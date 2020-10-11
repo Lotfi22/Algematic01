@@ -243,16 +243,16 @@
 
                         <li> <a class="waves-effect waves-dark" href="/home" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">Profile</span></a></li>
 
-                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Produit</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Stock</span></a></li>
 
 
-                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/Acceuil_sec1" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">sec1</span></a></li>
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/depot" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Dépot</span></a></li>
 
-                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/Acceuil_sec2" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">sec2</span></a></li>
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/Acceuil_sec2" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Local</span></a></li>
 
-                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/Acceuil_sec3" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">sec3</span></a></li>
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/Acceuil_sec3" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Rayon</span></a></li>
 
-                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/Acceuil_sec4" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">sec4</span></a></li>
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/Acceuil_sec4" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Etagère</span></a></li>
 
                         <li> <a class="waves-effect waves-dark" href="/home/Cat2" aria-expanded="false"><i class="mdi mdi-book-multiple"></i><span class="hide-menu">Cat2</span></a></li>
 
