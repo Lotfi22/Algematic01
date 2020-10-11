@@ -254,6 +254,20 @@
 
                         <li class="acacher"> <a class="waves-effect waves-dark" href="/etagere" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Etagère</span></a></li>
 
+                                            <!-- Produit -->
+
+                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Produit</span></a></li>
+
+
+                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/fabricant" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Fabricant</span></a></li>
+
+                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/fournisseur" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Fournisseur</span></a></li>
+
+                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/rayon" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Rayon</span></a></li>
+
+                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/etagere" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Etagère</span></a></li>
+                        <!--Fin-->
+
                         <li> <a class="waves-effect waves-dark" href="/home/Cat2" aria-expanded="false"><i class="mdi mdi-book-multiple"></i><span class="hide-menu">Cat2</span></a></li>
 
 
@@ -439,6 +453,39 @@
             }
 
             i=i+1;
+
+            // body... 
+        }
+
+                            /*************Produit**************/
+
+        $(".acacher2").hide(0);
+
+        var j=0;
+
+        function fshow2 (event) 
+        {
+            
+            if (j%2==0)
+            {
+                event.preventDefault();
+
+                $(".acacher2").show(1000);
+
+                $(".mdi-arrow-down-drop-circle-outline").attr('class','mdi mdi-arrow-up-drop-circle-outline');
+            }
+            else
+            {
+                
+                event.preventDefault();
+
+                $(".acacher2").hide(1000);
+
+                $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
+                /**/                
+            }
+
+            j=j+1;
 
             // body... 
         }

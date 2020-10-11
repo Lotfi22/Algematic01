@@ -59,3 +59,12 @@ Route::post('/AddEtagere', 'Etagere\EtagereController@AddEtagere');
 Route::post('/ModifEtagere/{idEtagereModif}', 'Etagere\EtagereController@ModifEtagere');
 /*Suppression d'un  rayon*/
 Route::post('/SupprimerEtagere/{idEtagereSupprimer}', 'Etagere\EtagereController@SupprimerEtagere');
+
+/***************************** Création d'une Etagère (CRUD)************************/
+Route::get('/fabricant', 'Fabricant\FabricantController@index');
+/*L'ajout d'un nouveau rayon*/
+Route::post('/AddEtagere', 'Etagere\EtagereController@AddEtagere');
+/*Modification d'un  rayon*/
+Route::post('/ModifEtagere/{idEtagereModif}', 'Etagere\EtagereController@ModifEtagere');
+/*Suppression d'un  rayon*/
+Route::post('/SupprimerEtagere/{idEtagereSupprimer}', 'Etagere\EtagereController@SupprimerEtagere');
