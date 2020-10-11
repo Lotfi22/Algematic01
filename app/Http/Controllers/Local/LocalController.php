@@ -13,7 +13,7 @@ class LocalController extends Controller
     	$depots=DB::select("select * from depots ");
     	$locals=DB::select("select * from locals ");
     	return view('Local\local',compact('depots','locals'));
-    }
+     }
 
      public function AddLocal(Request $request)
     {

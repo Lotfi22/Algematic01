@@ -35,9 +35,27 @@ Route::post('/SupprimerDepot/{idDepotSupprimer}', 'Depot\DepotController@Supprim
 
 /***************************** Création d'un LOCAL (CRUD)************************/
 Route::get('/local', 'Local\LocalController@index');
-/*L'ajout d'un nouveau dépot*/
+/*L'ajout d'un nouveau local*/
 Route::post('/AddLocal', 'Local\LocalController@AddLocal');
-/*Modification d'un  dépot*/
+/*Modification d'un  local*/
 Route::post('/ModifLocal/{idLocalModif}', 'Local\LocalController@ModifLocal');
-/*Suppression d'un  dépot*/
+/*Suppression d'un  local*/
 Route::post('/SupprimerLocal/{idLocalSupprimer}', 'Local\LocalController@SupprimerLocal');
+
+/***************************** Création d'un RAYON (CRUD)************************/
+Route::get('/rayon', 'Rayon\RayonController@index');
+/*L'ajout d'un nouveau rayon*/
+Route::post('/AddRayon', 'Rayon\RayonController@AddRayon');
+/*Modification d'un  rayon*/
+Route::post('/ModifRayon/{idRayonModif}', 'Rayon\RayonController@ModifRayon');
+/*Suppression d'un  rayon*/
+Route::post('/SupprimerRayon/{idRayonSupprimer}', 'Rayon\RayonController@SupprimerRayon');
+
+/***************************** Création d'une Etagère (CRUD)************************/
+Route::get('/etagere', 'Etagere\EtagereController@index');
+/*L'ajout d'un nouveau rayon*/
+Route::post('/AddEtagere', 'Etagere\EtagereController@AddEtagere');
+/*Modification d'un  rayon*/
+Route::post('/ModifEtagere/{idEtagereModif}', 'Etagere\EtagereController@ModifEtagere');
+/*Suppression d'un  rayon*/
+Route::post('/SupprimerEtagere/{idEtagereSupprimer}', 'Etagere\EtagereController@SupprimerEtagere');

@@ -250,9 +250,9 @@
 
                         <li class="acacher"> <a class="waves-effect waves-dark" href="/local" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Local</span></a></li>
 
-                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/Acceuil_sec3" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Rayon</span></a></li>
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/rayon" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Rayon</span></a></li>
 
-                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/Acceuil_sec4" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Etagère</span></a></li>
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/etagere" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Etagère</span></a></li>
 
                         <li> <a class="waves-effect waves-dark" href="/home/Cat2" aria-expanded="false"><i class="mdi mdi-book-multiple"></i><span class="hide-menu">Cat2</span></a></li>
 
