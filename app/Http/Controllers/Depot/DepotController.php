@@ -85,4 +85,12 @@ class DepotController extends Controller
         return redirect('/depot')->with('success','Le dépot a été Modifié avec succée');
 
     }
+
+    public function SupprimerDepot(Request $request,$idDepotSupprimer)
+    {
+        
+        DB::delete("delete from depots  where id='$idDepotSupprimer'");
+        return redirect('/depot')->with('success','Le dépot a été supprimé avec succée');
+
+    }
 }

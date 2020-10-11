@@ -30,3 +30,14 @@ Route::get('/depot', 'Depot\DepotController@index');
 Route::post('/AddDepot', 'Depot\DepotController@AddDepot');
 /*Modification d'un  dépot*/
 Route::post('/ModifDepot/{idDepotModif}', 'Depot\DepotController@ModifDepot');
+/*Suppression d'un  dépot*/
+Route::post('/SupprimerDepot/{idDepotSupprimer}', 'Depot\DepotController@SupprimerDepot');
+
+/***************************** Création d'un LOCAL (CRUD)************************/
+Route::get('/local', 'Local\LocalController@index');
+/*L'ajout d'un nouveau dépot*/
+Route::post('/AddLocal', 'Local\LocalController@AddLocal');
+/*Modification d'un  dépot*/
+Route::post('/ModifLocal/{idLocalModif}', 'Local\LocalController@ModifLocal');
+/*Suppression d'un  dépot*/
+Route::post('/SupprimerLocal/{idLocalSupprimer}', 'Local\LocalController@SupprimerLocal');

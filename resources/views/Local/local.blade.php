@@ -30,21 +30,21 @@
                       @endif
     <div>
          <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
-                      Ajouter Un dépot
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalNVLOCAL">
+                      Ajouter Un Local
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalNVLOCAL" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Informations du Nouveau Dépot</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Informations du Nouveau Local</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/AddDepot" method="POST">
+                     <form class="needs-validation" novalidate action="/AddLocal" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
@@ -55,8 +55,8 @@
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Adresse</B></label>
-                                  <input type="text" name="adresse"class="form-control"  placeholder="EL HAMIZ" required>
+                                  <label for="validationTooltip02"><B>Description</B></label>
+                                  <input type="text" name="description"class="form-control"  placeholder="EL HAMIZ" required>
                                 </div>
                               </div>
 
@@ -66,7 +66,17 @@
                                   <input type="text" name="superficie"class="form-control" placeholder="30 m2" required>
                                 </div>
                               </div>
-                            
+                            <div class="col-md-3 mb-3">
+                                  <div class="form-group">
+                                    <label for="exampleFormControlSelect1"><B>Dépot</B></label>
+                                    <select name="depot" class="form-control" id="exampleFormControlSelect1">
+                                     @foreach($depots as $depot)
+                                     <option value="{{$depot->id}}"> {{  $depot->nom  }} </option>
+                                      @endforeach
+                                     
+                                    </select>
+                                  </div>
+                            </div> 
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -88,25 +98,27 @@
             <tr>
               <th scope="col"><B>Numéro</B></th>
               <th scope="col"><B>Nom</B></th>
-              <th scope="col"><B>Adresse</B></th>
+              <th scope="col"><B>description</B></th>
               <th scope="col"><B>Sepérficie</B></th>
+              <th scope="col"><B>Num_Dépot</B></th>
               <th scope="col"><B>Modifier</B></th>
               <th scope="col"><B>Supprimer</B></th>
             </tr>
           </thead>
           <tbody>
-            @foreach($depots as $depot)
+            @foreach($locals as $local)
             <tr>
-              <td scope="row"><B>{{$depot->id}}</B></td>
-              <td>{{$depot->nom}}</td>
-              <td>{{$depot->adresse}}</td>
-              <td>{{$depot->superficie}}</td>
-              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$depot->id}}">
+              <td scope="row"><B>{{$local->id}}</B></td>
+              <td>{{$local->nom}}</td>
+              <td>{{$local->description}}</td>
+              <td>{{$local->superficie}}</td>
+              <td>{{$local->id_depot}}</td>
+              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFLOCAL{{$local->id}}">
                       Modifier
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModal{{$depot->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalMODIFLOCAL{{$local->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -115,7 +127,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifDepot/{{$depot->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/ModifLocal/{{$local->id}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
@@ -126,8 +138,8 @@
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Nouvelle Adresse</B></label>
-                                  <input type="text" name="adresse"class="form-control"  placeholder="EL HAMIZ" required>
+                                  <label for="validationTooltip02"><B>Nouvelle Description</B></label>
+                                  <input type="text" name="description"class="form-control"  placeholder="EL HAMIZ" required>
                                 </div>
                               </div>
 
@@ -148,12 +160,12 @@
                       </div>
                     </div>
                 </td>
-                 <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMER{{$depot->id}}">
+                 <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERLOCAL{{$local->id}}">
                        Supprimer
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalSUPPRIMER{{$depot->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalSUPPRIMERLOCAL{{$local->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -162,7 +174,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerDepot/{{$depot->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/SupprimerLocal/{{$local->id}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">

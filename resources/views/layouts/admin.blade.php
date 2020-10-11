@@ -248,7 +248,7 @@
 
                         <li class="acacher"> <a class="waves-effect waves-dark" href="/depot" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Dépot</span></a></li>
 
-                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/Acceuil_sec2" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Local</span></a></li>
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/local" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Local</span></a></li>
 
                         <li class="acacher"> <a class="waves-effect waves-dark" href="/home/Acceuil_sec3" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Ajouter Rayon</span></a></li>
 
