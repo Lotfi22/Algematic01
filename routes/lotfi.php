@@ -18,4 +18,16 @@ use Illuminate\Support\Facades\Hash;
 
 Route::get('/clients','Lotfi\ClientController@index');
 
+Route::get('/admin/client/categorie','Lotfi\ClientController@categories_index');
+
+Route::post('/home/categories/ajouter/ajax','Lotfi\ClientController@ajoutercategories');
+
+Route::post('/home/categories/modifier/ajax','Lotfi\ClientController@modifiercategories');
+
+Route::post('/home/categories/supprimer/ajax','Lotfi\ClientController@supprimercategories');
+
+
+
+
+
 

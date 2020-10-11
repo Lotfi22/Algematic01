@@ -9,6 +9,15 @@ use App\Depot;
 
 class DepotController extends Controller
 {
+
+    #Hada Howwa l middleware
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
     	$depots=DB::select("select * from depots ");

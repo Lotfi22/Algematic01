@@ -54,69 +54,80 @@ class ClientController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function categories_index()
     {
-        //
+
+        $id = Auth::id();
+        $actuel = User::FindOrFail($id);
+
+        $categories=DB::select("select * from categorie_clients");
+
+        if(count($categories)>0)
+        {
+
+            $last_id = $categories[count($categories)-1]->id;
+        }
+        else
+        {
+
+            $last_id=0;
+        }
+        
+
+        return view('Client.categorie',compact('categories','last_id'));
+
+        # code...
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function ajoutercategories(Request $request)
     {
-        //
+
+        if ($request->ajax()) 
+        {
+    
+            (DB::insert("insert into categorie_clients(nom,description) values(\"$request->nom\",\"$request->description\")"));
+
+            return back();
+
+            # code...
+        }
+
+        # code...
+    }    
+
+
+    public function modifiercategories(Request $request)
+    {
+
+        if ($request->ajax()) 
+        {
+
+            (DB::update("update categorie_clients c set c.nom=\"$request->nom\",c.description=\"$request->description\" where (c.id=$request->id) "));
+
+            return response()->json();
+        }
+        
+        # code...
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    public function show(cr $cr)
+    public function supprimercategories(Request $request)
     {
-        //
+
+        if ($request->ajax()) 
+        {
+
+            DB::delete("delete from categorie_clients where id=$request->id");
+
+            return response()->json();
+
+            # code...
+        }
+
+        # code...
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(cr $cr)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, cr $cr)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(cr $cr)
-    {
-        //
-    }
+    //
 }

@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\DB;
 
 class FabricantController extends Controller
 {
+
+    #Hada Howwa l middleware
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+	
      public function index()
      {
     	$fabricants=DB::select("select * from fabricants ");

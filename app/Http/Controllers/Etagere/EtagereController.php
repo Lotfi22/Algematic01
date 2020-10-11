@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\DB;
 
 class EtagereController extends Controller
 {
+
+
+    #Hada Howwa l middleware
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
      {
     	$etageres=DB::select("select * from etageres");

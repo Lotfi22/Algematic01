@@ -81,6 +81,8 @@ function ajoutercategorie(event,ojbet)
 
 	var $nom = $("#nomducategorie").val();
 
+	var $num = $("#numducategorie").val();
+
 	var $desc = $("#descducategorie").val();
 
 	var new_id = $(ojbet).attr('id');
@@ -93,13 +95,13 @@ function ajoutercategorie(event,ojbet)
 
 	console.log(new_id);
 	
-	var to_append = '<tr class="alert alert-success" id="categorie'+new_id+'"><form>{{ csrf_field() }} <td></td><td colspan="2"><div class="form-group col-md-12 col-sm-12">'                                                
+	var to_append = '<tr class="alert alert-success" id="categorie'+new_id+'"><form>{{ csrf_field() }} <td>'+$num+'</td><td colspan="2"><div class="form-group col-md-12 col-sm-12">'
 
 	to_append+='<label><textarea type="text" rows="4" name="nom" class=" form-control" id="nomcategorie'+new_id+'" value="'+$nom+'">'+$nom+'</textarea></label>'
 
 	to_append+='</div></td>'
 
-	to_append+='<td colspan="2"> <textarea type="text" rows="10" class="form-control" name="description" id="description'+new_id+'" value="'+$desc+'">'+$desc+'</textarea></td>'
+	to_append+='<td colspan="2"> <textarea type="text" rows="5" class="form-control" name="description" id="description'+new_id+'" value="'+$desc+'">'+$desc+'</textarea></td>'
 
 	to_append+='<td><button class="btn btn-success btn-sm" id="'+new_id+'" onclick="modifiercategorie(event,this)"> Enregistrer</button></td>'
 

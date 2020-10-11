@@ -263,30 +263,16 @@
 
                         <li class="acacher2"> <a class="waves-effect waves-dark" href="/fournisseur" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Fournisseur</span></a></li>
 
-                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/rayon" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Rayon</span></a></li>
-
-                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/etagere" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Etagère</span></a></li>
                         <!--Fin-->
 
-                        <li> <a class="waves-effect waves-dark" href="/home/Cat2" aria-expanded="false"><i class="mdi mdi-book-multiple"></i><span class="hide-menu">Cat2</span></a></li>
+
+                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow3(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Client</span></a></li>
 
 
+                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/admin/client/categorie" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Catégorie</span></a></li>
 
-                        <li> <a class="waves-effect waves-dark" href="/home/Cat3" aria-expanded="false"><i class="mdi mdi-cake-variant"></i><span class="hide-menu">Cat3</span></a></li>
+                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/admin/client/activite" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline "></i><span class="hide-menu">Activité</span></a></li>
 
-
-
-                        <li> <a class="waves-effect waves-dark" href="/home/Cat4" aria-expanded="false"><i class="mdi mdi-timer"></i><span class="hide-menu">Cat4</span></a></li>
-
-
-
-                        <li> <a class="waves-effect waves-dark" href="/home/Cat5" aria-expanded="false"><i class="mdi mdi-television"></i><span class="hide-menu">Cat5</span></a></li>
-
-
-                        <li><a  lass="waves-effect waves-dark" href="/home/Cat6" aria-expanded="false"><i class="mdi mdi-information-outline"></i><span class="hide-menu">Cat6</span></a></li>
-
-
-                        <li><a  lass="waves-effect waves-dark" href="/home/Cat7" aria-expanded="false"><i class="mdi mdi-network-question"></i><span class="hide-menu">Cat7</span></a></li>
 
 
 
@@ -489,6 +475,39 @@
 
             // body... 
         }
+
+
+        $(".acacher3").hide(0);
+
+        var j=0;
+
+        function fshow3 (event) 
+        {
+            
+            if (j%2==0)
+            {
+                event.preventDefault();
+
+                $(".acacher3").show(1000);
+
+                $(".mdi-arrow-down-drop-circle-outline").attr('class','mdi mdi-arrow-up-drop-circle-outline');
+            }
+            else
+            {
+                
+                event.preventDefault();
+
+                $(".acacher3").hide(1000);
+
+                $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
+                /**/                
+            }
+
+            j=j+1;
+
+            // body... 
+        }
+
 
         {{--  --}}
     </script>
