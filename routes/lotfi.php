@@ -16,6 +16,6 @@ use Illuminate\Support\Facades\Hash;
 
 #Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/test','TestController@index');
+Route::get('/clients','Lotfi\ClientController@index');
 
-Route::get('/test1','HomeController@index');
+
