@@ -8,7 +8,7 @@
                     @endif
                       @if (\Session::has('success'))
                         <div class="alert alert-success">
-                            <p>{{ \Session::get('success') }}</p>
+                            <p style=" text-align : center; ">{{ \Session::get('success') }}</p>
                         </div>
                     @endif
 
@@ -69,8 +69,8 @@
                             
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn-sm btn btn-primary">Ajouter</button>
                           </div>
                           </form>
                         </div>
@@ -101,7 +101,7 @@
               <td>{{$depot->nom}}</td>
               <td>{{$depot->adresse}}</td>
               <td>{{$depot->superficie}}</td>
-              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$depot->id}}">
+              <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$depot->id}}">
                       Modifier
                     </button>
 
@@ -140,15 +140,15 @@
                             
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-primary">Modifier</button>
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn-sm btn btn-primary">Modifier</button>
                           </div>
                           </form>
                         </div>
                       </div>
                     </div>
                 </td>
-                 <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMER{{$depot->id}}">
+                 <td><button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMER{{$depot->id}}">
                        Supprimer
                     </button>
 
@@ -166,8 +166,8 @@
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-primary">Supprimer</button>
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn-sm btn btn-primary">Supprimer</button>
                           </div>
                           </form>
                         </div>

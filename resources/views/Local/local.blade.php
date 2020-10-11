@@ -30,7 +30,7 @@
                       @endif
     <div>
          <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalNVLOCAL">
+                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalNVLOCAL">
                       Ajouter Un Local
                     </button>
 
@@ -79,8 +79,8 @@
                             </div> 
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn-sm btn btn-primary">Ajouter</button>
                           </div>
                           </form>
                         </div>
@@ -113,7 +113,7 @@
               <td>{{$local->description}}</td>
               <td>{{$local->superficie}}</td>
               <td>{{$local->id_depot}}</td>
-              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFLOCAL{{$local->id}}">
+              <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFLOCAL{{$local->id}}">
                       Modifier
                     </button>
 
@@ -152,15 +152,15 @@
                             
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-primary">Modifier</button>
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn-sm btn btn-primary">Modifier</button>
                           </div>
                           </form>
                         </div>
                       </div>
                     </div>
                 </td>
-                 <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERLOCAL{{$local->id}}">
+                 <td><button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERLOCAL{{$local->id}}">
                        Supprimer
                     </button>
 
@@ -178,8 +178,8 @@
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-primary">Supprimer</button>
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn-sm btn btn-primary">Supprimer</button>
                           </div>
                           </form>
                         </div>
