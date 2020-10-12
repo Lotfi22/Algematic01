@@ -36,8 +36,11 @@ class ClientController extends Controller
         $actuel = User::FindOrFail($id);
 
         $clients = (DB::select("select * from client_prospects cl , categorie_clients ca , activite_clients ac where cl.id_categorie = ca.id and id_activite = ac.id "));
-        $categories = [];
         
+        $categories = DB::select("select * from categorie_clients");
+
+        $activites = DB::select("select * from activite_clients where visible = 1") ;
+
         if(count($clients)>0)
         {
 
@@ -49,10 +52,22 @@ class ClientController extends Controller
             $last_id=0;
         }
 
-        return view('Client/clients',compact('actuel','clients','categories','last_id'));
+        return view('Client/clients',compact('actuel','clients','categories','last_id','activites'));
 
         //
     }
+
+    public function ajouter_client(Request $request)
+    {
+
+        dd($request->all());
+
+        # code...
+    }
+
+
+
+
 
     public function categories_index()
     {

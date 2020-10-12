@@ -31,6 +31,8 @@ Route::post('/home/activites/supprimer/ajax','Lotfi\ClientController@supprimerac
 # Client :
 Route::get('/home/clients','Lotfi\ClientController@index');
 
+Route::post('/home/clients/ajouter/ajax','Lotfi\ClientController@ajouter_client');
+
 
 
 
