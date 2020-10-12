@@ -1,13 +1,13 @@
-function modifiercategorie(event,objet) 
+function modifieractivite(event,objet) 
 {	
 	
 	event.preventDefault();
 
 	var $id=(($(objet)).attr('id'));
 
-	var id_to_hide = "#categorie"+$id;
+	var id_to_hide = "#activite"+$id;
 
-	var id_nom="#nomcategorie"+$id;
+	var id_nom="#nomactivite"+$id;
 
 	var id_desc="#description"+$id;
 
@@ -28,7 +28,7 @@ function modifiercategorie(event,objet)
            'X-CSRF-TOKEN': $('input[name="_token"]').val()
         },                    
         type:"POST",
-        url:"/home/categories/modifier/ajax",
+        url:"/home/activites/modifier/ajax",
         data:{id:$id,nom:$nom,description:$description},
 
         success:function(data) 
@@ -40,7 +40,7 @@ function modifiercategorie(event,objet)
 	// body... 
 }
 
-function supprimercategorie (event,objet) 
+function supprimeractivite (event,objet) 
 {
 
 	event.preventDefault();
@@ -49,7 +49,7 @@ function supprimercategorie (event,objet)
 
 	$id=($id.substr(3));
 
-	var id_hide="#categorie"+$id;
+	var id_hide="#activite"+$id;
 
 	console.log(id_hide)
 
@@ -61,7 +61,7 @@ function supprimercategorie (event,objet)
            'X-CSRF-TOKEN': $('input[name="_token"]').val()
         },                    
         type:"POST",
-        url:"/home/categories/supprimer/ajax",
+        url:"/home/activites/supprimer/ajax",
         data:{id:$id},
 
         success:function(data) 
@@ -74,16 +74,16 @@ function supprimercategorie (event,objet)
 	// body... 
 }
 
-function ajoutercategorie(event,ojbet) 
+function ajouteractivite(event,ojbet) 
 {
 
 	event.preventDefault();
 
-	var $nom = $("#nomducategorie").val();
+	var $nom = $("#nomduactivite").val();
 
-	var $num = $("#numducategorie").val();
+	var $num = $("#numduactivite").val();
 
-	var $desc = $("#descducategorie").val();
+	var $desc = $("#descduactivite").val();
 
 	var new_id = $(ojbet).attr('id');
 
@@ -95,21 +95,21 @@ function ajoutercategorie(event,ojbet)
 
 	console.log(new_id);
 	
-	var to_append = '<tr class="alert alert-success" id="categorie'+new_id+'"><form>{{ csrf_field() }} <td>'+$num+'</td><td colspan="2"><div class="form-group col-md-12 col-sm-12">'
+	var to_append = '<tr class="alert alert-success" id="activite'+new_id+'"><form>{{ csrf_field() }} <td>'+$num+'</td><td colspan="2"><div class="form-group col-md-12 col-sm-12">'
 
-	to_append+='<label><textarea type="text" rows="4" name="nom" class=" form-control" id="nomcategorie'+new_id+'" value="'+$nom+'">'+$nom+'</textarea></label>'
+	to_append+='<label><textarea type="text" rows="4" name="nom" class=" form-control" id="nomactivite'+new_id+'" value="'+$nom+'">'+$nom+'</textarea></label>'
 
 	to_append+='</div></td>'
 
 	to_append+='<td colspan="2"> <textarea type="text" rows="5" class="form-control" name="description" id="description'+new_id+'" value="'+$desc+'">'+$desc+'</textarea></td>'
 
-	to_append+='<td><button class="btn btn-success btn-sm" id="'+new_id+'" onclick="modifiercategorie(event,this)"> Enregistrer</button></td>'
+	to_append+='<td><button class="btn btn-success btn-sm" id="'+new_id+'" onclick="modifieractivite(event,this)"> Enregistrer</button></td>'
 
 	to_append+='<td><a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-'+new_id+'" style="color: #fff;"> supprimer</a><div id="myModalsup-'+new_id+'" class="modal fade" role="dialog">'
 
-	to_append+='<div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Voulez-vous vraiment supprimer ce categorie</h4></div>'
+	to_append+='<div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Voulez-vous vraiment supprimer ce activite</h4></div>'
 
-	to_append+='<div class="modal-body"><button class="col-md-5 btn btn-success" onclick="supprimercategorie(event,this)" data-dismiss="modal" id="mod'+new_id+'">OUI,je supprime</button><a data-dismiss="modal" class="col-md-6 btn btn-danger">NON,je ne veux pas supprimer</a></div><div class="modal-footer"><button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button></div></div></div></div></td></form></tr>'
+	to_append+='<div class="modal-body"><button class="col-md-5 btn btn-success" onclick="supprimeractivite(event,this)" data-dismiss="modal" id="mod'+new_id+'">OUI,je supprime</button><a data-dismiss="modal" class="col-md-6 btn btn-danger">NON,je ne veux pas supprimer</a></div><div class="modal-footer"><button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button></div></div></div></div></td></form></tr>'
 
 	to_append=$(to_append)	
 
@@ -130,8 +130,8 @@ function ajoutercategorie(event,ojbet)
 
 	$(xxx).attr('id',newest);
 
-	$("#nomducategorie").val("");
-	$("#descducategorie").val("");
+	$("#nomduactivite").val("");
+	$("#descduactivite").val("");
 
     $.ajax({
         headers: 
@@ -139,13 +139,13 @@ function ajoutercategorie(event,ojbet)
            'X-CSRF-TOKEN': $('input[name="_token"]').val()
         },                    
         type:"POST",
-        url:"/home/categories/ajouter/ajax",
+        url:"/home/activites/ajouter/ajax",
         data:{num:$num,nom:$nom,description:$desc},
 
         success:function(data) 
         {
 
-			$("#all_the_categories").append(to_append).show(1500);
+			$("#all_the_activites").append(to_append).show(1500);
 
 			to_append.show(1500)
 

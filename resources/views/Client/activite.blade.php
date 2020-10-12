@@ -15,11 +15,11 @@
 
                 <div class="card-body">
 
-                    <h4 class="card-title">Table des categories</h4>
+                    <h4 class="card-title">Table des activités</h4>
 
-                    <h6 class="card-subtitle">categories disponibles</code></h6>
+                    <h6 class="card-subtitle">activites disponibles</code></h6>
 
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Ajouter un categories </button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Ajouter une Activite </button>
 
                     <div id="myModal" class="modal fade" role="dialog">
 
@@ -31,7 +31,7 @@
 
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                                    <h4 class="modal-title">Nouvelle categorie</h4>
+                                    <h4 class="modal-title">Nouvelle activité</h4>
                               </div>
 
                                 <div class="modal-body">
@@ -44,7 +44,7 @@
 
                                             <label for="nom">Nom </label>
 
-                                            <textarea type="text" id="nomducategorie" cols="50" required name="nom" class="form-control" id="nom"></textarea>
+                                            <textarea type="text" id="nomduactivite" cols="50" required name="nom" class="form-control" id="nom"></textarea>
 
                                             {{--  --}}
                                         </div>
@@ -54,7 +54,7 @@
 
                                             <label for="num">Numéro</label>
 
-                                            <textarea type="text" id="numducategorie" cols="50" required name="num" class="form-control" id="num"></textarea>
+                                            <textarea type="text" id="numduactivite" cols="50" required name="num" class="form-control" id="num"></textarea>
 
                                             {{--  --}}
                                         </div>
@@ -65,7 +65,7 @@
 
                                             <label for="description">description </label>
 
-                                            <textarea type="text" id="descducategorie" rows="5" cols="2000" required name="description" class="form-control" id="description"></textarea>
+                                            <textarea type="text" id="descduactivite" rows="5" cols="2000" required name="description" class="form-control" id="description"></textarea>
                                         </div>
 
 
@@ -85,7 +85,7 @@
  --}}
 
 
-                                      <button style="margin-top: 5%;" id="ajout{{ $last_id }}" data-dismiss="modal" onclick="ajoutercategorie(event,this)" class="btn btn-success col-md-6">Ajouter</button>
+                                      <button style="margin-top: 5%;" id="ajout{{ $last_id }}" data-dismiss="modal" onclick="ajouteractivite(event,this)" class="btn btn-success col-md-6">Ajouter</button>
                                     </form>
 
                                     {{--  --}}
@@ -137,11 +137,11 @@
 
 
 
-                            <tbody id="all_the_categories">
+                            <tbody id="all_the_activites">
 
-                                @for($i=0 ; $i < count($categories) ; $i++)
+                                @for($i=0 ; $i < count($activites) ; $i++)
 
-                                    <tr id="categorie{{$categories[$i]->id}}">
+                                    <tr id="activite{{$activites[$i]->id}}">
 
                                         <form>
 
@@ -149,7 +149,7 @@
 
                                             <td>
 
-                                                {{ $categories[$i]->num }}                                                
+                                                {{ $activites[$i]->num }}                                                
                                             </td>
 
                                             <td colspan="2"> 
@@ -157,7 +157,7 @@
                                                 <div class="form-group col-md-12 col-sm-12">
 
                                                     <label>
-                                                        <textarea type="text" rows="4" name="nom" class=" form-control" id="nomcategorie{{$categories[$i]->id}}" value="{!! $categories[$i]->nom !!}">{!! $categories[$i]->nom !!}</textarea>
+                                                        <textarea type="text" rows="4" name="nom" class=" form-control" id="nomactivite{{$activites[$i]->id}}" value="{!! $activites[$i]->nom !!}">{!! $activites[$i]->nom !!}</textarea>
                                                     </label>
 
                                                     {{--  --}}
@@ -168,25 +168,25 @@
 
                                             <td colspan="2"> 
 
-                                                <textarea type="text" rows="5" class="form-control" name="description" id="description{{$categories[$i]->id}}" value="{!! ($categories[$i]->description) !!}">{!! ($categories[$i]->description) !!}</textarea> 
+                                                <textarea type="text" rows="5" class="form-control" name="description" id="description{{$activites[$i]->id}}" value="{!! ($activites[$i]->description) !!}">{!! ($activites[$i]->description) !!}</textarea> 
 
                                                 {{--  --}}
                                             </td>
 
                                             <td> 
 
-                                                <button class="btn btn-success btn-sm" id="{{$categories[$i]->id}}" onclick="modifiercategorie(event,this)"> Enregistrer</button> 
+                                                <button class="btn btn-success btn-sm" id="{{$activites[$i]->id}}" onclick="modifieractivite(event,this)"> Enregistrer</button> 
                                             </td>
 
                                             <td> 
 
-                                                @if ($categories[$i]->id!=0)
+                                                @if ($activites[$i]->id!=0)
 
     
 
-                                                    <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-{{$categories[$i]->id}}" style="color: #fff;"> supprimer</a>
+                                                    <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-{{$activites[$i]->id}}" style="color: #fff;"> supprimer</a>
 
-                                                    <div id="myModalsup-{{$categories[$i]->id}}" class="modal fade" role="dialog">
+                                                    <div id="myModalsup-{{$activites[$i]->id}}" class="modal fade" role="dialog">
 
                                                       <div class="modal-dialog modal-lg">
 
@@ -198,12 +198,12 @@
 
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                                                                    <h4 class="modal-title">Voulez-vous vraiment supprimer ce categorie</h4>
+                                                                    <h4 class="modal-title">Voulez-vous vraiment supprimer ce activite</h4>
                                                               </div>
 
                                                               <div class="modal-body">
 
-                                                                    <button class="col-md-5 btn btn-danger" onclick="supprimercategorie(event,this)" data-dismiss="modal" id="mod{{$categories[$i]->id}}">OUI,je supprime</button>
+                                                                    <button class="col-md-5 btn btn-danger" onclick="supprimeractivite(event,this)" data-dismiss="modal" id="mod{{$activites[$i]->id}}">OUI,je supprime</button>
 
                                                                     <a data-dismiss="modal" class="col-md-6  btn btn-success" style="color: #ffffff;" >NON,je ne veux pas supprimer</a>
                                                                     {{--  --}}
@@ -237,6 +237,6 @@
         {{--  --}}
     </div>
 
-    <script src="{{ asset('js/modifierlescategories.js') }}"></script>
+    <script src="{{ asset('js/modifierlesactivites.js') }}"></script>
  {{--  --}}   
 @endsection
