@@ -44,26 +44,33 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/AddFabricant" method="POST">
+                     <form class="needs-validation" novalidate action="/AddFabricant" method="POST" enctype="multipart/form-data">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip01"><B>Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="CAMERA ET CABLES" required>
+                                  <input type="text"  name="nom" class="form-control" placeholder="JORDAN" required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Adresse</B></label>
-                                  <input type="text" name="adresse"class="form-control"  placeholder="EL HAMIZ" required>
+                                  <label for="validationTooltip02"><B>Marque</B></label>
+                                  <input type="text" name="marque"class="form-control"  placeholder="NIKE" required>
                                 </div>
                               </div>
 
                               <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip03"><B>Supérficie</B></label>
-                                  <input type="text" name="superficie"class="form-control" placeholder="30 m2" required>
+                                  <label for="validationTooltip03"><B>Description</B></label>
+                                  <input type="text" name="description"class="form-control" placeholder="" required>
+                                </div>
+
+                              </div>
+                              <div class="form-row">
+                                 <div class="form-group">
+                                  <label for="exampleFormControlFile1"><B>Photo</B></label>
+                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
                                 </div>
                               </div>
                             
@@ -101,7 +108,31 @@
               <td scope="row"><B>{{$fabricant->id}}</B></td>
               <td>{{$fabricant->nom}}</td>
               <td>{{$fabricant->description}}</td>
-              <td>{{$fabricant->photo}}</td>
+              <td><!-- Button trigger modal -->
+                  <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#staticBackdrop{{$fabricant->id}}">
+                    Photo
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="staticBackdrop{{$fabricant->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="staticBackdropLabel">Photo_Marque</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <img src="{{asset('images/fabricant/'.$fabricant->photo ?? "nimi")}}">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
               <td>{{$fabricant->marque}}</td>
               <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$fabricant->id}}">
                       Modifier
@@ -119,24 +150,31 @@
                           </div>
                      <form class="needs-validation" novalidate action="/ModifFabricant/{{$fabricant->id}}" method="POST">
                         {{ csrf_field()}}
-                          <div class="modal-body">
+                         <div class="modal-body">
                               <div class="form-row">
 
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>Nouveau Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="CAMERA ET CABLES" required>
+                                  <label for="validationTooltip01"><B>Nouveau_Nom</B></label>
+                                  <input type="text"  name="nom" class="form-control" placeholder="JORDAN" required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Nouvelle Adresse</B></label>
-                                  <input type="text" name="adresse"class="form-control"  placeholder="EL HAMIZ" required>
+                                  <label for="validationTooltip02"><B>Nouvelle_Marque</B></label>
+                                  <input type="text" name="marque"class="form-control"  placeholder="NIKE" required>
                                 </div>
                               </div>
 
                               <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip03"><B>Nouvelle Supérficie</B></label>
-                                  <input type="text" name="superficie"class="form-control" placeholder="30 m2" required>
+                                  <label for="validationTooltip03"><B>Nouvelle_Description</B></label>
+                                  <input type="text" name="description"class="form-control" placeholder="" required>
+                                </div>
+
+                              </div>
+                              <div class="form-row">
+                                 <div class="form-group">
+                                  <label for="exampleFormControlFile1"><B>Nouvelle_Photo</B></label>
+                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
                                 </div>
                               </div>
                             
