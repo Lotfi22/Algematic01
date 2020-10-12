@@ -35,7 +35,7 @@ class ClientController extends Controller
         $id = Auth::id();
         $actuel = User::FindOrFail($id);
 
-        $clients = (DB::select("select * from client_prospects"));
+        $clients = (DB::select("select * from client_prospects cl , categorie_clients ca , activite_clients ac where cl.id_categorie = ca.id and id_activite = ac.id "));
         $categories = [];
         
         if(count($clients)>0)
