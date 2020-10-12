@@ -60,7 +60,7 @@ class ClientController extends Controller
         $id = Auth::id();
         $actuel = User::FindOrFail($id);
 
-        $categories=DB::select("select * from categorie_clients");
+        $categories=DB::select("select * from categorie_clients where visible = 1");
 
         if(count($categories)>0)
         {
@@ -72,7 +72,6 @@ class ClientController extends Controller
 
             $last_id=0;
         }
-        
 
         return view('Client.categorie',compact('categories','last_id'));
 
@@ -86,7 +85,7 @@ class ClientController extends Controller
         if ($request->ajax()) 
         {
     
-            (DB::insert("insert into categorie_clients(nom,description) values(\"$request->nom\",\"$request->description\")"));
+            (DB::insert("insert into categorie_clients(num,nom,description) values(\"$request->num\",\"$request->nom\",\"$request->description\")"));
 
             return back();
 
@@ -117,7 +116,7 @@ class ClientController extends Controller
         if ($request->ajax()) 
         {
 
-            DB::delete("delete from categorie_clients where id=$request->id");
+            (DB::update("update categorie_clients c set c.visible=0 where (c.id=$request->id) "));
 
             return response()->json();
 
@@ -127,6 +126,85 @@ class ClientController extends Controller
         # code...
     }
 
+
+
+
+    // Activités ....... : 
+
+
+
+
+    public function activites_index()
+    {
+
+        $id = Auth::id();
+        $actuel = User::FindOrFail($id);
+
+        $activites=DB::select("select * from activite_clients where visible = 1");
+
+        if(count($activites)>0)
+        {
+
+            $last_id = $activites[count($activites)-1]->id;
+        }
+        else
+        {
+
+            $last_id=0;
+        }
+
+        return view('Client.activite',compact('activites','last_id'));
+
+        # code...
+    }
+
+
+    public function ajouteractivites(Request $request)
+    {
+
+        if ($request->ajax()) 
+        {
+    
+            (DB::insert("insert into activite_clients(num,nom,description) values(\"$request->num\",\"$request->nom\",\"$request->description\")"));
+
+            return back();
+
+            # code...
+        }
+
+        # code...
+    }    
+
+
+    public function modifieractivites(Request $request)
+    {
+
+        if ($request->ajax()) 
+        {
+
+            (DB::update("update activite_clients c set c.nom=\"$request->nom\",c.description=\"$request->description\" where (c.id=$request->id) "));
+
+            return response()->json();
+        }
+        
+        # code...
+    }
+
+    public function supprimeractivites(Request $request)
+    {
+
+        if ($request->ajax()) 
+        {
+
+            (DB::update("update activite_clients c set c.visible=0 where (c.id=$request->id) "));
+
+            return response()->json();
+
+            # code...
+        }
+
+        # code...
+    }
 
 
     //
