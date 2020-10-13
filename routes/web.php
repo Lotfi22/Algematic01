@@ -62,9 +62,18 @@ Route::post('/SupprimerEtagere/{idEtagereSupprimer}', 'Etagere\EtagereController
 
 /***************************** Création d'un Fabricant (CRUD)************************/
 Route::get('/fabricant', 'Fabricant\FabricantController@index');
-/*L'ajout d'un nouveau rayon*/
+/*L'ajout d'un nouveau fabricant*/
 Route::post('/AddFabricant', 'Fabricant\FabricantController@AddFabricant');
-/*Modification d'un  rayon*/
+/*Modification d'un  fabricant*/
 Route::post('/ModifFabricant/{idFabricantModif}', 'Fabricant\FabricantController@ModifFabricant');
-/*Suppression d'un  rayon*/
+/*Suppression d'un  fabricant*/
 Route::post('/SupprimerFabricant/{idFabricantSupprimer}', 'Fabricant\FabricantController@SupprimerFabricant');
+
+/***************************** Création d'un Fournisseur (CRUD)************************/
+Route::get('/fournisseur', 'Fournisseur\FournisseurController@index');
+/*L'ajout d'un nouveau fournisseur*/
+Route::post('/AddFournisseur', 'Fournisseur\FournisseurController@AddFournisseur');
+/*Modification d'un  fournisseur*/
+Route::post('/ModifFournisseur/{idFournisseurModif}', 'Fournisseur\FournisseurController@ModifFournisseur');
+/*Suppression d'un  fournisseur*/
+Route::post('/SupprimerFournisseur/{idFournisseurSupprimer}', 'Fournisseur\FournisseurController@SupprimerFournisseur');
