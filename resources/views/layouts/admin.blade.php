@@ -254,7 +254,7 @@
 
                         <li class="acacher"> <a class="waves-effect waves-dark" href="/etagere" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Etagère</span></a></li>
 
-                                            <!-- Produit -->
+                                            <!-- Fabricant_Fournisseur -->
 
                         <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Fabricant_Fournisseur</span></a></li>
 
@@ -262,6 +262,23 @@
                         <li class="acacher2"> <a class="waves-effect waves-dark" href="/fabricant" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fabricant</span></a></li>
 
                         <li class="acacher2"> <a class="waves-effect waves-dark" href="/fournisseur" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fournisseur</span></a></li>
+
+                        
+
+                        <!--Fin-->
+
+                         <!-- Produit-Categorie_Famille_SousFamille -->
+
+                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshowProduit(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Produit</span></a></li>
+
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/categorie" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Catégorie_Prod</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/familleProd" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Famille_Prod</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/sousFamilleProd" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Sous_Famille_Prod</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/produit" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Produits</span></a></li>
 
                         
 
@@ -500,6 +517,36 @@
                 event.preventDefault();
 
                 $(".acacher3").hide(1000);
+
+                $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
+                /**/                
+            }
+
+            j=j+1;
+
+            // body... 
+        }
+    $(".acacherProduit").hide(0);
+
+        var j=0;
+
+        function fshowProduit (event) 
+        {
+            
+            if (j%2==0)
+            {
+                event.preventDefault();
+
+                $(".acacherProduit").show(1000);
+
+                $(".mdi-arrow-down-drop-circle-outline").attr('class','mdi mdi-arrow-up-drop-circle-outline');
+            }
+            else
+            {
+                
+                event.preventDefault();
+
+                $(".acacherProduit").hide(1000);
 
                 $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
                 /**/                

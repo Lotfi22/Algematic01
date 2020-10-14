@@ -75,6 +75,7 @@ class FabricantController extends Controller
         return redirect('/fabricant')->with('success','Le Nouveau Fabricant est enregistré avec succée');
 
     }
+    
     public function ModifFabricant(Request $request,$idFabricantModif)
     {
     	//dd($request->photo);

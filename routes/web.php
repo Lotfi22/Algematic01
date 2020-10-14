@@ -77,3 +77,21 @@ Route::post('/AddFournisseur', 'Fournisseur\FournisseurController@AddFournisseur
 Route::post('/ModifFournisseur/{idFournisseurModif}', 'Fournisseur\FournisseurController@ModifFournisseur');
 /*Suppression d'un  fournisseur*/
 Route::post('/SupprimerFournisseur/{idFournisseurSupprimer}', 'Fournisseur\FournisseurController@SupprimerFournisseur');
+
+/***************************** Création d'une CatégorieProduit (CRUD)************************/
+Route::get('/categorie', 'Produit\CategorieController@index');
+/*L'ajout d'un nouveau Catégorie*/
+Route::post('/AddCategorie', 'Produit\CategorieController@AddCategorie');
+/*Modification d'un  Catégorie*/
+Route::post('/ModifCategorie/{idCategorieModiff}', 'Produit\CategorieController@ModifCategorie');
+/*Suppression d'un  Catégorie*/
+Route::post('/SupprimerCategorie/{idCategorieSupprimer}', 'Produit\CategorieController@SupprimerCategorie');
+
+/***************************** Création d'une Famille_Produit (CRUD)************************/
+Route::get('/familleProd', 'Produit\FamilleProduitController@index');
+/*L'ajout d'un nouveau Famille_Produit*/
+Route::post('/AddFamilleProduit', 'Produit\FamilleProduitController@AddFamilleProduit');
+/*Modification d'un  Famille_Produit*/
+Route::post('/ModifFamilleProduit/{idFamilleProduitModiff}', 'Produit\FamilleProduitController@ModifFamilleProduit');
+/*Suppression d'un  Famille_Produit*/
+Route::post('/SupprimerFamilleProduit/{idFamilleProduitSupprimer}', 'Produit\FamilleProduitController@SupprimerFamilleProduit');
