@@ -95,3 +95,12 @@ Route::post('/AddFamilleProduit', 'Produit\FamilleProduitController@AddFamillePr
 Route::post('/ModifFamilleProduit/{idFamilleProduitModiff}', 'Produit\FamilleProduitController@ModifFamilleProduit');
 /*Suppression d'un  Famille_Produit*/
 Route::post('/SupprimerFamilleProduit/{idFamilleProduitSupprimer}', 'Produit\FamilleProduitController@SupprimerFamilleProduit');
+
+/***************************** Création d'une SOUSFamille_Produit (CRUD)************************/
+Route::get('/sousFamille', 'Produit\SousFamilleController@index');
+/*L'ajout d'un nouveau Famille_Produit*/
+Route::post('/AddSousFamille', 'Produit\SousFamilleController@AddSousFamille');
+/*Modification d'un  Famille_Produit*/
+Route::post('/ModifSousFamille/{idSousFamilleModiff}', 'Produit\SousFamilleController@ModifSousFamille');
+/*Suppression d'un  Famille_Produit*/
+Route::post('/SupprimerSousFamille/{idSousFamilleSupprimer}', 'Produit\SousFamilleController@SupprimerSousFamille');

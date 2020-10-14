@@ -86,6 +86,7 @@ class FamilleProduitController extends Controller
 		        
 
 		         DB::update("update familles f set id_categorie='$famille_categorie' ,nom='$famille_nom',description='$famille_description ' where f.id='$idFamilleProduitModiff'  ");
+                 
        			 return redirect('/familleProd')->with('success','La Famiile a été Modifiée avec succée');
 		}
         
