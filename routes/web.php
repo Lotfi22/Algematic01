@@ -104,3 +104,43 @@ Route::post('/AddSousFamille', 'Produit\SousFamilleController@AddSousFamille');
 Route::post('/ModifSousFamille/{idSousFamilleModiff}', 'Produit\SousFamilleController@ModifSousFamille');
 /*Suppression d'un  Famille_Produit*/
 Route::post('/SupprimerSousFamille/{idSousFamilleSupprimer}', 'Produit\SousFamilleController@SupprimerSousFamille');
+
+
+/***************************** Création d'une Propriété_Produit (CRUD)************************/
+Route::get('/propriete', 'Produit\ProprieteController@index');
+/*L'ajout d'un nouveau Famille_Produit*/
+Route::post('/AddPropriete', 'Produit\ProprieteController@AddPropriete');
+/*Modification d'un  Famille_Produit*/
+Route::post('/ModifPropriete/{idProprieteModiff}', 'Produit\ProprieteController@ModifPropriete');
+/*Suppression d'un  Famille_Produit*/
+Route::post('/SupprimerPropriete/{idProprieteSupprimer}', 'Produit\ProprieteController@SupprimerPropriete');
+
+/***************************** Création d'une Unite (CRUD)************************/
+Route::get('/unite', 'Produit\UniteController@index');
+/*L'ajout d'un nouveau Produit*/
+Route::post('/AddUnite', 'Produit\UniteController@AddUnite');
+/*Modification d'un  Unite*/
+Route::post('/ModifUnite/{idUniteModiff}', 'Produit\UniteController@ModifUnite');
+/*Suppression d'un  Unite*/
+Route::post('/SupprimerUnite/{idUniteSupprimer}', 'Produit\UniteController@SupprimerUnite');
+
+
+/***************************** Création d'un Produits (CRUD)************************/
+Route::get('/produit', 'Produit\ProduitController@index');
+/*L'ajout d'un nouveau Produit*/
+Route::post('/AddProduit', 'Produit\ProduitController@AddProduit');
+/*Modification d'un  Produit*/
+Route::post('/ModifProduit/{idProduitModiff}', 'Produit\ProduitController@ModifProduit');
+/*Suppression d'un  Produit*/
+Route::post('/SupprimerProduit/{idProduitSupprimer}', 'Produit\ProduitController@SupprimerProduit');
+
+
+
+/***************************** Création d'une Spécifité technique_Produit (CRUD)************************/
+Route::get('/technique', 'Produit\SpecifiteTechController@index');
+/*L'ajout d'un nouveau Famille_Produit*/
+Route::post('/AddTechnique', 'Produit\SpecifiteTechController@AddTechnique');
+/*Modification d'un  Famille_Produit*/
+Route::post('/ModifTechnique/{idTechniqueModiff}', 'Produit\SpecifiteTechController@ModifTechnique');
+/*Suppression d'un  Famille_Produit*/
+Route::post('/SupprimerTechnique/{idTechniqueSupprimer}', 'Produit\SpecifiteTechController@SupprimerTechnique');
