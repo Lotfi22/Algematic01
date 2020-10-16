@@ -165,12 +165,12 @@
               <td>{{$fournisseur->tele}}</td>
               <td>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#InfosPlus">
+                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#InfosPlus{{$fournisseur->id}}">
                       Plus
                     </button>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="InfosPlus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="InfosPlus{{$fournisseur->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">

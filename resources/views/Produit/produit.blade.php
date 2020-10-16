@@ -30,28 +30,28 @@
                       @endif
     <div>
          <!-- Button trigger modal -->
-                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalNVfamille">
-                      Ajouter Une Famille pour les Produits
+                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalNVProduit">
+                      Ajouter Un Produit
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalNVfamille" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalNVProduit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Informations de la Nouvelle Famille</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Informations du Nouveau Produit</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/AddFamilleProduit" method="POST">
+                     <form class="needs-validation" novalidate action="/AddProduit" method="POST" enctype="multipart/form-data">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
 
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="CAMERA ET CABLES" required>
+                                  <label for="validationTooltip01"><B>Code Produit</B></label>
+                                  <input type="text"  name="code" class="form-control" placeholder="A001" required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
@@ -59,19 +59,64 @@
                                   <input type="text" name="description"class="form-control"  placeholder="EL HAMIZ" required>
                                 </div>
                               </div>
+                              <div class="form-row">
 
-                            <div class="col-md-3 mb-3">
-                                  <div class="form-group">
-                                    <label for="exampleFormControlSelect1"><B>Catégorie</B></label>
-                                    <select name="categorie" class="form-control" id="exampleFormControlSelect1">
-                                     @foreach($categories as $categorie)
-                                     <option value="{{$categorie->id}}"> {{  $categorie->nom  }} </option>
-                                      @endforeach
-                                     
-                                    </select>
+                                <div class="form-group">
+                                  <label for="exampleFormControlFile1"><B>Photo</B></label>
+                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                  <label for="validationTooltip02"><B>Model</B></label>
+                                  <input type="text" name="model"class="form-control"  placeholder="EL HAMIZ" required>
+                                </div>
+
+                              </div>
+                              <div class="form-row">
+                                  <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                          <label for="exampleFormControlSelect1"><B>Sous Famille</B></label>
+                                          <select name="sfamille" class="form-control" id="exampleFormControlSelect1">
+                                           @foreach($sfamilles as $sfamille)
+                                           <option value="{{$sfamille->id}}"> {{  $sfamille->nom  }} </option>
+                                            @endforeach
+                                           
+                                          </select>
+                                        </div>
                                   </div>
-                            </div> 
-                          </div>
+
+                                  <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                          <label for="exampleFormControlSelect1"><B>Fabricant</B></label>
+                                          <select name="fabricant" class="form-control" id="exampleFormControlSelect1">
+                                           @foreach($fabricants as $fabricant)
+                                           <option value="{{$fabricant->id}}"> {{  $fabricant->nom  }} </option>
+                                            @endforeach
+                                           
+                                          </select>
+                                        </div>
+                                  </div>
+                              </div> 
+
+                               <div class="form-row">
+
+                                  <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                          <label for="exampleFormControlSelect1"><B>Unité</B></label>
+                                          <select name="unite" class="form-control" id="exampleFormControlSelect1">
+                                           @foreach($unites as $unite)
+                                           <option value="{{$unite->id}}"> {{  $unite->description  }} </option>
+                                            @endforeach
+                                           
+                                          </select>
+                                        </div>
+                                  </div>
+
+                            
+                              </div> 
+
+                              </div>
+
                           <div class="modal-footer">
                             <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
                             <button type="submit" class="btn-sm btn btn-primary">Ajouter</button>
@@ -91,26 +136,84 @@
           <thead>
             <tr>
               <th scope="col"><B>Numéro</B></th>
-              <th scope="col"><B>Nom</B></th>
+              <th scope="col"><B>Code</B></th>
               <th scope="col"><B>description</B></th>
-              <th scope="col"><B>Num_Catégorie</B></th>
+              <th scope="col"><B>Photo</B></th>
+              <th scope="col"><B>Autres Infos</B></th>
+              <th scope="col"><B>douk tban</B></th>
               <th scope="col"><B>Modifier</B></th>
               <th scope="col"><B>Supprimer</B></th>
             </tr>
           </thead>
           <tbody>
-            @foreach($familles as $famille)
+            @foreach($produits as $produit)
             <tr>
-              <td scope="row"><B>{{$famille->id}}</B></td>
-              <td>{{$famille->nom}}</td>
-              <td>{{$famille->description}}</td>
-              <td>{{$famille->id_categorie}}</td>
-              <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFfamille{{$famille->id}}">
+              <td scope="row"><B>{{$produit->id}}</B></td>
+              <td>{{$produit->code_produit}}</td>
+              <td>{{$produit->description}}</td>
+              <td><!-- Button trigger modal -->
+                  <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#staticBackdrop{{$produit->id}}">
+                    Photo
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="staticBackdrop{{$produit->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="staticBackdropLabel">Photo_Marque</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <img src="{{asset('images/produit/'.$produit->photo ?? "nimi")}}">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#InfosPlus{{$produit->id}}">
+                      Plus
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="InfosPlus{{$produit->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Informations Suplémentaires</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <p><B>Model:</B> {{$produit->model}}</p>
+                            <p><B>Unité: </B>{{$produit->UniteDescription}}</p>
+                            <p><B>Sous_Famille:</B> {{$produit->NomFamille}}</p>
+                            <p><B>Fabricant:</B> {{$produit->NomFabricant}}</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-succes" data-dismiss="modal">Fermer</button>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              </td>
+              
+              <td>Plus</td>
+              <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFproduit{{$produit->id}}">
                       Modifier
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalMODIFfamille{{$famille->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalMODIFproduit{{$produit->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -119,36 +222,78 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifFamilleProduit/{{$famille->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/ModifProduit/{{$produit->id}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field()}}
-                          <div class="modal-body">
+                     <div class="modal-body">
                               <div class="form-row">
 
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>Nouveau Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="{{$famille->nom}}" required>
+                                  <label for="validationTooltip01"><B>NV Code Produit</B></label>
+                                  <input type="text"  name="code" class="form-control" placeholder="A001" required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Nouvelle Description</B></label>
-                                  <input type="text" name="description"class="form-control"  placeholder="{{$famille->description}}" required>
+                                  <label for="validationTooltip02"><B>NV Description</B></label>
+                                  <input type="text" name="description"class="form-control"  placeholder="EL HAMIZ" required>
                                 </div>
                               </div>
+                              <div class="form-row">
 
-                              <div class="col-md-3 mb-3">
-                                  <div class="form-group">
-                                    <label for="exampleFormControlSelect1"><B>Nouvelle_Catégorie</B></label>
-                                    <select name="categorie" class="form-control" id="exampleFormControlSelect1">
-                                     @foreach($categories as $categorie)
-                                     <option value="{{$categorie->id}}"> {{  $categorie->nom  }} </option>
-                                      @endforeach
-                                     
-                                    </select>
+                                <div class="form-group">
+                                  <label for="exampleFormControlFile1"><B>NV Photo</B></label>
+                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                  <label for="validationTooltip02"><B>NV Model</B></label>
+                                  <input type="text" name="model"class="form-control"  placeholder="EL HAMIZ" required>
+                                </div>
+
+                              </div>
+                              <div class="form-row">
+                                  <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                          <label for="exampleFormControlSelect1"><B>NV Sous Famille</B></label>
+                                          <select name="sfamille" class="form-control" id="exampleFormControlSelect1">
+                                           @foreach($sfamilles as $sfamille)
+                                           <option value="{{$sfamille->id}}"> {{  $sfamille->nom  }} </option>
+                                            @endforeach
+                                           
+                                          </select>
+                                        </div>
                                   </div>
-                            </div> 
-                              
+
+                                  <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                          <label for="exampleFormControlSelect1"><B>NV Fabricant</B></label>
+                                          <select name="sfamille" class="form-control" id="exampleFormControlSelect1">
+                                           @foreach($fabricants as $fabricant)
+                                           <option value="{{$fabricant->id}}"> {{  $fabricant->nom  }} </option>
+                                            @endforeach
+                                           
+                                          </select>
+                                        </div>
+                                  </div>
+                              </div> 
+
+                               <div class="form-row">
+
+                                  <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                          <label for="exampleFormControlSelect1"><B>NV Unité</B></label>
+                                          <select name="sfamille" class="form-control" id="exampleFormControlSelect1">
+                                           @foreach($unites as $unite)
+                                           <option value="{{$unite->id}}"> {{  $unite->description  }} </option>
+                                            @endforeach
+                                           
+                                          </select>
+                                        </div>
+                                  </div>
+
                             
-                          </div>
+                              </div> 
+
+                              </div>
                           <div class="modal-footer">
                             <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
                             <button type="submit" class="btn-sm btn btn-primary">Modifier</button>
@@ -158,12 +303,12 @@
                       </div>
                     </div>
                 </td>
-                 <td><button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERfamille{{$famille->id}}">
+                 <td><button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERproduit{{$produit->id}}">
                        Supprimer
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalSUPPRIMERfamille{{$famille->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalSUPPRIMERproduit{{$produit->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -172,7 +317,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerFamilleProduit/{{$famille->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/SupprimerProduit/{{$produit->id}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">
