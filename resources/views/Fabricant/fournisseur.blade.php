@@ -149,7 +149,7 @@
               <th scope="col"><B>Nom</B></th>
               <th scope="col"><B>Adresse</B></th>
               <th scope="col"><B>Activité</B></th>
-              <th scope="col"><B>Tél</B></th>
+              <th scope="col"><B>+ BC</B></th>
               <th scope="col"><B>Autres Infos</B></th>
               <th scope="col"><B>Modifier</B></th>
               <th scope="col"><B>Supprimer</B></th>
@@ -162,10 +162,11 @@
               <td>{{$fournisseur->nom}}</td>
               <td>{{$fournisseur->adresse}}</td>
               <td>{{$fournisseur->activite}}</td>
-              <td>{{$fournisseur->tele}}</td>
+              <td>
+                    <a href="/commande/{{$fournisseur->id}}" type="button" class="btn-sm btn btn-success">Ajouter BC</a>
               <td>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#InfosPlus{{$fournisseur->id}}">
+                    <button type="button" class="btn-sm btn btn-dark" data-toggle="modal" data-target="#InfosPlus{{$fournisseur->id}}">
                       Plus
                     </button>
 
@@ -181,6 +182,7 @@
                           </div>
                           <div class="modal-body">
                             <p><B>Mobile: </B>{{$fournisseur->mobile}}</p>
+                            <p><B>Téléphone: </B>{{$fournisseur->tele}}</p>
                             <p><B>Fax:</B> {{$fournisseur->fax}}</p>
                             <p><B>Email:</B> {{$fournisseur->email}}</p>
                             <p><B>NIS:</B> {{$fournisseur->nis}}</p>

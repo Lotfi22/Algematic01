@@ -31,7 +31,7 @@
     <div>
          <!-- Button trigger modal -->
                     <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalNVProduit">
-                      Ajouter Un Produit
+                      Ajouter Un 
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->

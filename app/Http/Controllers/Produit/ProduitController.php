@@ -21,7 +21,7 @@ class ProduitController extends Controller
     	$fabricants=DB::select("select id,nom,marque from fabricants");
     	$sfamilles=DB::select("select id,nom from sous_familles where visible=1");
         $unites=DB::select("select id,description from unites");
-    	$produits=DB::select("select p.id,p.code_produit,p.description,p.photo,p.model,p.id_unite,u.description as UniteDescription,p.id_fabricant,f.nom as NomFabricant,p.id_sous_famille,s.nom as NomFamille
+    	$produits=DB::select("select p.id,p.code_produit,p.description,p.photo,p.model,p.prix_achat,p.id_unite,u.description as UniteDescription,p.id_fabricant,f.nom as NomFabricant,p.id_sous_famille,s.nom as NomFamille
              from produits p,unites u, fabricants f,sous_familles s 
             where p.id_unite=u.id and p.id_sous_famille=s.id and p.id_fabricant=f.id and p.visible=1");
 
@@ -33,15 +33,13 @@ class ProduitController extends Controller
     {   
 
         
-        //dd($request->photo);
+        
 
         $this->validate($request,[
             'code' => 'required|max:300',
             'description' => 'required|max:800',
             'model' => 'required|max:400',
-
-
-            //'photo' => 'required|image|max:5000'
+            'prix' => 'required|max:400'
             ]);
 
         
@@ -70,10 +68,11 @@ class ProduitController extends Controller
             $produit_code=$request->input('code');
             $produit_description=$request->input('description');
             $produit_model=$request->input('model');
+            $produit_prix=$request->input('prix');
             $produit_photo=$file_name;
             //$depot->save();
 
-            DB::insert("insert into produits (id_unite,code_produit,description,photo,model,id_sous_famille,id_fabricant) values('$produit_unite','$produit_code','$produit_description','$produit_photo','$produit_model','$produit_sfamille','$produit_fabricant') ");
+            DB::insert("insert into produits (id_unite,code_produit,description,photo,model,id_sous_famille,id_fabricant,prix_achat) values('$produit_unite','$produit_code','$produit_description','$produit_photo','$produit_model','$produit_sfamille','$produit_fabricant','$produit_prix') ");
             
             
             return redirect('/produit')->with('success','Le Nouveau Produit est enregistré avec succée');
