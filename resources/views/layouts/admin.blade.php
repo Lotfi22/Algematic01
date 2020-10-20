@@ -229,7 +229,7 @@
 
         <!-- ============================================================== -->
 
-        <aside class="left-sidebar">
+        <aside style="height: 100%; overflow: scroll;" class="left-sidebar">
 
             <!-- Sidebar scroll-->
 
@@ -256,7 +256,7 @@
 
                                             <!-- Fabricant_Fournisseur -->
 
-                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Fabricant_Fournisseur</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Fabricant_Fournisseur</span></a></li>
 
 
                         <li class="acacher2"> <a class="waves-effect waves-dark" href="/fabricant" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fabricant</span></a></li>

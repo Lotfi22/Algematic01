@@ -60,7 +60,24 @@ class ClientController extends Controller
     public function ajouter_client(Request $request)
     {
 
-        dd($request->all());
+
+        $this->validate($request,[
+
+            'code' => 'required|alpha_num',
+            'tel' => 'numeric',
+            'fax' => 'numeric',
+            'mobile' => 'numeric',
+            'email' => 'email',
+            'nis' => 'alpha_num',
+            'nif' => 'alpha_num',
+            'rc' => 'alpha_num',
+            'taux_remise_spec' => 'numeric',
+            'plafond_credit' => 'numeric',
+            #..
+        ]);
+
+        dd("je suis f ClientController");
+        #DB::insert("insert into clients (code,tel,fax,mobile,email,nis,nif,rc,taux_remise_spec,plafond_credit,type,client_inter_fact,motif_interd,id_categorie,id_activite) values ()");
 
         # code...
     }
