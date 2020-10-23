@@ -298,6 +298,7 @@
 
                         <li class="acacher3"> <a class="waves-effect waves-dark" href="/admin/client/activite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Activité</span></a></li>
 
+                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Clients | Prospect</span></a></li>
 
 
 
@@ -375,13 +376,29 @@
 
         <div class="page-wrapper">
 
-            <div class="container-fluid">
 
+            <div class="container-fluid">
 
 
                 <div id="ici_message" class="alert alert-success" style="text-align: center;">
 
                 </div>
+
+
+                @if ((session()->has('notification.message')))
+
+                  
+
+                    <div class="alert alert-{{ session()->get('notification.type') }}" style="text-align: center;">
+                    
+
+                        {{ session()->get('notification.message') }}
+
+                    </div>
+
+
+                  {{--  --}}
+                @endif               
 
 
 
