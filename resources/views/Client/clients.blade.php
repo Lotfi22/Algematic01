@@ -22,6 +22,8 @@
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Ajouter un client </button>
 
 
+{{-- hada houwwa l model --}}
+
 
 <div id="myModal" class="modal fade col-md-12" role="dialog">
 
@@ -47,7 +49,14 @@
 
                         <label for="la_photo">Choisir la photo </label>
 
-                        <input type="file" required name="la_photo1" id="la_photo1" class="form-control" >
+                        <input type="file" required name="la_photo1" value="{{ old('la_photo1') }}" id="la_photo1" class="form-control" >
+
+                        @if ($errors->has('la_photo1'))
+                            <span style="color: red;" class="help-block">
+                                <strong>{{ $errors->first('la_photo1') }}</strong>
+                            </span>
+                        @endif
+
 
                         {{--  --}}
                     </div>
@@ -57,7 +66,14 @@
 
                         <label for="code">Code Client</label>
                         <br>
-                        <textarea type="text" autofocus id="codeduclient" rows="1" cols="50" required name="code" class="form-control" id="code"></textarea>
+                        <textarea type="text" autofocus id="codeduclient" rows="1" cols="50" required name="code" class="form-control" id="code"> {{ old('code') }}</textarea>
+
+                        @if ($errors->has('code'))
+                            <span style="color: red;" class="help-block">
+                                <strong>{{ $errors->first('code') }}</strong>
+                            </span>
+                        @endif
+
 
                         {{--  --}}
                     </div>
@@ -66,14 +82,29 @@
 
                         <label for="tel">Téléphone </label>
 
-                        <textarea type="tel" required id="tel" rows="1" cols="50" required name="tel" class="form-control" id="tel"></textarea>
+                        <textarea type="tel" required id="tel" rows="1" cols="50" required name="tel" class="form-control" id="tel"> {{ old('tel') }}</textarea>
+
+                        @if ($errors->has('tel'))
+                            <span style="color: red;" class="help-block">
+                                <strong>{{ $errors->first('tel') }}</strong>
+                            </span>
+                        @endif
+
+
                     </div>
 
                     <div class="form-group col-md-6 col-sm-12">
 
                         <label for="fax">Fax </label>
 
-                        <textarea type="fax" id="fax" name="fax" rows="1" cols="50" class="form-control" id="fax"></textarea>
+                        <textarea type="fax" id="fax" name="fax" rows="1" cols="50" class="form-control" id="fax"> {{ old('fax') }}</textarea>
+
+                        @if ($errors->has('fax'))
+                            <span style="color: red;" class="help-block">
+                                <strong>{{ $errors->first('fax') }}</strong>
+                            </span>
+                        @endif
+
 
                         {{--  --}}
                     </div>
@@ -83,7 +114,14 @@
 
                         <label for="mobile">Mobile </label>
 
-                        <textarea type="mobile" id="mobile" name="mobile" rows="1" cols="50" class="form-control" id="mobile"></textarea>
+                        <textarea type="mobile" id="mobile" name="mobile" rows="1" cols="50" class="form-control" id="mobile"> {{ old('mobile') }}</textarea>
+
+                        @if ($errors->has('mobile'))
+                            <span style="color: red;" class="help-block">
+                                <strong>{{ $errors->first('mobile') }}</strong>
+                            </span>
+                        @endif
+
 
                         {{--  --}}
                     </div>
@@ -93,7 +131,14 @@
 
                         <label for="email">email </label>
 
-                        <textarea type="email" id="email" name="email" rows="1" cols="50" class="form-control" id="email"></textarea>
+                        <textarea type="email" id="email" name="email" rows="1" cols="50" class="form-control" id="email"> {{ old('email') }}</textarea>
+
+                        @if ($errors->has('email'))
+                            <span style="color: red;" class="help-block">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+
 
                         {{--  --}}
                     </div>
@@ -102,7 +147,13 @@
 
                         <label for="nis">NIS</label>
 
-                        <textarea type="nis" id="nis" name="nis" rows="1" cols="50" class="form-control" id="nis"></textarea>
+                        <textarea type="nis" id="nis" name="nis" rows="1" cols="50" class="form-control" id="nis"> {{ old('nis') }}</textarea>
+
+                        @if ($errors->has('nis'))
+                            <span style="color: red;" class="help-block">
+                                <strong>{{ $errors->first('nis') }}</strong>
+                            </span>
+                        @endif
 
                         {{--  --}}
                     </div>
@@ -113,7 +164,14 @@
                         
                         <label for="nif">NIF </label>
                         
-                        <textarea  type="text" required rows="1" cols="50" class="form-control" name="nif" id="nif"></textarea>
+                        <textarea  type="text" required rows="1" cols="50" class="form-control" name="nif" id="nif"> {{ old('nif') }}</textarea>
+
+                        @if ($errors->has('nif'))
+                            <span style="color: red;" class="help-block">
+                                <strong>{{ $errors->first('nif') }}</strong>
+                            </span>
+                        @endif
+
                     </div>
 
                     <br>
@@ -122,30 +180,75 @@
                         
                         <label for="rc">N° Registre de commerce </label>
                         
-                        <textarea type="text" required rows="1" cols="50" class="form-control" name="rc" id="rc"></textarea>
+                        <textarea type="text" required rows="1" cols="50" class="form-control" name="rc" id="rc"> {{ old('rc') }}</textarea>
+
+                        @if ($errors->has('rc'))
+                            <span style="color: red;" class="help-block">
+                                <strong>{{ $errors->first('rc') }}</strong>
+                            </span>
+                        @endif
+
+
                     </div>
                     
                     <div class="form-group col-md-6 col-sm-12">
                         
                         <label for="n_art_imp">N° Article d'Imposition</label>
                         
-                        <textarea type="text" required rows="1" cols="50" class="form-control" name="n_art_imp" id="n_art_imp"></textarea>
+                        <textarea type="text" required rows="1" cols="50" class="form-control" name="n_art_imp" id="n_art_imp"> {{ old('n_art_imp') }}</textarea>
+
+                        @if ($errors->has('n_art_imp'))
+                            <span style="color: red;" class="help-block">
+                                <strong>{{ $errors->first('n_art_imp') }}</strong>
+                            </span>
+                        @endif
+
                     </div>
 
                     <div class="form-group col-md-6 col-sm-12">
                         
                         <label for="taux_remise_spec">Taux d'réduction : </label>
                         
-                        <textarea type="number" value="0" required rows="1" cols="50" class="form-control" name="taux_remise_spec" id="taux_remise_spec"></textarea>
+                        <textarea type="number" value="0" required rows="1" cols="50" class="form-control" name="taux_remise_spec" id="taux_remise_spec"> {{ old('taux_remise_spec') }}</textarea>
+
+                        @if ($errors->has('taux_remise_spec'))
+                            <span style="color: red;" class="help-block">
+                                <strong>{{ $errors->first('taux_remise_spec') }}</strong>
+                            </span>
+                        @endif
+
                     </div>
 
                     <div class="form-group col-md-6 col-sm-12">
                         
                         <label for="plafond_credit">Plafond Crédit </label>
                         
-                        <textarea type="number" value="0" rows="1" cols="50" class="form-control" name="plafond_credit" id="plafond_credit"></textarea>
+                        <textarea type="number" value="0" rows="1" cols="50" class="form-control" name="plafond_credit" id="plafond_credit"> {{ old('plafond_credit') }}</textarea>
+
+                        @if ($errors->has('plafond_credit'))
+                            <span style="color: red;" class="help-block">
+                                <strong>{{ $errors->first('plafond_credit') }}</strong>
+                            </span>
+                        @endif
+
                     </div>
 
+
+                    <div class="form-group col-md-6 col-sm-12" style="margin: 2% 0%; ">
+
+                        <div class="custom-control custom-radio" style="margin-right: 20%;">
+                            <input type="radio" class="custom-control-input" id="client" value="0"  name="type">
+                            <label class="custom-control-label" for="client">Client</label>
+                        </div>
+
+                        <!-- Group of default radios - option 2 -->
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="prospect" value="1" checked name="type">
+                            <label class="custom-control-label" for="prospect">Prospect</label>
+                        </div>
+
+                        {{--  --}}
+                    </div>
 
                     <div class="form-group col-md-6 col-sm-12" style="margin: 2% 0%; ">
                         
@@ -160,12 +263,12 @@
 
                     <div class="form-group col-md-12" style="margin: 2% 0%; ">
                         
-                        <label for="motif_interd" style="margin-right: 3%;">Motif interdiction de Facturation</label>
+                        <label for="motif_interd" id="motif_interd_label" style="margin-right: 3%;">Motif interdiction de Facturation</label>
     
                         <select class="form-control" name="motif_interd" id="motif_interd" >
                             
-                            <option value="NON"> Motif N°1 </option>
-                            <option value="OUI"> Motif N°2 ......... </option>
+                            <option value="Motif N°1"> Motif N°1 </option>
+                            <option value="Motif N°2 ........."> Motif N°2 ......... </option>
                         </select>
                     </div>
 
@@ -176,7 +279,7 @@
 
                     <h5 style="visibility: visible;"> Categorie : </h5>
                         
-                    <select class="col-md-12 form-control"  data-live-search="true"  name="categorie0" id="le_select0">
+                    <select class="col-md-12 form-control"  data-live-search="true"  name="categorie" id="le_select0">
 
                         <option value="------">----------------</option>
 
@@ -191,10 +294,12 @@
                         {{--  --}}
                     </select>
 
-
+                    <h5 style="visibility: hidden;"> Categorie : </h5>
+                    <h5 style="visibility: hidden;"> Categorie : </h5>
+                    <h5 style="visibility: hidden;"> Categorie : </h5>
                     <h5 style="visibility: visible;"> Activité : </h5>
                         
-                    <select class="col-md-12 form-control"  data-live-search="true"  name="categorie0" id="le_select0">
+                    <select class="col-md-12 form-control"  data-live-search="true"  name="activite" id="le_select0">
 
                         <option value="------">----------------</option>
 
@@ -210,7 +315,7 @@
                     </select>
 
 
-                    <button style="margin-top: 5%;" id="ajout{{ $last_id }}" {{-- data-dismiss="modal" onclick="ajouterclient(event,this)" --}} type="submit" class="btn btn-success col-md-6">Ajouter</button>
+                    <button style="margin-top: 5%;" id="ajout{{ $last_id }}" {{-- data-dismiss="modal" onclick="ajouterclient(event,this)" --}} type="submit" onclick="verif(event);" class="btn btn-success col-md-6">Ajouter</button>
                 </form>
 
                 {{--  --}}
@@ -248,47 +353,31 @@
 
                                     <th>Photo</th>
 
-                                    <th>Titre</th>
+                                    <th>code_client</th>
 
-                                    <th style="visibility: hidden;">gggggg</th>
+                                    <th>tel</th>
 
-                                    <th style="visibility: hidden;">gggggg</th>
+                                    <th>fax</th>
 
-                                    <th>Description</th>
+                                    <th>mobile</th>
 
-                                    <th style="visibility: hidden;">ggggggg</th>
+                                    <th>email</th>
 
-                                    <th>Portions</th>
-
-                                    <th>Préparation</th>
-
-                                    <th>Cuisson</th>
-
-                                    <th style="visibility: hidden;">ggggggg</th>
-
-                                    <th>Repos</th>
-
-                                    <th style="visibility: hidden;">ggggggg</th>
+                                    <th>NIS</th>
                                     
-                                    <th>Conservation</th>
+                                    <th>NIF</th>
+
+                                    <th>N° RC</th>
                                     
-                                    <th style="visibility: hidden;">ggggggg</th>
+                                    <th>N° Art imp</th>
 
-                                    <th>Ingrédients</th>
-                                    
-                                    <th style="visibility: hidden;">ggggggg</th>
-                                    
-                                    <th>Etapes</th>
-                                    
-                                    <th style="visibility: hidden;">ggggggg</th>
+                                    <th>Catégorie</th>
+                                    <th style="visibility: hidden;" >Catégorie</th>
 
-                                    <th>Catégories</th>
+                                    <th>Activité</th>
+                                    <th style="visibility: hidden;" >Activité</th>
 
-                                    <th style="visibility: hidden;">ggggggg</th>
-
-                                    <th>Particularités</th>
-
-                                    <th style="visibility: hidden;">ggggggg</th>
+                                    <th>Plus</th>
 
                                 </tr>
 
@@ -301,119 +390,105 @@
                                 @for($i=0 ; $i < count($clients) ; $i++)
 
                                     <tr id="client{{$clients[$i]->id}}">
-
                                         <form class="iciic">
 
                                             {{ csrf_field() }}  
-
                                             <td>
+                                                <a href="/home/clients/{{$clients[$i]->id}}">
 
-                                                <img src="{{asset('../'.$clients[$i]->photo)}}" width="100%" height="10%">                                                
+                                                    <img src="{{asset('../'.$clients[$i]->photo)}}" width="100%" height="10%">
+                                                </a>                                                 
+                                            </td>
+                                            
+                                            <td> 
+                                                <a href="/home/clients/{{$clients[$i]->id}}">
+                                                    <p id="codeclient{{$clients[$i]->id}}" value="{!! $clients[$i]->code_client !!}">{!! $clients[$i]->code_client !!}</p>
+                                                </a>
+                                                {{--  --}}
                                             </td>
 
-                                            <td colspan="3"> 
+                                            <td> 
 
-                                                <p id="nomclient{{$clients[$i]->id}}" value="{!! $clients[$i]->nom !!}">{!! $clients[$i]->nom !!}</p>
+                                                <p id="tel{{$clients[$i]->id}}" value="{!! ($clients[$i]->tel) !!}">{!! nl2br($clients[$i]->tel) !!}</p> 
+
+                                                {{--  --}}
+                                            </td>
+
+                                            <td> 
+
+                                                <p id="fax{{$clients[$i]->id}}" value="{!! ($clients[$i]->fax) !!}">{{$clients[$i]->fax}}</p> 
+
+                                                {{--  --}}
+                                            </td>
+
+
+                                            <td> 
+
+                                                <p  style="height: 20em;" id="mobile{{$clients[$i]->id}}" value="{!! ($clients[$i]->mobile) !!}">{!! ($clients[$i]->mobile) !!}</p> 
+
+                                                {{--  --}}
+                                            </td>
+
+                                            <td> 
+
+                                                <p value="{{ substr($clients[$i]->email,0,2) }}" id="emailh{{$clients[$i]->id}}">{!! $clients[$i]->email !!}</p>
+                                                
+
+                                                {{--  --}}
+                                            </td>
+
+
+                                            <td> 
+
+                                                <p  value="{{ $clients[$i]->NIS }}"  
+                                                id="NIS{{$clients[$i]->id}}">{{ $clients[$i]->NIS }}</p>
                                                 
                                                 {{--  --}}
                                             </td>
 
-                                            <td colspan="2"> 
 
-                                                <p id="description{{$clients[$i]->id}}" value="{!! ($clients[$i]->description) !!}">{!! nl2br($clients[$i]->description) !!}</p> 
+                                            <td> 
 
-                                                {{--  --}}
-                                            </td>
-
-                                            <td colspan="1"> 
-
-                                                <p id="portions{{$clients[$i]->id}}" value="{!! ($clients[$i]->portions) !!}">{{$clients[$i]->portions}}</p> 
+                                                <p id="NIF{{$clients[$i]->id}}" value="{!! ($clients[$i]->NIF) !!}">{{$clients[$i]->NIF}}</p> 
 
                                                 {{--  --}}
                                             </td>
 
 
-                                            <td colspan="1"> 
+                                            <td> 
 
-                                                <p  style="height: 20em;" id="preparation{{$clients[$i]->id}}" value="{!! ($clients[$i]->preparation) !!}">{!! ($clients[$i]->preparation) !!} Minutes</p> 
-
-                                                {{--  --}}
-                                            </td>
-
-                                            <td colspan="2"> 
-
-                                                <p value="{{ substr($clients[$i]->dureecuisson,0,2) }}" id="dureecuissonh{{$clients[$i]->id}}">{!! substr($clients[$i]->dureecuisson,3,2) !!} Minutes</p>
-                                                
+                                                <p readonly id="RC{{$clients[$i]->id}}" value="{!! ($clients[$i]->RC) !!}">{{$clients[$i]->RC}}</p> 
 
                                                 {{--  --}}
                                             </td>
 
 
-                                            <td colspan="2"> 
+                                            <td> 
 
-                                                <p  value="{{ substr($clients[$i]->duree,0,2) }}"  
-                                                id="dureeh{{$clients[$i]->id}}">{{ substr($clients[$i]->duree,3,2) }} Minutes</p>
-                                                
-                                                {{--  --}}
+                                                <p id="n_art_imp{{$clients[$i]->id}}" value="{!! ($clients[$i]->n_art_imp) !!}">{{$clients[$i]->n_art_imp}}</p> 
                                             </td>
 
 
-                                            <td colspan="2"> 
-
-                                                <p cols="100" style="height: 20em; color: #000000;" id="conservation{{$clients[$i]->id}}" value="{!! ($clients[$i]->conservation) !!}">{{$clients[$i]->conservation}}</p> 
-
-                                                {{--  --}}
-                                            </td>
-
-
-                                            <td colspan="2"> 
-
-                                                <textarea class="form-control" readonly cols="100" style="height: 20em; color: #000000;" id="ingredients{{$clients[$i]->id}}" value="{!! ($clients[$i]->ingredients) !!}">{{$clients[$i]->ingredients}}</textarea> 
-
-                                                {{--  --}}
-                                            </td>
-
-
-                                            <td colspan="2"> 
-
-                                                <textarea class="form-control" readonly cols="100" style="height: 20em; color: #000000;" id="etapes{{$clients[$i]->id}}" value="{!! ($clients[$i]->etapes) !!}">{{$clients[$i]->etapes}}</textarea> 
+                                            <td colspan="2">
+                                                                                                        
+                                                <p value="rec{{$clients[$i]->id}}cat" id="cat{{$i}}
+                                                    {{$clients[$i]->id}}">{!! $clients[$i]->categorie_nom !!}
+                                                </p>                                           
 
                                                 {{--  --}}
                                             </td>
 
 
                                             <td colspan="2">
-                                                
-
-                                                @for ($k=0; $k< sizeof($clients_cat) ; $k++)
-                                                    
-                                                    @if ($clients_cat[$k]->client_id==$clients[$i]->id)
-                                                        
-                                                        <p value="rec{{$clients[$i]->id}}cat{{$clients_cat[$k]->categorie_id}}" id="cat{{$i}}{{$clients_cat[$k]->categorie_id}}{{$clients[$i]->id}}">{!! $clients_cat[$k]->categorie_nom !!}</p>                                           
-
-                                                        {{-- expr --}}
-                                                    @endif
-                                                        
-                                                    {{--  --}}
-                                                @endfor 
-
-
-                                                {{--  --}}
-                                            </td>
-
-                                            <td colspan="2"> 
-
-                                                <p id="etapes{{$clients[$i]->id}}" value="{!! ($clients[$i]->etapes) !!}">{!! nl2br($clients[$i]->Particularites) !!}</p> 
+                                                                                                        
+                                                <p value="act{{$clients[$i]->id}}cat" id="act{{$i}}
+                                                    {{$clients[$i]->id}}">{!! $clients[$i]->activite_nom !!}
+                                                </p>                                           
 
                                                 {{--  --}}
                                             </td>
 
 
-{{--                                             <td> 
-
-                                                <button class="btn btn-success btn-sm" id="{{$clients[$i]->id}}" onclick="modifierclient(event,this)"> Enregistrer</button> 
-                                            </td>
- --}}
                                             <td> 
 
                                                 <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-{{$clients[$i]->id}}" style="color: #fff;"> supprimer</a>
@@ -475,18 +550,43 @@
 
     <script>
         
+        $("#motif_interd").hide(0);
+        $("#motif_interd_label").hide(0);
+
         
-        alert($("#motif_interd")).change(function(event) {
+        $("#client_inter_fact").change(function(event) {
 
             event.preventDefault();
             
-            alert($("#motif_interd").val());
+            if ($("#client_inter_fact").val() == "OUI") 
+            {
+                
+                $("#motif_interd_label").show('slow');    
+                
+                $("#motif_interd").show('slow');
+
+                //
+            }
+            else
+            {
+
+                $("#motif_interd_label").hide('slow');    
+                
+                $("#motif_interd").hide('slow');
+                //
+            }
 
             //
         });
             
-        
+        function verif(e)
+        {
+            /*e.preventDefault();*/
 
+
+
+            //
+        }
         
         
 

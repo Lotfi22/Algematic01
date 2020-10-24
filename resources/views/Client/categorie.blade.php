@@ -19,7 +19,7 @@
 
                     <h6 class="card-subtitle">categories disponibles</code></h6>
 
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Ajouter un categories </button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Ajouter une categorie </button>
 
                     <div id="myModal" class="modal fade" role="dialog">
 

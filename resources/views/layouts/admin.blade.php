@@ -233,7 +233,7 @@
 
         <!-- ============================================================== -->
 
-        <aside class="left-sidebar">
+        <aside style="height: 100%; overflow: scroll;" class="left-sidebar">
 
             <!-- Sidebar scroll-->
 
@@ -260,7 +260,11 @@
 
                                             <!-- Fabricant_Fournisseur -->
 
+<<<<<<< HEAD
                         <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Achat</span></a></li>
+=======
+                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Fabricant_Fournisseur</span></a></li>
+>>>>>>> a98bd959649cc7ec73bb7e69b3088d53b5cb480e
 
 
                         <li class="acacher2"> <a class="waves-effect waves-dark" href="/fabricant" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fabricant</span></a></li>
@@ -304,6 +308,7 @@
 
                         <li class="acacher3"> <a class="waves-effect waves-dark" href="/admin/client/activite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Activité</span></a></li>
 
+                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Clients | Prospect</span></a></li>
 
 
 
@@ -381,13 +386,29 @@
 
         <div class="page-wrapper">
 
-            <div class="container-fluid">
 
+            <div class="container-fluid">
 
 
                 <div id="ici_message" class="alert alert-success" style="text-align: center;">
 
                 </div>
+
+
+                @if ((session()->has('notification.message')))
+
+                  
+
+                    <div class="alert alert-{{ session()->get('notification.type') }}" style="text-align: center;">
+                    
+
+                        {{ session()->get('notification.message') }}
+
+                    </div>
+
+
+                  {{--  --}}
+                @endif               
 
 
 

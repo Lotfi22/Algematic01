@@ -72,28 +72,16 @@ Route::post('/SupprimerFabricant/{idFabricantSupprimer}', 'Fabricant\FabricantCo
 /***************************** Création d'un Fournisseur (CRUD)************************/
 Route::get('/fournisseur', 'Fournisseur\FournisseurController@index');
 /*L'ajout d'un nouveau fournisseur*/
-Route::get('/commande/{idFournisseur}', 'Fournisseur\FournisseurController@commande');
+Route::post('/commande/{idFournisseur}', 'Fournisseur\FournisseurController@commande');
 /*L'ajout d'un nouveau fournisseur*/
-Route::post('/ADDcommande/{idFournisseur}', 'Fournisseur\FournisseurController@ADDcommande');
+Route::post('/ADDcommande/{idFournisseur}/{numfactureproformat}','Fournisseur\FournisseurController@ADDcommande');
 /*L'ajout d'un nouveau fournisseur*/
-Route::post('/AddBC/{idFournisseur}/{nomFournisseur}', 'Fournisseur\FournisseurController@AddBC');
-/*BC*/
-Route::post('/PDF/{idFournisseur}/{nomFournisseur}', 'Fournisseur\FournisseurController@PDF');
-/*PDF*/
 Route::post('/AddFournisseur', 'Fournisseur\FournisseurController@AddFournisseur');
 /*Modification d'un  fournisseur*/
 Route::post('/ModifFournisseur/{idFournisseurModif}', 'Fournisseur\FournisseurController@ModifFournisseur');
 /*Suppression d'un  fournisseur*/
 Route::post('/SupprimerFournisseur/{idFournisseurSupprimer}', 'Fournisseur\FournisseurController@SupprimerFournisseur');
 
-/***************************** Création d'un Pré_achat (CRUD)************************/
-Route::get('/preachat', 'Fournisseur\PreAchatController@index');
-/*L'ajout d'un nouveau fournisseur*/
-Route::post('/AddPreAchat', 'Fournisseur\PreAchatController@AddPreAchat');
-/*Modification d'un  fournisseur*/
-Route::post('/ModifPreAchat/{idPreAchatModif}', 'Fournisseur\PreAchatController@ModifPreAchat');
-/*Suppression d'un  fournisseur*/
-Route::post('/SupprimerPreAchat/{idPreAchatSupprimer}', 'Fournisseur\PreAchatController@SupprimerPreAchat');
 
 /***************************** Création d'une CatégorieProduit (CRUD)************************/
 Route::get('/categorie', 'Produit\CategorieController@index');
@@ -161,3 +149,12 @@ Route::post('/AddTechnique', 'Produit\SpecifiteTechController@AddTechnique');
 Route::post('/ModifTechnique/{idTechniqueModiff}', 'Produit\SpecifiteTechController@ModifTechnique');
 /*Suppression d'un  Famille_Produit*/
 Route::post('/SupprimerTechnique/{idTechniqueSupprimer}', 'Produit\SpecifiteTechController@SupprimerTechnique');
+
+/***************************** Achat ************************/
+Route::get('/preachat', 'Achat\AchatController@index');
+/*L'ajout d'un nouveau Famille_Produit
+Route::post('/AddTechnique', 'Produit\SpecifiteTechController@AddTechnique');
+/*Modification d'un  Famille_Produit
+Route::post('/ModifTechnique/{idTechniqueModiff}', 'Produit\SpecifiteTechController@ModifTechnique');
+/*Suppression d'un  Famille_Produit
+Route::post('/SupprimerTechnique/{idTechniqueSupprimer}', 'Produit\SpecifiteTechController@SupprimerTechnique');*/

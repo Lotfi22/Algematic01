@@ -1,33 +1,37 @@
 @extends('../layouts.admin')
 @section('content')         
     
-     @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                      @if (\Session::has('success'))
-                        <div class="alert alert-success">
-                            <p>{{ \Session::get('success') }}</p>
-                        </div>
-                    @endif
+    @if (session('status'))
 
-                    @if (count($errors)>0)
-                        <ul>
-                          @foreach($errors->all() as $error)
-                          <li class="alert alert-danger">{{$error}}</li>
-                          @endforeach
-                        </ul>
-                    @endif
-                    <div class="container">
-                      @if(session()->has('notif'))
-                      <div class="row">
-                        <div class="alert alert-danger">
-                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true" >&times;</button>
-                          <strong>Notification</strong>{{session()->get('notif') }}
-                        </div>
-                      </div>
-                      @endif
+        <div class="alert alert-success">
+
+            {{ session('status') }}
+
+        </div>
+    @endif
+
+    @if (\Session::has('success'))
+        <div class="alert alert-success">
+            <p>{{ \Session::get('success') }}</p>
+        </div>
+    @endif
+
+    @if (count($errors)>0)
+        <ul>
+            @foreach($errors->all() as $error)
+            <li class="alert alert-danger">{{$error}}</li>
+            @endforeach
+        </ul>
+    @endif
+    <div class="container">
+        @if(session()->has('notif'))
+            <div class="row">
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" >&times;</button>
+                    <strong>Notification</strong>{{session()->get('notif') }}
+                </div>
+            </div>
+        @endif
     <div>
          <!-- Button trigger modal -->
                     <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalNVETAGERE">
@@ -131,7 +135,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>NV_Num_Etage</B></label>
-                                  <input type="number" name="num_etage"class="form-control"  placeholder="12" required>
+                                  <input type="number" min="0" name="num_etage"class="form-control"  placeholder="12" required>
                                 </div>
                               </div>
 

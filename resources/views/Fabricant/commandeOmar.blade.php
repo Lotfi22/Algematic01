@@ -33,8 +33,10 @@
               @foreach($fournisseurs as $fournisseur)
               <h2 style=" text-align: center; "><B>Fournisseur : {{$fournisseur->nom}}</B></h2>  
               @endforeach
+              <h2 style=" text-align: center; "><B>N° Facture Proformat : {{$achat_facture}}</B></h2>  
 
-                <form class="needs-validation" novalidate action="/ADDcommande/{{$fournisseur->id}}" method="POST">
+
+                <form class="needs-validation" novalidate action="/ADDcommande/{{$fournisseur->id}}/{{$achat_facture}}" method="POST">
                         {{ csrf_field()}}
                       <div class="form-group items" id="dynamic_form">
                       <div class="row">
@@ -47,8 +49,8 @@
                               <select class='form-control produits' class="js-example-basic-single" name='produit' id="produit" >
                                   <option value=""></option>
                                   @foreach($produits as $produit)
-                                  <option  value="{{$produit->id}}">
-                                      {{$produit->code_produit}} 
+                                  <option  value="{{$produit->code_produit}}">
+                                      {{$produit->code_produit}} -- {{$produit->description}}
                                   </option>
                                   @endforeach 
                               </select>   

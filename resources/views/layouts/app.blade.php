@@ -229,7 +229,7 @@
 
         <!-- ============================================================== -->
 
-        <aside class="left-sidebar">
+        <aside style="height: 100%; overflow: scroll;" class="left-sidebar">
 
             <!-- Sidebar scroll-->
 
@@ -254,14 +254,39 @@
 
                         <li class="acacher"> <a class="waves-effect waves-dark" href="/etagere" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Etagère</span></a></li>
 
-                                            <!-- Produit -->
+                                            <!-- Fabricant_Fournisseur -->
 
-                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Produit</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Fabricant_Fournisseur</span></a></li>
 
 
                         <li class="acacher2"> <a class="waves-effect waves-dark" href="/fabricant" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fabricant</span></a></li>
 
                         <li class="acacher2"> <a class="waves-effect waves-dark" href="/fournisseur" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fournisseur</span></a></li>
+
+                        
+
+                        <!--Fin-->
+
+                         <!-- Produit-Categorie_Famille_SousFamille -->
+
+                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshowProduit(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Produit</span></a></li>
+
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/categorie" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Catégorie_Prod</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/familleProd" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Famille_Prod</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/sousFamille" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Sous_Famille_Prod</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/propriete" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Propriétes_Produits</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/unite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Unité de Mesure</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/produit" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Produits</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/technique" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Spécificité Technique</span></a></li>
+
+                        
 
                         <!--Fin-->
 
@@ -273,8 +298,7 @@
 
                         <li class="acacher3"> <a class="waves-effect waves-dark" href="/admin/client/activite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Activité</span></a></li>
 
-                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Client</span></a></li>
-
+                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Clients | Prospect</span></a></li>
 
 
 
@@ -359,6 +383,22 @@
                 <div id="ici_message" class="alert alert-success" style="text-align: center;">
 
                 </div>
+
+
+                @if ((session()->has('notification.message')))
+
+                  
+
+                    <div class="alert alert-{{ session()->get('notification.type') }}" style="text-align: center;">
+                    
+
+                        {{ session()->get('notification.message') }}
+
+                    </div>
+
+
+                  {{--  --}}
+                @endif               
 
 
 
@@ -509,6 +549,36 @@
 
             // body... 
         }
+    $(".acacherProduit").hide(0);
+
+        var j=0;
+
+        function fshowProduit (event) 
+        {
+            
+            if (j%2==0)
+            {
+                event.preventDefault();
+
+                $(".acacherProduit").show(1000);
+
+                $(".mdi-arrow-down-drop-circle-outline").attr('class','mdi mdi-arrow-up-drop-circle-outline');
+            }
+            else
+            {
+                
+                event.preventDefault();
+
+                $(".acacherProduit").hide(1000);
+
+                $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
+                /**/                
+            }
+
+            j=j+1;
+
+            // body... 
+        }
 
 
         {{--  --}}
@@ -516,145 +586,3 @@
     
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{-- <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
-</body>
-</html>
- --}}
