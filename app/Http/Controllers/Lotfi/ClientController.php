@@ -61,8 +61,10 @@ class ClientController extends Controller
 
         $id = Auth::id();
         $actuel = User::FindOrFail($id);
-
+        
         $client = (DB::select("select *,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects cl , categorie_clients ca , activite_clients ac where cl.id_categorie = ca.id and id_activite = ac.id and cl.id = \"$id_client\" "))[0];
+
+
 
         $categories = DB::select("select * from categorie_clients where visible = 1 order by nom");
 
