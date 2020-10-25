@@ -152,9 +152,5 @@ Route::post('/SupprimerTechnique/{idTechniqueSupprimer}', 'Produit\SpecifiteTech
 
 /***************************** Achat ************************/
 Route::get('/preachat', 'Achat\AchatController@index');
-/*L'ajout d'un nouveau Famille_Produit
-Route::post('/AddTechnique', 'Produit\SpecifiteTechController@AddTechnique');
-/*Modification d'un  Famille_Produit
-Route::post('/ModifTechnique/{idTechniqueModiff}', 'Produit\SpecifiteTechController@ModifTechnique');
-/*Suppression d'un  Famille_Produit
-Route::post('/SupprimerTechnique/{idTechniqueSupprimer}', 'Produit\SpecifiteTechController@SupprimerTechnique');*/
+
+Route::post('/AddAchat/{idPreAchat}', 'Achat\AchatController@AddAchat');

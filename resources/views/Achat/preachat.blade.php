@@ -28,196 +28,147 @@
                         </div>
                       </div>
                       @endif
-    <div>
-         <!-- Button trigger modal -->
-                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalFOURNISSEUR">
-                      Ajouter Un Fournisseur
-                    </button>
 
-                    <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalFOURNISSEUR" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Informations du Nouveau Fournisseur</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                     <form class="needs-validation" novalidate action="/AddFournisseur" method="POST">
-                        {{ csrf_field()}}
-                          <div class="modal-body">
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="COMPILS" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Adresse</B></label>
-                                  <input type="text" name="adresse"class="form-control"  placeholder="EL HAMIZ" required>
-                                </div>
-
-                              </div>
-
-                               <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>Activité</B></label>
-                                  <input type="text"  name="activite" class="form-control" placeholder="CAMERA ET CABLES" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Téléphone</B></label>
-                                  <input type="number" minlength="10" maxlength="10" name="tele"class="form-control"  placeholder="0550725743" required>
-                                </div>
-                                
-                              </div>
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>Fax</B></label>
-                                  <input type="number"  minlength="9" maxlength="9"  name="fax" class="form-control" placeholder="021889977" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Mobile</B></label>
-                                  <input type="number" minlength="10" maxlength="10" name="mobile"class="form-control"  placeholder="021889977" required>
-                                </div>
-                                
-                              </div>
-
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>Email</B></label>
-                                  <input type="email"  name="email" class="form-control" placeholder="lasnami.walid@outlook.com" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>NIF</B></label>
-                                  <input type="number" min="0" name="nif"class="form-control"  placeholder="000448756" required>
-                                </div>
-                                
-                              </div>
-
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>NIS</B></label>
-                                  <input type="number" min="0"  name="nis" class="form-control" placeholder="000448756" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>RC</B></label>
-                                  <input type="text" name="rc"class="form-control"  placeholder="0009A69408" required>
-                                </div>
-                                
-                              </div>
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>N° Art IMP</B></label>
-                                  <input type="text"  name="num_art_imp" class="form-control" placeholder="021786" required>
-                                </div>
-                                
-                              </div>
-
-
-                           
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn-sm btn btn-primary">Ajouter</button>
-                          </div>
-                          </form>
-                        </div>
+                      <div>
+                        <h1 style="text-align: center;  " >Liste Des Pré_Achats</h1>
                       </div>
-                    </div>
-
-    </div>
-
-     <br>
-     <br>
+                      <br>
+   
 
     <div>
         <table class="table table-striped table-dark">
           <thead>
             <tr>
-              <th scope="col"><B>Numéro</B></th>
-              <th scope="col"><B>Nom</B></th>
-              <th scope="col"><B>Adresse</B></th>
-              <th scope="col"><B>Activité</B></th>
-              <th scope="col"><B>+ BC</B></th>
-              <th scope="col"><B>Autres Infos</B></th>
+              <th scope="col"><B>N° FP</B></th>
+              <th scope="col"><B>Photo FP</B></th>
+              <th scope="col"><B>N° BC</B></th>
+              <th scope="col"><B>Achat</B></th>
               <th scope="col"><B>Modifier</B></th>
               <th scope="col"><B>Supprimer</B></th>
             </tr>
           </thead>
           <tbody>
-            @foreach($fournisseurs as $fournisseur)
+            @foreach($presachats as $preachat)
             <tr>
-              <td scope="row"><B>{{$fournisseur->id}}</B></td>
-              <td>{{$fournisseur->nom}}</td>
-              <td>{{$fournisseur->adresse}}</td>
-              <td>{{$fournisseur->activite}}</td>
+              <td scope="row"><B>{{$preachat->num_facture_proformat}}</B></td>
+              <td><!-- Photo Facture proformat -->
+                  <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#staticBackdrop{{$preachat->num_facture_proformat}}">
+                    Photo FP
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="staticBackdrop{{$preachat->num_facture_proformat}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="staticBackdropLabel">Photo_FP</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <img src="{{asset('images/factureproforma/'.$preachat->facture_proformat_photo ?? "nimi")}}">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              <td>{{$preachat->num_bc}}</td>
               <td>
-                  <!--  <a href="/commande/{{$fournisseur->id}}" type="button" class="btn-sm btn btn-success">Ajouter BC</a>-->
-                  <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#exampleModalBC{{$fournisseur->id}}">
-                       Ajouter BC
+                  
+                  <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#exampleModalBC{{$preachat->id}}">
+                       Achat
                     </button>
 
-                    <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalBC{{$fournisseur->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <!-- Boutom d'achat -->
+                    <div class="modal fade" id="exampleModalBC{{$preachat->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title"  id="exampleModalLabel">Ajouter Une Facture PROFORMAT</h5>
+                            <h5 class="modal-title"  id="exampleModalLabel">Informations de l'Achat</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/commande/{{$fournisseur->id}}" method="POST" enctype="multipart/form-data">
+                     <form class="needs-validation" novalidate action="/AddAchat/{{$preachat->id}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field()}}
                         
                           
                           <div class="modal-body">
-                              <div class="form-row">
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip03"><B>Numéro Facture ProForma</B></label>
-                                  <input type="text" name="facture"class="form-control" placeholder="FP20600" required>
+              
+                              
+
+                               <div class="form-row">
+                                  <div class="col-md-6 mb-3">
+                                    <label for="validationTooltip03"><B>N° BL </B></label>
+                                    <input type="text" name="bl"class="form-control" placeholder="BL0600" required>
+                                 </div>
+                                  <div class="col-md-6 mb-3">
+                                    <label for="validationTooltip03"><B>N° Attachement </B></label>
+                                    <input type="text" name="attachement"class="form-control" placeholder="AT0600" required>
+                                 </div>
                                 </div>
 
-                              </div>
-
-                              <div class="form-row">
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip03"><B>Date de La facture</B></label>
-                                  <input type="date" name="date"class="form-control" placeholder="02/05/2018" required>
+                                <div class="form-row">
+                                 <div class="col-md-6 mb-3">
+                                    <label for="validationTooltip03"><B>N° Décharge </B></label>
+                                    <input type="text" name="decharge"class="form-control" placeholder="BL0600" required>
+                                 </div>
+                                 <div class="col-md-6 mb-3">
+                                  <label for="validationTooltip03"><B>N° Facture </B></label>
+                                  <input type="text" name="facture"class="form-control" placeholder="F20600" required>
+                                </div>
                                 </div>
 
-                              </div>
-                              <div class="form-row">
+                                <div class="form-row">
                                  <div class="form-group" >
-                                  <label for="exampleFormControlFile1"><B>Photo</B></label>
-                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
+                                  <label for="exampleFormControlFile1"><B>Photo Facture</B></label>
+                                  <input type="file" name="photofacture"  class="form-control-file" id="exampleFormControlFile1">
                                 </div>
                               </div>
 
+                                <div class="form-row">
+                                 <div class="form-group" >
+                                  <label for="exampleFormControlFile1"><B>Photo BL</B></label>
+                                  <input type="file" name="photobl"  class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+                              </div>
+
+                               
+
+                                <div class="form-row">
+
+                                 <div class="form-group" >
+                                  <label for="exampleFormControlFile1"><B>Photo Attachement</B></label>
+                                  <input type="file" name="photoattachement"  class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+
+                              </div>
+
+
+                                <div class="form-row">
+                                 <div class="form-group" >
+                                  <label for="exampleFormControlFile1"><B>Photo Décharge</B></label>
+                                  <input type="file" name="photodecharge"  class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+                              </div>
                               <div class="form-row">
+                               <div class="col-md-12 mb-6">
+                                  <div class="form-group">
+                                    <label for="exampleFormControlSelect1"><B>Nature Doc_Payement</B></label>
+                                    <select name="doc" class="form-control" id="exampleFormControlSelect1">
+                                     @foreach($nature_doc_payments as $doc)
+                                     <option value="{{$doc->id}}"> {{  $doc->nom  }} </option>
+                                      @endforeach
+                                     
+                                    </select>
+                                  </div>
 
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip03"><B>Remise</B></label>
-                                  <input type="text" name="remise"class="form-control" placeholder="3 %" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip03"><B>TVA</B></label>
-                                  <input type="text" name="tva"class="form-control" placeholder="19 %" required>
-                                </div>
-
-                              </div>
+                            </div> 
+                          </div>
                           </div>
 
                           <div class="modal-footer">
@@ -229,48 +180,15 @@
                       </div>
                     </div>
 
-              <td>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn-sm btn btn-dark" data-toggle="modal" data-target="#InfosPlus{{$fournisseur->id}}">
-                      Plus
-                    </button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="InfosPlus{{$fournisseur->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Informations Suplémentaires</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <p><B>Mobile: </B>{{$fournisseur->mobile}}</p>
-                            <p><B>Téléphone: </B>{{$fournisseur->tele}}</p>
-                            <p><B>Fax:</B> {{$fournisseur->fax}}</p>
-                            <p><B>Email:</B> {{$fournisseur->email}}</p>
-                            <p><B>NIS:</B> {{$fournisseur->nis}}</p>
-                            <p><B>NIF:</B> {{$fournisseur->nif}}</p>
-                            <p><B>RC:</B> {{$fournisseur->rc}}</p>
-                            <p><B>Num_Art_Imp:</B> {{$fournisseur->num_art_imp}}</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-succes" data-dismiss="modal">Fermer</button>
-                            
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-              </td>
+             
               
               <td>
-                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFfournisseur{{$fournisseur->id}}">
+                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFpreachat{{$preachat->id}}">
                       Modifier
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalMODIFfournisseur{{$fournisseur->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalMODIFpreachat{{$preachat->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -279,87 +197,14 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifFournisseur/{{$fournisseur->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/Modifpreachat/{{$preachat->id}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>NV-Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="{{$fournisseur->nom}}" required>
-                                </div>
+                             
 
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>NV-Adresse</B></label>
-                                  <input type="text" name="adresse"class="form-control"  placeholder="{{$fournisseur->adresse}}" required>
-                                </div>
-
-                              </div>
-
-                               <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>NV-Activité</B></label>
-                                  <input type="text"  name="activite" class="form-control" placeholder="{{$fournisseur->activite}}" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>NV-Téléphone</B></label>
-                                  <input type="number" minlength="10" maxlength="10" name="tele"class="form-control"  placeholder="{{$fournisseur->tele}}" required>
-                                </div>
-                                
-                              </div>
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>NV-Fax</B></label>
-                                  <input type="number"  minlength="9" maxlength="9"  name="fax" class="form-control" placeholder="{{$fournisseur->fax}}" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>NV-Mobile</B></label>
-                                  <input type="number" minlength="10" maxlength="10" name="mobile"class="form-control"  placeholder="{{$fournisseur->mobile}}" required>
-                                </div>
-                                
-                              </div>
-
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>NV-Email</B></label>
-                                  <input type="email"  name="email" class="form-control" placeholder="{{$fournisseur->email}}" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>NV-NIF</B></label>
-                                  <input type="number" min="0" name="nif"class="form-control"  placeholder="{{$fournisseur->nif}}" required>
-                                </div>
-                                
-                              </div>
-
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>NV-NIS</B></label>
-                                  <input type="number" min="0"  name="nis" class="form-control" placeholder="{{$fournisseur->nif}}" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>NV-RC</B></label>
-                                  <input type="text" name="rc"class="form-control"  placeholder="{{$fournisseur->rc}}" required>
-                                </div>
-                                
-                              </div>
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>NV-N° Art IMP</B></label>
-                                  <input type="text"  name="num_art_imp" class="form-control" placeholder="{{$fournisseur->num_art_imp}}" required>
-                                </div>
-                                
-                              </div>
-
-
+                              -->
                               
                             
                           </div>
@@ -374,12 +219,12 @@
                 </td>
                 
                  <td>
-                    <button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERfournisseur{{$fournisseur->id}}">
+                    <button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERpreachat{{$preachat->id}}">
                        Supprimer
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalSUPPRIMERfournisseur{{$fournisseur->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalSUPPRIMERpreachat{{$preachat->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -388,7 +233,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerFournisseur/{{$fournisseur->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/Supprimerpreachat/{{$preachat->id}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">
