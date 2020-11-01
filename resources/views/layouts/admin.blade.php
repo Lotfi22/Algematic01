@@ -258,9 +258,23 @@
 
                         <li class="acacher"> <a class="waves-effect waves-dark" href="/etagere" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Etagère</span></a></li>
 
+
                         <!-- Fabricant_Fournisseur -->
 
 
+                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="DemandeAchat(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Achat</span></a></li>
+
+
+
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/DemandeAchat" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande d'Acaht</span></a></li>
+
+                        
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/DemandeAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande en Attente</span></a></li>
+                        
+                       
+                        
+
+                        <!--Fin-->
                         <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Fabricant_Fournisseur</span></a></li>
 
 
@@ -269,8 +283,7 @@
 
                         <li class="acacher2"> <a class="waves-effect waves-dark" href="/fournisseur" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fournisseur</span></a></li>
 
-                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/preachat" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Pré_Achat</span></a></li>
-
+                       
                         
 
                         <!--Fin-->
@@ -631,6 +644,38 @@
 
             // body... 
         }
+            //Achat
+         $(".DemandeAchat").hide(0);
+
+        var i=0;
+
+        function DemandeAchat (event) 
+        {
+            
+            if (i%2==0)
+            {
+                event.preventDefault();
+
+                $(".DemandeAchat").show(1000);
+
+                $(".mdi-arrow-down-drop-circle-outline").attr('class','mdi mdi-arrow-up-drop-circle-outline');
+            }
+            else
+            {
+                
+                event.preventDefault();
+
+                $(".DemandeAchat").hide(1000);
+
+                $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
+                /**/                
+            }
+
+            i=i+1;
+
+            // body... 
+        }
+
 
 
         {{--  --}}

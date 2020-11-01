@@ -33,6 +33,8 @@ class HomeController extends Controller
         $id = Auth::id();
         $actuel = User::FindOrFail($id);
 
-        return view('home',compact('actuel'));
+        $privilege=$actuel->privilege;
+        
+        return view('home',compact('actuel','privilege'));
     }
 }

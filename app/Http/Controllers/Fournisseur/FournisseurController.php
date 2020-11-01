@@ -246,7 +246,7 @@ class FournisseurController extends Controller
          $fournisseurs=DB::select("select * from fournisseurs where  id='$idFournisseur'");
          $pre_achat=DB::select("select * from pre_achat where  num_facture_proformat='$numfactureproformat'");
 
-         
+      
 
          $now = Carbon::now()->format('d/m/Y');
 
@@ -336,7 +336,6 @@ class FournisseurController extends Controller
             foreach ($request['dynamic_form']['dynamic_form'] as $key=>$array) 
             {
                     $index = $key +1;
-
                     $code_produit=$array['produit'];
                     $id_produit=DB::select("select id  from produits where code_produit='$code_produit'");
                     $id_prod=$id_produit[0]->id;

@@ -153,4 +153,29 @@ Route::post('/SupprimerTechnique/{idTechniqueSupprimer}', 'Produit\SpecifiteTech
 /***************************** Achat ************************/
 Route::get('/preachat', 'Achat\AchatController@index');
 
-Route::post('/AddAchat/{idPreAchat}', 'Achat\AchatController@AddAchat');
+
+
+
+
+/***************************** Achat ************************/
+
+Route::get('/DemandeAchat', 'DemandeAchat\DemandeAchatController@index');
+
+Route::post('/ADDDemandeAchat', 'DemandeAchat\DemandeAchatController@ADDDemandeAchat');
+
+Route::get('/DemandeAttente', 'DemandeAchat\DemandeAchatController@DemandeAttente');
+
+Route::post('/RefuserDemande/{idpreachat}', 'DemandeAchat\DemandeAchatController@RefuserDemande');
+
+Route::post('/ValiderPreAchat/{idpreachat}/{numfactureproformat}', 'DemandeAchat\DemandeAchatController@ValiderPreAchat');
+
+
+Route::post('/AddAchat/{idpreachat}', 'DemandeAchat\DemandeAchatController@AddAchat');
+
+/***************************** Ranger les Produits ************************/
+
+Route::post('/Ranger/{idpreachat}', 'DemandeAchat\DemandeAchatController@Ranger');
+
+
+
+

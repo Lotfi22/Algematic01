@@ -99,7 +99,7 @@ class AchatController extends Controller
                     
                     DB::update("update pre_achat p set achat_done=1 where p.id='$idPreAchat' ");
                     
-                    return redirect('/preachat')->with('success','L achat est enregistré avec succée');
+                    return redirect('/preachat')->with('success','Achat enregistré avec succée');
 
                 }
        

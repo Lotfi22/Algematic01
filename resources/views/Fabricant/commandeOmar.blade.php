@@ -38,12 +38,20 @@
 
                 <form class="needs-validation" novalidate action="/ADDcommande/{{$fournisseur->id}}/{{$achat_facture}}" method="POST">
                         {{ csrf_field()}}
+                           <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                  <label for="validationTooltip03"><B>Description</B></label>
+                                  <input type="text" name="description"class="form-control" placeholder="" required>
+                                </div>
+
+                              </div>
                       <div class="form-group items" id="dynamic_form">
                       <div class="row">
                       <div class="button-group" style="padding: 27px;">
                               <a href="javascript:void(0)" class="btn btn-primary" id="plus5"><i class="fa fa-plus"></i></a>
                               <a href="javascript:void(0)" class="btn btn-danger" id="minus5"><i class="fa fa-minus"></i></a>
                           </div>
+
                           <div class="col-md-3">
                               <label class="small mb-1" for="inputFirstName">Produit: </label>
                               <select class='form-control produits' class="js-example-basic-single" name='produit' id="produit" >

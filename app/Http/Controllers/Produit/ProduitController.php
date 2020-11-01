@@ -37,9 +37,7 @@ class ProduitController extends Controller
 
         $this->validate($request,[
             'code' => 'required|max:300',
-            'description' => 'required|max:800',
-            'model' => 'required|max:400',
-            'prix' => 'required|max:400'
+            'description' => 'required|max:800'
             ]);
 
         
@@ -62,23 +60,85 @@ class ProduitController extends Controller
             $path='images/produit';
             $request->photo->move($path,$file_name);
 
+            $file_extension= $request->detail->getClientOriginalExtension();
+            $file_name2=time().'.'.$file_extension;
+            $path='images/produit';
+            $request->detail->move($path,$file_name2);
+
             $produit_unite=$request->input('unite');
             $produit_sfamille=$request->input('sfamille');
             $produit_fabricant=$request->input('fabricant');
             $produit_code=$request->input('code');
             $produit_description=$request->input('description');
             $produit_model=$request->input('model');
-            $produit_prix=$request->input('prix');
             $produit_photo=$file_name;
+            $produit_detail=$file_name2;
             //$depot->save();
 
-            DB::insert("insert into produits (id_unite,code_produit,description,photo,model,id_sous_famille,id_fabricant,prix_achat) values('$produit_unite','$produit_code','$produit_description','$produit_photo','$produit_model','$produit_sfamille','$produit_fabricant','$produit_prix') ");
+            DB::insert("insert into produits (id_unite,code_produit,description,photo,model,id_sous_famille,id_fabricant,data) values('$produit_unite','$produit_code','$produit_description','$produit_photo','$produit_model','$produit_sfamille','$produit_fabricant','$produit_detail') ");
             
             
             return redirect('/produit')->with('success','Le Nouveau Produit est enregistré avec succée');
         }
     }
     
+
+     public function ModifProduit(Request $request,$idProduitModiff)
+    {   
+
+        
+
+        
+        $testnom=$request->input('code');
+        $info=DB::select("select description from produits where code_produit='$testnom'");
+       
+
+         if (count($info)>1) 
+               {
+                   
+                session()->flash('notif' , ' Erreur Oupss Ce Code_Produit  existe déja  !!! ');
+
+                return redirect()->back(); 
+               }
+      
+        else
+        {
+            $file_extension= $request->photo->getClientOriginalExtension();
+            $file_name=time().'.'.$file_extension;
+            $path='images/produit';
+            $request->photo->move($path,$file_name);
+
+            $file_extension= $request->detail->getClientOriginalExtension();
+            $file_name2=time().'.'.$file_extension;
+            $path='images/produit';
+            $request->detail->move($path,$file_name2);
+
+            $produit_unite=$request->input('unite');
+            $produit_sfamille=$request->input('sfamille');
+            $produit_fabricant=$request->input('fabricant');
+            $produit_code=$request->input('code');
+            $produit_description=$request->input('description');
+            $produit_model=$request->input('model');
+            $produit_photo=$file_name;
+            $produit_detail=$file_name2;
+            //$depot->save();
+
+            DB::update("update  produits p set id_unite = '$produit_unite', code_produit= '$produit_code',  description='$produit_description', photo='$produit_photo' ,model='$produit_model',  id_sous_famille='produit_sfamille' , id_fabricant='produit_fabricant',data='$produit_detail' 
+            where p.id='$idProduitModiff' ");
+            
+            
+            return redirect('/produit')->with('success','Le Produit a été Modifié avec succée');
+        }
+    }
+    
+    public function SupprimerProduit(Request $request,$idProduitSupprimer)
+    {
+        
+        DB::delete("delete from produits  where id='$idProduitSupprimer'");
+
+        return redirect('/produit')->with('success','Le Produit a été supprimé avec succée');
+
+    }
 
 
 }

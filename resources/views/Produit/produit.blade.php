@@ -36,7 +36,7 @@
 
                     <!-- Boutom d'Ajouter une Maman -->
                     <div class="modal fade" id="exampleModalNVProduit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
+                      <div class="modal-dialog ">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Informations du Nouveau Produit</h5>
@@ -59,26 +59,29 @@
                                   <input type="text" name="description"class="form-control"  placeholder="EL HAMIZ" required>
                                 </div>
                               </div>
-                              <div class="form-row">
 
-                                <div class="form-group">
-                                  <label for="exampleFormControlFile1"><B>Photo</B></label>
-                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
-                                </div>
+                              
+
+                              <div class="form-row">
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>Model</B></label>
                                   <input type="text" name="model"class="form-control"  placeholder="EL HAMIZ" required>
                                 </div>
 
-                              </div>
-
-                              <div class="form-row">
-
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Prix Unitaire</B></label>
-                                  <input type="text" name="prix"class="form-control"  placeholder="10 000" required>
-                                </div>
+                                        <div class="form-group">
+                                          <label for="exampleFormControlSelect1"><B>Unité</B></label>
+                                          <select name="unite" class="form-control" id="exampleFormControlSelect1">
+                                           @foreach($unites as $unite)
+                                           <option value="{{$unite->id}}"> {{  $unite->description  }} </option>
+                                            @endforeach
+                                           
+                                          </select>
+                                        </div>
+                                  </div>
+
+                                
 
                               </div>
 
@@ -95,7 +98,7 @@
                                         </div>
                                   </div>
 
-                                  <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                           <label for="exampleFormControlSelect1"><B>Fabricant</B></label>
                                           <select name="fabricant" class="form-control" id="exampleFormControlSelect1">
@@ -106,24 +109,27 @@
                                           </select>
                                         </div>
                                   </div>
-                              </div> 
+
+                                </div>
+                            <div class="form-row">
+
+                                <div class="form-group">
+                                  <label for="exampleFormControlFile1"><B>Photo</B></label>
+                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+
+                              </div>
+
+                             
 
                                <div class="form-row">
 
-                                  <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                          <label for="exampleFormControlSelect1"><B>Unité</B></label>
-                                          <select name="unite" class="form-control" id="exampleFormControlSelect1">
-                                           @foreach($unites as $unite)
-                                           <option value="{{$unite->id}}"> {{  $unite->description  }} </option>
-                                            @endforeach
-                                           
-                                          </select>
-                                        </div>
-                                  </div>
+                                <div class="form-group">
+                                  <label for="exampleFormControlFile1"><B>Photo_Détails</B></label>
+                                  <input type="file" name="detail"  class="form-control-file" id="exampleFormControlFile1">
+                                </div>
 
-                            
-                              </div> 
+                              </div>
 
                               </div>
 
@@ -235,48 +241,49 @@
                           </div>
                      <form class="needs-validation" novalidate action="/ModifProduit/{{$produit->id}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field()}}
-                     <div class="modal-body">
+                           <div class="modal-body">
                               <div class="form-row">
 
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>NV Code Produit</B></label>
+                                  <label for="validationTooltip01"><B>Code Produit</B></label>
                                   <input type="text"  name="code" class="form-control" placeholder="A001" required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>NV Description</B></label>
+                                  <label for="validationTooltip02"><B>Description</B></label>
                                   <input type="text" name="description"class="form-control"  placeholder="EL HAMIZ" required>
                                 </div>
                               </div>
+
+                              
+
                               <div class="form-row">
 
-                                <div class="form-group">
-                                  <label for="exampleFormControlFile1"><B>NV Photo</B></label>
-                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
-                                </div>
-
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>NV Model</B></label>
+                                  <label for="validationTooltip02"><B>Model</B></label>
                                   <input type="text" name="model"class="form-control"  placeholder="EL HAMIZ" required>
                                 </div>
 
-
-
-                              </div>
-
-                              <div class="form-row">
-
                                 <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Nv Prix Aachat</B></label>
-                                  <input type="text" name="Prix"class="form-control"  placeholder="EL HAMIZ" required>
-                                </div>
+                                        <div class="form-group">
+                                          <label for="exampleFormControlSelect1"><B>Unité</B></label>
+                                          <select name="unite" class="form-control" id="exampleFormControlSelect1">
+                                           @foreach($unites as $unite)
+                                           <option value="{{$unite->id}}"> {{  $unite->description  }} </option>
+                                            @endforeach
+                                           
+                                          </select>
+                                        </div>
+                                  </div>
+
+                                
 
                               </div>
 
                               <div class="form-row">
                                   <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                          <label for="exampleFormControlSelect1"><B>NV Sous Famille</B></label>
+                                          <label for="exampleFormControlSelect1"><B>Sous Famille</B></label>
                                           <select name="sfamille" class="form-control" id="exampleFormControlSelect1">
                                            @foreach($sfamilles as $sfamille)
                                            <option value="{{$sfamille->id}}"> {{  $sfamille->nom  }} </option>
@@ -286,10 +293,10 @@
                                         </div>
                                   </div>
 
-                                  <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                          <label for="exampleFormControlSelect1"><B>NV Fabricant</B></label>
-                                          <select name="sfamille" class="form-control" id="exampleFormControlSelect1">
+                                          <label for="exampleFormControlSelect1"><B>Fabricant</B></label>
+                                          <select name="fabricant" class="form-control" id="exampleFormControlSelect1">
                                            @foreach($fabricants as $fabricant)
                                            <option value="{{$fabricant->id}}"> {{  $fabricant->nom  }} </option>
                                             @endforeach
@@ -297,24 +304,27 @@
                                           </select>
                                         </div>
                                   </div>
-                              </div> 
+
+                                </div>
+                            <div class="form-row">
+
+                                <div class="form-group">
+                                  <label for="exampleFormControlFile1"><B>Photo</B></label>
+                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+
+                              </div>
+
+                             
 
                                <div class="form-row">
 
-                                  <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                          <label for="exampleFormControlSelect1"><B>NV Unité</B></label>
-                                          <select name="sfamille" class="form-control" id="exampleFormControlSelect1">
-                                           @foreach($unites as $unite)
-                                           <option value="{{$unite->id}}"> {{  $unite->description  }} </option>
-                                            @endforeach
-                                           
-                                          </select>
-                                        </div>
-                                  </div>
+                                <div class="form-group">
+                                  <label for="exampleFormControlFile1"><B>Photo_Détails</B></label>
+                                  <input type="file" name="detail"  class="form-control-file" id="exampleFormControlFile1">
+                                </div>
 
-                            
-                              </div> 
+                              </div>
 
                               </div>
                           <div class="modal-footer">
