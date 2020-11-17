@@ -356,11 +356,24 @@
                 </td>
                 @endif
 
-                @if($preachat->demande_valide==1)
-                <td>
-                  <button type="submit" class="btn-sm btn btn-light">Demande Validée</button>
-                </td>
+                @if($preachat->demande_valide==1 && $preachat->achat_done==1)
+    
+                    <td>
+                      <p class="alert alert-primary" style="text-align: center; height: 40px;"> <i class="mdi mdi-check-all"></i> {{-- Demande Validée --}}</p>
+                    </td>
+
                 @endif
+                
+                @if($preachat->demande_valide==1 && $preachat->achat_done==0)
+    
+                    <td>
+                      <p class="alert alert-secondary" style="text-align: center; height: 40px;"> <i class="mdi mdi-check"></i> {{-- Demande Validée --}}</p>
+                    </td>
+
+                @endif
+
+
+
                 @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0) )
                  <td>
                     <button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERpreachat{{$preachat->id}}">

@@ -177,5 +177,34 @@ Route::post('/AddAchat/{idpreachat}', 'DemandeAchat\DemandeAchatController@AddAc
 Route::post('/Ranger/{idpreachat}', 'DemandeAchat\DemandeAchatController@Ranger');
 
 
+/***************************** Client Walid ************************/
+
+Route::get('/clientNimi', 'ClientNimi\ClientController@index');
+
+Route::post('/Ranger/{idpreachat}', 'ClientNimi\ClientController@Ranger');
 
 
+
+/***************************** Demande_Vente ************************/
+
+Route::get('/DemandeVente', 'DemandeVente\DemandeVenteController@index');
+
+Route::post('/AddDemandeVente', 'DemandeVente\DemandeVenteController@AddDemandeVente');
+
+Route::get('/DemandeVenteAttente', 'DemandeVente\DemandeVenteController@DemandeVenteAttente');
+
+Route::post('/RefuserDemandeVente/{idPreVente}', 'DemandeVente\DemandeVenteController@RefuserDemandeVente');
+
+Route::post('/ValiderDemandeVente/{idPreVente}', 'DemandeVente\DemandeVenteController@ValiderDemandeVente');
+
+Route::post('/VenteFactureProformat/{idPreVente}', 'DemandeVente\DemandeVenteController@VenteFactureProformat');
+
+
+/***************************** Création d'un Article de Vente (CRUD)************************/
+Route::get('/article', 'DemandeVente\ArticleController@index');
+/*L'ajout d'un nouveau dépot*/
+Route::post('/AddArticle', 'DemandeVente\ArticleController@AddArticle');
+/*Modification d'un  dépot*/
+Route::post('/ModifArticle/{idArticleModif}', 'DemandeVente\ArticleController@ModifArticle');
+/*Suppression d'un  dépot*/
+Route::post('/SupprimerArticle/{idArticleSupprimer}', 'DemandeVente\ArticleController@SupprimerArticle');

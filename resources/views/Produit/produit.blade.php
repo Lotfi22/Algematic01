@@ -156,7 +156,7 @@
               <th scope="col"><B>description</B></th>
               <th scope="col"><B>Photo</B></th>
               <th scope="col"><B>Autres Infos</B></th>
-              <th scope="col"><B>douk tban</B></th>
+              <th scope="col"><B>Data</B></th>
               <th scope="col"><B>Modifier</B></th>
               <th scope="col"><B>Supprimer</B></th>
             </tr>
@@ -210,7 +210,18 @@
                           </div>
                           <div class="modal-body">
                             <p><B>Model:</B> {{$produit->model}}</p>
-                            <p><B>Prix Achat:</B> {{$produit->prix_achat}}</p>
+                            <p><B>Prix Achat:</B> 
+                                    @if($produit->prix_achat == 0)
+                                          Pas encore
+                                    @endif
+                                    @foreach($prix as $pri)
+                                    @if( ($produit->prix_achat != 0) && ($produit->id == $pri->id_produit) )
+                                          
+                                          {{$pri->prix}}
+
+                                    @endif
+                                    @endforeach
+                            </p>
                             <p><B>Unité: </B>{{$produit->UniteDescription}}</p>
                             <p><B>Sous_Famille:</B> {{$produit->NomFamille}}</p>
                             <p><B>Fabricant:</B> {{$produit->NomFabricant}}</p>
@@ -224,7 +235,30 @@
                     </div>
               </td>
               
-              <td>Plus</td>
+              <td><!-- Button trigger modal -->
+                  <button type="button" class="btn-sm btn btn-dark" data-toggle="modal" data-target="#data{{$produit->id}}">
+                    Data
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="data{{$produit->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog ">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="staticBackdropLabel">Photo_Data</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <img width="100%" src="{{asset('images/produit/'.$produit->data ?? "nimi")}}">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div></td>
               <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFproduit{{$produit->id}}">
                       Modifier
                     </button>

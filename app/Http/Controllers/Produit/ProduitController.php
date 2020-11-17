@@ -21,12 +21,13 @@ class ProduitController extends Controller
     	$fabricants=DB::select("select id,nom,marque from fabricants");
     	$sfamilles=DB::select("select id,nom from sous_familles where visible=1");
         $unites=DB::select("select id,description from unites");
-    	$produits=DB::select("select p.id,p.code_produit,p.description,p.photo,p.model,p.prix_achat,p.id_unite,u.description as UniteDescription,p.id_fabricant,f.nom as NomFabricant,p.id_sous_famille,s.nom as NomFamille
+    	$produits=DB::select("select p.id,p.code_produit,p.description,p.photo,p.model,p.prix_achat,p.id_unite,u.description as UniteDescription,p.id_fabricant,p.data,f.nom as NomFabricant,p.id_sous_famille,s.nom as NomFamille
              from produits p,unites u, fabricants f,sous_familles s 
             where p.id_unite=u.id and p.id_sous_famille=s.id and p.id_fabricant=f.id and p.visible=1");
+        $prix=DB::select("select s.id_produit,s.prix from stocks s");
 
     	
-    	return view('Produit\produit',compact('fabricants','produits','sfamilles','unites'));
+    	return view('Produit\produit',compact('fabricants','produits','sfamilles','unites','prix'));
      }
 
      public function AddProduit(Request $request)
@@ -123,7 +124,7 @@ class ProduitController extends Controller
             $produit_detail=$file_name2;
             //$depot->save();
 
-            DB::update("update  produits p set id_unite = '$produit_unite', code_produit= '$produit_code',  description='$produit_description', photo='$produit_photo' ,model='$produit_model',  id_sous_famille='produit_sfamille' , id_fabricant='produit_fabricant',data='$produit_detail' 
+            DB::update("update  produits p set id_unite = '$produit_unite', code_produit= '$produit_code',  description='$produit_description', photo='$produit_photo' ,model='$produit_model',  id_sous_famille='$produit_sfamille' , id_fabricant='$produit_fabricant',data='$produit_detail' 
             where p.id='$idProduitModiff' ");
             
             

@@ -121,7 +121,7 @@
 
                         <!-- Logo icon --><b>
 
-                            <img src="../nabila/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img width="50%" src="../nabila/assets/images/algematic.png" alt="homepage" class="dark-logo" />
 
                         </b>
 
@@ -129,11 +129,7 @@
 
                         <!-- Logo text -->
 
-                        <span>
-
-                            <img src="../img/logo.svg" alt="homepage" class="dark-logo" width="50%" />
-
-                        </span>
+                      
 
                     </a>
 
@@ -275,6 +271,24 @@
                         
 
                         <!--Fin-->
+
+                         <li> <a class="waves-effect waves-dark" href="/home4" onclick="DemandeVente(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Vente</span></a></li>
+
+
+
+                         <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/article" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Article de Vente</span></a></li>
+
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/DemandeVente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande de Vente</span></a></li>
+
+                        
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/DemandeVenteAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Ventes</span></a></li>
+                        
+                       
+                        
+
+                        <!--Fin-->
+
+
                         <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Fabricant_Fournisseur</span></a></li>
 
 
@@ -320,6 +334,8 @@
                         <li class="acacher3"> <a class="waves-effect waves-dark" href="/admin/client/activite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Activité</span></a></li>
 
                         <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Clients | Prospect</span></a></li>
+
+                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/clientNimi" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Clients Nimi</span></a></li>
 
 
 
@@ -481,6 +497,7 @@
 </body>
     
     <script type="text/javascript">
+        
 
           $(document).ready(function() {
             var dynamic_form =  $("#dynamic_form").dynamicForm("#dynamic_form","#plus5", "#minus5", {
@@ -677,6 +694,36 @@
         }
 
 
+         $(".DemandeVente").hide(0);
+
+        var i=0;
+
+        function DemandeVente (event) 
+        {
+            
+            if (i%2==0)
+            {
+                event.preventDefault();
+
+                $(".DemandeVente").show(1000);
+
+                $(".mdi-arrow-down-drop-circle-outline").attr('class','mdi mdi-arrow-up-drop-circle-outline');
+            }
+            else
+            {
+                
+                event.preventDefault();
+
+                $(".DemandeVente").hide(1000);
+
+                $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
+                /**/                
+            }
+
+            i=i+1;
+
+            // body... 
+        }
 
         {{--  --}}
     </script>

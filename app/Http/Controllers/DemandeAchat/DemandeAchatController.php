@@ -109,7 +109,7 @@ class DemandeAchatController extends Controller
         $id = Auth::id();
         $actuel = User::FindOrFail($id);
 
-        return view('home',compact('actuel'));
+        return back();
 
 	     }
 	 }
