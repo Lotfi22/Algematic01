@@ -99,7 +99,7 @@
                           </div>
                                 
                                 
-                                   <table class="table table-striped table-dark">
+                                   <table  id="table_id" class="display" style="width:100%">
                                       <thead>
                                         <tr>
                                           <th scope="col"><B>Code_Produit</B></th>
