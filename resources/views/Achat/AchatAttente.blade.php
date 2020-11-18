@@ -98,7 +98,7 @@
                             </button>
                           </div>
                                 
-                                
+                                  <h3 style="text-align: center;" ><B>Liste des Produits déja achetés</B></h3>
                                    <table  id="table_id" class="display" style="width:100%">
                                       <thead>
                                         <tr>
@@ -118,6 +118,29 @@
                                            <td scope="row"><B>{{$prod->qte_demande}}</B></td>
                                            <td scope="row"><B>{{$prod->prix}}</B></td>
                                            <td scope="row"><B>{{$prod->nv_prix}}</B></td>
+                                        </tr>
+                                        @endif
+                                        @endforeach
+                              </tbody>
+                            </table>
+                            <hr>
+                             <h3 style="text-align: center;" ><B>Liste des Produits demandés</B> </h3>
+                                   <table  id="table_id" class="display" style="width:100%">
+                                      <thead>
+                                        <tr>
+                                          <th scope="col"><B>Code_Produit</B></th>
+                                          <th scope="col"><B>Qte Demandée</B></th>
+                                          <th scope="col"><B>Prix</B></th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        @foreach($produits2 as $prod)
+                                        @if($prod->id_pre_achat== $preachat->id)
+                                        <tr>
+                                           <td scope="row"><B>{{$prod->code_produit}}</B></td>
+                                           <td scope="row"><B>{{$prod->qte_demande}}</B></td>
+                                           <td scope="row"><B>{{$prod->nv_prix}}</B></td>
+                  
                                         </tr>
                                         @endif
                                         @endforeach
@@ -343,8 +366,7 @@
                      <form class="needs-validation" novalidate action="/ValiderPreAchat/{{$preachat->id}}/{{$preachat->num_facture_proformat}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
-                              <div class="form-row">
-                          </div>
+                              
                           <div class="modal-footer">
                             <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
                             <button type="submit" class="btn-sm btn btn-primary">Valider</button>
@@ -356,15 +378,40 @@
                 </td>
                 @endif
 
-                @if($preachat->demande_valide==1 && $preachat->achat_done==1)
+                @if($preachat->demande_valide==1 )
     
-                    <td>
-                      <p class="alert alert-primary" style="text-align: center; height: 40px;"> <i class="mdi mdi-check-all"></i> {{-- Demande Validée --}}</p>
-                    </td>
+                             <td>
+                    <button type="button" class="btn-sm btn btn-warning" data-toggle="modal" data-target="#valider{{$preachat->id}}">
+                      Télecharger BC
+                    </button>
+
+                    <!-- Boutom d'Ajouter une Maman -->
+                    <div class="modal fade" id="valider{{$preachat->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Telecharger</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                     <form class="needs-validation" novalidate action="/ValiderPreAchat/{{$preachat->id}}/{{$preachat->num_facture_proformat}}" method="POST">
+                        {{ csrf_field()}}
+                          <div class="modal-body">
+                              
+                          <div class="modal-footer">
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn-sm btn btn-primary">Telecharger</button>
+                          </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                </td>
 
                 @endif
                 
-                @if($preachat->demande_valide==1 && $preachat->achat_done==0)
+                @if($preachat->demande_valide==1 )
     
                     <td>
                       <p class="alert alert-secondary" style="text-align: center; height: 40px;"> <i class="mdi mdi-check"></i> {{-- Demande Validée --}}</p>

@@ -181,7 +181,7 @@ Route::post('/Ranger/{idpreachat}', 'DemandeAchat\DemandeAchatController@Ranger'
 
 Route::get('/clientNimi', 'ClientNimi\ClientController@index');
 
-Route::post('/Ranger/{idpreachat}', 'ClientNimi\ClientController@Ranger');
+
 
 
 

@@ -129,6 +129,11 @@ class DemandeAchatController extends Controller
     		from  ligne_produit l, produits d, stocks s
     		where s.id_produit=l.id_produit and l.id_produit=d.id  ");
 
+        $produits2=DB::select("select l.id_pre_achat,d.code_produit,l.id_produit,l.qte_demande,l.prix as nv_prix
+            from  ligne_produit l, produits d
+            where l.id_produit=d.id  ");
+
+
     	$nvproduits=DB::select("select l.id_produit,l.id_pre_achat,p.code_produit,p.description
     		from ligne_produit l, produits p where l.id_produit=p.id");
 
@@ -142,7 +147,7 @@ class DemandeAchatController extends Controller
         $privilege=$actuel->privilege;
 
     	
-    	return view('Achat\AchatAttente',compact('presachats','nature_doc_payments','privilege','produits','employes','etageres','nvproduits'));
+    	return view('Achat\AchatAttente',compact('presachats','nature_doc_payments','privilege','produits','employes','etageres','nvproduits','produits2'));
 
 	 }
 
@@ -163,6 +168,13 @@ class DemandeAchatController extends Controller
 
 	  public function ValiderPreAchat(Request $request,$idpreachat,$numfactureproformat)
 	 {
+
+        $test=DB::select("select * from pre_achat where id='$idpreachat' ");
+
+        if($test[0]->demande_valide == 0)
+        {
+
+
 
 		$year = Carbon::now()->format('Y');
 
@@ -352,8 +364,190 @@ class DemandeAchatController extends Controller
 
         $dompdf->loadHtml($html);
         $dompdf->render();
-        $dompdf->stream("d_facture", array('Attachment'=>1));
+        $dompdf->stream("BC", array('Attachment'=>1));
 
+        }
+
+
+
+        else
+        {
+
+        $now = Carbon::now()->format('d/m/Y');
+        
+        $produits=DB::select("select  p.id,p.code_produit,l.prix,l.qte_demande,l.id_pre_achat
+          from ligne_produit l, produits p 
+          where p.id=l.id_produit and l.id_pre_achat='$idpreachat' ");
+
+         $id_fournisseur=DB::select("select id_fournisseur from pre_achat where id='$idpreachat' ");
+
+         $id_fournisseur=$id_fournisseur[0]->id_fournisseur;
+        
+         $fournisseurs=DB::select("select * from fournisseurs where  id='$id_fournisseur'");
+
+         $pre_achat=DB::select("select * from pre_achat where  id='$idpreachat'");
+
+         $dompdf = new Dompdf();
+
+        $html = '<!doctype html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <title>Bon de Commande </title>
+        <style type="text/css">
+            * {
+                font-family: Verdana, Arial, sans-serif;
+            }
+            table{
+            }
+            tfoot tr td{
+                font-weight: bold;
+            }
+            .gray {
+                background-color: lightgray;
+            }
+            tbody {
+                width: 100%;
+            }
+        </style>
+        </head>
+        <body>
+          <table width="100%">
+            <tr>
+                <td valign="top"></td>
+                <td align="left">
+                <h1><B> ALGEMATIC</B></h1>
+                  <h2 style="text-align: center;">BON DE COMMANDE</h2>
+                  <h3 style="text-align: center;">N°: '.$pre_achat[0]->num_bc.'   - Date: '.$now.' </h3>
+                  <hr>
+                  <h3 style="text-align: center;"> IDENTIFICATION DU SERVICE CONTRACTANT </h3>
+                  <hr>
+                  <h4 style="text-align: center;>Dénomination: SARL ALGEMATIC</h4>
+                  <h4>Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger.</h4>
+                  <hr>
+                  <h3 style="text-align: center;"> IDENTIFICATION DU PRESTATAIRE </h3>
+                  <hr>
+                    <h4 style="text-align: center;>'.$fournisseurs[0]->nom.' </h4>
+                    <h4 style="text-align: center;>Relatif à la Facture Pro Format N° '.$pre_achat[0]->num_facture_proformat.' du '.$pre_achat[0]->date_achat.' </h4>
+                    <hr>
+
+                </td>
+                <td align="right">
+                    <img src=""  />
+                </td>
+            </tr>
+          </table>
+          
+          <br/>
+          <table width="100%">
+            <thead style="background-color: lightgray;">
+              <tr>
+                <th>Article</th>
+                <th>Designation</th>
+                <th>Quantité</th>
+                <th>Prix U.HT</th>
+                <th>Montant HT</th>
+              </tr>
+            </thead>
+            <tbody>';
+            $total = 0;
+            $i=0;
+            foreach ($produits as $produit) 
+            {
+                    
+
+                    $code_produit=$produit->code_produit;
+               
+                    $id_prod=$produit->id;
+
+                    $id_pre_achat=$produit->id_pre_achat;
+
+                    $quantite=$produit->qte_demande;
+
+                    $prix=$produit->prix;
+
+                    $designation=DB::select("select description from produits where  code_produit='$code_produit'");
+
+                    
+
+                        
+                    $html.='<tr class="item">
+                    
+                    <td>
+                        '.$code_produit.'
+                    </td>
+                    <td>
+
+                        '.$designation[0]->description.'
+                    </td>
+                    <td align="right">
+                        '.$quantite.'
+                    </td>
+                    <td align="right">
+                    '.$prix.'
+                    </td>
+                    <td align="right">
+                    '.$prix*$quantite.'
+                    </td>
+                </tr>';
+
+                $total=$total+$prix*$quantite;
+            }
+
+            
+
+            $prix_remise=$total*$pre_achat[0]->remise/100;
+            $total_HT=$total-$prix_remise;
+            $montant_tva=$total_HT*$pre_achat[0]->tva/100;
+            $total_TTC=$montant_tva+$total_HT;
+
+        $html.='
+            </tbody>
+            <tfoot>';
+            $html.='                 
+                <tr>
+                    <td colspan="4"></td>
+                    <td align="right">Total HT </td>
+                    <td align="right">'.$total.'</td>
+                </tr>
+                 <tr>
+                    <td colspan="4"></td>
+                    <td align="right">Remise '.$pre_achat[0]->remise.' %</td>
+                    <td align="right">'.$prix_remise.'</td>
+                </tr>
+                 <tr>
+                    <td colspan="4"></td>
+                    <td align="right">Net HT</td>
+                    <td align="right">'.$total_HT.'</td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td align="right">Montant TVA '.$pre_achat[0]->tva.' %</td>
+                    <td align="right">'.$montant_tva.'</td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td align="right">Total TTC</td>
+                    <td align="right">'.$total_TTC.'</td>
+                </tr>';
+            
+            $html.='</tfoot>
+          </table>
+          <h5>Arrête le présent Bon de Commande à la somme de:</h5>
+          <br>
+          <h5 style="text-align: right;">Cachet et signature</h5>
+          <br>
+          <hr>
+          <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
+          <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
+
+        </body>
+        </html>';
+
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        $dompdf->stream("BC", array('Attachment'=>1));
+        }
 
 
 	 }

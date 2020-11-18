@@ -2,8 +2,6 @@
 
 <html lang="en">
 
-
-
 <head>
 
     <meta charset="utf-8">
@@ -25,6 +23,8 @@
     <title>Welcome Admin</title>
 
     <!-- Bootstrap Core CSS -->
+
+    <script src="{{ asset('../js/jquery-3.2.1.min.js') }}"></script>
 
     <link href="{{ asset('../nabila/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -51,17 +51,8 @@
 
     <link href="{{ asset('../nabila/lite/css/colors/default-dark.css') }}" id="theme" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('../DataTables/datatables.min.css') }}"/>
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-
-    ------------------------------------
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>     
-
-    
-          
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -491,15 +482,17 @@
 
     <script src="{{ asset('../nabila/lite/js/dashboard.js') }}"></script>
 
-    <script src="{{ asset('../js/jquery-3.2.1.min.js') }}"></script>
-
     <script src="{{ asset('../js/app.js') }}"></script>
     <script src="{{ asset('../js/dynamic-form.js') }}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('../DataTables/datatables.min.css') }}"/>
+    <script type="text/javascript" src="{{ asset('../DataTables/datatables.min.js') }}"></script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
 </body>
@@ -736,9 +729,8 @@
         {{--  --}}
     </script>
 
-
     <script type="text/javascript">
-        
+
         $(document).ready( function () 
         {
             $('#table_id').DataTable();
@@ -747,6 +739,6 @@
         //
     </script>
 
-    
 
+    {{--  --}}
 </html>
