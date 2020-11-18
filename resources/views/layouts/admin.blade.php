@@ -334,10 +334,6 @@
 
                         <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Clients | Prospect</span></a></li>
 
-                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/clientNimi" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Clients Nimi</span></a></li>
-
-
-
                         <li>
 
                             <a href="{{ url('/logout') }}"
