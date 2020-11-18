@@ -381,13 +381,7 @@
                                         <form class="iciic">
 
                                             {{ csrf_field() }}  
-{{--                                             <td>
-                                                <a href="/home/clients/{{$clients[$i]->id}}">
 
-                                                    <img src="{{asset('../'.$clients[$i]->photo)}}" width="100%" height="10%">
-                                                </a>                                                 
-                                            </td>
- --}}                                            
                                             <td> 
                                                 <a href="/home/clients/{{$clients[$i]->id}}">
                                                     <p id="codeclient{{$clients[$i]->id}}" value="{!! $clients[$i]->code_client !!}">{!! $clients[$i]->code_client !!}</p>
@@ -402,28 +396,10 @@
                                                 {{--  --}}
                                             </td>
 
-{{--                                             <td> 
-
-                                                <p id="fax{{$clients[$i]->id}}" value="{!! ($clients[$i]->fax) !!}">{{$clients[$i]->fax}}</p> 
-
-                                            </td>
- --}}
-
-                                             <td> 
-
-                                                <p id="mobile{{$clients[$i]->id}}" value="{!! ($clients[$i]->mobile) !!}">{!! ($clients[$i]->mobile) !!}</p> 
-
-                                                
-                                            </td>
-{{--
                                             <td> 
 
-                                                <p value="{{ substr($clients[$i]->email,0,2) }}" id="emailh{{$clients[$i]->id}}">{!! $clients[$i]->email !!}</p>
-                                                
-
-                                                
+                                                <p id="mobile{{$clients[$i]->id}}" value="{!! ($clients[$i]->mobile) !!}">{!! ($clients[$i]->mobile) !!}</p>                                                 
                                             </td>
- --}}
 
                                             <td> 
 
@@ -448,13 +424,6 @@
 
                                                 {{--  --}}
                                             </td>
-
-
-{{--                                             <td> 
-
-                                                <p id="n_art_imp{{$clients[$i]->id}}" value="{!! ($clients[$i]->n_art_imp) !!}">{{$clients[$i]->n_art_imp}}</p> 
-                                            </td>
- --}}
 
                                             <td colspan="1">
                                                                                                         
@@ -575,18 +544,6 @@
 
         //
     </script>
-
-
-    <script type="text/javascript">
-
-        $(document).ready( function () 
-        {
-            $('#table_id').DataTable();
-        });
-
-        //
-    </script>
-
 
 
 
