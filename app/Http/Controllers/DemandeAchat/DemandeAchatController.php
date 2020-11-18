@@ -422,13 +422,13 @@ class DemandeAchatController extends Controller
                   <hr>
                   <h3 style="text-align: center;"> IDENTIFICATION DU SERVICE CONTRACTANT </h3>
                   <hr>
-                  <h4 style="text-align: center;>Dénomination: SARL ALGEMATIC</h4>
+                  <h4 style="text-align: center;">Dénomination: SARL ALGEMATIC</h4>
                   <h4>Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger.</h4>
                   <hr>
                   <h3 style="text-align: center;"> IDENTIFICATION DU PRESTATAIRE </h3>
                   <hr>
-                    <h4 style="text-align: center;>'.$fournisseurs[0]->nom.' </h4>
-                    <h4 style="text-align: center;>Relatif à la Facture Pro Format N° '.$pre_achat[0]->num_facture_proformat.' du '.$pre_achat[0]->date_achat.' </h4>
+                    <h4 style="text-align: center;">'.$fournisseurs[0]->nom.' </h4>
+                    <h4 style="text-align: center;">Relatif à la Facture Pro Format N° '.$pre_achat[0]->num_facture_proformat.' du '.$pre_achat[0]->date_achat.' </h4>
                     <hr>
 
                 </td>
