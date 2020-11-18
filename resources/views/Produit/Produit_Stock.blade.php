@@ -28,13 +28,14 @@
                         </div>
                       </div>
                       @endif
-    
 
-     <br>
-     <br>
+                       <div>
+                        <h1 style="text-align: center;  " >Liste Des Produits</h1>
+                      </div>
+                      <br>
 
     <div>
-        <table  id="table_id" class="display">
+        <table  class="table table-striped table-dark"  id="table_id" class="display">
           <thead>
             <tr>
               <th scope="col"><B>Code_Produit</B></th>
@@ -44,7 +45,7 @@
               <th scope="col"><B>Prix</B></th>
               <th scope="col"><B>Date_Stock</B></th>
               <th scope="col"><B>Modifier</B></th>
-              <th scope="col"><B>Supprimer</B></th>
+              
             </tr>
           </thead>
           <tbody>
@@ -77,7 +78,7 @@
                     </div>
                   </div>
                 </td>
-                <td>
+               
               <td>{{$stock->quantite}}</td>
               <td>{{$stock->prix}}</td>
               <td>{{$stock->date_arrivage}}</td>
@@ -128,32 +129,7 @@
                       </div>
                     </div>
                 </td>
-                 <td><button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMER{{$stock->id}}">
-                       Supprimer
-                    </button>
-
-                    <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalSUPPRIMER{{$stock->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Voulez vous vraiment Supprimer</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                     <form class="needs-validation" novalidate action="/Supprimerstock/{{$stock->id}}" method="POST">
-                        {{ csrf_field()}}
-                          
-                          <div class="modal-footer">
-                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn-sm btn btn-primary">Supprimer</button>
-                          </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                </td>
+                 
             </tr>
             @endforeach
           </tbody>
