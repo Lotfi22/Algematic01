@@ -1,16 +1,16 @@
-/*function modifierrecette(event,objet) 
+/*function modifierclient(event,objet) 
 {	
 	event.preventDefault();
 
 	var $id=(($(objet)).attr('id'));
 
-	var id_to_hide = "#recette"+$id;
+	var id_to_hide = "#client"+$id;
 
 	var $id=(($(objet)).attr('id'));
 
-	var id_to_hide = "#recette"+$id;
+	var id_to_hide = "#client"+$id;
 
-	var id_nom="#nomrecette"+$id;
+	var id_nom="#nomclient"+$id;
 
 	var id_desc="#description"+$id;
 
@@ -74,7 +74,7 @@
 	           'X-CSRF-TOKEN': $('input[name="_token"]').val()
 	        },                    
 	        type:"POST",
-	        url:"/home/recettes/modifier/ajax",
+	        url:"/home/clients/modifier/ajax",
 	        data:{id:$id,nom:$nom,description:$description,duree:l_heure,ingredients:$ingredients,preparation:$preparation,cuisson:l_heure_cuisson},
 
 	        success:function(data) 
@@ -99,20 +99,18 @@
 	// body... 
 }
 */
-function supprimerrecette (event,objet) 
+function supprimerclient (event,objet) 
 {
 
 	event.preventDefault();
 
 	$id=(objet.getAttribute('id'));
-
+	
 	$id=($id.substr(3));
-
-	var id_hide="#recette"+$id;
+	
+	var id_hide="#client"+$id;
 
 	console.log(id_hide)
-
-	$(id_hide).hide(1000);
 
     $.ajax({
         headers: 
@@ -120,11 +118,13 @@ function supprimerrecette (event,objet)
            'X-CSRF-TOKEN': $('input[name="_token"]').val()
         },                    
         type:"POST",
-        url:"/home/recettes/supprimer/ajax",
+        url:"/home/clients/supprimer/ajax",
         data:{id:$id},
 
         success:function(data) 
         {
+
+			$(id_hide).hide(1000);
 
         	//
 		}
@@ -133,14 +133,14 @@ function supprimerrecette (event,objet)
 	// body... 
 }
 
-function ajouterrecette(event,ojbet) 
+function ajouterclient(event,ojbet) 
 {
 
 	event.preventDefault();
 
-	var $nom = $("#nomdurecette").val();
+	var $nom = $("#nomduclient").val();
 
-	var $desc = $("#descdurecette").val();
+	var $desc = $("#descduclient").val();
 
 	var dureemin = $("#dureemin").val();
 
@@ -180,9 +180,9 @@ function ajouterrecette(event,ojbet)
 		console.log("le new_id : ");
 		console.log(new_id);
 		
-		var to_append = '<tr class="alert alert-success" id="recette'+new_id+'"><form>{{ csrf_field() }} <td></td><td colspan="2"><div class="form-group col-md-12 col-sm-12">'                                                
+		var to_append = '<tr class="alert alert-success" id="client'+new_id+'"><form>{{ csrf_field() }} <td></td><td colspan="2"><div class="form-group col-md-12 col-sm-12">'                                                
 
-		to_append+='<label><textarea type="text" rows="4" name="nom" class=" form-control" id="nomrecette'+new_id+'" value="'+$nom+'">'+$nom+'</textarea></label>'
+		to_append+='<label><textarea type="text" rows="4" name="nom" class=" form-control" id="nomclient'+new_id+'" value="'+$nom+'">'+$nom+'</textarea></label>'
 
 		to_append+='</div></td>'
 
@@ -197,19 +197,19 @@ function ajouterrecette(event,ojbet)
 		to_append+='</td>'
 
 
-		to_append+='<td><button class="btn btn-success btn-sm" id="'+new_id+'" onclick="modifierrecette(event,this)"> Enregistrer</button></td>'
+		to_append+='<td><button class="btn btn-success btn-sm" id="'+new_id+'" onclick="modifierclient(event,this)"> Enregistrer</button></td>'
 
 		to_append+='<td><a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-'+new_id+'" style="color: #fff;"> supprimer</a><div id="myModalsup-'+new_id+'" class="modal fade" role="dialog">'
 
-		to_append+='<div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Voulez-vous vraiment supprimer ce recette</h4></div>'
+		to_append+='<div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Voulez-vous vraiment supprimer ce client</h4></div>'
 
-		to_append+='<div class="modal-body"><button class="col-md-5 btn btn-success" onclick="supprimerrecette(event,this)" data-dismiss="modal" id="mod'+new_id+'">OUI,je supprime</button><a data-dismiss="modal" class="col-md-6 btn btn-danger">NON,je ne veux pas supprimer</a></div><div class="modal-footer"><button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button></div></div></div></div></td></form></tr>'
+		to_append+='<div class="modal-body"><button class="col-md-5 btn btn-success" onclick="supprimerclient(event,this)" data-dismiss="modal" id="mod'+new_id+'">OUI,je supprime</button><a data-dismiss="modal" class="col-md-6 btn btn-danger">NON,je ne veux pas supprimer</a></div><div class="modal-footer"><button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button></div></div></div></div></td></form></tr>'
 
 		to_append=$(to_append)	
 
 		to_append.hide(0);
 
-		$("#all_the_recettes").append(to_append).show(1500);
+		$("#all_the_clients").append(to_append).show(1500);
 
 		to_append.show(1500)
 
@@ -228,8 +228,8 @@ function ajouterrecette(event,ojbet)
 
 		$('html, body').animate({scrollTop:$(document).height()}, 'slow');
 
-		$("#nomdurecette").val("");
-		$("#descdurecette").val("");
+		$("#nomduclient").val("");
+		$("#descduclient").val("");
 
 	    $.ajax({
 	        headers: 
@@ -237,7 +237,7 @@ function ajouterrecette(event,ojbet)
 	           'X-CSRF-TOKEN': $('input[name="_token"]').val()
 	        },                    
 	        type:"POST",
-	        url:"/home/recettes/ajouter/ajax",
+	        url:"/home/clients/ajouter/ajax",
 	        data:{nom:$nom,description:$desc,duree:l_heure},
 
 	        success:function(data) 

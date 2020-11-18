@@ -1,13 +1,51 @@
 $(document).ready(function() 
 {
-	
-	$('html, body').animate({scrollTop:$(document).height()}, 2000) 
 
-	$('html, body').animate({scrollTop:0}, 1000) 
+	$("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable .ici_la_rechereche").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	});
+
 	
+	$('html, body').animate({scrollTop:$(document).height()}, 200) 
+
+	$('html, body').animate({scrollTop:0}, 500) 
+	
+	$("#motif_interd").hide(0);
+	$("#motif_interd_label").hide(0);
+
+
+	$("#client_inter_fact").change(function(event) {
+
+	    event.preventDefault();
+	    
+	    if ($("#client_inter_fact").val() == "OUI") 
+	    {
+	        
+	        $("#motif_interd_label").show('slow');    
+	        
+	        $("#motif_interd").show('slow');
+
+	        //
+	    }
+	    else
+	    {
+
+	        $("#motif_interd_label").hide('slow');    
+	        
+	        $("#motif_interd").hide('slow');
+	        //
+	    }
+
+	    //
+	});
 
 	/**/	
 });
+
+
 
 
 for(var j = 1;j < 5; j++)
