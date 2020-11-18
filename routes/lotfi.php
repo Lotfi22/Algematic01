@@ -42,11 +42,14 @@ Route::get('/home/prix_ventes','Lotfi\VenteController@index');
 
 
 # Articles :
-Route::get('/home/articles','Lotfi\ArticleController@index');
-Route::post('/home/articles/ajouter/ajax','Lotfi\ArticleController@ajouterarticle');
-Route::post('/home/articles/modifier/ajax','Lotfi\ArticleController@modifierarticles');
-Route::post('/home/articles/supprimer/ajax','Lotfi\ArticleController@supprimerarticles');
-
+/***************************** Création d'un Article de Vente (CRUD)************************/
+Route::get('/article', 'DemandeVente\ArticleController@index');
+/*L'ajout d'un nouveau dépot*/
+Route::post('/AddArticle', 'DemandeVente\ArticleController@AddArticle');
+/*Modification d'un  dépot*/
+Route::post('/ModifArticle/{idArticleModif}', 'DemandeVente\ArticleController@ModifArticle');
+/*Suppression d'un  dépot*/
+Route::post('/SupprimerArticle/{idArticleSupprimer}', 'DemandeVente\ArticleController@SupprimerArticle');
 
 
 

@@ -8,7 +8,7 @@
                     @endif
                       @if (\Session::has('success'))
                         <div class="alert alert-success">
-                            <p>{{ \Session::get('success') }}</p>
+                            <p style="text-align: center;">{{ \Session::get('success') }}</p>
                         </div>
                     @endif
 
@@ -29,34 +29,46 @@
                       </div>
                       @endif
 
-                      <div>
-                        <h1 style="text-align: center;  " >Liste Des Demandes de Vente</h1>
-                      </div>
-                      <br>
+                        <div>
+                            <h1 style="text-align: center;  " >Liste Des Demandes de Vente</h1>
+                        </div>
+                    <br>
    
 
+
     <div>
-        <table class="table table-striped table-dark">
+        <table id="table_id" class="table table-striped table-dark display">
+          
           <thead>
+            
             <tr>
-              <th scope="col"><B>Client</B></th>
-              <th scope="col"><B>Infos Client</B></th>
-              <th scope="col"><B>Infos Demande</B></th>
-              <th scope="col"><B>Statut</B></th>
-              @if($privilege ?? '' == 1)
-              <th scope="col"><B>Valider</B></th>
-              @endif
-               @if($privilege ?? '' == 1)
-              <th scope="col"><B>Refuser</B></th>
-              @endif
+                  
+                <th scope="col"><B>Client</B></th>
+                <th scope="col"><B>Date</B></th>
+                <th scope="col"><B>Infos Client</B></th>
+                <th scope="col"><B>Infos Demande</B></th>
+                <th scope="col"><B>Statut</B></th>
+              
+                @if($privilege ?? '' == 1)
+                    <th scope="col"><B>Valider</B></th>
+                @endif
+                @if($privilege ?? '' == 1)
+                    <th scope="col"><B>Refuser</B></th>
+                @endif
+
+
+                {{--  --}}
             </tr>
-          </thead>
-          <tbody>
+
+            </thead>
+            <tbody>
+            
             @foreach($ventes as $vente)
             <tr>
               <td scope="row"><B>{{$vente->code_client}}</B></td>
+              <td scope="row"><B>{{$vente->date_demande}}</B></td>
                <td><!-- Button Infos Client -->
-                  <button type="button" class="btn-sm btn btn-dark" data-toggle="modal" data-target="#infosClient{{$vente->preVente}}">
+                  <button type="button" class="btn-sm btn btn-info" data-toggle="modal" data-target="#infosClient{{$vente->preVente}}">
                     Informations
                   </button>
 
@@ -116,21 +128,9 @@
                           </div>
                           <div class="modal-body">
                           <ul>
-                            <li><B>Téléphone :  </B>  {{$vente->tel}}</li>
-                            <li><B>Fax :  </B>  {{$vente->fax}}</li>
+                            <li><B>Client :  </B>  {{$vente->code_client}}</li>
                             <li><B>Mobile :  </B>  {{$vente->mobile}}</li>
                             <li><B>Email :  </B>  {{$vente->email}}</li>
-                            <li><B>NIS :  </B>  {{$vente->NIS}}</li>
-                            <li><B>NIF :  </B>  {{$vente->NIF}}</li>
-                            <li><B>RC :  </B>  {{$vente->RC}}</li>
-                            <li><B>N°_art_imp :  </B>  {{$vente->n_art_imp}}</li>
-                            <li><B>Taux_remise_spec :  </B>  {{$vente->taux_remise_spec}}</li>
-                            <li><B>Client_inter_fact :  </B>  {{$vente->client_inter_fact}}</li>
-                            <li><B>Motif_interd :  </B>  {{$vente->motif_interd}}</li>
-                            <li><B>Plafond_credit :  </B>  {{$vente->plafond_credit}}</li>
-                            <li><B>Categorie_nom :  </B>  {{$vente->categorie_nom}}</li>
-                            <li><B>Activite_nom :  </B>  {{$vente->activite_nom}}</li>
-                            <li><B>Ajouter le :  </B>  {{$vente->created_at}}</li>
                           </ul>
                         </div>
                                 
@@ -251,7 +251,7 @@
 
  			@if(  ($vente->statut_validation == 2 ) )
               <td>
-                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#FP{{$vente->preVente}}">
+                    <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#FP{{$vente->preVente}}">
                       Editer FP
                     </button>
 

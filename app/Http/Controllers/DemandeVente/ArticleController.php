@@ -27,10 +27,10 @@ class ArticleController extends Controller
         $actuel = User::FindOrFail($id);
 
         
-
     	$produits=DB::select("select p.id,p.code_produit,p.description,s.quantite,s.prix
     		from produits p, stocks s
     		where p.id=s.id_produit  ");
+
 
     	$clients=DB::select("select * from client_prospects");
 
@@ -69,43 +69,32 @@ class ArticleController extends Controller
         $nom=$request->input('nom');
         $description=$request->input('description');
 
-         DB::insert("insert into articles (nom,description) values('$nom','$description') ;");
+        DB::insert("insert into articles (nom,description) values(\"$nom\",\"$description\")");
 
-
-
-        $id_article=DB::select("select *  from articles where nom='$nom'");
+        $id_article=DB::select("select * from articles where nom='$nom'");
 
         $id_article=$id_article[0]->id;
 
         $total=0;
 
      	foreach ($request['dynamic_form']['dynamic_form'] as $key=>$array) 
-            {
-                    $index = $key +1;
-                    $code_produit=$array['produit'];
-                    $id_produit=DB::select("select id  from produits where code_produit='$code_produit'");
-                    $id_prod=$id_produit[0]->id;
-                    
-                    $quantite=$array['quantite'];
-                    $prix=$array['prix'];
-                   
-
-                         DB::insert("insert into prix_vente_produits (id_produit,id_article,prix,quantite) 
-                        values('$id_prod','$id_article','$prix','$quantite') ;");
-                  
-
-                        
-                $total=$total+$array['prix']*$array['quantite'];
-            }
-
+        {
+            $index = $key +1;
+            $code_produit=$array['produit'];
+            $id_produit=DB::select("select id  from produits where code_produit='$code_produit'");
+            $id_prod=$id_produit[0]->id;
+            
+            $quantite=$array['quantite'];
+            $prix=$array['prix'];
+           
+            DB::insert("insert into prix_vente_produits (id_produit,id_article,prix,quantite) 
+            values('$id_prod','$id_article','$prix','$quantite') ;");
+                       
+            $total=$total+$array['prix']*$array['quantite'];
+        }
 
        DB::update("update articles a set total='$total' where a.id='$id_article' ");
         
-        
-        return redirect('/article')->with('success','Article Ajouté avec succée');
-
+       return redirect('/article')->with('success','Article Ajouté avec succée');
     }
-
-
-
 }
