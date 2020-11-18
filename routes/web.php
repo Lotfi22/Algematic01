@@ -208,3 +208,9 @@ Route::post('/AddArticle', 'DemandeVente\ArticleController@AddArticle');
 Route::post('/ModifArticle/{idArticleModif}', 'DemandeVente\ArticleController@ModifArticle');
 /*Suppression d'un  dépot*/
 Route::post('/SupprimerArticle/{idArticleSupprimer}', 'DemandeVente\ArticleController@SupprimerArticle');
+
+
+
+/***************************** Produit STOCK (CRUD)************************/
+
+Route::get('/ProduitStock', 'Produit\ProduitController@ProduitController');
