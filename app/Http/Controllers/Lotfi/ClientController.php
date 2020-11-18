@@ -34,7 +34,7 @@ class ClientController extends Controller
         $id = Auth::id();
         $actuel = User::FindOrFail($id);
 
-        $clients = (DB::select("select *,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects cl , categorie_clients ca , activite_clients ac where cl.id_categorie = ca.id and id_activite = ac.id "));
+        $clients = (DB::select("select *,cl.id as id,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects cl , categorie_clients ca , activite_clients ac where cl.id_categorie = ca.id and id_activite = ac.id and cl.visible = 1 order by cl.id"));
         
         $categories = DB::select("select * from categorie_clients where visible = 1");
 
@@ -61,8 +61,13 @@ class ClientController extends Controller
 
         $id = Auth::id();
         $actuel = User::FindOrFail($id);
+
+
+        $client = (DB::select("select *,cl.id as id,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects cl , categorie_clients ca , activite_clients ac where cl.id_categorie = ca.id and id_activite = ac.id and cl.id = \"$id_client\" "))[0];
+
         
         $client = (DB::select("select *,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects cl , categorie_clients ca , activite_clients ac where cl.id_categorie = ca.id and id_activite = ac.id and cl.id = \"$id_client\" "))[0];
+
 
 
 
@@ -78,7 +83,7 @@ class ClientController extends Controller
     public function modifier_client1(Request $request)
     {   
         $id_client=($request->id_client);
-
+        
         $this->validate($request,[
 
             'code' => 'required|alpha_num',
@@ -184,6 +189,22 @@ class ClientController extends Controller
         # code...
     }
 
+    public function supprimer_client(Request $request)
+    {
+
+        if ($request->ajax()) 
+        {
+
+            (DB::update("update client_prospects c set c.visible=0 where (c.id=$request->id) "));
+
+            return response()->json();
+
+            # code...
+        }
+
+        # code...
+    }
+
 
     public function ajouter_client(Request $request)
     {
@@ -194,14 +215,11 @@ class ClientController extends Controller
 
         $this->validate($request,[
 
-            'code' => 'required|alpha_num',
+            'code' => 'required',
             'tel' => 'numeric',
             'fax' => 'numeric',
             'mobile' => 'numeric',
             'email' => 'email',
-            'nis' => 'alpha_num',
-            'nif' => 'alpha_num',
-            'rc' => 'alpha_num',
             'taux_remise_spec' => 'numeric',
             'plafond_credit' => 'numeric',
             #..

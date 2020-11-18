@@ -34,6 +34,19 @@ Route::post('/home/clients/ajouter/ajax','Lotfi\ClientController@ajouter_client'
 Route::get('/home/clients/{id}','Lotfi\ClientController@modifier_client');
 Route::post('/home/clients/modifier','Lotfi\ClientController@modifier_client1');
 Route::post('/home/clients/modifier/ajax','Lotfi\ClientController@modifier_client2');
+Route::post('/home/clients/supprimer/ajax','Lotfi\ClientController@supprimer_client');
+
+# Prix vente produits
+Route::get('/home/prix_ventes','Lotfi\VenteController@index');
+
+
+
+# Articles :
+Route::get('/home/articles','Lotfi\ArticleController@index');
+Route::post('/home/articles/ajouter/ajax','Lotfi\ArticleController@ajouterarticle');
+Route::post('/home/articles/modifier/ajax','Lotfi\ArticleController@modifierarticles');
+Route::post('/home/articles/supprimer/ajax','Lotfi\ArticleController@supprimerarticles');
+
 
 
 

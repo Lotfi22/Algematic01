@@ -1,11 +1,7 @@
 @extends('../layouts.admin')
 
-
 @section('content')         
 
-<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     
     <div class="row" id="hnaya">
 
@@ -345,23 +341,17 @@
 
                     <div class="table-responsive">
 
-                        <table class="table">
+                        <table class="table display" id="table_id">
 
                             <thead>
 
                                 <tr>
 
-                                    <th>Photo</th>
-
                                     <th>code_client</th>
 
                                     <th>tel</th>
 
-                                    <th>fax</th>
-
                                     <th>mobile</th>
-
-                                    <th>email</th>
 
                                     <th>NIS</th>
                                     
@@ -369,13 +359,11 @@
 
                                     <th>N° RC</th>
                                     
-                                    <th>N° Art imp</th>
-
                                     <th>Catégorie</th>
-                                    <th style="visibility: hidden;" >Catégorie</th>
+                                    
 
                                     <th>Activité</th>
-                                    <th style="visibility: hidden;" >Activité</th>
+                                    
 
                                     <th>Plus</th>
 
@@ -393,13 +381,13 @@
                                         <form class="iciic">
 
                                             {{ csrf_field() }}  
-                                            <td>
+{{--                                             <td>
                                                 <a href="/home/clients/{{$clients[$i]->id}}">
 
                                                     <img src="{{asset('../'.$clients[$i]->photo)}}" width="100%" height="10%">
                                                 </a>                                                 
                                             </td>
-                                            
+ --}}                                            
                                             <td> 
                                                 <a href="/home/clients/{{$clients[$i]->id}}">
                                                     <p id="codeclient{{$clients[$i]->id}}" value="{!! $clients[$i]->code_client !!}">{!! $clients[$i]->code_client !!}</p>
@@ -414,29 +402,28 @@
                                                 {{--  --}}
                                             </td>
 
-                                            <td> 
+{{--                                             <td> 
 
                                                 <p id="fax{{$clients[$i]->id}}" value="{!! ($clients[$i]->fax) !!}">{{$clients[$i]->fax}}</p> 
 
-                                                {{--  --}}
                                             </td>
+ --}}
 
+                                             <td> 
 
-                                            <td> 
+                                                <p id="mobile{{$clients[$i]->id}}" value="{!! ($clients[$i]->mobile) !!}">{!! ($clients[$i]->mobile) !!}</p> 
 
-                                                <p  style="height: 20em;" id="mobile{{$clients[$i]->id}}" value="{!! ($clients[$i]->mobile) !!}">{!! ($clients[$i]->mobile) !!}</p> 
-
-                                                {{--  --}}
+                                                
                                             </td>
-
+{{--
                                             <td> 
 
                                                 <p value="{{ substr($clients[$i]->email,0,2) }}" id="emailh{{$clients[$i]->id}}">{!! $clients[$i]->email !!}</p>
                                                 
 
-                                                {{--  --}}
+                                                
                                             </td>
-
+ --}}
 
                                             <td> 
 
@@ -463,13 +450,13 @@
                                             </td>
 
 
-                                            <td> 
+{{--                                             <td> 
 
                                                 <p id="n_art_imp{{$clients[$i]->id}}" value="{!! ($clients[$i]->n_art_imp) !!}">{{$clients[$i]->n_art_imp}}</p> 
                                             </td>
+ --}}
 
-
-                                            <td colspan="2">
+                                            <td colspan="1">
                                                                                                         
                                                 <p value="rec{{$clients[$i]->id}}cat" id="cat{{$i}}
                                                     {{$clients[$i]->id}}">{!! $clients[$i]->categorie_nom !!}
@@ -479,7 +466,7 @@
                                             </td>
 
 
-                                            <td colspan="2">
+                                            <td colspan="1">
                                                                                                         
                                                 <p value="act{{$clients[$i]->id}}cat" id="act{{$i}}
                                                     {{$clients[$i]->id}}">{!! $clients[$i]->activite_nom !!}
@@ -542,10 +529,6 @@
     </div>
 
     <script src="{{ asset('js/modifierlesclients.js') }}"></script>
-    <script src="{{ asset('../js/jquery-3.2.1.min.js') }}"></script>
-
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
     <script src="{{ asset('../js/lmodifierlesclientss.js') }}"></script>
 
     <script>
@@ -592,6 +575,21 @@
 
         //
     </script>
+
+
+    <script type="text/javascript">
+
+        $(document).ready( function () 
+        {
+            $('#table_id').DataTable();
+        });
+
+        //
+    </script>
+
+
+
+
 
  {{--  --}}   
 @endsection
