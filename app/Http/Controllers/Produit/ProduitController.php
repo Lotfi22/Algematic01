@@ -141,5 +141,14 @@ class ProduitController extends Controller
 
     }
 
+    public function ProduitController()
+    {
+
+         $stocks=DB::select("select * from stocks s,produits p where p.id=s.id_produit");
+
+        
+        return view('Produit\Produit_Stock',compact('stocks'));
+    }
+
 
 }

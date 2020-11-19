@@ -253,6 +253,8 @@
 
                         <li class="acacher"> <a class="waves-effect waves-dark" href="/etagere" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Etagère</span></a></li>
 
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/ProduitStock" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Produits</span></a></li>
+
 
                         <!-- Fabricant_Fournisseur -->
 
@@ -317,6 +319,8 @@
                         <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/unite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Unité de Mesure</span></a></li>
 
                         <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/produit" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Produits</span></a></li>
+
+
 
                         <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/technique" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Spécificité Technique</span></a></li>
 
