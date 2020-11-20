@@ -200,8 +200,6 @@ Route::post('/ValiderDemandeVente/{idPreVente}', 'DemandeVente\DemandeVenteContr
 Route::post('/VenteFactureProformat/{idPreVente}', 'DemandeVente\DemandeVenteController@VenteFactureProformat');
 
 
-<<<<<<< HEAD
-||||||| 4a146c8
 /***************************** Création d'un Article de Vente (CRUD)************************/
 Route::get('/article', 'DemandeVente\ArticleController@index');
 /*L'ajout d'un nouveau dépot*/
@@ -210,7 +208,9 @@ Route::post('/AddArticle', 'DemandeVente\ArticleController@AddArticle');
 Route::post('/ModifArticle/{idArticleModif}', 'DemandeVente\ArticleController@ModifArticle');
 /*Suppression d'un  dépot*/
 Route::post('/SupprimerArticle/{idArticleSupprimer}', 'DemandeVente\ArticleController@SupprimerArticle');
-=======
+
+
+
 /***************************** Création d'un Article de Vente (CRUD)************************/
 Route::get('/article', 'DemandeVente\ArticleController@index');
 /*L'ajout d'un nouveau dépot*/
@@ -225,4 +225,4 @@ Route::post('/SupprimerArticle/{idArticleSupprimer}', 'DemandeVente\ArticleContr
 /***************************** Produit STOCK (CRUD)************************/
 
 Route::get('/ProduitStock', 'Produit\ProduitController@ProduitController');
->>>>>>> f5fbd4515820327a34088d38224e270e6874cfcc
+
