@@ -15,21 +15,21 @@ use Illuminate\Support\Facades\Hash;
 */
 
 # Catégorie Client :
-Route::get('/admin/client/categorie','Lotfi\ClientController@categories_index');
+Route::get('/home/clients/categorie','Lotfi\ClientController@categories_index');
 Route::post('/home/categories/ajouter/ajax','Lotfi\ClientController@ajoutercategories');
 Route::post('/home/categories/modifier/ajax','Lotfi\ClientController@modifiercategories');
 Route::post('/home/categories/supprimer/ajax','Lotfi\ClientController@supprimercategories');
 
 
 # Activité Client :
-Route::get('/admin/client/activite','Lotfi\ClientController@activites_index');
+Route::get('/home/clients/activite','Lotfi\ClientController@activites_index');
 Route::post('/home/activites/ajouter/ajax','Lotfi\ClientController@ajouteractivites');
 Route::post('/home/activites/modifier/ajax','Lotfi\ClientController@modifieractivites');
 Route::post('/home/activites/supprimer/ajax','Lotfi\ClientController@supprimeractivites');
 
 
 # Client :
-Route::get('/home/clients','Lotfi\ClientController@index');
+Route::get('/home/clients/prospectes','Lotfi\ClientController@index');
 Route::post('/home/clients/ajouter/ajax','Lotfi\ClientController@ajouter_client');
 Route::get('/home/clients/{id}','Lotfi\ClientController@modifier_client');
 Route::post('/home/clients/modifier','Lotfi\ClientController@modifier_client1');

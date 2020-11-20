@@ -329,14 +329,14 @@
                         <!--Fin-->
 
 
-                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow3(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Client</span></a></li>
+                        <li> <a class="waves-effect waves-dark" id="clients" href="/home4" onclick="fshow3(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Client</span></a></li>
 
 
-                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/admin/client/categorie" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Catégorie</span></a></li>
+                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients/categorie" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Catégorie</span></a></li>
 
-                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/admin/client/activite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Activité</span></a></li>
+                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients/activite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Activité</span></a></li>
 
-                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Clients | Prospect</span></a></li>
+                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients/prospectes" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Clients | Prospect</span></a></li>
 
                         <li>
 
@@ -750,7 +750,62 @@
            }
         }
 
+        //
+    </script>
 
+
+
+    <script>
+
+        var url1 = (window.location.href.substr(21));            
+        
+        alert(url1);
+        
+        function eventFire(el, etype){
+
+            if (el.fireEvent) 
+            {
+                el.fireEvent('on' + etype);
+            } 
+
+            else 
+            {
+                var evObj = document.createEvent('Events');
+                evObj.initEvent(etype, true, false);
+                el.dispatchEvent(evObj);
+            }
+
+            //
+        }        
+
+
+        function indexes_of(str,char) 
+        {
+            
+            var indices = [];
+            
+            for(var i=0; i<str.length;i++) 
+            
+            {
+                if (str[i] === char) indices.push(i);
+            }        
+
+            return indices;
+
+            //
+        }
+
+        var indexes = (indexes_of(url1,"/"))
+
+        var le_href = (url1.substr(indexes[1]+1,indexes[2]-indexes[1]-1));
+    
+        le_href = le_href.toString();
+
+        alert(le_href)
+
+        eventFire(document.getElementById(le_href),'click');
+
+        {{--  --}}
     </script>
 
 

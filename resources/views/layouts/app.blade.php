@@ -286,17 +286,14 @@
 
                         <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/technique" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Spécificité Technique</span></a></li>
 
-                        
-
                         <!--Fin-->
-
 
                         <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow3(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Client</span></a></li>
 
 
-                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/admin/client/categorie" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Catégorie</span></a></li>
+                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients/categorie" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Catégorie</span></a></li>
 
-                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/admin/client/activite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Activité</span></a></li>
+                        <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients/activite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Activité</span></a></li>
 
                         <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Clients | Prospect</span></a></li>
 
@@ -579,8 +576,7 @@
 
             // body... 
         }
-
-
+        
         {{--  --}}
     </script>
     
