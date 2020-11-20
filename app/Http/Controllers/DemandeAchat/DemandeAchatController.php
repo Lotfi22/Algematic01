@@ -70,8 +70,9 @@ class DemandeAchatController extends Controller
 
                $now = Carbon::now()->format('d/m/Y');
 
-                if($testremise = 'yes')
+                if($testremise == 'yes')
               {
+                
                
                 $remise=$request->input('remise');
 
@@ -81,10 +82,11 @@ class DemandeAchatController extends Controller
 
               else
               {
-                DB::insert("insert into pre_achat (id_fournisseur,date_achat,num_facture_proformat,facture_proformat_photo) 
-                values('$fournisseur','$date','$facture','$photo') ");
+                
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,num_facture_proformat,facture_proformat_photo,remiseradio) 
+                values('$fournisseur','$date','$facture','$photo','$testremise') ");
               }
-              
+
      			    $pre_achat=DB::select("select * from pre_achat where  num_facture_proformat='$facture'");
 
      			    $id_pre_achat=$pre_achat[0]->id;
@@ -138,9 +140,7 @@ class DemandeAchatController extends Controller
 
     	$nature_doc_payments=DB::select("select * from nature_doc_payment");
 
-    	$produits=DB::select("select l.id_pre_achat,d.code_produit,l.id_produit,l.qte_demande,s.quantite,l.prix as nv_prix,s.prix
-    		from  ligne_produit l, produits d, stocks s
-    		where s.id_produit=l.id_produit and l.id_produit=d.id  ");
+    	$produits=DB::select("select * from stocks  ");
 
         $produits2=DB::select("select l.id_pre_achat,d.code_produit,l.id_produit,l.qte_demande,l.prix as nv_prix
             from  ligne_produit l, produits d

@@ -98,7 +98,7 @@
                             </button>
                           </div>
                                 
-                                  <h3 style="text-align: center;" ><B>Liste des Produits déja achetés</B></h3>
+                                  <h3 style="text-align: center;" ><B>Liste des Produits demandés</B></h3>
                                    <table  id="table_id" class="display" style="width:100%">
                                       <thead>
                                         <tr>
@@ -110,42 +110,36 @@
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        @foreach($produits as $prod)
-                                        @if($prod->id_pre_achat== $preachat->id)
+                                        @foreach($produits2 as $prod2)
+                                        @if($prod2->id_pre_achat== $preachat->id)
                                         <tr>
-                                           <td scope="row"><B>{{$prod->code_produit}}</B></td>
-                                           <td scope="row"><B>{{$prod->quantite}}</B></td>
-                                           <td scope="row"><B>{{$prod->qte_demande}}</B></td>
-                                           <td scope="row"><B>{{$prod->prix}}</B></td>
-                                           <td scope="row"><B>{{$prod->nv_prix}}</B></td>
+                                           <td scope="row"><B>{{$prod2->code_produit}}</B></td>
+                                           <td scope="row">
+                                              @foreach($produits as $prod)
+                                                 @if($prod->id_produit == $prod2->id_produit)
+                                                  <B>{{$prod->quantite}}</B>
+                                                 @endif
+                                               @endforeach
+                                           </td>
+                                           <td scope="row"><B>{{$prod2->qte_demande}}</B></td>
+                                           <td scope="row">
+                                              @foreach($produits as $prod)
+                                                 @if($prod->id_produit == $prod2->id_produit)
+                                                  <B>{{$prod->prix}}</B>
+                                                 @endif
+                                               @endforeach
+                                           </td>
+                                           <td scope="row"><B>{{$prod2->nv_prix}}</B></td>
                                         </tr>
                                         @endif
                                         @endforeach
                               </tbody>
                             </table>
-                            <hr>
-                             <h3 style="text-align: center;" ><B>Liste des Produits demandés</B> </h3>
-                                   <table  id="table_id" class="display" style="width:100%">
-                                      <thead>
-                                        <tr>
-                                          <th scope="col"><B>Code_Produit</B></th>
-                                          <th scope="col"><B>Qte Demandée</B></th>
-                                          <th scope="col"><B>Prix</B></th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        @foreach($produits2 as $prod)
-                                        @if($prod->id_pre_achat== $preachat->id)
-                                        <tr>
-                                           <td scope="row"><B>{{$prod->code_produit}}</B></td>
-                                           <td scope="row"><B>{{$prod->qte_demande}}</B></td>
-                                           <td scope="row"><B>{{$prod->nv_prix}}</B></td>
-                  
-                                        </tr>
-                                        @endif
-                                        @endforeach
-                              </tbody>
-                            </table>
+                             <h3 style="text-align: center;" ><B>Montant HT: {{$preachat->montant}}</B></h3>
+                             @if($preachat->remiseradio =='oui')
+                             <h3 style="text-align: center;" ><B>Remise: {{$preachat->remise}} %</B></h3>
+                             <h3 style="text-align: center;" ><B>Montant Avec remise: {{$preachat->montant - ($preachat->montant * $preachat->remise / 100)}}</B></h3>
+                             @endif
                                 <div class="modal-footer">
                             <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Fermer</
                           </div>
