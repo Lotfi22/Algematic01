@@ -74,11 +74,28 @@
                                   <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                
+                              </div>
+
+                              <div class="form-row">
+                                <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="yesCheck" name="RemiseYN" value="yes" checked  onclick="yesnoCheck()" >
+                                <label class="custom-control-label" for="yesCheck">Avec Remise</label>
+                              </div>
+
+                              <!-- Default checked -->
+                              <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="noCheck" name="RemiseYN" value="non" onclick="yesnoCheck()">
+                                <label class="custom-control-label" for="noCheck">Sans Remise</label>
+                              </div>
+                            </div>
+                              <div class="form-row">
+                                <div class="col-md-6 mb-3" id="myDIV">
                                       <label for="validationTooltip03"><B>Remise</B></label>
                                       <input type="text" name="remise" class="form-control" placeholder="3" required>
                                 </div>
                               </div>
+
 
                               
                 </div>

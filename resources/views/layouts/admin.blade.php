@@ -739,6 +739,20 @@
         //
     </script>
 
+     <script>
+            
+       function yesnoCheck() {
+            if (document.getElementById('yesCheck').checked) {
+                document.getElementById('myDIV').style.display = 'block';
+            } 
+            else if(document.getElementById('noCheck').checked) {
+                document.getElementById('myDIV').style.display = 'none';
+           }
+        }
+
+
+    </script>
+
 
     {{--  --}}
 </html>

@@ -37,13 +37,15 @@ class DemandeAchatController extends Controller
 
 
 
-     public function ADDDemandeAchat(Request $request)
+    public function ADDDemandeAchat(Request $request)
      {
 
-     	$facture=$request->input('facture');
+        $facture=$request->input('facture');
         $info=DB::select("select id from pre_achat where num_facture_proformat='$facture'");
        
-        
+        $testremise=$request->RemiseYN;
+
+
 
          if (count($info)>0) 
                {
@@ -55,23 +57,34 @@ class DemandeAchatController extends Controller
         else
                {    
 
-     				$file_extension= $request->photo->getClientOriginalExtension();
-                    $file_name=time().'.'.$file_extension;
-                    $path='images/DemandeAchat';
-                    $request->photo->move($path,$file_name);
+              $file_extension= $request->photo->getClientOriginalExtension();
+              $file_name=time().'.'.$file_extension;
+              $path='images/DemandeAchat';
+              $request->photo->move($path,$file_name);
 
-                    $facture=$request->input('facture');
-     				$date=$request->input('date');
-     			    $photo=$file_name;
-     			    $fournisseur=$request->input('fournisseur');
-     			    $remise=$request->input('remise');
-     			    
-			         $now = Carbon::now()->format('d/m/Y');
-
-     			    DB::insert("insert into pre_achat (id_fournisseur,date_achat,num_facture_proformat,facture_proformat_photo,remise) 
-     			    	values('$fournisseur','$date','$facture','$photo','$remise') ");
+              $facture=$request->input('facture');
+              $date=$request->input('date');
+              $photo=$file_name;
+              $fournisseur=$request->input('fournisseur');
 
 
+               $now = Carbon::now()->format('d/m/Y');
+
+                if($testremise = 'yes')
+              {
+               
+                $remise=$request->input('remise');
+
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,num_facture_proformat,facture_proformat_photo,remise) 
+                values('$fournisseur','$date','$facture','$photo','$remise') ");
+              }
+
+              else
+              {
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,num_facture_proformat,facture_proformat_photo) 
+                values('$fournisseur','$date','$facture','$photo') ");
+              }
+              
      			    $pre_achat=DB::select("select * from pre_achat where  num_facture_proformat='$facture'");
 
      			    $id_pre_achat=$pre_achat[0]->id;
