@@ -94,8 +94,9 @@ class DemandeVenteController extends Controller
         return redirect('/DemandeVente')->with('success','Demande Envoyée avec succée');
      }
 
-     public function DemandeVenteAttente()
-     {
+    public function DemandeVenteAttente()
+    
+    {
 
 
         $id = Auth::id();

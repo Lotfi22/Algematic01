@@ -308,13 +308,13 @@
                         <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshowProduit(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Produit</span></a></li>
 
 
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/categorie" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Catégorie_Prod</span></a></li>
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/categorie" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Catégorie</span></a></li>
 
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/familleProd" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Famille_Prod</span></a></li>
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/familleProd" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Famille</span></a></li>
 
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/sousFamille" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Sous_Famille_Prod</span></a></li>
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/sousFamille" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Sous_Famille</span></a></li>
 
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/propriete" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Propriétes_Produits</span></a></li>
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/propriete" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Propriétes</span></a></li>
 
                         <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/unite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Unité de Mesure</span></a></li>
 
