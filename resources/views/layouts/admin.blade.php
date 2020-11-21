@@ -265,7 +265,7 @@
 
                         <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/familleProd" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Famille</span></a></li>
 
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/sousFamille" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Sous_Famille</span></a></li>
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/sousFamille" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Sous Famille</span></a></li>
 
                         <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/propriete" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Propriétes</span></a></li>
 

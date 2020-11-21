@@ -44,7 +44,7 @@
 
                                             <label for="nom">Nom </label>
 
-                                            <textarea type="text" id="nomducategorie" cols="50" required name="nom" class="form-control" id="nom"></textarea>
+                                            <textarea id="nomducategorie" cols="50" required name="nom" class="form-control" id="nom"></textarea>
 
                                             {{--  --}}
                                         </div>
@@ -54,7 +54,7 @@
 
                                             <label for="num">Numéro</label>
 
-                                            <textarea type="text" id="numducategorie" cols="50" required name="num" class="form-control" id="num"></textarea>
+                                            <textarea id="numducategorie" cols="50" required name="num" class="form-control" id="num"></textarea>
 
                                             {{--  --}}
                                         </div>
@@ -65,7 +65,7 @@
 
                                             <label for="description">description </label>
 
-                                            <textarea type="text" id="descducategorie" rows="5" cols="2000" required name="description" class="form-control" id="description"></textarea>
+                                            <textarea id="descducategorie" rows="5" cols="2000" required name="description" class="form-control" id="description"></textarea>
                                         </div>
 
 
@@ -115,21 +115,19 @@
 
                     <div class="table-responsive">
 
-                        <table class="table">
+                        <table class="table table-striped display" id="table_id">
 
                             <thead>
 
                                 <tr>
 
-                                    <th>numéro</th>
+                                    <th>Numéro</th>
 
-                                    <th>nom</th>
+                                    <th>Nom</th>
+                                    
+                                    <th>Description</th>
 
-                                    <th style="visibility: hidden;">gggggg</th>
-
-                                    <th>description</th>
-
-                                    <th style="visibility: hidden;">ggggggggggggg</th>
+                                    <th>Action</th>
 
                                 </tr>
 
@@ -152,13 +150,14 @@
                                                 {{ $categories[$i]->num }}                                                
                                             </td>
 
-                                            <td colspan="2"> 
+                                            <td> 
 
                                                 <div class="form-group col-md-12 col-sm-12">
 
-                                                    <label>
-                                                        <textarea type="text" rows="4" name="nom" class=" form-control" id="nomcategorie{{$categories[$i]->id}}" value="{!! $categories[$i]->nom !!}">{!! $categories[$i]->nom !!}</textarea>
-                                                    </label>
+                                                    <p style="text-align: center;" id="parag{{$categories[$i]->id}}">{!! $categories[$i]->nom !!}</p>
+                                                    
+                                                    <textarea type="text" rows="4" name="nom" class=" form-control" id="nomcategorie{{$categories[$i]->id}}" value="{!! $categories[$i]->nom !!}">{!! $categories[$i]->nom !!}</textarea>
+                                                    
 
                                                     {{--  --}}
                                                 </div>                                                    
@@ -166,7 +165,9 @@
                                                 {{--  --}}
                                             </td>
 
-                                            <td colspan="2"> 
+                                            <td> 
+
+                                                <p style="text-align: center;" id="paragdesc{{$categories[$i]->id}}">{!! ($categories[$i]->description) !!}</p>
 
                                                 <textarea type="text" rows="5" class="form-control" name="description" id="description{{$categories[$i]->id}}" value="{!! ($categories[$i]->description) !!}">{!! ($categories[$i]->description) !!}</textarea> 
 
@@ -175,10 +176,8 @@
 
                                             <td> 
 
-                                                <button class="btn btn-success btn-sm" id="{{$categories[$i]->id}}" onclick="modifiercategorie(event,this)"> Enregistrer</button> 
-                                            </td>
-
-                                            <td> 
+                                                <button class="btn btn-success btn-sm" id="modiff{{$categories[$i]->id}}" onclick="lancer_modif(event,this)"> Modifier</button> 
+                                                <button class="btn btn-success btn-sm eng" id="{{$categories[$i]->id}}" onclick="modifiercategorie(event,this)"> Enregistrer</button> 
 
                                                 @if ($categories[$i]->id!=0)
 

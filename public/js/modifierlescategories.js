@@ -95,17 +95,17 @@ function ajoutercategorie(event,ojbet)
 
 	console.log(new_id);
 	
-	var to_append = '<tr class="alert alert-success" id="categorie'+new_id+'"><form>{{ csrf_field() }} <td>'+$num+'</td><td colspan="2"><div class="form-group col-md-12 col-sm-12">'
+	var to_append = '<tr class="alert alert-success" id="categorie'+new_id+'"><form>{{ csrf_field() }} <td>'+$num+'</td><td><div class="form-group col-md-12 col-sm-12">'
 
 	to_append+='<label><textarea type="text" rows="4" name="nom" class=" form-control" id="nomcategorie'+new_id+'" value="'+$nom+'">'+$nom+'</textarea></label>'
 
 	to_append+='</div></td>'
 
-	to_append+='<td colspan="2"> <textarea type="text" rows="5" class="form-control" name="description" id="description'+new_id+'" value="'+$desc+'">'+$desc+'</textarea></td>'
+	to_append+='<td> <textarea type="text" rows="5" class="form-control" name="description" id="description'+new_id+'" value="'+$desc+'">'+$desc+'</textarea></td>'
 
-	to_append+='<td><button class="btn btn-success btn-sm" id="'+new_id+'" onclick="modifiercategorie(event,this)"> Enregistrer</button></td>'
+	to_append+='<td><button class="btn btn-success btn-sm" id="'+new_id+'" onclick="modifiercategorie(event,this)"> Enregistrer</button>'
 
-	to_append+='<td><a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-'+new_id+'" style="color: #fff;"> supprimer</a><div id="myModalsup-'+new_id+'" class="modal fade" role="dialog">'
+	to_append+='<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-'+new_id+'" style="color: #fff;"> supprimer</a><div id="myModalsup-'+new_id+'" class="modal fade" role="dialog">'
 
 	to_append+='<div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Voulez-vous vraiment supprimer ce categorie</h4></div>'
 
@@ -156,4 +156,42 @@ function ajoutercategorie(event,ojbet)
 	});	
 
 	// body... 
+}
+
+$("textarea[type=text]").hide();
+$(".eng").hide();
+
+function lancer_modif(event,ojbet) 
+{
+
+	event.preventDefault();
+
+	$id=(ojbet.getAttribute('id'));
+
+	$id = $id.substr(6)
+	
+	id_desc = "#description"+$id;
+	id_nom = "#nomcategorie"+$id;
+
+	id_hide_1 = "#parag" + $id;
+	id_hide_2 = "#paragdesc" + $id;
+
+	$(id_hide_1).hide('400',function() 
+	{
+		$(id_hide_2).hide('400', function() 
+		{
+			$(id_nom).show('400', function() 
+			{
+				$(id_desc).show('400', function() 
+				{
+					$("#modiff"+$id).hide('400', function() 
+					{
+						$("#"+$id).show()		
+					});	
+				});			
+			});
+		});	
+	});
+
+	// body...
 }
