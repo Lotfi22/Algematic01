@@ -759,8 +759,6 @@
 
         var url1 = (window.location.href.substr(21));            
         
-        alert(url1);
-        
         function eventFire(el, etype){
 
             if (el.fireEvent) 
@@ -801,7 +799,6 @@
     
         le_href = le_href.toString();
 
-        alert(le_href)
 
         eventFire(document.getElementById(le_href),'click');
 
