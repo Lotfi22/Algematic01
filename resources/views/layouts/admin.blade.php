@@ -263,7 +263,11 @@
 
 
 
-                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAchat" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande d'Acaht</span></a></li>
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/Jointe" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Pièce Jointe</span></a></li>
+
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAchat" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Achat Bien</span></a></li>
+
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAchatPrestation" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Achat Préstation</span></a></li>
 
                         
                         <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande en Attente</span></a></li>
@@ -526,6 +530,36 @@
                 event.preventDefault();
             })
         });
+
+          /*achat prestation*/
+
+          $(document).ready(function() {
+            var dynamic_form2 =  $("#dynamic_form2").dynamicForm("#dynamic_form2","#plus55", "#minus55", {
+                limit:10,
+                formPrefix : "dynamic_form2",
+                normalizeFullForm : false
+            });
+
+            dynamic_form2.inject([{p_name: 'Hemant',quantity: '123',remarks: 'testing remark'},{p_name: 'Harshal',quantity: '123',remarks: 'testing remark'}]);
+
+            $("#dynamic_form2 #minus55").on('click', function(){
+                var initDynamicId = $(this).closest('#dynamic_form2').parent().find("[id^='dynamic_form2']").length;
+                if (initDynamicId === 2) {
+                    $(this).closest('#dynamic_form2').next().find('#minus55').hide();
+                }
+                $(this).closest('#dynamic_form2').remove();
+            });
+
+            $('form').on('submit', function(event){
+                var values = {};
+                $.each($('form').serializeArray(), function(i, field) {
+                    values[field.name] = field.value;
+                });
+                console.log(values)
+                event.preventDefault();
+            })
+        });
+
         /*Omar select multiple*/
         $(document).ready(function() {
     $('.js-example-basic-multiple').select2(
@@ -747,6 +781,48 @@
             } 
             else if(document.getElementById('noCheck').checked) {
                 document.getElementById('myDIV').style.display = 'none';
+           }
+        }
+
+        //
+    </script>
+
+     <script>
+            
+       function yesnoCheckAnonyme() {
+            if (document.getElementById('Fournisseur').checked) {
+                document.getElementById('fournisseuranonyme').style.display = 'block';
+            } 
+            else if(document.getElementById('Anonyme').checked) {
+                document.getElementById('fournisseuranonyme').style.display = 'none';
+           }
+        }
+
+        //
+    </script>
+
+     <script>
+            
+       function yesnoCheckJoint() {
+            if (document.getElementById('Joint').checked) {
+                document.getElementById('Monjoint').style.display = 'block';
+            } 
+            else if(document.getElementById('NonJoint').checked) {
+                document.getElementById('Monjoint').style.display = 'none';
+           }
+        }
+
+        //
+    </script>
+
+     <script>
+            
+       function yesnoCheckProduit() {
+            if (document.getElementById('YesProduit').checked) {
+                document.getElementById('dynamic_form').style.display = 'block';
+            } 
+            else if(document.getElementById('NoProduit').checked) {
+                document.getElementById('dynamic_form').style.display = 'none';
            }
         }
 

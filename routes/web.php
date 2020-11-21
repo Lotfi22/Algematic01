@@ -157,7 +157,7 @@ Route::get('/preachat', 'Achat\AchatController@index');
 
 
 
-/***************************** Achat ************************/
+/***************************** Achat Bien ************************/
 
 Route::get('/home/achats/DemandeAchat', 'DemandeAchat\DemandeAchatController@index');
 
@@ -168,6 +168,17 @@ Route::get('/home/achats/DemandeAttente', 'DemandeAchat\DemandeAchatController@D
 Route::post('/home/achats/RefuserDemande/{idpreachat}', 'DemandeAchat\DemandeAchatController@RefuserDemande');
 
 Route::post('/home/achats/ValiderPreAchat/{idpreachat}/{numfactureproformat}', 'DemandeAchat\DemandeAchatController@ValiderPreAchat');
+
+
+
+/***************************** Achat Prestation ************************/
+
+Route::get('/home/achats/DemandeAchatPrestation', 'DemandeAchat\DemandeAchatController@indexPrestation');
+
+
+
+
+
 
 
 Route::post('/home/achats/AddAchat/{idpreachat}', 'DemandeAchat\DemandeAchatController@AddAchat');

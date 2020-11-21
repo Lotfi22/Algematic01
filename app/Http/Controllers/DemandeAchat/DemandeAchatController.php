@@ -707,4 +707,42 @@ class DemandeAchatController extends Controller
 
      }
 
+
+      public function indexJoint()
+     {
+
+
+        dd("DemandeAchatController function indexJoint   pas encore (paramètre que Salim peut le change)");
+      $id = Auth::id();
+      $actuel = User::FindOrFail($id);
+
+      
+
+      $produits=DB::select("select * from produits");
+      $fournisseurs=DB::select("select * from fournisseurs");
+        
+
+      
+      return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs'));
+     }
+
+
+
+     public function indexPrestation()
+     {
+
+      $id = Auth::id();
+      $actuel = User::FindOrFail($id);
+
+      
+
+      $produits=DB::select("select * from produits");
+      $fournisseurs=DB::select("select * from fournisseurs");
+      $types=DB::select("select * from type_pieces");
+        
+
+      
+      return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types'));
+     }
+
 }
