@@ -56,7 +56,7 @@ class DepotController extends Controller
         DB::insert("insert into depots (nom,adresse,superficie) values('$depot_nom','$depot_adresse','$depot_superficie') ");
         
         
-        return redirect('/depot')->with('success','Le dépot est enregistré avec succée');
+        return redirect('/home/stocks/depot')->with('success','Le dépot est enregistré avec succée');
 
     }
 
@@ -91,7 +91,7 @@ class DepotController extends Controller
 
         
         DB::update("update depots d set nom='$depot_nom',adresse='$depot_adresse',superficie='$depot_superficie' where d.id='$idDepotModif'  ");
-        return redirect('/depot')->with('success','Le dépot a été Modifié avec succée');
+        return redirect('/home/stocks/depot')->with('success','Le dépot a été Modifié avec succée');
 
     }
 
@@ -99,7 +99,7 @@ class DepotController extends Controller
     {
         
         DB::delete("delete from depots  where id='$idDepotSupprimer'");
-        return redirect('/depot')->with('success','Le dépot a été supprimé avec succée');
+        return redirect('/home/stocks/depot')->with('success','Le dépot a été supprimé avec succée');
 
     }
 }

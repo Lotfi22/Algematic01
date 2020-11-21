@@ -25,40 +25,40 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 /***************************** Création d'un DEPOT (CRUD)************************/
-Route::get('/depot', 'Depot\DepotController@index');
+Route::get('/home/stocks/depot', 'Depot\DepotController@index');
 /*L'ajout d'un nouveau dépot*/
-Route::post('/AddDepot', 'Depot\DepotController@AddDepot');
+Route::post('/home/stocks/AddDepot', 'Depot\DepotController@AddDepot');
 /*Modification d'un  dépot*/
-Route::post('/ModifDepot/{idDepotModif}', 'Depot\DepotController@ModifDepot');
+Route::post('/home/stocks/ModifDepot/{idDepotModif}', 'Depot\DepotController@ModifDepot');
 /*Suppression d'un  dépot*/
-Route::post('/SupprimerDepot/{idDepotSupprimer}', 'Depot\DepotController@SupprimerDepot');
+Route::post('/home/stocks/SupprimerDepot/{idDepotSupprimer}', 'Depot\DepotController@SupprimerDepot');
 
 /***************************** Création d'un LOCAL (CRUD)************************/
-Route::get('/local', 'Local\LocalController@index');
+Route::get('/home/stocks/local', 'Local\LocalController@index');
 /*L'ajout d'un nouveau local*/
-Route::post('/AddLocal', 'Local\LocalController@AddLocal');
+Route::post('/home/stocks/AddLocal', 'Local\LocalController@AddLocal');
 /*Modification d'un  local*/
-Route::post('/ModifLocal/{idLocalModif}', 'Local\LocalController@ModifLocal');
+Route::post('/home/stocks/ModifLocal/{idLocalModif}', 'Local\LocalController@ModifLocal');
 /*Suppression d'un  local*/
-Route::post('/SupprimerLocal/{idLocalSupprimer}', 'Local\LocalController@SupprimerLocal');
+Route::post('/home/stocks/SupprimerLocal/{idLocalSupprimer}', 'Local\LocalController@SupprimerLocal');
 
 /***************************** Création d'un RAYON (CRUD)************************/
-Route::get('/rayon', 'Rayon\RayonController@index');
+Route::get('/home/stocks/rayon', 'Rayon\RayonController@index');
 /*L'ajout d'un nouveau rayon*/
-Route::post('/AddRayon', 'Rayon\RayonController@AddRayon');
+Route::post('/home/stocks/AddRayon', 'Rayon\RayonController@AddRayon');
 /*Modification d'un  rayon*/
-Route::post('/ModifRayon/{idRayonModif}', 'Rayon\RayonController@ModifRayon');
+Route::post('/home/stocks/ModifRayon/{idRayonModif}', 'Rayon\RayonController@ModifRayon');
 /*Suppression d'un  rayon*/
-Route::post('/SupprimerRayon/{idRayonSupprimer}', 'Rayon\RayonController@SupprimerRayon');
+Route::post('/home/stocks/SupprimerRayon/{idRayonSupprimer}', 'Rayon\RayonController@SupprimerRayon');
 
 /***************************** Création d'une Etagère (CRUD)************************/
-Route::get('/etagere', 'Etagere\EtagereController@index');
+Route::get('/home/stocks/etagere', 'Etagere\EtagereController@index');
 /*L'ajout d'un nouveau rayon*/
-Route::post('/AddEtagere', 'Etagere\EtagereController@AddEtagere');
+Route::post('/home/stocks/AddEtagere', 'Etagere\EtagereController@AddEtagere');
 /*Modification d'un  rayon*/
-Route::post('/ModifEtagere/{idEtagereModif}', 'Etagere\EtagereController@ModifEtagere');
+Route::post('/home/stocks/ModifEtagere/{idEtagereModif}', 'Etagere\EtagereController@ModifEtagere');
 /*Suppression d'un  rayon*/
-Route::post('/SupprimerEtagere/{idEtagereSupprimer}', 'Etagere\EtagereController@SupprimerEtagere');
+Route::post('/home/stocks/SupprimerEtagere/{idEtagereSupprimer}', 'Etagere\EtagereController@SupprimerEtagere');
 
 /***************************** Création d'un Fabricant (CRUD)************************/
 Route::get('/fabricant', 'Fabricant\FabricantController@index');
@@ -159,22 +159,22 @@ Route::get('/preachat', 'Achat\AchatController@index');
 
 /***************************** Achat ************************/
 
-Route::get('/DemandeAchat', 'DemandeAchat\DemandeAchatController@index');
+Route::get('/home/achats/DemandeAchat', 'DemandeAchat\DemandeAchatController@index');
 
-Route::post('/ADDDemandeAchat', 'DemandeAchat\DemandeAchatController@ADDDemandeAchat');
+Route::post('/home/achats/ADDDemandeAchat', 'DemandeAchat\DemandeAchatController@ADDDemandeAchat');
 
-Route::get('/DemandeAttente', 'DemandeAchat\DemandeAchatController@DemandeAttente');
+Route::get('/home/achats/DemandeAttente', 'DemandeAchat\DemandeAchatController@DemandeAttente');
 
-Route::post('/RefuserDemande/{idpreachat}', 'DemandeAchat\DemandeAchatController@RefuserDemande');
+Route::post('/home/achats/RefuserDemande/{idpreachat}', 'DemandeAchat\DemandeAchatController@RefuserDemande');
 
-Route::post('/ValiderPreAchat/{idpreachat}/{numfactureproformat}', 'DemandeAchat\DemandeAchatController@ValiderPreAchat');
+Route::post('/home/achats/ValiderPreAchat/{idpreachat}/{numfactureproformat}', 'DemandeAchat\DemandeAchatController@ValiderPreAchat');
 
 
-Route::post('/AddAchat/{idpreachat}', 'DemandeAchat\DemandeAchatController@AddAchat');
+Route::post('/home/achats/AddAchat/{idpreachat}', 'DemandeAchat\DemandeAchatController@AddAchat');
 
 /***************************** Ranger les Produits ************************/
 
-Route::post('/Ranger/{idpreachat}', 'DemandeAchat\DemandeAchatController@Ranger');
+Route::post('/home/achats/Ranger/{idpreachat}', 'DemandeAchat\DemandeAchatController@Ranger');
 
 
 /***************************** Client Walid ************************/
@@ -224,5 +224,5 @@ Route::post('/SupprimerArticle/{idArticleSupprimer}', 'DemandeVente\ArticleContr
 
 /***************************** Produit STOCK (CRUD)************************/
 
-Route::get('/ProduitStock', 'Produit\ProduitController@ProduitController');
+Route::get('/home/stocks/ProduitStock', 'Produit\ProduitController@ProduitController');
 

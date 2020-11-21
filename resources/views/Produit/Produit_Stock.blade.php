@@ -96,7 +96,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/Modifstock/{{$stock->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/stocks/Modifstock/{{$stock->id}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">

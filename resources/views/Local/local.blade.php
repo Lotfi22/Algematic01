@@ -44,7 +44,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/AddLocal" method="POST">
+                     <form class="needs-validation" novalidate action="/home/stocks/AddLocal" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
@@ -127,7 +127,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifLocal/{{$local->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/stocks/ModifLocal/{{$local->id}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
@@ -174,7 +174,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerLocal/{{$local->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/stocks/SupprimerLocal/{{$local->id}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">

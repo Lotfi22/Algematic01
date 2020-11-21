@@ -44,7 +44,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/AddRayon" method="POST">
+                     <form class="needs-validation" novalidate action="/home/stocks/AddRayon" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
@@ -119,7 +119,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifRayon/{{$rayon->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/stocks/ModifRayon/{{$rayon->id}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
@@ -161,7 +161,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerRayon/{{$rayon->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/stocks/SupprimerRayon/{{$rayon->id}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">

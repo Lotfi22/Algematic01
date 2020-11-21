@@ -44,7 +44,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/AddDepot" method="POST">
+                     <form class="needs-validation" novalidate action="/home/stocks/AddDepot" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
@@ -115,7 +115,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifDepot/{{$depot->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/stocks/ModifDepot/{{$depot->id}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
@@ -162,7 +162,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerDepot/{{$depot->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/stocks/SupprimerDepot/{{$depot->id}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">

@@ -55,7 +55,7 @@ class EtagereController extends Controller
         DB::insert("insert into etageres (id_rayon,num_etage,description) values('$etage_rayon','$etage_num','$etage_description') ");
         
         
-        return redirect('/etagere')->with('success','Etagère  enregistrée avec succée');
+        return redirect('/home/stocks/etagere')->with('success','Etagère  enregistrée avec succée');
 
     }
 
@@ -86,7 +86,7 @@ class EtagereController extends Controller
 
         
         DB::update("update etageres e set num_etage='$etage_num',description='$etage_description' where e.id='$idEtagereModif' ");
-        return redirect('/etagere')->with('success','Etagère Modifiée avec succée');
+        return redirect('/home/stocks/etagere')->with('success','Etagère Modifiée avec succée');
 
     }
 
@@ -94,7 +94,7 @@ class EtagereController extends Controller
     {
         
         DB::delete("delete from etageres  where id='$idEtagereSupprimer'");
-        return redirect('/etagere')->with('success','Etagère supprimée avec succée');
+        return redirect('/home/stocks/etagere')->with('success','Etagère supprimée avec succée');
     }
 
 }

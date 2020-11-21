@@ -56,7 +56,7 @@ class LocalController extends Controller
         DB::insert("insert into locals (id_depot,nom,description,superficie) values('$local_Depot','$local_nom','$local_description','$local_superficie') ");
         
         
-        return redirect('/local')->with('success','Le Local est enregistré avec succée');
+        return redirect('/home/stocks/local')->with('success','Le Local est enregistré avec succée');
 
     }
 
@@ -90,7 +90,7 @@ class LocalController extends Controller
 
         
         DB::update("update locals l set nom='$local_nom',description='$local_description',superficie='$local_superficie' where l.id='$idLocalModif'  ");
-        return redirect('/local')->with('success','Le Local a été Modifié avec succée');
+        return redirect('/home/stocks/local')->with('success','Le Local a été Modifié avec succée');
 
     }
 
@@ -98,7 +98,7 @@ class LocalController extends Controller
     {
         
         DB::delete("delete from locals  where id='$idLocalSupprimer'");
-        return redirect('/local')->with('success','Le local a été supprimé avec succée');
+        return redirect('/home/stocks/local')->with('success','Le local a été supprimé avec succée');
 
     }
 

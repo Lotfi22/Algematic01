@@ -242,31 +242,31 @@
 
                         <li> <a class="waves-effect waves-dark" href="/home" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">Profile</span></a></li>
 
-                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Stock</span></a></li>
+                        <li> <a id="stocks" class="waves-effect waves-dark" href="/home4" onclick="fshow(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Stock</span></a></li>
 
 
-                        <li class="acacher"> <a class="waves-effect waves-dark" href="/depot" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Dépot</span></a></li>
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/stocks/depot" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Dépot</span></a></li>
 
-                        <li class="acacher"> <a class="waves-effect waves-dark" href="/local" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Local</span></a></li>
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/stocks/local" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Local</span></a></li>
 
-                        <li class="acacher"> <a class="waves-effect waves-dark" href="/rayon" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Rayon</span></a></li>
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/stocks/rayon" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Rayon</span></a></li>
 
-                        <li class="acacher"> <a class="waves-effect waves-dark" href="/etagere" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Etagère</span></a></li>
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/stocks/etagere" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Etagère</span></a></li>
 
-                        <li class="acacher"> <a class="waves-effect waves-dark" href="/ProduitStock" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Produits</span></a></li>
+                        <li class="acacher"> <a class="waves-effect waves-dark" href="/home/stocks/ProduitStock" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Produits</span></a></li>
 
 
                         <!-- Fabricant_Fournisseur -->
 
 
-                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="DemandeAchat(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Achat</span></a></li>
+                        <li> <a id="achats" class="waves-effect waves-dark" href="/home4" onclick="DemandeAchat(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Achat</span></a></li>
 
 
 
-                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/DemandeAchat" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande d'Acaht</span></a></li>
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAchat" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande d'Acaht</span></a></li>
 
                         
-                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/DemandeAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande en Attente</span></a></li>
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande en Attente</span></a></li>
                         
                        
                         

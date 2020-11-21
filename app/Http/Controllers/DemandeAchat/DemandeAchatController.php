@@ -167,12 +167,12 @@ class DemandeAchatController extends Controller
 	 public function RefuserDemande(Request $request,$idpreachat)
 	 {
 
+      $commentaire=$request->commentaire;
+      DB::update(" update pre_achat p set p.commentaire='commentaire' where p.id='$idpreachat' ");
+      DB::update(" update pre_achat p set p.refuser='1' where p.id='$idpreachat' ");
+   
 
-    	DB::delete("delete from ligne_produit  where id_pre_achat='$idpreachat'");
-     	DB::delete("delete from pre_achat  where id='$idpreachat'");
-     	DB::delete("delete from produits  where id not in (select id_produit from arrivages) ");
-
-        return redirect('/DemandeAttente')->with('success','La demande a été refusé avec succé');
+        return redirect('/home/achats/DemandeAttente')->with('success','La demande a été refusé avec succé');
 
 	 }
 
@@ -634,7 +634,7 @@ class DemandeAchatController extends Controller
                     
                     DB::update("update pre_achat p set achat_done=1 where p.id='$idPreAchat' ");
                     
-                    return redirect('/DemandeAttente')->with('success','Achat enregistré avec succée');
+                    return redirect('/home/achats/DemandeAttente')->with('success','Achat enregistré avec succée');
 
                 }
        

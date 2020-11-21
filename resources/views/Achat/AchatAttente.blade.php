@@ -152,8 +152,12 @@
 
               <td>
 
-                @if($preachat->demande_valide == 0)
+                @if( ($preachat->demande_valide == 0) && ($preachat->refuser ==0) )
                   <button  class="btn-sm btn btn-dark">En_Attente</button>
+                @endif
+
+                @if($preachat->refuser == 1)
+                  <button  class="btn-sm btn btn-danger">Refusée</button>
                 @endif
 
                  @if($preachat->ranger ==1)
@@ -175,7 +179,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/Ranger/{{$preachat->id}}" method="POST" enctype="multipart/form-data">
+                     <form class="needs-validation" novalidate action="/home/achats/Ranger/{{$preachat->id}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field()}}
                         
                           
@@ -252,7 +256,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/AddAchat/{{$preachat->id}}" method="POST" enctype="multipart/form-data">
+                     <form class="needs-validation" novalidate action="/home/achats/AddAchat/{{$preachat->id}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field()}}
                         
                           
@@ -341,13 +345,27 @@
 
              
               @endif
-              @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0))
+              @if( ($privilege ?? '' == 1) )
               <td>
-                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#valider{{$preachat->id}}">
+                    
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Validation
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0))
+            <button type="button" class="dropdown-item"  data-toggle="modal" data-target="#valider{{$preachat->id}}">
                       Valider
-                    </button>
+            </button>
+            @endif
+            @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0) )
+             <button type="button" class="dropdown-item"  data-toggle="modal" data-target="#exampleModalSUPPRIMERpreachat{{$preachat->id}}">
+                       Refuser
+            </button>
+            @endif
 
-                    <!-- Boutom d'Ajouter une Maman -->
+          </div>
+          <!-- Modal de validation -->
                     <div class="modal fade" id="valider{{$preachat->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -357,7 +375,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ValiderPreAchat/{{$preachat->id}}/{{$preachat->num_facture_proformat}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/achats/ValiderPreAchat/{{$preachat->id}}/{{$preachat->num_facture_proformat}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               
@@ -369,7 +387,42 @@
                         </div>
                       </div>
                     </div>
-                </td>
+
+               
+
+        </div>
+          <!-- Modal de refus -->
+
+                    <div class="modal fade" id="exampleModalSUPPRIMERpreachat{{$preachat->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Voulez vous vraiment Refuser</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                     <form class="needs-validation" novalidate action="/home/achats/RefuserDemande/{{$preachat->id}}" method="POST">
+                        {{ csrf_field()}}
+
+                            <div class="modal-body">
+                    
+                              <div class="col-md-6 mb-3">
+                                  <label for="validationTooltip03"><B>Motif refus</B></label>
+                                  <input type="text" name="commentaire"class="form-control" placeholder="Prix Invalide" required>
+                             </div>
+
+                        </div>
+                          
+                          <div class="modal-footer">
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn-sm btn btn-primary">Refuser</button>
+                          </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+    </td>
                 @endif
 
                 @if($preachat->demande_valide==1 )
@@ -389,7 +442,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ValiderPreAchat/{{$preachat->id}}/{{$preachat->num_facture_proformat}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/achats/ValiderPreAchat/{{$preachat->id}}/{{$preachat->num_facture_proformat}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               
@@ -415,35 +468,7 @@
 
 
 
-                @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0) )
-                 <td>
-                    <button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERpreachat{{$preachat->id}}">
-                       Refuser
-                    </button>
 
-                    <!-- Boutom dAjouter une Maman -->
-                    <div class="modal fade" id="exampleModalSUPPRIMERpreachat{{$preachat->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Voulez vous vraiment Refuser</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                     <form class="needs-validation" novalidate action="/RefuserDemande/{{$preachat->id}}" method="POST">
-                        {{ csrf_field()}}
-                          
-                          <div class="modal-footer">
-                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn-sm btn btn-primary">Refuser</button>
-                          </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                </td>
-                @endif
             </tr>
             @endforeach
           </tbody>

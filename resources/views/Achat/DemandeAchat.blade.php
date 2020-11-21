@@ -33,7 +33,7 @@
              
 
 
-                <form class="needs-validation" novalidate action="/ADDDemandeAchat/" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate action="/home/achats/ADDDemandeAchat/" method="POST" enctype="multipart/form-data">
 
                         {{ csrf_field()}}
 
