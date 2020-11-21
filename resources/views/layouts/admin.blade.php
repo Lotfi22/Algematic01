@@ -120,7 +120,7 @@
 
                         <!-- Logo icon --><b>
 
-                            <img width="50%" src="../nabila/assets/images/algematic.png" alt="homepage" class="dark-logo" />
+                            <img width="50%" src="{{ asset('../nabila/assets/images/algematic.png') }}" alt="homepage" class="dark-logo" />
 
                         </b>
 
@@ -190,7 +190,7 @@
 
                             <a class="nav-link waves-effect waves-dark" onclick="event.preventDefault();
 
-                                document.getElementById('logout-form').submit();" href="{{ url('/logout') }}"><img src="../nabila/assets/images/1.jpg" alt="user" class="profile-pic" />
+                                document.getElementById('logout-form').submit();" href="{{ url('/logout') }}"><img src="{{ asset('../nabila/assets/images/1.jpg') }}" alt="user" class="profile-pic" />
 
                             </a>
 
