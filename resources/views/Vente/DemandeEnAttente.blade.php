@@ -135,11 +135,6 @@
 
                             <!--  -->
                         </td>
-                        
-                        
-                 			
-                        
-
 
                         <!--  -->
                     </tr>
@@ -203,8 +198,6 @@
 
 
     {{-- Les modals --}}
-
-
 
     @foreach($ventes as $vente)
 
