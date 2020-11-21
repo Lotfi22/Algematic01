@@ -43,7 +43,7 @@
                     <th scope="col"><B>Statut</B></th>
                   
                     @if($privilege ?? '' == 1)
-                        <th scope="col" style="text-align: center;"><B>Approbation</B></th>
+                        <th scope="col" style="text-align: center;"><B>Action</B></th>
                     @endif
 
                     {{--  --}}
@@ -64,14 +64,14 @@
                         
                         <td>
 
-                            <button type="button" class="btn-sm btn btn-info" data-toggle="modal" data-target="#infosClient{{$vente->preVente}}">
+                            <button type="button" class="{{-- btn-sm --}} btn btn-info" data-toggle="modal" data-target="#infosClient{{$vente->preVente}}">
                                 Informations  
                             </button>
                         </td>
                         
                         <td>
                             
-                            <button type="button" class="btn-sm btn btn-warning" data-toggle="modal" data-target="#InfosDemande{{$vente->preVente}}">
+                            <button type="button" class="{{-- btn-sm --}} btn btn-warning" data-toggle="modal" data-target="#InfosDemande{{$vente->preVente}}">
                                Infos
                             </button>
 
@@ -81,12 +81,15 @@
                         <td>
                             @if($vente->statut_validation == 0)
                             	
-                            	<button type="button" class="btn-sm btn btn-success" >En Cours</button>
-                            @endif
-
-                            @if($vente->statut_validation == 1)
+                            	<p id="encours" style="text-align: center;" class="alert alert-primary">En Cours . . . . .</p>
+                            
+                             @elseif($vente->statut_validation == 1)
                             		                                    
-                                <button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#Commentaire{{$vente->preVente}}"> Demanade Refusée </button>
+                                <p style="text-align: center;" class="alert alert-danger">Refusée</p>
+                             
+                             @else
+
+                                <p style="text-align: center;" class="alert alert-success" data-toggle="modal" data-target="#Commentaire{{$vente->preVente}}">Approuvée</p>
 
                                 <!-- -->    
                             @endif
@@ -99,8 +102,32 @@
                             @if( ($privilege ?? '' == 1) && ($vente->statut_validation == 0 ) )
                             
                                 
-                                <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#valider{{$vente->preVente}}">
+                                <button type="button" class="{{-- btn-sm --}} btn btn-success" data-toggle="modal" data-target="#valider{{$vente->preVente}}">
                                     Valider
+                                </button>
+
+                                <!--  -->
+                            
+
+                             @elseif(  ($vente->statut_validation == 2 ) )
+                                <button type="button" class="{{-- btn-sm --}} btn btn-primary" data-toggle="modal" data-target="#FP{{$vente->preVente}}">
+                                  Editer FP
+                                </button>
+
+                                <!--  -->
+                            
+
+                             @elseif( ($privilege ?? '' == 1) && ($vente->statut_validation == 0) )
+
+                                <button type="button" class="{{-- btn-sm --}} btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERvente{{$vente->preVente}}">
+                                   Refuser
+                                </button>
+
+                             @else   
+
+                                <button type="button" class="{{-- btn-sm --}} btn btn-warning" data-toggle="modal" data-target="#Commentaire{{$vente->preVente}}">
+                                   
+                                   Voir détails
                                 </button>
 
                                 <!--  -->
@@ -109,39 +136,10 @@
                             <!--  -->
                         </td>
                         
-                        <td>
+                        
                  			
-                            @if(  ($vente->statut_validation == 2 ) )
-                                <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#FP{{$vente->preVente}}">
-                                  Editer FP
-                                </button>
+                        
 
-                                <!--  -->
-                            @endif
-
-                            @if( ($privilege ?? '' == 1) && ($vente->statut_validation == 0) )
-
-                                <button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERvente{{$vente->preVente}}">
-                                   Refuser
-                                </button>
-
-                                <!--  -->
-                            @endif
-
-                            <!--  -->
-                        </td>
-
-                        <td>
-                            
-                            @if($vente->statut_validation == 1)
-                                
-                                <button type="button" class="btn-sm btn btn-dark" >Invalide</button>
-                                
-                                <!--  --> 	
-                            @endif
-                            
-                            <!--  -->
-                        </td>
 
                         <!--  -->
                     </tr>
@@ -235,8 +233,8 @@
                             </div>
                             
                             <div class="modal-footer">
-                                <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                <button type="submit" class="btn-sm btn btn-primary">Valider</button>
+                                <button type="button" class="{{-- btn-sm --}} btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="{{-- btn-sm --}} btn btn-success">Valider</button>
                             </div>
                         </div>
                     </form>
@@ -272,9 +270,9 @@
                         
                         <div class="modal-footer">
                             
-                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="button" class="{{-- btn-sm --}} btn btn-secondary" data-dismiss="modal">Annuler</button>
 
-                            <button type="submit" class="btn-sm btn btn-primary"  >Valider</button>
+                            <button type="submit" class="{{-- btn-sm --}} btn btn-primary">Valider</button>
                         </div>
                     </form>
                 </div>
@@ -435,7 +433,7 @@
                     </table>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="{{-- btn-sm --}} btn btn-secondary" data-dismiss="modal">Fermer</button>
                     </div>
 
                     {{--  --}}
@@ -476,14 +474,31 @@
                         </div>
               
                         <div class="modal-footer">
-                        <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn-sm btn btn-primary">Refuser</button>
+                        <button type="button" class="{{-- btn-sm --}} btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="{{-- btn-sm --}} btn btn-primary">Refuser</button>
                       </div>
                     </form>
                 </div>
             </div>
         </div>
     @endforeach
+
+
+    <script type="text/javascript">
+        
+        function clin() 
+        {
+            
+            $("#encours")./*parent().parent().*/fadeToggle('slow');
+
+            clin();
+            // 
+        }
+
+        clin();
+
+        {{----}}
+    </script>
 
 
     {{--  --}}
