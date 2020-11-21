@@ -111,21 +111,7 @@
                                     <button type="button" class="{{-- btn-sm --}} col-md-3 btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERvente{{$vente->preVente}}">
                                        Refuser
                                     </button>
-                                    
-                                    {{--
-                                    <select class="form-control col-md-7">
-                                        
-                                        <option>        </option>
-
-                                        <option style="font-size: 1.1em;" class="alert alert-success" data-toggle="modal" data-target="#valider{{$vente->preVente}}">Valider</option> 
-
-                                        <option style="font-size: 1.1em;" class="alert alert-danger"  data-toggle="modal" data-target="#exampleModalSUPPRIMERvente{{$vente->preVente}}">Refuser</option> 
-                                        <!--  -->                                        
-                                    </select>
-
-                                    --}}
-                                    <!--  -->
-                                
+                                                                    
 
                                  @elseif(  ($vente->statut_validation == 2 ) )
                                     <button type="button" class="{{-- btn-sm --}} col-md-7 btn btn-outline-info" data-toggle="modal" data-target="#FP{{$vente->preVente}}">

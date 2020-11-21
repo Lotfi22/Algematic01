@@ -139,7 +139,7 @@ class DemandeVenteController extends Controller
        
         DB::update("update pre_ventes p set statut_validation= 2 where p.id='$idPreVente' ");
 
-        return redirect('/DemandeVenteAttente')->with('success','La demande de Vente a été Validé avec succé');
+        return back()->with('success','La demande de Vente a été Validé avec succé');
     }
 
 

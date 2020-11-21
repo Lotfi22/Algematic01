@@ -107,8 +107,8 @@
 
             <div class="modal-footer">
                    
-                <button type="submit" class="btn-sm btn btn-primary">Valier La Demande</button>
-                <a class="btn-sm btn btn-dark" href="/home" aria-expanded="false">Annuler</span></a>
+                <button type="submit" class="btn btn-outline-primary col-md-6">Valider La Demande</button>
+                <a class="btn btn-outline-danger col-md-6" href="" aria-expanded="false">Annuler</span></a>
             </div>
         </form>
     </div>    
