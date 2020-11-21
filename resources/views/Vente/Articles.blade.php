@@ -147,8 +147,8 @@
         <th scope="col"><B>description</B></th>
         <th scope="col"><B>Infos</B></th>
         <th scope="col"><B>Date</B></th>
-        <th scope="col"><B>Modifier</B></th>
-        <th scope="col"><B>Supprimer</B></th>
+        <th style="text-align: center;"><B>Plus</B></th>
+        {{--  --}}
     </tr>
 </thead>
 
@@ -258,8 +258,8 @@
         </div>
         </div>
         </div>
-        </td>
-        <td><button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERarticle{{$article->id}}">
+        
+        <button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERarticle{{$article->id}}">
         Supprimer
         </button>
 

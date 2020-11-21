@@ -273,16 +273,16 @@
 
                         <!--Fin-->
 
-                         <li> <a class="waves-effect waves-dark" href="/home4" onclick="DemandeVente(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Vente</span></a></li>
+                         <li> <a id="vente" class="waves-effect waves-dark" href="/home4" onclick="DemandeVente(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Vente</span></a></li>
 
 
 
-                         <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/article" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Article de Vente</span></a></li>
+                         <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/article" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Article de Vente</span></a></li>
 
-                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/DemandeVente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande de Vente</span></a></li>
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande de Vente</span></a></li>
 
                         
-                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/DemandeVenteAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Ventes</span></a></li>
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVenteAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Ventes</span></a></li>
                         
                        
                         
