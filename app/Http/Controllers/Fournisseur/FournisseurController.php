@@ -38,48 +38,86 @@ class FournisseurController extends Controller
             'adresse' => 'required|max:800',
             'activite' => 'required|max:500',
             'tele' => 'required|regex:/(0)[0-9]{9}/',
-            'fax' => 'required|regex:/(0)[0-9]{8}/',
-            'mobile' => 'required|regex:/(0)[0-9]{8}/',
-            'email' => 'required|email',
-            'nif' => 'required|regex:/[0-9]{10}/',
-            'nis' => 'required|regex:/[0-9]{10}/',
-            'rc' => 'required|max:30',
-            'num_art_imp' => 'required|max:30',
+        
             ]);
 
     	
     	$tele=$request->input('tele');
         $info=DB::select("select * from fournisseurs where tele='$tele'");
        
-        
+        $TestAnonyme=$request->AnonymeYN;
+
+        $TestFabricant=$request->FabricantYN;
+
+
 
          if (count($info)>0) 
                {
                    
-                session()->flash('notif' , ' Erreur Oupss Cet Fournisseur  existe déja  !!! ');
+                session()->flash('notif' , ' Erreur Oupss Ce numéro de télephone existe déja  !!! ');
 
                 return redirect()->back(); 
                }
 		else
 			   {
-					$fournisseur_nom=$request->input('nom');
-					$fournisseur_adresse=$request->input('adresse');
-					$fournisseur_activite=$request->input('activite');
-					$fournisseur_tele=$request->input('tele');
-					$fournisseur_fax=$request->input('fax');
-					$fournisseur_mobile=$request->input('mobile');
-					$fournisseur_email=$request->input('email');
-					$fournisseur_nif=$request->input('nif');
-					$fournisseur_nis=$request->input('nis');
-					$fournisseur_rc=$request->input('rc');
-					$fournisseur_num_art_imp=$request->input('num_art_imp');
-			        
-			        //$depot->save();
 
-			        DB::insert("insert into fournisseurs (nom,adresse,activite,tele,fax,mobile,email,nif,nis,rc,num_art_imp) values('$fournisseur_nom','$fournisseur_adresse','$fournisseur_activite','$fournisseur_tele','$fournisseur_fax','$fournisseur_mobile','$fournisseur_email','$fournisseur_nif','$fournisseur_nis','$fournisseur_rc','$fournisseur_num_art_imp') ");
-			        
-			        
-			        return redirect('/fournisseur')->with('success','Le Fournisseur est enregistré avec succée');
+
+                    if($TestAnonyme == 'yes')
+                    {
+                        $fournisseur_nom=$request->input('nom');
+                        $fournisseur_adresse=$request->input('adresse');
+                        $fournisseur_activite=$request->input('activite');
+                        $fournisseur_tele=$request->input('tele');
+
+
+                         DB::insert("insert into fournisseurs (nom,adresse,activite,tele,anonyme) values('$fournisseur_nom','$fournisseur_adresse','$fournisseur_activite','$fournisseur_tele','$TestAnonyme') ");
+                    }
+
+                    else
+                    {
+
+                        if($TestFabricant == 'yes')
+
+                        {
+        					$fournisseur_nom=$request->input('nom');
+        					$fournisseur_adresse=$request->input('adresse');
+        					$fournisseur_activite=$request->input('activite');
+        					$fournisseur_tele=$request->input('tele');
+        					$fournisseur_fax=$request->input('fax');
+        					$fournisseur_mobile=$request->input('mobile');
+        					$fournisseur_email=$request->input('email');
+        					$fournisseur_nif=$request->input('nif');
+        					$fournisseur_nis=$request->input('nis');
+        					$fournisseur_rc=$request->input('rc');
+        					$fournisseur_num_art_imp=$request->input('num_art_imp');
+                            $fournisseur_marque=$request->input('marque');
+        			        
+        			        //$depot->save();
+
+        			        DB::insert("insert into fournisseurs (nom,adresse,activite,tele,fax,mobile,email,nif,nis,rc,num_art_imp,fabricant,marque) values('$fournisseur_nom','$fournisseur_adresse','$fournisseur_activite','$fournisseur_tele','$fournisseur_fax','$fournisseur_mobile','$fournisseur_email','$fournisseur_nif','$fournisseur_nis','$fournisseur_rc','$fournisseur_num_art_imp','$TestFabricant','$fournisseur_marque') ");
+                        }
+                        else
+                        {
+                            $fournisseur_nom=$request->input('nom');
+                            $fournisseur_adresse=$request->input('adresse');
+                            $fournisseur_activite=$request->input('activite');
+                            $fournisseur_tele=$request->input('tele');
+                            $fournisseur_fax=$request->input('fax');
+                            $fournisseur_mobile=$request->input('mobile');
+                            $fournisseur_email=$request->input('email');
+                            $fournisseur_nif=$request->input('nif');
+                            $fournisseur_nis=$request->input('nis');
+                            $fournisseur_rc=$request->input('rc');
+                            $fournisseur_num_art_imp=$request->input('num_art_imp');
+                            
+                            
+                            //$depot->save();
+
+                            DB::insert("insert into fournisseurs (nom,adresse,activite,tele,fax,mobile,email,nif,nis,rc,num_art_imp,fabricant,marque) values('$fournisseur_nom','$fournisseur_adresse','$fournisseur_activite','$fournisseur_tele','$fournisseur_fax','$fournisseur_mobile','$fournisseur_email','$fournisseur_nif','$fournisseur_nis','$fournisseur_rc','$fournisseur_num_art_imp') ");   
+                        }
+    			     }   
+    			        
+    			        return redirect('/fournisseur')->with('success','Le Fournisseur est enregistré avec succée');
 
 				}
        
