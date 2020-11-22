@@ -386,7 +386,7 @@
                             <tr>    
                                 <th scope="col"><B>Référance</B></th>
                                 <th scope="col"><B>Description</B></th>
-                                <th scope="col"><B>Prix_D'achat</B></th>
+                                <th scope="col"><B>Prix d'achat</B></th>
                                 <th scope="col"><B>Prix U.HT</B></th>
                                 <th scope="col"><B>Quantité</B></th>
                                 <th scope="col"><B>Montant HT</B></th>
@@ -416,11 +416,40 @@
                         </tbody>
                     </table>
 
-                    <div style="margin-left: 70%;">
+                    <div style="margin-left: 60%;">
 
-                        <b> Montant Total HT : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant) !!}</B></b>
-                        <b> Montant TVA 19% : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant*0.19) !!}</B></b>
-                        <b> Total TTC : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant*1.19) !!}</B></b>
+                        <p style="font-weight: bold;">
+                            <b> Montant Total HT : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant) !!}</B></b>
+                        </p>                            
+                        
+                        @if($vente->taux_remise_spec != 0)
+
+                            <p style="font-weight: bold;"><b> Remise ({!! $vente->taux_remise_spec !!}%) : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant*$vente->taux_remise_spec/100) !!}</B>
+                            </b></p>
+
+                            <p style="font-weight: bold;"><b> Montant aprés Remise : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant*(1-($vente->taux_remise_spec/100))) !!}</B>
+                            </b></p>
+
+                            <p style="font-weight: bold;">
+                                <b> Montant TVA 19% : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant*(1-($vente->taux_remise_spec/100))*0.19) !!}</B>
+                                </b>
+                            </p>                            
+
+                         @else
+
+                            <p style="font-weight: bold;">
+                                <b> Montant TVA 19% : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant*0.19) !!}</B>
+                                </b>
+                            </p>                            
+
+                            {{--  --}}
+                        @endif
+
+                        
+                        <p style="font-weight: bold;">
+                            <b> Total TTC : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant*1.19) !!}</B>
+                            </b>
+                        </p>    
 
                     </div>
 

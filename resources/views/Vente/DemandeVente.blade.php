@@ -34,8 +34,6 @@
         @endif
       
         <h1 style=" text-align: center; " ><B>Demande De Vente</B></h1>     
-        
-        <br>
 
         <form class="needs-validation" novalidate action="/AddDemandeVente" method="POST" enctype="multipart/form-data">
 
@@ -48,6 +46,31 @@
                     <div class="col-md-12 mb-6" >
             
                         <div class="form-group">
+
+                            <div class="custom-control custom-radio col-md-4">
+                                
+                                <input type="radio" class="custom-control-input" id="produit11" name="type_vente">
+                                
+                                <label class="custom-control-label" for="produit11">Produit</label>
+                            </div>             
+
+                            <div class="custom-control custom-radio col-md-4">
+                                
+                                <input type="radio" class="custom-control-input" id="article" name="type_vente">
+                                
+                                <label class="custom-control-label" for="article">Article</label>
+                            </div>             
+
+                            <div class="custom-control custom-radio col-md-3">
+                                
+                                <input type="radio" class="custom-control-input" id="Préstation" name="type_vente">
+                                
+                                <label class="custom-control-label" for="Préstation">Préstation</label>
+                            </div>             
+
+
+
+                            <br><br>
                         
                             <label  for="exampleFormControlSelect1"><B >Client</B></label>
                             
