@@ -112,6 +112,8 @@ $.fn.dynamicForm = function (selectedTarget, plusSelector, minusSelector, option
 	 * On cloning make the form under the clone dynamic
 	 * @param {Object} clone
 	 */
+
+	 
 	function dynamiseSubClones(clone){
 		$(subDynamicForm).each(function(){
 			var plus = this.getPlusSelector(), minus = this.getMinusSelector(), options = this.getOptions(), selector = this.selector;

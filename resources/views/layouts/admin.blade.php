@@ -791,10 +791,12 @@
             
        function yesnoCheckAnonyme() {
             if (document.getElementById('Fournisseur').checked) {
-                document.getElementById('fournisseuranonyme').style.display = 'block';
+                document.getElementById('fournisseurdeclare').style.display = 'block';
+                document.getElementById('fournisseuranonyme').style.display = 'none';
             } 
             else if(document.getElementById('Anonyme').checked) {
-                document.getElementById('fournisseuranonyme').style.display = 'none';
+                document.getElementById('fournisseuranonyme').style.display = 'block';
+                document.getElementById('fournisseurdeclare').style.display = 'none';
            }
         }
 
@@ -817,7 +819,8 @@
 
      <script>
             
-       function yesnoCheckProduit() {
+       function yesnoCheckProduit() 
+       {
             if (document.getElementById('YesProduit').checked) {
                 document.getElementById('dynamic_form').style.display = 'block';
             } 
@@ -829,6 +832,7 @@
         //
     </script>
 
+     
 
 
     <script>

@@ -34,7 +34,7 @@
              
 
 
-                <form class="needs-validation" novalidate action="/home/achats/ADDDemandeAchatPrestation/" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate action="/home/achats/AddDemandeAchatPrestation/" method="POST" enctype="multipart/form-data">
 
                         {{ csrf_field()}}
 
@@ -57,7 +57,7 @@
                             <br>
 
 
-                            <div class="form-row" id="fournisseuranonyme">
+                            <div class="form-row" id="fournisseurdeclare">
                                <div class="col-md-12 mb-6" >
                                   <div class="form-group">
                                     <label  for="exampleFormControlSelect1"><B >Fournisseur</B></label>
@@ -71,6 +71,22 @@
 
                             </div> 
                           </div>
+
+                          <div class="form-row" id="fournisseuranonyme">
+                               <div class="col-md-12 mb-6" >
+                                  <div class="form-group">
+                                    <label  for="exampleFormControlSelect1"><B >Fournisseur Anonyme</B></label>
+                                    <select name="anonyme" class="form-control" id="exampleFormControlSelect1">
+                                     @foreach($fournisseurs as $fournisseur)
+                                     <option value="{{$fournisseur->id}}"> {{  $fournisseur->nom  }} </option>
+                                      @endforeach
+                                     
+                                    </select>
+                                  </div>
+
+                            </div> 
+                          </div>
+
                           <hr>
 
                           <div class="form-row">
@@ -81,78 +97,92 @@
                                   <input type="text" name="prestation"class="form-control" placeholder="Application Web" required>
 
                             </div> 
+
                           </div>
+
                           <br>
                           <hr>
-              <h4 ><B>Ajouter des pièces jointes</B></h4>
-                            
-                             <div class="form-row">
-                                  <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" id="Joint" name="joint" value="yes" checked  onclick="yesnoCheckJoint()" >
-                                  <label class="custom-control-label" for="Joint">Oui</label>
-                                </div>
 
-                                <!-- Default checked -->
-                                <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" id="NonJoint" name="joint" value="non" onclick="yesnoCheckJoint()">
-                                  <label class="custom-control-label" for="NonJoint">Non</label>
-                                </div>
-                            </div>
-                            <br> 
+                       <h4 ><B>Ajouter des pièces jointes</B></h4>
+      
+       <div class="form-row">
+            
+            <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="Joint" name="joint" value="yes" checked  onclick="yesnoCheckJoint()" >
+            <label class="custom-control-label" for="Joint">Oui</label>
+          </div>
+
+          <!-- Default checked -->
+          <div class="custom-control custom-radio">
+            
+            <input type="radio" class="custom-control-input" id="NonJoint" name="joint" value="non" onclick="yesnoCheckJoint()">
+            <label class="custom-control-label" for="NonJoint">Non</label>
+        
+          </div>
+
+      </div>
+      <br> 
 
                            
-          <div class="form-row" id="Monjoint">
+      <div class="form-row" id="Monjoint">
 
 
-              <div class="form-group items" id="dynamic_form2">
+          <div class="form-group items" id="dynamic_form2">
 
-                      <div class="row">
-                      <div class="button-group" style="padding: 27px;">
-                              <a href="javascript:void(0)" class="btn btn-primary" id="plus55"><i class="fa fa-plus"></i></a>
-                              <a href="javascript:void(0)" class="btn btn-danger" id="minus55"><i class="fa fa-minus"></i></a>
-                          </div>
-
-                      <div class="form-row">
-
-                          <div class="col-md-6 mb-3">
-                              <label class="small mb-1" for="inputFirstName">Type Pièce: </label>
-                              <select class='form-control produits' class="js-example-basic-single" name='typepiece' id="typepiece" >
-                                  <option value=""></option>
-                                  @foreach($types as $type)
-                                  <option  value="{{$type->id}}">
-                                      {{$type->type}} 
-                                  </option>
-                                  @endforeach 
-                              </select>   
-                          </div>
-
-                          <div class="col-md-6 mb-3">
-                              <label class="small mb-1" for="inputEmailAddress">Numéro/Dénomination</label>
-                              <input type="text" class="form-control quantites" name="quantite" id="quantite" placeholder="2";>
-                          </div>
-
+                  <div class="row">
+                  <div class="button-group" style="padding: 27px;">
+                          <a href="javascript:void(0)" class="btn btn-primary" id="plus55"><i class="fa fa-plus"></i></a>
+                          <a href="javascript:void(0)" class="btn btn-danger" id="minus55"><i class="fa fa-minus"></i></a>
                       </div>
 
-                      <div class="form-row" style="margin-left: 100px">
+                  <div class="form-row">
 
-                                
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip03">Date pièce</label>
-                                  <input type="date" name="date"class="form-control" placeholder="02/05/2018" required>
-                                </div>
-
-                               <div class="col-md-6 mb-3">
-                                  <label for="exampleFormControlFile1">Pièce Jointe</label>
-                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
-                                </div>
-
-                          
-
+                      <div class="col-md-3">
+                          <label class="small mb-1" for="inputFirstName">Type Pièce: </label>
+                          <select class='form-control produits' class="js-example-basic-single" name='typepiece' id="typepiece" >
+                              <option value=""></option>
+                              @foreach($types as $type)
+                              <option id="{{$type->type}}"  value="{{$type->id}}">
+                                  <B>{{$type->type}} </B>
+                              </option>
+                              @endforeach 
+                          </select>   
                       </div>
+
+                          <div class="col-md-3">
+                              <label class="small mb-1" for="inputEmailAddress">Information du Produit : </label>
+                              <input type="text" class="form-control quantites" name="facture" id="facture" placeholder="FP001/2020, Contrat 001, BL001 ....";>
+                          </div>
+                    
+
+                    
+
                   </div>
-            </div>
 
-                           
+
+                  
+
+                  <div class="form-row" style="margin-left: 100px">
+
+                       <div class="col-md-3">
+                        <label class="small mb-1" for="inputEmailAddress">Date pièce </label>
+                        <input type="date" class="form-control quantites" name="date" id="date" placeholder="02/05/2018";>
+                    </div>
+
+                     
+                    <div class="col-md-3">
+                        <label class="small mb-1" for="inputEmailAddress">Pièce Jointe </label>
+                        <input type="file"  class="form-control-file" name="photo" id="photo" >
+                    </div>
+
+                  
+                </div>
+
+              </div>
+
+        </div>
+
+                       
                         </div>
 
                               
@@ -194,13 +224,13 @@
                               <div class="form-row">
 
                                 <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="YesProduit" name="ProduitYN" value="yes"   onclick="yesnoCheckProduit()" >
+                                <input type="radio" class="custom-control-input" id="YesProduit" name="ProduitYN" value="yes" checked  onclick="yesnoCheckProduit()" >
                                 <label class="custom-control-label" for="YesProduit">Oui</label>
                               </div>
 
                               <!-- Default checked -->
                               <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="NoProduit" name="ProduitYN" value="non" checked onclick="yesnoCheckProduit()">
+                                <input type="radio" class="custom-control-input" id="NoProduit" name="ProduitYN" value="non"  onclick="yesnoCheckProduit()">
                                 <label class="custom-control-label" for="NoProduit">Non</label>
                               </div>
 

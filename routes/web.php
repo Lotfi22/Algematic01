@@ -175,6 +175,7 @@ Route::post('/home/achats/ValiderPreAchat/{idpreachat}/{numfactureproformat}', '
 
 Route::get('/home/achats/DemandeAchatPrestation', 'DemandeAchat\DemandeAchatController@indexPrestation');
 
+Route::post('/home/achats/AddDemandeAchatPrestation', 'DemandeAchat\DemandeAchatController@AddDemandeAchatPrestation');
 
 
 

@@ -745,4 +745,20 @@ class DemandeAchatController extends Controller
       return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types'));
      }
 
+
+        public function AddDemandeAchatPrestation(Request $request)
+     {
+
+      $testanonyme=$request->anonyme;
+
+      $testjoint=$request->joint;
+
+      $testremise=$request->RemiseYN;
+
+      
+
+      
+      return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types'));
+     }
+
 }
