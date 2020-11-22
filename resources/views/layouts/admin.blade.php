@@ -818,6 +818,34 @@
         //
     </script>
 
+     <script>
+            
+       function yesnoCheckFabricant() {
+            if (document.getElementById('FabricantOui').checked) {
+                document.getElementById('JeSuisFabricat').style.display = 'block';
+            } 
+            else if(document.getElementById('FabricantNon').checked) {
+                document.getElementById('JeSuisFabricat').style.display = 'none';
+           }
+        }
+
+        //
+    </script>
+
+     <script>
+            
+       function yesnoCheckAnonymeYN() {
+            if (document.getElementById('AnonymeOui').checked) {
+                document.getElementById('nonanonyme').style.display = 'none';
+            } 
+            else if(document.getElementById('AnonymeNon').checked) {
+                document.getElementById('nonanonyme').style.display = 'block';
+           }
+        }
+
+        //
+    </script>
+
      
 
 

@@ -44,97 +44,154 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
+
+
                      <form class="needs-validation" novalidate action="/AddFournisseur" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
-                              <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="COMPILS" required>
-                                </div>
+                      <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Adresse</B></label>
-                                  <input type="text" name="adresse"class="form-control"  placeholder="EL HAMIZ" required>
-                                </div>
-
-                              </div>
-
-                               <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>Activité</B></label>
-                                  <input type="text"  name="activite" class="form-control" placeholder="CAMERA ET CABLES" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Téléphone</B></label>
-                                  <input type="number" minlength="10" maxlength="10" name="tele"class="form-control"  placeholder="0550725743" required>
-                                </div>
-                                
-                              </div>
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>Fax</B></label>
-                                  <input type="number"  minlength="9" maxlength="9"  name="fax" class="form-control" placeholder="021889977" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Mobile</B></label>
-                                  <input type="number" minlength="10" maxlength="10" name="mobile"class="form-control"  placeholder="021889977" required>
-                                </div>
-                                
-                              </div>
-
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>Email</B></label>
-                                  <input type="email"  name="email" class="form-control" placeholder="lasnami.walid@outlook.com" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>NIF</B></label>
-                                  <input type="number" min="0" name="nif"class="form-control"  placeholder="000448756" required>
-                                </div>
-                                
-                              </div>
-
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>NIS</B></label>
-                                  <input type="number" min="0"  name="nis" class="form-control" placeholder="000448756" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>RC</B></label>
-                                  <input type="text" name="rc"class="form-control"  placeholder="0009A69408" required>
-                                </div>
-                                
-                              </div>
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>N° Art IMP</B></label>
-                                  <input type="text"  name="num_art_imp" class="form-control" placeholder="021786" required>
-                                </div>
-                                
-                              </div>
-
-
-                           
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn-sm btn btn-primary">Ajouter</button>
-                          </div>
-                          </form>
+                      <h4 ><B>Anonyme ?</B></h4>
+                      
+                          <div class="custom-control custom-radio">
+                          <input type="radio" class="custom-control-input" id="AnonymeOui" name="AnonymeYN" value="yes"   onclick="yesnoCheckAnonymeYN()" >
+                          <label class="custom-control-label" for="AnonymeOui">Oui</label>
                         </div>
-                      </div>
+
+                        <!-- Default checked -->
+                        <div class="custom-control custom-radio">
+                          <input type="radio" class="custom-control-input" id="AnonymeNon" name="AnonymeYN" value="non" checked onclick="yesnoCheckAnonymeYN()">
+                          <label class="custom-control-label" for="AnonymeNon">Non</label>
+                        </div>
                     </div>
+
+                       
+                    
+                     
+
+              <div id="anonyme">
+
+                      <div class="form-row" >
+
+                        <div class="col-md-6 mb-3">
+                          <label for="validationTooltip01"><B>Nom</B></label>
+                          <input type="text"  name="nom" class="form-control" placeholder="COMPILS" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                          <label for="validationTooltip02"><B>Adresse</B></label>
+                          <input type="text" name="adresse"class="form-control"  placeholder="EL HAMIZ" required>
+                        </div>
+
+                      </div>
+
+                       <div class="form-row" >
+
+                        <div class="col-md-6 mb-3">
+                          <label for="validationTooltip01"><B>Activité</B></label>
+                          <input type="text"  name="activite" class="form-control" placeholder="CAMERA ET CABLES" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                          <label for="validationTooltip02"><B>Téléphone</B></label>
+                          <input type="number" minlength="10" maxlength="10" name="tele"class="form-control"  placeholder="0550725743" required>
+                        </div>
+                        
+                      </div>
+
+              </div>
+
+              <div id="nonanonyme">
+
+                      <div class="form-row">
+
+                      <h4 ><B>Fabricant ?</B></h4>
+
+                          <div class="custom-control custom-radio">
+                          <input type="radio" class="custom-control-input" id="FabricantOui" name="FabricantYN" value="yes" checked  onclick="yesnoCheckFabricant()" >
+                          <label class="custom-control-label" for="FabricantOui">Oui</label>
+                        </div>
+
+                        <!-- Default checked -->
+                        <div class="custom-control custom-radio">
+                          <input type="radio" class="custom-control-input" id="FabricantNon" name="FabricantYN" value="non" onclick="yesnoCheckFabricant()">
+                          <label class="custom-control-label" for="FabricantNon">Non</label>
+                        </div>
+                    </div>
+
+                    <br>
+
+                      <div class="form-row" id="JeSuisFabricat">
+
+                        <div class="col-md-12 mb-6">
+                          <label for="validationTooltip01"><B>Marque</B></label>
+                          <input type="text"  name="marque" class="form-control" placeholder="marque" >
+                        </div>
+
+                      </div>
+
+                      <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                          <label for="validationTooltip01"><B>Fax</B></label>
+                          <input type="number"  minlength="9" maxlength="9"  name="fax" class="form-control" placeholder="021889977" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                          <label for="validationTooltip02"><B>Mobile</B></label>
+                          <input type="number" minlength="10" maxlength="10" name="mobile"class="form-control"  placeholder="021889977" required>
+                        </div>
+                        
+                      </div>
+
+                      <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                          <label for="validationTooltip01"><B>Email</B></label>
+                          <input type="email"  name="email" class="form-control" placeholder="lasnami.walid@outlook.com" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                          <label for="validationTooltip02"><B>NIF</B></label>
+                          <input type="number" min="0" name="nif"class="form-control"  placeholder="000448756" required>
+                        </div>
+                        
+                      </div>
+
+                      <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                          <label for="validationTooltip01"><B>NIS</B></label>
+                          <input type="number" min="0"  name="nis" class="form-control" placeholder="000448756" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                          <label for="validationTooltip02"><B>RC</B></label>
+                          <input type="text" name="rc"class="form-control"  placeholder="0009A69408" required>
+                        </div>
+                        
+                      </div>
+                      <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                          <label for="validationTooltip01"><B>N° Art IMP</B></label>
+                          <input type="text"  name="num_art_imp" class="form-control" placeholder="021786" required>
+                        </div>
+                        
+                      </div>
+            </div>
+
+                   
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn-sm btn btn-primary">Ajouter</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
 
     </div>
 
