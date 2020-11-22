@@ -120,7 +120,7 @@
 
                         <!-- Logo icon --><b>
 
-                            <img width="50%" src="../nabila/assets/images/algematic.png" alt="homepage" class="dark-logo" />
+                            <img width="50%" src="{{ asset('../nabila/assets/images/algematic.png') }}" alt="homepage" class="dark-logo" />
 
                         </b>
 
@@ -190,7 +190,7 @@
 
                             <a class="nav-link waves-effect waves-dark" onclick="event.preventDefault();
 
-                                document.getElementById('logout-form').submit();" href="{{ url('/logout') }}"><img src="../nabila/assets/images/1.jpg" alt="user" class="profile-pic" />
+                                document.getElementById('logout-form').submit();" href="{{ url('/logout') }}"><img src="{{ asset('../nabila/assets/images/1.jpg') }}" alt="user" class="profile-pic" />
 
                             </a>
 
@@ -242,6 +242,7 @@
 
                         <li> <a class="waves-effect waves-dark" href="/home" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">Profile</span></a></li>
 
+
                         <li> <a id="stocks" class="waves-effect waves-dark" href="/home4" onclick="fshow(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Stock</span></a></li>
 
 
@@ -254,12 +255,42 @@
                         <li class="acacher"> <a class="waves-effect waves-dark" href="/home/stocks/etagere" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Etagère</span></a></li>
 
                         <li class="acacher"> <a class="waves-effect waves-dark" href="/home/stocks/ProduitStock" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Produits</span></a></li>
+                        
+                        {{-- fin stock --}}                        
+
+                        <li> <a id="produits" class="waves-effect waves-dark" href="/home4" onclick="fshowProduit(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Produit</span></a></li>
 
 
-                        <!-- Fabricant_Fournisseur -->
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/categorie" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Catégorie</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/familleProd" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Famille</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/sousFamille" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Sous Famille</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/propriete" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Propriétes</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/unite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Unité de Mesure</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/produit" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Produits</span></a></li>
+
+                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/technique" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span style="font-size: 0.8em;" class="hide-menu">Spécificité Technique</span></a></li>
+
+                        {{-- fin produit --}}
+
+                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Fournisseur</span></a></li>
 
 
-                        <li> <a id="achats" class="waves-effect waves-dark" href="/home4" onclick="DemandeAchat(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Achat</span></a></li>
+
+                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/fabricant" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fabricant</span></a></li>
+
+                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/fournisseur" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fournisseur</span></a></li>
+
+
+                        {{-- fin fournisseur --}}                        
+
+
+
+                        <li> <a id="achats" class="waves-effect waves-dark" href="/home4" onclick="DemandeAchat(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" >Achat</span></a></li>
 
 
 
@@ -272,66 +303,7 @@
                         
                         <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande en Attente</span></a></li>
                         
-                       
-                        
-
-                        <!--Fin-->
-
-                         <li> <a id="vente" class="waves-effect waves-dark" href="/home4" onclick="DemandeVente(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Vente</span></a></li>
-
-
-
-                         <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/article" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Article de Vente</span></a></li>
-
-                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande de Vente</span></a></li>
-
-                        
-                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVenteAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Ventes</span></a></li>
-                        
-                       
-                        
-
-                        <!--Fin-->
-
-
-                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" style="font-size: 12px;">Fabricant_Fournisseur</span></a></li>
-
-
-
-                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/fabricant" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fabricant</span></a></li>
-
-                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/fournisseur" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fournisseur</span></a></li>
-
-                       
-                        
-
-                        <!--Fin-->
-
-                         <!-- Produit-Categorie_Famille_SousFamille -->
-
-                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshowProduit(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Produit</span></a></li>
-
-
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/categorie" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Catégorie</span></a></li>
-
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/familleProd" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Famille</span></a></li>
-
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/sousFamille" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Sous_Famille</span></a></li>
-
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/propriete" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Propriétes</span></a></li>
-
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/unite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Unité de Mesure</span></a></li>
-
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/produit" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Produits</span></a></li>
-
-
-
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/technique" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Spécificité Technique</span></a></li>
-
-                        
-
-                        <!--Fin-->
-
+                        {{-- fin achat --}}
 
                         <li> <a class="waves-effect waves-dark" id="clients" href="/home4" onclick="fshow3(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Client</span></a></li>
 
@@ -341,6 +313,20 @@
                         <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients/activite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Activité</span></a></li>
 
                         <li class="acacher3"> <a class="waves-effect waves-dark" href="/home/clients/prospectes" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Clients | Prospect</span></a></li>
+
+                        {{-- fin client --}}                                                                                        
+
+                        <!--Fin-->
+
+                        <li> <a id="vente" class="waves-effect waves-dark" href="/home4" onclick="DemandeVente(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Vente</span></a></li>
+
+
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/article" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Article de Vente</span></a></li>
+
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande de Vente</span></a></li>
+
+                        
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVenteAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Ventes</span></a></li>                        
 
                         <li>
 

@@ -64,14 +64,14 @@
                         
                         <td>
 
-                            <button type="button" class="{{-- btn-sm --}} btn btn-info" data-toggle="modal" data-target="#infosClient{{$vente->preVente}}">
-                                Informations  
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#infosClient{{$vente->preVente}}">
+                                Infos  
                             </button>
                         </td>
                         
                         <td>
                             
-                            <button type="button" class="{{-- btn-sm --}} btn btn-warning" data-toggle="modal" data-target="#InfosDemande{{$vente->preVente}}">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#InfosDemande{{$vente->preVente}}">
                                Infos
                             </button>
 
@@ -81,7 +81,7 @@
                         <td>
                             @if($vente->statut_validation == 0)
                             	
-                            	<p id="encours" style="text-align: center;" class="alert alert-primary">En Cours . . . . .</p>
+                            	<p style="text-align: center;" class="encours alert alert-primary">En Cours . . . . .</p>
                             
                              @elseif($vente->statut_validation == 1)
                             		                                    
@@ -97,45 +97,45 @@
                             <!-- -->
                         </td>
                         
-                        <td>
-                            
-                            @if( ($privilege ?? '' == 1) && ($vente->statut_validation == 0 ) )
-                            
+                        @if($privilege ?? '' == 1)
+
+                            <td>
                                 
-                                <button type="button" class="{{-- btn-sm --}} btn btn-success" data-toggle="modal" data-target="#valider{{$vente->preVente}}">
-                                    Valider
-                                </button>
+                                @if( ($privilege ?? '' == 1) && ($vente->statut_validation == 0 ) )
+                                
+                                                                                                                             
+                                    <button type="button" class="{{-- btn-sm --}} col-md-3 btn btn-outline-success" data-toggle="modal" data-target="#valider{{$vente->preVente}}">
+                                        Valider
+                                    </button>
+
+                                    <button type="button" class="{{-- btn-sm --}} col-md-3 btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERvente{{$vente->preVente}}">
+                                       Refuser
+                                    </button>
+                                                                    
+
+                                 @elseif(  ($vente->statut_validation == 2 ) )
+                                    <button type="button" class="{{-- btn-sm --}} col-md-7 btn btn-outline-info" data-toggle="modal" data-target="#FP{{$vente->preVente}}">
+                                      Editer FP
+                                    </button>
+
+                                    <!--  -->
+                                 @else   
+
+                                    <button type="button" class="{{-- btn-sm --}} col-md-7 btn btn-outline-warning" data-toggle="modal" data-target="#Commentaire{{$vente->preVente}}">
+                                       
+                                       Voir détails
+                                    </button>
+
+                                    <!--  -->
+                                @endif
+
 
                                 <!--  -->
-                            
-
-                             @elseif(  ($vente->statut_validation == 2 ) )
-                                <button type="button" class="{{-- btn-sm --}} btn btn-primary" data-toggle="modal" data-target="#FP{{$vente->preVente}}">
-                                  Editer FP
-                                </button>
-
-                                <!--  -->
-                            
-
-                             @elseif( ($privilege ?? '' == 1) && ($vente->statut_validation == 0) )
-
-                                <button type="button" class="{{-- btn-sm --}} btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERvente{{$vente->preVente}}">
-                                   Refuser
-                                </button>
-
-                             @else   
-
-                                <button type="button" class="{{-- btn-sm --}} btn btn-warning" data-toggle="modal" data-target="#Commentaire{{$vente->preVente}}">
-                                   
-                                   Voir détails
-                                </button>
-
-                                <!--  -->
-                            @endif
-
-                            <!--  -->
-                        </td>
-
+                            </td>
+                                
+                            <!--  -->                            
+                        @endif
+                        
                         <!--  -->
                     </tr>
 
@@ -201,19 +201,15 @@
 
     @foreach($ventes as $vente)
 
-        <div class="modal fade" id="FP{{$vente->preVente}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" role="dialog"  id="FP{{$vente->preVente}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 
                 <div class="modal-content">
 
-                    <div class="modal-header">
+                    <div style="padding-top: 3%;">
                         
-                        <h5 class="modal-title" id="exampleModalLabel">Télécharger Facture Proformat</h5>
-                        
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h4 class="text-center">Voulez vous télécharger Facture Proformat ?</h4>
                     </div>
 
                     <form class="needs-validation" novalidate action="/VenteFactureProformat/{{$vente->preVente}}" method="POST">
@@ -221,13 +217,11 @@
                         {{ csrf_field()}}
                         
                         <div class="modal-body">
-                            
-                            <div class="form-row">
-                            </div>
-                            
+                                                        
                             <div class="modal-footer">
-                                <button type="button" class="{{-- btn-sm --}} btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                <button type="submit" class="{{-- btn-sm --}} btn btn-success">Valider</button>
+                                <button type="button" class="btn btn-outline-danger col-md-6" data-dismiss="modal">Plus tard
+                                </button>
+                                <button type="submit" class="btn btn-outline-success col-md-6">Oui, Tétécharger maintenant</button>
                             </div>
                         </div>
                     </form>
@@ -239,56 +233,48 @@
 
     @foreach($ventes as $vente)
 
-        <div class="modal fade" id="valider{{$vente->preVente}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" role="dialog" id="valider{{$vente->preVente}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         
-            <div class="modal-dialog">
-        
+            <div class="modal-dialog modal-lg">
+                
                 <div class="modal-content">
-        
-                    <div class="modal-header">
-        
-                        <h5 class="modal-title" id="exampleModalLabel">Voulez Vous Vraiment Valider</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+
+                    <div style="padding-top: 3%;">
+                        
+                        <h4 class="text-center">Voulez vous vraiment Valider la vente ?</h4>
+                        
                     </div>
-                    
+
                     <form class="needs-validation" novalidate action="/ValiderDemandeVente/{{$vente->preVente}}" method="POST">
+                        
                         {{ csrf_field()}}
                         
                         <div class="modal-body">
-                            <div class="form-row">
-                        </div>
-                        
-                        <div class="modal-footer">
-                            
-                            <button type="button" class="{{-- btn-sm --}} btn btn-secondary" data-dismiss="modal">Annuler</button>
-
-                            <button type="submit" class="{{-- btn-sm --}} btn btn-primary">Valider</button>
+                                                        
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-warning col-md-6" data-dismiss="modal">Plus tard</button>
+                                <button type="submit" class="btn btn-outline-success col-md-6">Oui, je Valide</button>
+                            </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
-
     @endforeach
 
     @foreach($ventes as $vente)
 
-        <div class="modal fade" id="Commentaire{{$vente->preVente}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" role="dialog" id="Commentaire{{$vente->preVente}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
 
                 <div class="modal-content">
 
-                    <div class="modal-header">
+                    <div style="padding-top: 3%;">
 
-                        <h5 class="modal-title" id="staticBackdropLabel">Motif du Refus</h5>
-
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h4 style="text-align: center; " class="modal-title" id="staticBackdropLabel">Motif du Refus</h4>
+                        <hr>
                     </div>
 
                     <div class="modal-body">
@@ -298,7 +284,13 @@
                             <div class="col-md-12 mb-6">
                                 
                                 <div class="form-group">    
-                                    <p> <B>Motif refus : {{$vente->commentaire}} </B> </p>
+
+                                    @if($vente->commentaire == "")
+                                        <h5 style="text-align: center;"><B> Pas de motif pour ce refus </B> </h5>
+                                     @else   
+                                        <h5 style="text-align: center;"> Motif refus : <B> {{$vente->commentaire}} </B> </h5>
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -306,7 +298,7 @@
 
                     <div class="modal-footer">
 
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
             </div>
@@ -317,19 +309,17 @@
     @foreach($ventes as $vente)
 
 
-        <div class="modal fade" id="infosClient{{$vente->preVente}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" role="dialog" id="infosClient{{$vente->preVente}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 
                 <div class="modal-content">
                     
-                    <div class="modal-header">
+                    <div style="padding-top: 3%;">
                         
-                        <h5 class="modal-title" id="staticBackdropLabel">Informations du Client</h5>
+                        <h4 class="text-center">Informations du Client</h4>
                         
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <hr>
                     </div>
 
                     <div class="modal-body">
@@ -353,7 +343,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
             </div>
@@ -362,15 +352,15 @@
 
     @foreach($ventes as $vente)
 
-        <div class="modal fade" id="InfosDemande{{$vente->preVente}}" tabindex="-1" aria-labelledby="InfosDemande{{$vente->preVente}}" aria-hidden="true">
+        <div class="modal fade" role="dialog" id="InfosDemande{{$vente->preVente}}" tabindex="-1" aria-labelledby="InfosDemande{{$vente->preVente}}" aria-hidden="true">
 
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-lg col-md-12">
 
                 <div class="modal-content">
 
                     <div class="modal-header">
                         
-                        <h5 class="modal-title" id="InfosDemande{{$vente->preVente}}">Informations de la Vente  Demandée // Montant Total = <B>{{$vente->montant}}</B></h5>
+                        <h4 class="text-center" id="InfosDemande{{$vente->preVente}}">Informations sur la Vente  Demandée // Montant Total = <B>{{$vente->montant}}</B></h5>
                         
                         <br>
 
@@ -426,7 +416,7 @@
                     </table>
 
                     <div class="modal-footer">
-                        <button type="button" class="{{-- btn-sm --}} btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
                     </div>
 
                     {{--  --}}
@@ -444,32 +434,46 @@
     
     @foreach($ventes as $vente)
         
-        <div class="modal fade" id="exampleModalSUPPRIMERvente{{$vente->preVente}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+        <div class="modal fade" role="dialog" id="exampleModalSUPPRIMERvente{{$vente->preVente}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            
+            <div class="modal-dialog modal-lg">
+                
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Voulez vous vraiment Refuser</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    
+                    <div style="padding-top: 3%;">
+                        
+                        <h4 style="text-align: center;">Voulez vous vraiment Refuser ? </h4>
+
+                        <hr>
+
+                        <!--  -->
                     </div>
+
                     <form class="needs-validation" novalidate action="/RefuserDemandeVente/{{$vente->preVente}}" method="POST">
+                        
                         {{ csrf_field()}}
 
                         <div class="modal-body">
 
-                        <div class="form-row">
+                            <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
-                          <label for="validationTooltip01"><B>Commentaire de Refus</B></label>
-                          <input type="text"  name="commentaire" class="form-control" placeholder="Le prix de l'article 01 est invalide" required>
-                        </div>      
-                        </div>
+                                <div class="row col-md-12">
+                                    
+                                    <label class="col-md-4" for="{{ $vente->id }}">Commentaire sur le Refus </label>
+                                    
+                                    <input type="text" id="{{ $vente->id }}" name="commentaire" class="form-control col-md-6">
+                                    {{--  --}}
+                                </div>      
+
+                                {{--  --}}
+                            </div>
               
-                        <div class="modal-footer">
-                        <button type="button" class="{{-- btn-sm --}} btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <button type="submit" class="{{-- btn-sm --}} btn btn-primary">Refuser</button>
-                      </div>
+                            <div class="modal-footer">
+                            
+                                <button type="button" class="btn btn-outline-warning col-md-6" data-dismiss="modal">Plus tard</button>
+                                <button type="submit" class="btn btn-outline-danger col-md-6">Refuser</button>
+                            </div>
+                        </div>    
                     </form>
                 </div>
             </div>
@@ -482,7 +486,7 @@
         function clin() 
         {
             
-            $("#encours")./*parent().parent().*/fadeToggle('slow');
+            $(".encours")./*parent().parent().*/fadeToggle('slow');
 
             clin();
             // 

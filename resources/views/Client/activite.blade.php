@@ -32,7 +32,7 @@
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                                     <h4 class="modal-title">Nouvelle activité</h4>
-                              </div>
+                                </div>
 
                                 <div class="modal-body">
 
@@ -115,7 +115,7 @@
 
                     <div class="table-responsive">
 
-                        <table class="table">
+                        <table id="table_id" class="table display">
 
                             <thead>
 
@@ -125,12 +125,9 @@
 
                                     <th>nom</th>
 
-                                    <th style="visibility: hidden;">gggggg</th>
-
                                     <th>description</th>
 
-                                    <th style="visibility: hidden;">ggggggggggggg</th>
-
+                                    <th>Action</th>
                                 </tr>
 
                             </thead>
@@ -152,7 +149,7 @@
                                                 {{ $activites[$i]->num }}                                                
                                             </td>
 
-                                            <td colspan="2"> 
+                                            <td> 
 
                                                 <div class="form-group col-md-12 col-sm-12">
 
@@ -166,7 +163,7 @@
                                                 {{--  --}}
                                             </td>
 
-                                            <td colspan="2"> 
+                                            <td> 
 
                                                 <textarea type="text" rows="5" class="form-control" name="description" id="description{{$activites[$i]->id}}" value="{!! ($activites[$i]->description) !!}">{!! ($activites[$i]->description) !!}</textarea> 
 
@@ -176,9 +173,6 @@
                                             <td> 
 
                                                 <button class="btn btn-success btn-sm" id="{{$activites[$i]->id}}" onclick="modifieractivite(event,this)"> Enregistrer</button> 
-                                            </td>
-
-                                            <td> 
 
                                                 @if ($activites[$i]->id!=0)
 

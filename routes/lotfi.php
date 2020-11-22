@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Hash;
 |
 */
 
+Route::get('/home/produits/categorie', 'Produit\CategorieController@index');
+Route::get('/home/produits/familleProd', 'Produit\FamilleProduitController@index');
+Route::get('/home/produits/sousFamille', 'Produit\SousFamilleController@index');
+Route::get('/home/produits/propriete', 'Produit\ProprieteController@index');
+Route::get('/home/produits/unite', 'Produit\UniteController@index');
+Route::get('/home/produits/produit', 'Produit\ProduitController@index');
+Route::get('/home/produits/technique', 'Produit\SpecifiteTechController@index');
+
+
+
 # Catégorie Client :
 Route::get('/home/clients/categorie','Lotfi\ClientController@categories_index');
 Route::post('/home/categories/ajouter/ajax','Lotfi\ClientController@ajoutercategories');

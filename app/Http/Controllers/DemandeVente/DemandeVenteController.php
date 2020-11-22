@@ -20,7 +20,7 @@ class DemandeVenteController extends Controller
     }
 
     public function index()
-     {
+    {
 
      	$id = Auth::id();
         $actuel = User::FindOrFail($id);
@@ -36,10 +36,10 @@ class DemandeVenteController extends Controller
 
     	
     	return view('Vente\DemandeVente',compact('employes','clients','articles'));
-     }
+    }
 
-      public function AddDemandeVente(Request $request)
-     {
+    public function AddDemandeVente(Request $request)
+    {
 
         $id = Auth::id();
         $actuel = User::FindOrFail($id);
@@ -72,30 +72,27 @@ class DemandeVenteController extends Controller
         $total=0;
 
         foreach ($request['dynamic_form']['dynamic_form'] as $key=>$array) 
-            {
-                    $index = $key +1;
-                    $id_article=$array['produit'];
-                    $quantite=$array['quantite'];
-                    $prix=$array['prix'];
-                    $tot=$quantite*$prix;
+        {
+            $index = $key +1;
+            $id_article=$array['produit'];
+            $quantite=$array['quantite'];
+            $prix=$array['prix'];
+            $tot=$quantite*$prix;
 
-                    DB::insert("insert into ligne_ventes (id_article,id_client,id_pre_vente,quantite,prix_u,total) 
-                        values('$id_article','$id_client','$id_preVente','$quantite','$prix','$tot') ;");
-                  
+            DB::insert("insert into ligne_ventes (id_article,id_client,id_pre_vente,quantite,prix_u,total) 
+            values('$id_article','$id_client','$id_preVente','$quantite','$prix','$tot') ;");
+              
 
-                        
-                $total=$total+$array['prix']*$array['quantite'];
-            }
+                    
+            $total=$total+$array['prix']*$array['quantite'];
+        }
 
-            DB::update(" update pre_ventes p set montant='$total' where p.id='$id_preVente' ");
-/*
-          
-*/
+        DB::update(" update pre_ventes p set montant='$total' where p.id='$id_preVente' ");
+
         return redirect('/DemandeVente')->with('success','Demande Envoyée avec succée');
-     }
+    }
 
     public function DemandeVenteAttente()
-    
     {
 
 
@@ -112,8 +109,8 @@ class DemandeVenteController extends Controller
         $employes=DB::select("select * from employes");
 
         $ventes=DB::select(" select  *,p.id as preVente,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects c,pre_ventes p, categorie_clients ca , activite_clients ac
-             where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id
-             order by p.id DESC");
+            where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id
+            order by p.id DESC");
 
 
 
@@ -121,37 +118,35 @@ class DemandeVenteController extends Controller
 
          
         return view('Vente\DemandeEnAttente',compact('employes','ventes','ligne_ventes','privilege'));
-     }
+    }
 
 
 
-     public function RefuserDemandeVente(Request $request,$idPreVente)
-     {
+    public function RefuserDemandeVente(Request $request,$idPreVente)
+    {
 
         $commentaire=$request->input('commentaire');
 
         DB::update("update pre_ventes p set statut_validation= 1, commentaire ='$commentaire' where p.id='$idPreVente' ");
 
-        return redirect('/DemandeVenteAttente')->with('success','La demande de Vente a été refusé avec succé');
+        return back()->with('success','La demande de Vente a été refusé avec succé');
      }
 
 
 
-     public function ValiderDemandeVente(Request $request,$idPreVente)
-     {
-
+    public function ValiderDemandeVente(Request $request,$idPreVente)
+    {
        
-            DB::update("update pre_ventes p set statut_validation= 2 where p.id='$idPreVente' ");
+        DB::update("update pre_ventes p set statut_validation= 2 where p.id='$idPreVente' ");
+
+        return back()->with('success','La demande de Vente a été Validé avec succé');
+    }
 
 
-        return redirect('/DemandeVenteAttente')->with('success','La demande de Vente a été Validé avec succé');
-     }
 
 
-
-
-     public function VenteFactureProformat(Request $request,$idPreVente)
-     {
+    public function VenteFactureProformat(Request $request,$idPreVente)
+    {
          
         $ventes=DB::select(" select  *,p.id as preVente,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects c,pre_ventes p, categorie_clients ca , activite_clients ac
              where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id and p.id='$idPreVente'");
@@ -186,68 +181,76 @@ class DemandeVenteController extends Controller
 
         if($ventetest[0]->num_facture_proformat == NULL)
         {
-             DB::update("update pre_ventes p set num_facture_proformat='$numfp' where p.id='$idPreVente'");
+            DB::update("update pre_ventes p set num_facture_proformat='$numfp' where p.id='$idPreVente'");
             
             DB::update("update pre_ventes p set date_edition_FP='$now' where p.id='$idPreVente'");
-       
 
+            $dompdf = new Dompdf();
 
+            $html = '<!doctype html>
 
-        $dompdf = new Dompdf();
+            <html lang="en">
 
-        $html = '<!doctype html>
-        <html lang="en">
-        <head>
-        <meta charset="UTF-8">
-        <title>Bon de Commande </title>
-        <style type="text/css">
-            * {
-                font-family: Verdana, Arial, sans-serif;
-            }
-            table{
-            }
-            tfoot tr td{
-                font-weight: bold;
-            }
-            .gray {
-                background-color: lightgray;
-            }
-            tbody {
-                width: 100%;
-            }
-        </style>
-        </head>
-        <body> 
-          <table width="100%">
-            <tr>
-                <td valign="top"></td>
-                <td align="left">
-                <h1><B> ALGEMATIC</B></h1>
-                  <h2 style="text-align: center;">Facture Pro Format N° '.$numfp.'   ---   Alger, le '.$now.'  </h2>
-                  <div style="border: solid;" >  Raison: SARL ALGEMATIC <br> Adresse: Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger.  </div>
+            <head>
 
-                  <div style="border: solid;" >  Client: '.$ventes[0]->code_client.'  </div>
-                 
-                 
-                </td>
-                <td align="right">
-                    <img src=""  />
-                </td>
-            </tr>
-          </table>
-          
-          <br/>
-          <table width="100%">
-            <thead style="background-color: lightgray;">
-              <tr>
-                <th>Référance</th>
-                <th>Désignation</th>
-                <th>Quantité</th>
-                <th>Prix U.HT</th>
-                <th>Montant HT</th>
-              </tr>
-            </thead>
-            <tbody>';
+                <meta charset="UTF-8">
+
+                <title>Bon de Commande </title>
+
+                <style type="text/css">
+                    * {
+                        font-family: Verdana, Arial, sans-serif;
+                    }
+                    table{
+                    }
+                    tfoot tr td{
+                        font-weight: bold;
+                    }
+                    .gray {
+                        background-color: lightgray;
+                    }
+                    tbody {
+                        width: 100%;
+                    }
+                </style>
+            </head>
+
+            <body> 
+                <table width="100%">
+                    <tr>
+                        
+                        <td valign="top"></td>
+                        
+                        <td align="left">
+                        
+                        <h1><B> ALGEMATIC</B></h1>
+                        
+                        <h2 style="text-align: center;">Facture Pro Format N° '.$numfp.'   ---   Alger, le '.$now.'  </h2>
+                        
+                        <div style="border: solid;" >  Raison: SARL ALGEMATIC <br> Adresse: Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger.  </div>
+
+                        <div style="border: solid;" >  Client: '.$ventes[0]->code_client.'  </div>
+                     
+                     
+                    </td>
+                    <td align="right">
+                        <img src=""  />
+                    </td>
+                </tr>
+              </table>
+              
+              <br/>
+              <table width="100%">
+                <thead style="background-color: lightgray;">
+                  <tr>
+                    <th>Référance</th>
+                    <th>Désignation</th>
+                    <th>Quantité</th>
+                    <th>Prix U.HT</th>
+                    <th>Montant HT</th>
+                  </tr>
+                </thead>
+                <tbody>';
 
             $total = 0;
 
@@ -353,112 +356,120 @@ class DemandeVenteController extends Controller
 
         $html = '<!doctype html>
         <html lang="en">
-        <head>
-        <meta charset="UTF-8">
-        <title>Bon de Commande </title>
-        <style type="text/css">
-            * {
-                font-family: Verdana, Arial, sans-serif;
-            }
-            table{
-            }
-            tfoot tr td{
-                font-weight: bold;
-            }
-            .gray {
-                background-color: lightgray;
-            }
-            tbody {
-                width: 100%;
-            }
-        </style>
-        </head>
-        <body> 
-          <table width="100%">
-            <tr>
-                <td valign="top"></td>
-                <td align="left">
-                <h1><B> ALGEMATIC</B></h1>
-                  <h2 style="text-align: center;">Facture Pro Format N° '.$ventetest[0]->num_facture_proformat.'   ---   Alger, le '.$ventetest[0]->date_edition_FP.'  </h2>
-                  <div style="border: solid;" >  Raison: SARL ALGEMATIC <br> Adresse: Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger.  </div>
+    
+            <head>
+        
+                <meta charset="UTF-8">
+                <title>Bon de Commande </title>
+                <style type="text/css">
+                    * {
+                        font-family: Verdana, Arial, sans-serif;
+                    }
+                    table{
+                    }
+                    tfoot tr td{
+                        font-weight: bold;
+                    }
+                    .gray {
+                        background-color: lightgray;
+                    }
+                    tbody {
+                        width: 100%;
+                    }
+                </style>
+            </head>
+        
+            <body> 
+                <table width="100%">
+                    <tr>
+                        <td valign="top"></td>
 
-                  <div style="border: solid;" >  Client: '.$ventes[0]->code_client.'  </div>
-                 
-                 
-                </td>
-                <td align="right">
-                    <img src=""  />
-                </td>
-            </tr>
-          </table>
-          
-          <br/>
-          <table width="100%">
-            <thead style="background-color: lightgray;">
-              <tr>
-                <th>Référance</th>
-                <th>Désignation</th>
-                <th>Quantité</th>
-                <th>Prix U.HT</th>
-                <th>Montant HT</th>
-              </tr>
-            </thead>
+                        <td align="left">
+                            
+                            <h1><B> ALGEMATIC</B></h1>
+                            
+                            <h2 style="text-align: center;">Facture Pro Format N° '.$ventetest[0]->num_facture_proformat.'   ---   Alger, le '.$ventetest[0]->date_edition_FP.'  </h2>
+                            
+                            <div style="border: solid;" >  Raison: SARL ALGEMATIC <br> Adresse: Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger.  
+                            </div>
+
+                            <div style="border: solid;" >  Client: '.$ventes[0]->code_client.'  </div>
+                        </td>
+                        
+                        <td align="right">
+                            <img src=""  />
+                        </td>
+                    </tr>
+                </table>
+              
+                <br/>
+                
+                <table width="100%">
+                
+                <thead style="background-color: lightgray;">
+                    <tr>
+                        <th>Référance</th>
+                        <th>Désignation</th>
+                        <th>Quantité</th>
+                        <th>Prix U.HT</th>
+                        <th>Montant HT</th>
+                    </tr>
+                </thead>
             <tbody>';
 
-            $total = 0;
+                $total = 0;
 
-            $i=0;
+                $i=0;
 
-            foreach ($ligne_ventes as $ligne) 
-            {
-                    
+                foreach ($ligne_ventes as $ligne) 
+                {
+                        
 
-                    $ref=$ligne->nom;
-               
-                    $description=$ligne->description;
+                        $ref=$ligne->nom;
+                   
+                        $description=$ligne->description;
 
-                    $quantite=$ligne->quantite;
+                        $quantite=$ligne->quantite;
 
-                    $prix=$ligne->prix_u;
+                        $prix=$ligne->prix_u;
 
-                    $totale=$ligne->total;
-
-                    
+                        $totale=$ligne->total;
 
                         
-                    $html.='<tr class="item">
-                    
-                    <td>
-                        '.$ref.'
-                    </td>
-                    <td>
 
-                        '.$description.'
-                    </td>
-                    <td align="right">
-                        '.$quantite.'
-                    </td>
-                    <td align="right">
-                    '.$prix.'
-                    </td>
-                    <td align="right">
-                    '.$totale.'
-                    </td>
-                </tr>';
+                            
+                        $html.='<tr class="item">
+                        
+                        <td>
+                            '.$ref.'
+                        </td>
+                        <td>
 
-                $total=$total+$totale;
-            }
+                            '.$description.'
+                        </td>
+                        <td align="right">
+                            '.$quantite.'
+                        </td>
+                        <td align="right">
+                        '.$prix.'
+                        </td>
+                        <td align="right">
+                        '.$totale.'
+                        </td>
+                    </tr>';
 
-            
+                    $total=$total+$totale;
+                }
+     
+                $total_HT=$total;
+                $montant_tva=$total_HT*19/100;
+                $total_TTC=$montant_tva+$total_HT;
 
-            
-            $total_HT=$total;
-            $montant_tva=$total_HT*19/100;
-            $total_TTC=$montant_tva+$total_HT;
-
-        $html.='
-            </tbody>
+                $html.='
+                
+                </tbody>
             <tfoot>';
+            
             $html.='                 
                 <tr>
                     <td colspan="4"></td>
@@ -479,16 +490,16 @@ class DemandeVenteController extends Controller
                 </tr>';
             
             $html.='</tfoot>
-          </table>
-          <h5>Arrête le présent Bon de Commande à la somme de:</h5>
-          <br>
-          <h5 style="text-align: right;">Cachet et signature</h5>
-          <br>
-          <hr>
-          <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
-          <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
+            </table>
+            <h5>Arrête le présent Bon de Commande à la somme de:</h5>
+            <br>
+            <h5 style="text-align: right;">Cachet et signature</h5>
+            <br>
+            <hr>
+            <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
+            <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
 
-        </body>
+            </body>
         </html>';
 
         $dompdf->loadHtml($html);
@@ -496,6 +507,6 @@ class DemandeVenteController extends Controller
         $dompdf->stream("FP'.$NbNumFP.'_'$year'", array('Attachment'=>0));
 
         } 
-     }
+    }
 
 }
