@@ -112,7 +112,7 @@ class DemandeVenteController extends Controller
             where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id
             order by p.id DESC");
 
-
+        
 
         $ligne_ventes=DB::select("select *,a.nom,a.description,l.total,a.total as PrixArticleAchat from ligne_ventes l, articles a where l.id_article=a.id");
 

@@ -358,37 +358,38 @@
 
                 <div class="modal-content">
 
-                    <div class="modal-header">
+                    <div style="padding-top: 2%;">
                         
-                        <h4 class="text-center" id="InfosDemande{{$vente->preVente}}">Informations sur la Vente  Demandée // Montant Total = <B>{{$vente->montant}}</B></h5>
-                        
-                        <br>
-
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h4 class="text-center" id="InfosDemande{{$vente->preVente}}">Informations sur la Vente Demandée </h5>
                     </div>
-
                     <div class="modal-body">
+                        <hr>
                         <ul>
                             <li><B>Client :  </B>  {{$vente->code_client}}</li>
                             <li><B>Mobile :  </B>  {{$vente->mobile}}</li>
                             <li><B>Email :  </B>  {{$vente->email}}</li>
                         </ul>
+
+                        @if($vente->taux_remise_spec!=0)
+
+                            <p style="text-align: center;" class="alert alert-success"> Le client a une remise spésifique de  : <b> {!! $vente->taux_remise_spec !!} % </b> </p>
+
+                            {{--  --}}
+                        @endif
                     </div>
                     
                     
-                    <table class="table table-striped table-dark">
+                    <table class="table table-striped table-dark display">
 
                         <thead>
         
                             <tr>    
-                                <th scope="col"><B>Article</B></th>
+                                <th scope="col"><B>Référance</B></th>
                                 <th scope="col"><B>Description</B></th>
                                 <th scope="col"><B>Prix_D'achat</B></th>
-                                <th scope="col"><B>Prix_u</B></th>
+                                <th scope="col"><B>Prix U.HT</B></th>
                                 <th scope="col"><B>Quantité</B></th>
-                                <th scope="col"><B>Total</B></th>
+                                <th scope="col"><B>Montant HT</B></th>
                             </tr>
                         </thead>
 
@@ -399,12 +400,12 @@
                                 @if( $ligne->id_pre_vente == $vente->preVente)
                                     
                                     <tr>
-                                        <td scope="row"> {{$ligne->nom}}</td>
-                                        <td scope="row">  {{$ligne->description}}</td>
-                                        <td scope="row"> {{$ligne->PrixArticleAchat}}</td>
-                                        <td scope="row"> {{$ligne->prix_u}}</td>
-                                        <td scope="row">  {{$ligne->quantite}}</td>
-                                        <td scope="row">{{$ligne->total}}</td>
+                                        <td scope="row"> {!! $ligne->nom !!} </td>
+                                        <td scope="row"> {!! $ligne->description !!} </td>
+                                        <td scope="row"> {!! number_format((float)$ligne->PrixArticleAchat) !!} </td>
+                                        <td scope="row"> {!! number_format((float)$ligne->prix_u) !!} </td>
+                                        <td scope="row"> {!! $ligne->quantite !!} </td>
+                                        <td scope="row"> {!! number_format((float)$ligne->total) !!} </td>
                                     </tr>
                                 @endif
 
@@ -414,6 +415,14 @@
                             {{----}}
                         </tbody>
                     </table>
+
+                    <div style="margin-left: 70%;">
+
+                        <b> Montant Total HT : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant) !!}</B></b>
+                        <b> Montant TVA 19% : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant*0.19) !!}</B></b>
+                        <b> Total TTC : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant*1.19) !!}</B></b>
+
+                    </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
