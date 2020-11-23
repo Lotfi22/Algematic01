@@ -37,12 +37,9 @@
             </div>
         @endif
       
-        <h1 style=" text-align: center; " ><B>Demande De Vente</B></h1>     
+        <h1 style=" text-align: center;"><B id="demandedevente">Demande De Vente D'Articles</B></h1>     
 
         <hr>
-
-
-
         
         <form class="needs-validation" id="ventes_articles" novalidate action="/AddDemandeVente" method="POST" enctype="multipart/form-data">
 
@@ -246,13 +243,13 @@
                     <div class="col-md-3">
                         <label class="small mb-1" for="inputFirstName">Produit : </label>
                 
-                        <select class='form-control produits' class="js-example-basic-single" name='produit' id="produit" >
+                        <select class='form-control produits' onchange="get_prices(this);" class="js-example-basic-single" name='produit' id="produit" >
                 
                             <option value=""></option>
                     
                             @foreach($produits as $produit)
 
-                                <option  value="{{$produit->id}}">
+                                <option value="{{$produit->id}}">
                                     
                                     {{$produit->code_produit}} | {{  $produit->description }} 
 
@@ -261,13 +258,18 @@
                             @endforeach 
                         </select>   
                     </div>
+
+                    <div class="col-md-2">
+                        <label class="small mb-1" for="inputEmailAddress">Quantité disponible : </label>
+                        <input type="number" class="form-control quantites" name="quantite_dispo" id="quantite_dispo" readonly>
+                    </div>
                     
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label class="small mb-1" for="inputEmailAddress">Quantité : </label>
                         <input type="number" class="form-control quantites" name="quantite" id="quantite" placeholder="2";>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         
                         <label class="small mb-1" for="inputEmailAddress">Prix Unitaire : </label>
                         <input type="number" class="form-control prixs" name="prix" id="prix" placeholder="8000"; >
@@ -403,72 +405,8 @@
     </div>    
 
 
-    <script type="text/javascript">
-        
-        $("#ventes_prestations").hide();
-        $("#ventes_produits").hide();
+    <script src="{{ asset('../js/demandevente1.js') }}" ></script>
 
-
-
-        function afficher_que_prestations()
-        {
-            
-            $("#ventes_produits").hide(1000, function() 
-            {
-                $("#ventes_articles").hide(1000, function()   
-                {
-                    
-                    $("#ventes_prestations").show(500) 
-
-                    //    
-                });                
-
-                //    
-            });                                
-
-            // 
-        }
-
-        function afficher_que_produits() 
-        {
-            
-            $("#ventes_prestations").hide(1000, function() 
-            {
-                
-                $("#ventes_articles").hide(1000, function()   
-                {
-                    
-                    $("#ventes_produits").show(500) 
-
-                    //    
-                });                
-
-                //    
-            });                                
-
-            // 
-        }
-
-        function afficher_que_articles() 
-        {
-            
-            $("#ventes_prestations").hide(1000, function() 
-            {
-                
-                $("#ventes_produits").hide(1000, function()   
-                {
-                    
-                    $("#ventes_articles").show(500) 
-
-                    //    
-                });                
-
-                //    
-            });                                
-        }    
-
-        //
-    </script>
 
 
     {{--  --}}

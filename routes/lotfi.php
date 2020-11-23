@@ -61,9 +61,9 @@ Route::post('/ModifArticle/{idArticleModif}', 'DemandeVente\ArticleController@Mo
 /*Suppression d'un  dépot*/
 Route::post('/SupprimerArticle/{idArticleSupprimer}', 'DemandeVente\ArticleController@SupprimerArticle');
 
-
 Route::get('/home/vente/DemandeVente', 'DemandeVente\DemandeVenteController@index');
 Route::get('/home/vente/DemandeVenteAttente', 'DemandeVente\DemandeVenteController@DemandeVenteAttente');
+Route::get('/home/vente/DemandeVente/GetPrice','DemandeVente\DemandeVenteController@get_price');
 
 
 

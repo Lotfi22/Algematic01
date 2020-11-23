@@ -27,8 +27,8 @@ class DemandeVenteController extends Controller
 
     	$articles=DB::select("select * from articles order by nom");
 
-        $produits = DB::select("select * from produits order by code_produit");
-
+        $produits = DB::select("select p.id,p.code_produit,p.description,s.quantite, s.prix, s.date_arrivage from produits p, stocks s where s.id_produit = p.id order by code_produit");
+        
     	$clients=DB::select("select * from client_prospects order by code_client");
 
     	$employes=DB::select("select * from employes order by nom");
