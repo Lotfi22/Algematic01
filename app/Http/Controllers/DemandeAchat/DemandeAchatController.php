@@ -737,18 +737,21 @@ class DemandeAchatController extends Controller
       
 
       $produits=DB::select("select * from produits");
-      $fournisseurs=DB::select("select * from fournisseurs");
+      $fournisseurs=DB::select("select * from fournisseurs where anonyme='non'");
+      $anonymes=DB::select("select * from fournisseurs where anonyme='yes'");
       $types=DB::select("select * from type_pieces");
         
 
       
-      return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types'));
+      return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types','anonymes'));
      }
 
 
         public function AddDemandeAchatPrestation(Request $request)
      {
 
+      dd($request->all());
+      
       $testanonyme=$request->anonyme;
 
       $testjoint=$request->joint;

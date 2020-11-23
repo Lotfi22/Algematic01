@@ -273,15 +273,11 @@
 
                         <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/produit" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Produits</span></a></li>
 
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/technique" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span style="font-size: 0.8em;" class="hide-menu">Spécificité Technique</span></a></li>
 
                         {{-- fin produit --}}
 
                         <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Fournisseur</span></a></li>
 
-
-
-                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/fabricant" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fabricant</span></a></li>
 
                         <li class="acacher2"> <a class="waves-effect waves-dark" href="/fournisseur" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fournisseur</span></a></li>
 
@@ -292,9 +288,6 @@
 
                         <li> <a id="achats" class="waves-effect waves-dark" href="/home4" onclick="DemandeAchat(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" >Achat</span></a></li>
 
-
-
-                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/Jointe" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Pièce Jointe</span></a></li>
 
                         <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAchat" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Achat Bien</span></a></li>
 
@@ -774,7 +767,7 @@
     </script>
 
      <script>
-            
+            document.getElementById('fournisseuranonyme').style.display = 'none';
        function yesnoCheckAnonyme() {
             if (document.getElementById('Fournisseur').checked) {
                 document.getElementById('fournisseurdeclare').style.display = 'block';
@@ -790,7 +783,7 @@
     </script>
 
      <script>
-            
+            document.getElementById('Monjoint').style.display = 'block';
        function yesnoCheckJoint() {
             if (document.getElementById('Joint').checked) {
                 document.getElementById('Monjoint').style.display = 'block';
@@ -846,7 +839,50 @@
         //
     </script>
 
-     
+     <script>
+            
+       function FicheTechnique() 
+       {
+            if (document.getElementById('YesFiche').checked) {
+                document.getElementById('dynamic_form').style.display = 'block';
+            } 
+            else if(document.getElementById('NoFiche').checked) {
+                document.getElementById('dynamic_form').style.display = 'none';
+           }
+        }
+
+        //
+    </script>
+
+    <script>
+            
+       function PhotoProduit() 
+       {
+            if (document.getElementById('YesPhoto').checked) {
+                document.getElementById('MaPhoto').style.display = 'block';
+            } 
+            else if(document.getElementById('NoPhoto').checked) {
+                document.getElementById('MaPhoto').style.display = 'none';
+           }
+        }
+
+        //
+    </script>
+
+     <script>
+            
+       function FichePiece() 
+       {
+            if (document.getElementById('YesPiece').checked) {
+                document.getElementById('MaPiece').style.display = 'block';
+            } 
+            else if(document.getElementById('NoPiece').checked) {
+                document.getElementById('MaPiece').style.display = 'none';
+           }
+        }
+
+        //
+    </script>
 
 
     <script>

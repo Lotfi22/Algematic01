@@ -76,9 +76,9 @@
                                <div class="col-md-12 mb-6" >
                                   <div class="form-group">
                                     <label  for="exampleFormControlSelect1"><B >Fournisseur Anonyme</B></label>
-                                    <select name="anonyme" class="form-control" id="exampleFormControlSelect1">
-                                     @foreach($fournisseurs as $fournisseur)
-                                     <option value="{{$fournisseur->id}}"> {{  $fournisseur->nom  }} </option>
+                                    <select name="FournisseurNon" class="form-control" id="exampleFormControlSelect1">
+                                     @foreach($anonymes as $anonyme)
+                                     <option value="{{$anonyme->id}}"> {{  $anonyme->nom  }} </option>
                                       @endforeach
                                      
                                     </select>
@@ -150,7 +150,7 @@
                       </div>
 
                           <div class="col-md-3">
-                              <label class="small mb-1" for="inputEmailAddress">Information du Produit : </label>
+                              <label class="small mb-1" for="inputEmailAddress">Numéro/Dénomination</label>
                               <input type="text" class="form-control quantites" name="facture" id="facture" placeholder="FP001/2020, Contrat 001, BL001 ....";>
                           </div>
                     
@@ -218,7 +218,7 @@
 
                        <br>
 
-                        <h4 ><B>Ajoutez des Produits</B></h4>
+                        <h4><B>Ajoutez des Produits</B></h4>
 
                         
                               <div class="form-row">

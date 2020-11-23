@@ -21,13 +21,14 @@ class ProduitController extends Controller
     	$fabricants=DB::select("select id,nom,marque from fabricants");
     	$sfamilles=DB::select("select id,nom from sous_familles where visible=1");
         $unites=DB::select("select id,description from unites");
-    	$produits=DB::select("select p.id,p.code_produit,p.description,p.photo,p.model,p.prix_achat,p.id_unite,u.description as UniteDescription,p.id_fabricant,p.data,f.nom as NomFabricant,p.id_sous_famille,s.nom as NomFamille
-             from produits p,unites u, fabricants f,sous_familles s 
-            where p.id_unite=u.id and p.id_sous_famille=s.id and p.id_fabricant=f.id and p.visible=1");
+    	$produits=DB::select("select *,u.description as UniteDescription,p.data,p.id_sous_famille,s.nom as NomFamille
+             from produits p,unites u,sous_familles s 
+            where p.id_unite=u.id and p.id_sous_famille=s.id  and p.visible=1");
         $prix=DB::select("select s.id_produit,s.prix from stocks s");
+        $proprietes=DB::select("select * from proprietes");
 
     	
-    	return view('Produit\produit',compact('fabricants','produits','sfamilles','unites','prix'));
+    	return view('Produit\produit',compact('fabricants','produits','sfamilles','unites','prix','proprietes'));
      }
 
      public function AddProduit(Request $request)
@@ -44,6 +45,14 @@ class ProduitController extends Controller
         
         $testnom=$request->input('code');
         $info=DB::select("select description from produits where code_produit='$testnom'");
+
+        $TestProduitBien=$request->input('ProduitBien');
+
+        $TestPhotoYN=$request->input('PhotoYN');
+
+        $TestPieceYN=$request->input('PieceYN');
+
+        $TestFicheYN=$request->input('FicheYN');
        
 
          if (count($info)>0) 
@@ -56,27 +65,101 @@ class ProduitController extends Controller
       
         else
         {
-            $file_extension= $request->photo->getClientOriginalExtension();
-            $file_name=time().'.'.$file_extension;
-            $path='images/produit';
-            $request->photo->move($path,$file_name);
+           
+                if($TestPhotoYN =='yes')
+                {
 
-            $file_extension= $request->detail->getClientOriginalExtension();
-            $file_name2=time().'.'.$file_extension;
-            $path='images/produit';
-            $request->detail->move($path,$file_name2);
+                    $file_extension= $request->photo->getClientOriginalExtension();
+                    $file_name=time().'.'.$file_extension;
+                    $path='images/produit';
+                    $request->photo->move($path,$file_name);
 
-            $produit_unite=$request->input('unite');
-            $produit_sfamille=$request->input('sfamille');
-            $produit_fabricant=$request->input('fabricant');
-            $produit_code=$request->input('code');
-            $produit_description=$request->input('description');
-            $produit_model=$request->input('model');
-            $produit_photo=$file_name;
-            $produit_detail=$file_name2;
-            //$depot->save();
 
-            DB::insert("insert into produits (id_unite,code_produit,description,photo,model,id_sous_famille,id_fabricant,data) values('$produit_unite','$produit_code','$produit_description','$produit_photo','$produit_model','$produit_sfamille','$produit_fabricant','$produit_detail') ");
+                    $produit_unite=$request->input('unite');
+                    $produit_sfamille=$request->input('sfamille');
+                    $produit_code=$request->input('code');
+                    $produit_description=$request->input('description');
+                    $produit_model=$request->input('model');
+                    $produit_photo=$file_name;
+  
+                    //$depot->save();
+
+                    if($TestPieceYN =='yes')
+                    {
+                            
+                            $file_extension= $request->phototechnique->getClientOriginalExtension();
+                            $file_name2=time().'.'.$file_extension;
+                            $path='images/produit';
+                            $request->phototechnique->move($path,$file_name2);
+
+                            DB::insert("insert into produits (id_unite,code_produit,description,photo,model,id_sous_famille,data,prestation,ficheYN) values('$produit_unite','$produit_code','$produit_description','$produit_photo','$produit_model','$produit_sfamille','$file_name2','$TestProduitBien','$TestFicheYN') ");
+
+                            
+                    }
+                    else
+                    {
+                         DB::insert("insert into produits (id_unite,code_produit,description,photo,model,id_sous_famille,pieceYN,prestation,ficheYN) values('$produit_unite','$produit_code','$produit_description','$produit_photo','$produit_model','$produit_sfamille','$TestPieceYN','$TestProduitBien','$TestFicheYN') ");
+                    }
+
+                   
+                }
+
+                else
+                {
+                    $produit_unite=$request->input('unite');
+                    $produit_sfamille=$request->input('sfamille');
+                    $produit_code=$request->input('code');
+                    $produit_description=$request->input('description');
+                    $produit_model=$request->input('model');
+                    
+  
+                    //$depot->save();
+
+                     if($TestPieceYN =='yes')
+                    {
+                            
+                            $file_extension= $request->phototechnique->getClientOriginalExtension();
+                            $file_name2=time().'.'.$file_extension;
+                            $path='images/produit';
+                            $request->phototechnique->move($path,$file_name2);
+
+                            DB::insert("insert into produits (id_unite,code_produit,description,model,id_sous_famille,data,photoYN,prestation,ficheYN) values('$produit_unite','$produit_code','$produit_description','$produit_model','$produit_sfamille','$file_name2','$TestPhotoYN','$TestProduitBien','$TestFicheYN') ");
+                    }
+                    else
+                    {
+                         DB::insert("insert into produits (id_unite,code_produit,description,model,id_sous_famille,pieceYN,photoYN,prestation,ficheYN) values('$produit_unite','$produit_code','$produit_description','$produit_model','$produit_sfamille','$TestPieceYN','$TestPhotoYN','$TestProduitBien','$TestFicheYN') ");
+                    }
+
+                }
+
+                /* if caractéristique == oui (dynamique forme)*/
+
+                $NewProdect=DB::select("select id from produits where id=(select max(id) from produits)");
+                $IdNewProdect=$NewProdect[0]->id;
+
+                if($TestFicheYN == 'yes')
+                {
+                        foreach ($request['dynamic_form']['dynamic_form'] as $key=>$array) 
+                        {
+                                $index = $key +1;
+
+                                $specificite=$array['specificite'];
+                                
+                                $specification=$array['specification'];
+      
+
+                              
+                                     DB::insert("insert into proprietes (id_produit,specificite,specification) 
+                                    values('$IdNewProdect','$specificite','$specification') ;");
+                                
+                                    
+                            
+                        }
+
+                }
+            
+
+            
             
             
             return redirect('/produit')->with('success','Le Nouveau Produit est enregistré avec succée');

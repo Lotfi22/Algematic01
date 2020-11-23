@@ -36,8 +36,7 @@ class FournisseurController extends Controller
     	$this->validate($request,[
             'nom' => 'required|max:300',
             'adresse' => 'required|max:800',
-            'activite' => 'required|max:500',
-            'tele' => 'required|regex:/(0)[0-9]{9}/',
+            'activite' => 'required|max:500'
         
             ]);
 
