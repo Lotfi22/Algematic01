@@ -25,17 +25,15 @@ class DemandeVenteController extends Controller
      	$id = Auth::id();
         $actuel = User::FindOrFail($id);
 
-        
+    	$articles=DB::select("select * from articles order by nom");
 
-    	$articles=DB::select("select * from articles ");
+        $produits = DB::select("select * from produits order by code_produit");
 
-    	$clients=DB::select("select * from client_prospects");
+    	$clients=DB::select("select * from client_prospects order by code_client");
 
-    	$employes=DB::select("select * from employes");
-
-
+    	$employes=DB::select("select * from employes order by nom");
     	
-    	return view('Vente\DemandeVente',compact('employes','clients','articles'));
+    	return view('Vente\DemandeVente',compact('employes','clients','articles','produits'));
     }
 
     public function AddDemandeVente(Request $request)
@@ -112,7 +110,7 @@ class DemandeVenteController extends Controller
             where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id
             order by p.id DESC");
 
-        
+
 
         $ligne_ventes=DB::select("select *,a.nom,a.description,l.total,a.total as PrixArticleAchat from ligne_ventes l, articles a where l.id_article=a.id");
 

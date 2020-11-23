@@ -483,7 +483,7 @@
     <script type="text/javascript">
         
 
-          $(document).ready(function() {
+        $(document).ready(function() {
             var dynamic_form =  $("#dynamic_form").dynamicForm("#dynamic_form","#plus5", "#minus5", {
                 limit:10,
                 formPrefix : "dynamic_form",
@@ -510,9 +510,9 @@
             })
         });
 
-          /*achat prestation*/
+        /*achat prestation*/
 
-          $(document).ready(function() {
+        $(document).ready(function() {
             var dynamic_form2 =  $("#dynamic_form2").dynamicForm("#dynamic_form2","#plus55", "#minus55", {
                 limit:10,
                 formPrefix : "dynamic_form2",
@@ -538,6 +538,35 @@
                 event.preventDefault();
             })
         });
+
+        $(document).ready(function() {
+            var dynamic_form3 =  $("#dynamic_form3").dynamicForm("#dynamic_form3","#plus555", "#minus555", {
+                limit:10,
+                formPrefix : "dynamic_form3",
+                normalizeFullForm : false
+            });
+
+            dynamic_form3.inject([{p_name: 'Hemant',quantity: '123',remarks: 'testing remark'},{p_name: 'Harshal',quantity: '123',remarks: 'testing remark'}]);
+
+            $("#dynamic_form3 #minus55").on('click', function(){
+                var initDynamicId = $(this).closest('#dynamic_form3').parent().find("[id^='dynamic_form3']").length;
+                if (initDynamicId === 2) {
+                    $(this).closest('#dynamic_form3').next().find('#minus55').hide();
+                }
+                $(this).closest('#dynamic_form3').remove();
+            });
+
+            $('form').on('submit', function(event){
+                var values = {};
+                $.each($('form').serializeArray(), function(i, field) {
+                    values[field.name] = field.value;
+                });
+                console.log(values)
+                event.preventDefault();
+            })
+        });
+
+
 
         /*Omar select multiple*/
         $(document).ready(function() {
