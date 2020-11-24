@@ -29,7 +29,7 @@
                       </div>
                       @endif
               
-              <h1 style=" text-align: center; " ><B>Demande d'Achat Préstation</B></h1>     <br>
+              <h1 style=" text-align: center; " ><B>Demande d'Achat </B></h1>     <br>
               <hr>
              
 
@@ -40,17 +40,51 @@
 
                     <div class="modal-body">
 
+                            
+                            <h4 ><B>Type d'achat </B></h4>
+                             <div class="form-row">
+                              
+                                  <div class="custom-control custom-radio">
+                                  <input type="radio" class="custom-control-input" id="TypeBien" name="TypeAchat" value="bien"   onclick="TypeDAchat()" >
+                                  <label class="custom-control-label" for="TypeBien">Achat Bien</label>
+                                </div>
+
+                                <!-- Default checked -->
+                                <div class="custom-control custom-radio">
+                                  <input type="radio" class="custom-control-input" id="TypePrestation" name="TypeAchat" checked value="prestation" onclick="TypeDAchat()">
+                                  <label class="custom-control-label" for="TypePrestation">Achat Préstation</label>
+                                </div>
+                            </div>
+
+                            <br>
+                            <hr>
+
+                            <div class="form-row" id="InfoProduit">
+
+                             <div class="col-md-12 mb-6" >
+                            
+                                 <label for="validationTooltip03"><B>Information du Produit</B></label>
+                                    <input type="text" name="NomProduitPrestation"class="form-control" placeholder="Application Web" required>
+
+                            </div> 
+
+
+
+                          </div>
+
+                          <br>
+                          <hr>
                             <h4 ><B>Fournisseur déclaré ?</B></h4>
                             
                              <div class="form-row">
                                   <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" id="Fournisseur" name="anonyme" value="yes" checked  onclick="yesnoCheckAnonyme()" >
+                                  <input type="radio" class="custom-control-input" id="Fournisseur" name="anonyme" value="non" checked  onclick="yesnoCheckAnonyme()" >
                                   <label class="custom-control-label" for="Fournisseur">Oui</label>
                                 </div>
 
                                 <!-- Default checked -->
                                 <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" id="Anonyme" name="anonyme" value="non" onclick="yesnoCheckAnonyme()">
+                                  <input type="radio" class="custom-control-input" id="Anonyme" name="anonyme" value="yes" onclick="yesnoCheckAnonyme()">
                                   <label class="custom-control-label" for="Anonyme">Non</label>
                                 </div>
                             </div>
@@ -89,19 +123,7 @@
 
                           <hr>
 
-                          <div class="form-row">
-
-                           <div class="col-md-12 mb-6" >
-                          
-                               <label for="validationTooltip03"><B>Information du Produit</B></label>
-                                  <input type="text" name="prestation"class="form-control" placeholder="Application Web" required>
-
-                            </div> 
-
-                          </div>
-
                           <br>
-                          <hr>
 
                        <h4 ><B>Ajouter des pièces jointes</B></h4>
       

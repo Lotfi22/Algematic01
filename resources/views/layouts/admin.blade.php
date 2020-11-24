@@ -289,9 +289,8 @@
                         <li> <a id="achats" class="waves-effect waves-dark" href="/home4" onclick="DemandeAchat(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu" >Achat</span></a></li>
 
 
-                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAchat" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Achat Bien</span></a></li>
 
-                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAchatPrestation" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Achat Préstation</span></a></li>
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAchatPrestation" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande d'Achat</span></a></li>
 
                         
                         <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande en Attente</span></a></li>
@@ -907,6 +906,22 @@
             } 
             else if(document.getElementById('NoPiece').checked) {
                 document.getElementById('MaPiece').style.display = 'none';
+           }
+        }
+
+        //
+    </script>
+
+     <script>
+             document.getElementById('InfoProduit').style.display = 'block';
+       function TypeDAchat() 
+       {    
+           
+            if (document.getElementById('TypeBien').checked) {
+                document.getElementById('InfoProduit').style.display = 'none';
+            } 
+            else if(document.getElementById('TypePrestation').checked) {
+                document.getElementById('InfoProduit').style.display = 'block';
            }
         }
 

@@ -747,21 +747,196 @@ class DemandeAchatController extends Controller
      }
 
 
+
+
+/*******************************************************************************************************/
+
+
+
         public function AddDemandeAchatPrestation(Request $request)
      {
 
-      dd($request->all());
-      
-      $testanonyme=$request->anonyme;
-
-      $testjoint=$request->joint;
-
-      $testremise=$request->RemiseYN;
-
       
 
+      $TypeAchat=$request->TypeAchat; /*done*/
       
-      return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types'));
+      $testanonyme=$request->anonyme; /*done*/
+
+      $testjoint=$request->joint;     /*done*/
+
+      $testremise=$request->RemiseYN;  /*done*/
+
+      $testProduitYN=$request->ProduitYN; /*done*/
+
+      $now = Carbon::now()->format('d/m/Y');
+
+
+            /*savoir le type de fournisseur*/
+
+
+
+      if($testanonyme =='non')
+      {
+          $fournisseur=$request->fournisseur;
+
+      }
+
+      else
+      {
+          $fournisseur=$request->FournisseurNon;
+
+      }
+
+
+     
+
+       
+
+        if($testremise == 'yes')
+        {
+         
+            $remise=$request->input('remise');
+
+            if($TypeAchat =='prestation')
+            {
+
+                $NomPrestation=$request->NomProduitPrestation;
+
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remise,typeachat,NomPrestation) 
+                           values('$fournisseur','$now','$remise','$TypeAchat','$NomPrestation') ");
+
+            }
+
+            else
+            {
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remise) 
+                           values('$fournisseur','$now','$remise') ");
+            }
+
+          
+        }
+
+      else
+      {
+
+           if($TypeAchat =='prestation')
+            {
+
+                $NomPrestation=$request->NomProduitPrestation;
+
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remise,typeachat,NomPrestation) 
+                           values('$fournisseur','$now','$remise','$TypeAchat','$NomPrestation') ");
+
+                 DB::insert("insert into pre_achat (id_fournisseur,date_achat,remiseradio,NomPrestation) 
+          values('$fournisseur','$now','$testremise') ");
+
+            }
+
+            else
+            {
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remise) 
+                           values('$fournisseur','$now','$remise') ");
+            }
+
+  
+          DB::insert("insert into pre_achat (id_fournisseur,date_achat,remiseradio) 
+          values('$fournisseur','$now','$testremise') ");
+
+      }
+
+
+
+      $NewPreAchat=DB::select("select id from pre_achat where id=(select max(id) from pre_achat)");
+
+      $id_pre_achat=$NewPreAchat[0]->id;
+
+
+
+           /* si la saisie des produits alors insertions dans ligne produits */
+
+      if($testProduitYN == 'yes')   
+      {
+           $total=0;
+
+           foreach ($request['dynamic_form']['dynamic_form'] as $key=>$array) 
+            {
+                $index = $key +1;
+                $code_produit=$array['produit'];
+                $id_produit=DB::select("select id  from produits where code_produit='$code_produit'");
+                $id_prod=$id_produit[0]->id;
+                
+                $quanitite=$array['quantite'];
+                $prix=$array['prix'];
+                $designation=DB::select("select description from produits where  code_produit='$code_produit'");
+
+                $trouve=DB::select("select * from ligne_produit l
+                    where l.id_pre_achat='$id_pre_achat' and l.id_produit='$id_prod' ");
+
+                if(count($trouve) == 0)
+                {
+                     DB::insert("insert into ligne_produit (id_pre_achat,id_produit,date_demande,qte_demande,prix) 
+                    values('$id_pre_achat','$id_prod','$now','$quanitite','$prix') ;");
+                }
+
+                    
+            $total=$total+$array['prix']*$array['quantite'];
+
+            }
+
+            DB::update("update pre_achat p set montant='$total' where p.id='$id_pre_achat' ");
+
+
+      }
+
+
+                /* si la saisie des pieces jointes (fap, contart ....) */
+
+       if($testjoint == 'non')    
+      { 
+
+          DB::update("update pre_achat p set pieces_jointes='$testjoint' where p.id='$id_pre_achat' ");
+
+      }
+
+      else  /* Yap there is a product to regster it !! let's go*/
+      {
+
+          foreach ($request['dynamic_form2']['dynamic_form2'] as $key=>$array) 
+            {
+
+                $index = $key +1;
+
+                $IdTypePiece=$array['typepiece'];
+              
+                $facture=$array['facture'];
+
+                $date=$array['date'];
+
+
+                $file_extension= $array['photo']->getClientOriginalExtension();
+                $file_name=time().'.'.$file_extension;
+                $path='images/achat';
+                $array['photo']->move($path,$file_name);
+                $photofacture=$file_name;
+
+                
+
+                
+                 DB::insert("insert into pieces (id_type, id_pre_achat, piece,date_Piece, numero_piece, date_Ajout) 
+                values('$IdTypePiece','$id_pre_achat','$photofacture','$date','$facture','$now') ;");
+            
+
+            }
+
+
+
+      }
+
+
+
+      return redirect('/home/achats/DemandeAttente')->with('success','La demande a été envoyé avec succée');
+
+      //return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types'));
      }
 
 }
