@@ -1,5 +1,5 @@
 $("#ventes_prestations").hide();
-$("#ventes_produits").hide();
+$("#ventes_articles").hide();
 
 function afficher_que_prestations()
 {
@@ -73,28 +73,126 @@ function afficher_que_articles()
     });                                
 }    
 
+id_prochain_select = "";
+
+var li_rah = [{id: "ZZXWEEVBD", code_produit: " ", description: "  "}];
+
 function get_prices(object) 
 {
 
-    var conceptName = $(object).find(":selected").val();
+    var $id = $(object).find(":selected").val();
 
-        $.ajax({
+    var num =(object.id.substr(object.id.length-1))
 
-            type: "post",
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
+    var new_id = "#quantite_dispo"+num;
 
-            type:"POST",
-            url:"/home/vente/DemandeVente/GetPrice",
-            data:{},
+    var prix_new_id = "#prix_prod"+num;
 
-            success:function(data) 
-            {
-                
-                var depart = data['depart']; 
+    svt_num = parseInt(num)+1;
 
-                console.log(depart);
-            }
-        });    
+    id_prochain_select = "#produits"+(svt_num)
+
+    for (var i = 0; i < produits.length; i++) 
+    {
+        
+        if (produits[i].id == $id)
+        {
+            
+            produits.splice(i, 1);
+            
+            //
+        }
+
+        //
+    }
+
+
+    $.ajax({
+        headers: 
+        {
+           'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        },                    
+        type:"POST",
+        url:"/home/vente/DemandeVente/GetPrice",
+        data:{id:$id},
+        
+        success:function(data) 
+        {   
+
+            console.log(data);
+
+            $(new_id).val(data.quantite);
+
+            $(prix_new_id).val(data.prix);  
+
+            $("#"+object.id).prop('disabled', true);             
+
+            //
+        }
+    }); 
+
+    // body...
+}
+
+function get_stock(object) 
+{
+    
+    var num =(object.id.substr(object.id.length-1))
+
+    var new_id = "#quantite_dispo"+num;
+
+    var qte_dispo = $(new_id).val()
+
+    var qte_demandee = ($(object).val())
+    
+    if(parseInt(qte_demandee) > parseInt(qte_dispo))
+    {
+            
+        $(new_id).parent().fadeToggle(1000).fadeToggle(1000).fadeToggle(1000).fadeToggle(1000);
+        
+        $(new_id).parent().removeClass("alert alert-success").addClass("alert alert-danger");
+
+        //
+    }
+    else
+    {
+
+        $(new_id).parent().removeClass("alert alert-danger").addClass("alert alert-success");        
+
+        //
+    }
+
+    // body...
+}
+
+function fit_select() 
+{
+    setTimeout(function()
+    { 
+    
+        console.log(id_prochain_select);
+        
+        prochain = (id_prochain_select.substr(id_prochain_select.length-1))
+
+/*        var past = parseInt(prochain) - 1;
+
+        $("#produits"+past).prop('disabled', true);
+*/
+        console.log(produits);
+        
+        $(id_prochain_select).html(" <option value =\" \">  </option>");
+
+        $.each(produits, function(key, value) 
+        {   
+            $(id_prochain_select).append($("<option></option>")
+                                .attr("value", value.id)
+                                .text(value.code_produit + ' | ' + value.description)); 
+        });
+
+        //
+    }, 1000);
+    
+
 
     // body...
 }

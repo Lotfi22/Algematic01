@@ -65,12 +65,12 @@
 
                                 <div class="col-md-6 mb-3">
                                     <label for="validationTooltip01"><B>Réferance</B></label>
-                                    <input type="text"  name="nom" class="form-control" placeholder="A001" required>
+                                    <input type="text"  name="Réferance" class="form-control" placeholder="A001" required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                     <label for="validationTooltip02"><B>Description</B></label>
-                                    <input type="text" name="description"class="form-control"  placeholder="Desc de l'article" required>
+                                    <input type="text" name="description_article"class="form-control"  placeholder="Desc de l'article" required>
                                 </div>
                             </div>
                                   
@@ -147,7 +147,7 @@
         <th scope="col"><B>description</B></th>
         <th scope="col"><B>Infos</B></th>
         <th scope="col"><B>Date</B></th>
-        <th style="text-align: center;"><B>Plus</B></th>
+        <th style="text-align: center;"><B>Action</B></th>
         {{--  --}}
     </tr>
 </thead>
@@ -216,48 +216,8 @@
 
         <td>{!! substr($article->created_at,0,10) !!} - {!! substr($article->created_at,10,6) !!}</td>
 
-        <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFarticle{{$article->id}}">
-        Modifier
-        </button>
+        <td>
 
-        <!-- Boutom d'Ajouter une Maman -->
-        <div class="modal fade" id="exampleModalMODIFarticle{{$article->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nouvelles Infos</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-        <form class="needs-validation" novalidate action="/ModifProduit/{{$produit->id}}" method="POST" enctype="multipart/form-data">
-        {{ csrf_field()}}
-        <div class="modal-body">
-        <div class="form-row">
-
-        <div class="col-md-6 mb-3">
-          <label for="validationTooltip01"><B>Code Produit</B></label>
-          <input type="text"  name="code" class="form-control" placeholder="A001" required>
-        </div>
-
-        <div class="col-md-6 mb-3">
-          <label for="validationTooltip02"><B>Description</B></label>
-          <input type="text" name="description"class="form-control"  placeholder="EL HAMIZ" required>
-        </div>
-        </div>
-
-
-
-        </div>
-
-        <div class="modal-footer">
-        <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
-        <button type="submit" class="btn-sm btn btn-primary">Modifier</button>
-        </div>
-        </form>
-        </div>
-        </div>
-        </div>
         
         <button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERarticle{{$article->id}}">
         Supprimer
@@ -265,7 +225,7 @@
 
         <!-- Boutom d'Ajouter une Maman -->
         <div class="modal fade" id="exampleModalSUPPRIMERarticle{{$article->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
         <div class="modal-content">
         <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Voulez vous vraiment Supprimer</h5>
@@ -273,12 +233,12 @@
         <span aria-hidden="true">&times;</span>
         </button>
         </div>
-        <form class="needs-validation" novalidate action="/SupprimerProduit/{{$produit->id}}" method="POST">
+        <form class="needs-validation" novalidate action="/Supprimerarticle/{{$article->id}}" method="POST">
         {{ csrf_field()}}
 
         <div class="modal-footer">
-        <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
-        <button type="submit" class="btn-sm btn btn-danger">Supprimer</button>
+        <button type="button" class="btn btn-outline-secondary col-md-5" data-dismiss="modal">Annuler</button>
+        <button type="submit" class="btn btn-outline-danger col-md-6">Supprimer</button>
         </div>
         </form>
         </div>

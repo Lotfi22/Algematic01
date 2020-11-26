@@ -21,19 +21,26 @@ class DemandeVenteController extends Controller
 
     public function index()
     {
+        /*dd(User::asLetters("1003,66"));*/
 
      	$id = Auth::id();
+
         $actuel = User::FindOrFail($id);
 
     	$articles=DB::select("select * from articles order by nom");
 
-        $produits = DB::select("select p.id,p.code_produit,p.description,s.quantite, s.prix, s.date_arrivage from produits p, stocks s where s.id_produit = p.id order by code_produit");
+        $produits = DB::select("select p.id,p.code_produit,p.description from produits p order by code_produit");
         
-    	$clients=DB::select("select * from client_prospects order by code_client");
+
+        $produitss = DB::select("select p.id,p.code_produit,p.description from produits p order by code_produit");
+    	
+        $clients=DB::select("select * from client_prospects order by code_client");
 
     	$employes=DB::select("select * from employes order by nom");
+
+        $produitss = json_encode($produitss);
     	
-    	return view('Vente\DemandeVente',compact('employes','clients','articles','produits'));
+    	return view('Vente\DemandeVente',compact('employes','clients','articles','produits','produitss'));
     }
 
     public function AddDemandeVente(Request $request)
@@ -141,6 +148,31 @@ class DemandeVenteController extends Controller
     }
 
 
+
+    public function get_price(Request $request)
+    {
+        
+        $qte = DB::select("select quantite,prix from stocks where id_produit = \"$request->id\" ");
+
+        if(count($qte) > 0)
+        {
+
+            $qte = $qte[0];
+
+            //
+        }
+        else
+        {
+
+            $qte = ["quantite" => 0 , "prix"=>""];
+            
+            //
+        }
+
+        return response()->json($qte);        
+
+        # code...
+    }    
 
 
     public function VenteFactureProformat(Request $request,$idPreVente)
