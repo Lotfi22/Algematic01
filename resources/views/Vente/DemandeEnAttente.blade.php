@@ -30,7 +30,7 @@
 
     <div>
         
-        <table id="table_id" class="table table-striped table-dark display">
+        <table id="table_id" class="table-responsive table-striped table-dark display">
           
             <thead>
             

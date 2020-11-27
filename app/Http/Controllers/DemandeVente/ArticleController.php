@@ -21,13 +21,13 @@ class ArticleController extends Controller
     }
 
     public function index()
-     {
+    {
 
      	$id = Auth::id();
         $actuel = User::FindOrFail($id);
 
         
-    	$produits=DB::select("select p.id,p.code_produit,p.description,s.quantite,s.prix
+    	$produits=DB::select("select p.id, p.code_produit,p.description,s.quantite,s.prix
     		from produits p, stocks s
     		where p.id=s.id_produit  ");
 
@@ -36,35 +36,20 @@ class ArticleController extends Controller
 
     	$employes=DB::select("select * from employes");
 
-    	$articles=DB::select("select * from articles");
+    	$articles=DB::select("select * from articles where visible = 1");
 
     	$produit_article=DB::select("select * from prix_vente_produits p,produits d where d.id=p.id_produit");
     	
     	return view('Vente\Articles',compact('produits','clients','employes','articles','produit_article'));
-     }
+    }
 
 
-     public function AddArticle(Request $request)
+    public function AddArticle(Request $request)
     {
     	$this->validate($request,[
             'nom' => 'required|max:300',
             'description' => 'required|max:1000'
             ]);
-
-    	/*
-    	$testnom=$request->input('nom');
-        $info=DB::select("select count(*) as number from depots where nom='$testnom'");
-       
-        $info = (array_pluck($info,'number')[0]); 
-
-         if ($info>0) 
-               {
-                   
-                session()->flash('notif' , ' Erreur Oupss Ce Nom de dépot existe déja  !!! ');
-
-                return redirect()->back(); 
-               }
-		*/
         
         $nom=$request->input('nom');
         $description=$request->input('description');
@@ -97,4 +82,22 @@ class ArticleController extends Controller
         
        return redirect('/article')->with('success','Article Ajouté avec succée');
     }
+
+    public function SupprimerArticle($id)
+    {
+
+        DB::update("update articles a set visible = 0 where a.id=\"$id\" ");
+
+        session()->flash('notification.message' , "Article \"$id\" supprimé avec succés");
+
+        session()->flash('notification.type' , 'warning');         
+
+        return back();
+
+
+        # code...
+    }
+
+
+    //
 }
