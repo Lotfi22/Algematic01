@@ -190,13 +190,13 @@
 
                             <a class="nav-link waves-effect waves-dark" onclick="event.preventDefault();
 
-                                document.getElementById('logout-form').submit();" href="{{ url('/logout') }}"><img src="{{ asset('../nabila/assets/images/1.jpg') }}" alt="user" class="profile-pic" />
+                                document.getElementById('logoutform').submit();" href="{{ url('/logout') }}"><img src="{{ asset('../nabila/assets/images/1.jpg') }}" alt="user" class="profile-pic" />
 
                             </a>
 
 
 
-                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            <form id="logoutform" action="{{ url('/logout') }}" method="POST" style="display: none;">
 
                                 {{ csrf_field() }}
 
@@ -294,6 +294,8 @@
 
                         
                         <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande en Attente</span></a></li>
+
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAttente2" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Achats</span></a></li>
                         
                         {{-- fin achat --}}
 
@@ -423,10 +425,15 @@
                 @yield('content')
 
 
+
                 {{--  --}}
             </div>    
         </div>
     </div>
+
+
+
+
 
     <!-- ============================================================== -->
 

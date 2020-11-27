@@ -35,71 +35,110 @@
                       <br>
    
 
-    <div>
-        <table class="table table-striped table-dark"  id="table_id" class="display">
-          <thead>
+
+  <table class="table table-striped table-dark"  id="table_id" class="display">
+      <thead>
             <tr>
-              <th scope="col"><B>N° FP</B></th>
-              <th scope="col"><B>Photo FP</B></th>
-              <th scope="col"><B>Infos Demande</B></th>
-              <th scope="col"><B>Achat</B></th>
-              @if($privilege ?? '' == 1)
-              <th scope="col"><B>Valider</B></th>
-              @endif
-               @if($privilege ?? '' == 1)
-              <th scope="col"><B>Refuser</B></th>
-              @endif
+                <th scope="col"><B>Type</B></th>
+                <th scope="col"><B>Date</B></th>
+                <th scope="col"><B>Fournisseur</B></th>
+                <th scope="col"><B>Informations</B></th>
+                <th scope="col"><B>Achat</B></th>
+                @if($privilege ?? '' == 1)
+                  <th scope="col"><B>Valider</B></th>
+                @endif
+                   @if($privilege ?? '' == 1)
+                <th scope="col"><B>Refuser</B></th>
+                @endif
             </tr>
-          </thead>
+      </thead>
           <tbody>
             @foreach($presachats as $preachat)
             <tr>
-              <td scope="row"><B>{{$preachat->num_facture_proformat}}</B></td>
-              <td><!-- Photo Facture proformat -->
-                  <button type="button" class="btn-sm btn btn-secondary" data-toggle="modal" data-target="#staticBackdrop{{$preachat->num_facture_proformat}}">
-                    Photo FP
-                  </button>
 
-                  <!-- Modal -->
-                  <div class="modal fade" id="staticBackdrop{{$preachat->num_facture_proformat}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="staticBackdropLabel">Photo_FP</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <img width="100%" src="{{asset('images/DemandeAchat/'.$preachat->facture_proformat_photo ?? "nimi")}}">
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
+              <td scope="row"><B>{{$preachat->typeachat}}</B></td>
 
-               <td>
-                    <button type="button" class="btn-sm btn btn-warning" data-toggle="modal" data-target="#InfosDemande{{$preachat->id}}">
-                       Infos
+              <td scope="row"><B>{{$preachat->date_achat}}</B></td>
+
+              <td scope="row">
+                  
+                  <button type="button" class="btn-sm btn btn-warning" data-toggle="modal" data-target="#Fournisseur{{$preachat->id}}">
+                       Fournisseur
                     </button>
 
-                    <!-- Infos Demande Achat -->
-                    <div class="modal fade" id="InfosDemande{{$preachat->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <!-- Infos Fournis -->
+                    <div class="modal fade bd-example-modal-xl" id="Fournisseur{{$preachat->id}}" tabindex="-1" aria-labelledby="FournisseurmyHugeModalLabel{{$preachat->id}}" aria-hidden="true">
                       <div class="modal-dialog modal-lg">
                         <div class="modal-content">
 
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Informations sur la Demande</h5>
+                            <h5 class="modal-title" id="FournisseurmyHugeModalLabel{{$preachat->id}}">Informations du Fournisseur</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                                 
-                                  <h3 style="text-align: center;" ><B>Liste des Produits demandés</B></h3>
-                                   <table  id="table_id" class="display" style="width:100%">
+                                  
+                             <table  id="table_id" class="display" style="width:100%">
+
+                                <thead>
+                                  <tr>
+                                    <th scope="col"><B>Nom</B></th>
+                                    <th scope="col"><B>Adresse</B></th>
+                                    <th scope="col"><B>Activite</B></th>
+                                    <th scope="col"><B>Tele</B></th>
+                                    <th scope="col"><B>Fax</B></th>
+                                    <th scope="col"><B>Email</B></th>
+                                    <th scope="col"><B>Fabricant</B></th>
+                                    <th scope="col"><B>Anonyme</B></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                 
+                                  <tr>
+                                     <td scope="row"><B>{{$preachat->nom}}</B></td>
+                                     <td scope="row"><B>{{$preachat->adresse}}</B></td>
+                                     <td scope="row"><B>{{$preachat->activite}}</B></td>
+                                     <td scope="row"><B>{{$preachat->tele}}</B></td>
+                                     <td scope="row"><B>{{$preachat->fax}}</B></td>
+                                     <td scope="row"><B>{{$preachat->email}}</B></td>
+                                     <td scope="row"><B>{{$preachat->fabricant}}</B></td>
+                                     <td scope="row"><B>{{$preachat->anonyme}}</B></td>
+                                  </tr>
+
+                              </tbody>
+                            </table>
+                           
+                                <div class="modal-footer">
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Fermer</
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+
+              </td>
+
+               <td>
+                    <button type="button"  class="btn-sm btn btn-warning"  data-toggle="modal" data-target="#InfosDemande{{$preachat->id}}">
+                       Infos Demande
+                    </button>
+
+                    <!-- Liste des produits 1er buttom -->
+                    <div class="modal fade" id="InfosDemande{{$preachat->id}}" tabindex="-1" aria-labelledby="InfosDemandeexampleModalLabel{{$preachat->id}}" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="InfosDemandeexampleModalLabel{{$preachat->id}}">Informations sur la Demande</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                                
+                                  <h3 style="text-align: center;"  ><B>Liste des Produits demandés</B></h3>
+                                   <table   style="width:100%">
                                       <thead>
                                         <tr>
                                           <th scope="col"><B>Code_Produit</B></th>
@@ -140,6 +179,7 @@
                              <h3 style="text-align: center;" ><B>Remise: {{$preachat->remise}} %</B></h3>
                              <h3 style="text-align: center;" ><B>Montant Avec remise: {{$preachat->montant - ($preachat->montant * $preachat->remise / 100)}}</B></h3>
                              @endif
+                             <hr>
                                 <div class="modal-footer">
                             <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Fermer</
                           </div>
@@ -148,7 +188,16 @@
                         </div>
                       </div>
                     </div>
+
+                    <!--Fin  Liste des produits 1er buttom -->
+
+                   
+
                 </td>
+
+             
+
+              
 
               <td>
 
@@ -473,7 +522,7 @@
             @endforeach
           </tbody>
         </table>
-    </div>
+
 
 
 

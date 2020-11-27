@@ -23,7 +23,7 @@ class DemandeAchatController extends Controller
      {
 
      	$id = Auth::id();
-        $actuel = User::FindOrFail($id);
+      $actuel = User::FindOrFail($id);
 
         
 
@@ -130,19 +130,147 @@ class DemandeAchatController extends Controller
 	 }
 
 
+   public function DemandeAttente2()
+   {
+
+        
+
+      $presachats=DB::select("select *,p.id as idpreachat from pre_achat p,fournisseurs f where p.id_fournisseur=f.id ");
+
+      $pieces=DB::select(" select *,p.id as IdPiece from pieces p, type_pieces t
+                            where p.id_type=t.id ");
+      
+      $nature_doc_payments=DB::select("select * from nature_doc_payment");
+
+      $produits=DB::select("select * from stocks  ");
+
+      $produits2=DB::select("select l.id_pre_achat,d.code_produit,l.id_produit,l.qte_demande,l.prix as nv_prix
+            from  ligne_produit l, produits d
+            where l.id_produit=d.id  ");
+
+     
+      $nvproduits=DB::select("select l.id_produit,l.id_pre_achat,p.code_produit,p.description
+        from ligne_produit l, produits p where l.id_produit=p.id");
+
+      $employes=DB::select("select * from employes ");
+      
+      $etageres=DB::select("select * from etageres where id not in ( select id_etagere from arrivages) ");
+
+      $id = Auth::id();
+      $actuel = User::FindOrFail($id);
+
+      $privilege=$actuel->privilege;
+
+      
+      return view('Achat\AchatAttente2',compact('presachats','nature_doc_payments','privilege','produits','employes','etageres','nvproduits','produits2','pieces'));
+
+   }
+
+
+   /*Telecharger une piece*/
+
+    public function TelechargerPiece($IdPiece)
+    {
+
+      
+      
+       $MaPiece=DB::select(" select * from pieces where id='$IdPiece'");
+
+       $piece=$MaPiece[0]->piece;
+
+       $file=public_path()."/images/achat/$piece";
+
+       $extention = pathinfo($piece, PATHINFO_EXTENSION);
+
+       if($extention == 'jpg')
+       {
+
+          $headers= array('Content_type:  application/jpg');
+
+          return Response::download($file,"PhotoJointe",$headers);
+       }
+
+       if($extention == 'jpeg')
+       {
+
+          $headers= array('Content_type:  application/jpeg');
+
+          return Response::download($file,"PhotoJointe",$headers);
+       }
+
+       if($extention == 'PNG')
+       {
+
+          $headers= array('Content_type:  application/PNG');
+
+          return Response::download($file,"PhotoJointe",$headers);
+       }
+
+       if($extention == 'pdf')
+       {
+
+          $headers= array('Content_type:  application/pdf');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       if($extention == 'docx')
+       {
+
+          $headers= array('Content_type:  application/docx');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       if($extention == 'docx')
+       {
+
+          $headers= array('Content_type:  application/docx');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       if($extention == 'doc')
+       {
+
+          $headers= array('Content_type:  application/doc');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+
+       if($extention == 'xlsx')
+       {
+
+          $headers= array('Content_type:  application/xlsx');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       
+
+       
+
+       
+    }
+
+
+
+
+
 
 	 public function DemandeAttente()
 	 {
 
         
 
-    	$presachats=DB::select("select * from pre_achat ");
+    	$presachats=DB::select("select * from pre_achat p,fournisseurs f where p.id_fournisseur=f.id ");
 
     	$nature_doc_payments=DB::select("select * from nature_doc_payment");
 
     	$produits=DB::select("select * from stocks  ");
 
-        $produits2=DB::select("select l.id_pre_achat,d.code_produit,l.id_produit,l.qte_demande,l.prix as nv_prix
+      $produits2=DB::select("select l.id_pre_achat,d.code_produit,l.id_produit,l.qte_demande,l.prix as nv_prix
             from  ligne_produit l, produits d
             where l.id_produit=d.id  ");
 
@@ -154,10 +282,10 @@ class DemandeAchatController extends Controller
     	
     	$etageres=DB::select("select * from etageres where id not in ( select id_etagere from arrivages) ");
 
-        $id = Auth::id();
-        $actuel = User::FindOrFail($id);
+      $id = Auth::id();
+      $actuel = User::FindOrFail($id);
 
-        $privilege=$actuel->privilege;
+      $privilege=$actuel->privilege;
 
     	
     	return view('Achat\AchatAttente',compact('presachats','nature_doc_payments','privilege','produits','employes','etageres','nvproduits','produits2'));
@@ -824,23 +952,23 @@ class DemandeAchatController extends Controller
 
                 $NomPrestation=$request->NomProduitPrestation;
 
-                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remise,typeachat,NomPrestation) 
-                           values('$fournisseur','$now','$remise','$TypeAchat','$NomPrestation') ");
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remiseradio, typeachat, NomPrestation) 
+                           values('$fournisseur','$now','$testremise','$TypeAchat','$NomPrestation') ");
 
-                 DB::insert("insert into pre_achat (id_fournisseur,date_achat,remiseradio,NomPrestation) 
-          values('$fournisseur','$now','$testremise') ");
+               
 
             }
 
             else
             {
-                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remise) 
-                           values('$fournisseur','$now','$remise') ");
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remiseradio) 
+                           values('$fournisseur','$now','$testremise') ");
+
+               
             }
 
   
-          DB::insert("insert into pre_achat (id_fournisseur,date_achat,remiseradio) 
-          values('$fournisseur','$now','$testremise') ");
+       
 
       }
 
