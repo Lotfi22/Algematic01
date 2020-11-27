@@ -166,6 +166,11 @@
                                           <th scope="col"><B>Qte Demandée</B></th>
                                           <th scope="col"><B>Ancien_Prix</B></th>
                                           <th scope="col"><B>Nv_Prix</B></th>
+                                          <th scope="col"><B>Photo</B></th>
+                                          <th scope="col"><B>Fiche</B></th>
+                                          <th scope="col"><B>Caractéristiques</B></th>
+
+                                         
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -189,6 +194,32 @@
                                                @endforeach
                                            </td>
                                            <td scope="row"><B>{{$prod2->nv_prix}}</B></td>
+
+                                          @if($prod2->photoYN =='yes')
+                                            <td scope="row"><a class="btn btn-primary" href="/home/achats/TelechargerProduitPhoto/{{$prod2->id_produit}}" role="button">Télécharger</a>
+                                             </td>
+                                          @endif
+                                           @if($prod2->photoYN =='non')
+                                            <td scope="row">Rien</td>
+                                          @endif
+
+                                          @if($prod2->pieceYN =='yes')
+                                            <td scope="row"><a class="btn btn-primary" href="/home/achats/TelechargerProduitFiche/{{$prod2->id_produit}}" role="button">Télécharger</a>
+                                             </td>
+                                          @endif
+                                           @if($prod2->pieceYN =='non')
+                                            <td scope="row">Rien</td>
+                                          @endif
+
+                                          @if($prod2->ficheYN =='yes')
+                                            <td scope="row"><a class="btn btn-primary" href="/home/achats/TelechargerProduitCaracteristique/{{$prod2->id_produit}}" role="button">Télécharger</a>
+                                             </td>
+                                          @endif
+                                           @if($prod2->ficheYN =='non')
+                                            <td scope="row">Rien</td>
+                                          @endif
+
+
                                         </tr>
                                         @endif
                                         @endforeach

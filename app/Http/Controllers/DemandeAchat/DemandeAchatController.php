@@ -142,9 +142,9 @@ class DemandeAchatController extends Controller
       
       $nature_doc_payments=DB::select("select * from nature_doc_payment");
 
-      $produits=DB::select("select * from stocks  ");
+      $produits=DB::select("select * from stocks");
 
-      $produits2=DB::select("select l.id_pre_achat,d.code_produit,l.id_produit,l.qte_demande,l.prix as nv_prix
+      $produits2=DB::select("select *,d.id as id_produit,l.id_pre_achat,d.code_produit,l.id_produit,l.qte_demande,l.prix as nv_prix,d.photo,d.data
             from  ligne_produit l, produits d
             where l.id_produit=d.id  ");
 
@@ -255,6 +255,292 @@ class DemandeAchatController extends Controller
     }
 
 
+
+    public function TelechargerProduitPhoto($IdProduit)
+    {
+
+      
+      
+       $MaPiece=DB::select(" select * from produits where id='$IdProduit'");
+
+       $piece=$MaPiece[0]->photo;
+
+       $file=public_path()."/images/produit/$piece";
+
+       $extention = pathinfo($piece, PATHINFO_EXTENSION);
+
+       if($extention == 'jpg')
+       {
+
+          $headers= array('Content_type:  application/jpg');
+
+          return Response::download($file,"PhotoProduit",$headers);
+       }
+
+       if($extention == 'jpeg')
+       {
+
+          $headers= array('Content_type:  application/jpeg');
+
+          return Response::download($file,"PhotoProduit",$headers);
+       }
+
+       if($extention == 'PNG')
+       {
+
+          $headers= array('Content_type:  application/PNG');
+
+          return Response::download($file,"PhotoProduit",$headers);
+       }
+
+       if($extention == 'pdf')
+       {
+
+          $headers= array('Content_type:  application/pdf');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       if($extention == 'docx')
+       {
+
+          $headers= array('Content_type:  application/docx');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       if($extention == 'docx')
+       {
+
+          $headers= array('Content_type:  application/docx');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       if($extention == 'doc')
+       {
+
+          $headers= array('Content_type:  application/doc');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+
+       if($extention == 'xlsx')
+       {
+
+          $headers= array('Content_type:  application/xlsx');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       
+
+       
+
+       
+    }
+
+
+    public function TelechargerProduitFiche($IdProduit)
+    {
+
+      
+      
+       $MaPiece=DB::select(" select * from produits where id='$IdProduit'");
+
+       $piece=$MaPiece[0]->data;
+
+       $file=public_path()."/images/produit/$piece";
+
+       $extention = pathinfo($piece, PATHINFO_EXTENSION);
+
+       if($extention == 'jpg')
+       {
+
+          $headers= array('Content_type:  application/jpg');
+
+          return Response::download($file,"FicheProduit",$headers);
+       }
+
+       if($extention == 'jpeg')
+       {
+
+          $headers= array('Content_type:  application/jpeg');
+
+          return Response::download($file,"FicheProduit",$headers);
+       }
+
+       if($extention == 'PNG')
+       {
+
+          $headers= array('Content_type:  application/PNG');
+
+          return Response::download($file,"FicheProduit",$headers);
+       }
+
+       if($extention == 'pdf')
+       {
+
+          $headers= array('Content_type:  application/pdf');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       if($extention == 'docx')
+       {
+
+          $headers= array('Content_type:  application/docx');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       if($extention == 'docx')
+       {
+
+          $headers= array('Content_type:  application/docx');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       if($extention == 'doc')
+       {
+
+          $headers= array('Content_type:  application/doc');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+
+       if($extention == 'xlsx')
+       {
+
+          $headers= array('Content_type:  application/xlsx');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       
+
+       
+
+       
+    }
+
+
+    public function TelechargerProduitCaracteristique($IdProduit)
+    {
+
+
+        $MonProduit=DB::select("select * from produits where id='$IdProduit' ");
+
+        $proprietes=DB::select(" select * from proprietes where id_produit='$IdProduit' ");
+        
+        $dompdf = new Dompdf();
+
+        $html = '<!doctype html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <title>Bon de Commande </title>
+        <style type="text/css">
+            * {
+                font-family: Verdana, Arial, sans-serif;
+            }
+            table{
+            }
+            tfoot tr td{
+                font-weight: bold;
+            }
+            .gray {
+                background-color: lightgray;
+            }
+            tbody {
+                width: 100%;
+            }
+        </style>
+        </head>
+        <body>
+          <table width="100%">
+            <tr>
+                <td valign="top"></td>
+                <td align="left">
+
+                    <h1><B> ALGEMATIC</B></h1>
+                      <h2 style="text-align: center;">Caractéristiques Téchniques du Produit</h2>
+                      <h3 style="text-align: center;">Produit: '.$MonProduit[0]->code_produit.'   </h3>
+                     
+
+                </td>
+                <td align="right">
+                    <img src=""  />
+                </td>
+            </tr>
+          </table>
+          
+          <br/>
+          <table width="100%">
+            <thead style="background-color: lightgray;">
+              <tr>
+                <th>Designation</th>
+                <th>Description</th>
+                
+              </tr>
+            </thead>
+            <tbody>';
+           
+            foreach ($proprietes as $propre) 
+            {
+                    
+
+               
+
+                    $Designation=$propre->specificite;
+
+                    $Description=$propre->specification;
+
+                    
+
+                    
+
+                        
+                    $html.='<tr class="item">
+                    
+                    <td>
+                        '.$Designation.'
+                    </td>
+                    <td>
+
+                        '.$Description.'
+                    </td>
+                   
+                </tr>';
+
+               
+            }
+
+            
+
+           
+
+        $html.='
+            </tbody>
+            <tfoot>';
+           
+            
+            $html.='</tfoot>
+          </table>
+          
+
+        </body>
+        </html>';
+
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        $dompdf->stream("CaracteristiquesProduit", array('Attachment'=>1));
+
+
+    }
 
 
 
@@ -1062,7 +1348,7 @@ class DemandeAchatController extends Controller
 
 
 
-      return redirect('/home/achats/DemandeAttente')->with('success','La demande a été envoyé avec succée');
+      return redirect('/home/achats/AchatAttente2')->with('success','La demande a été envoyé avec succée');
 
       //return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types'));
      }

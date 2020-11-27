@@ -173,6 +173,12 @@ Route::post('/home/achats/ValiderPreAchat/{idpreachat}/{numfactureproformat}', '
 
 Route::get('/home/achats/TelechargerPiece/{IdPiece}', 'DemandeAchat\DemandeAchatController@TelechargerPiece');
 
+Route::get('/home/achats/TelechargerProduitPhoto/{IdProduit}', 'DemandeAchat\DemandeAchatController@TelechargerProduitPhoto');
+
+Route::get('/home/achats/TelechargerProduitFiche/{IdProduit}', 'DemandeAchat\DemandeAchatController@TelechargerProduitFiche');
+
+Route::get('/home/achats/TelechargerProduitCaracteristique/{IdProduit}', 'DemandeAchat\DemandeAchatController@TelechargerProduitCaracteristique');
+
 /***************************** Achat Prestation ************************/
 
 Route::get('/home/achats/DemandeAchatPrestation', 'DemandeAchat\DemandeAchatController@indexPrestation');
