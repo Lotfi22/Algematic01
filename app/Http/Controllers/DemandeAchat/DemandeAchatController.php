@@ -1361,4 +1361,46 @@ class DemandeAchatController extends Controller
       //return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types'));
      }
 
+
+     /********************************ARRIVAG**************************************************************/
+
+     public function AchatArrivage()
+     {
+
+       
+
+       $presachats=DB::select("select *,p.id as idpreachat from pre_achat p,fournisseurs f where p.id_fournisseur=f.id and p.demande_valide='1'");
+
+       $pieces=DB::select(" select *,p.id as IdPiece from pieces p, type_pieces t
+                            where p.id_type=t.id ");
+      
+      $nature_doc_payments=DB::select("select * from nature_doc_payment");
+
+      $produits=DB::select("select * from stocks");
+
+      $produits2=DB::select("select *,d.id as id_produit,l.id_pre_achat,d.code_produit,l.id_produit,l.qte_demande,l.prix as nv_prix,d.photo,d.data
+            from  ligne_produit l, produits d
+            where l.id_produit=d.id  ");
+
+      $types=DB::select("select * from type_pieces");
+
+     
+      $nvproduits=DB::select("select l.id_produit,l.id_pre_achat,p.code_produit,p.description
+        from ligne_produit l, produits p where l.id_produit=p.id");
+
+      $employes=DB::select("select * from employes ");
+      
+      $etageres=DB::select("select * from etageres where id not in ( select id_etagere from arrivages) ");
+
+      $id = Auth::id();
+      $actuel = User::FindOrFail($id);
+
+      $privilege=$actuel->privilege;
+
+      
+      return view('Achat\AchatArrivage',compact('presachats','nature_doc_payments','privilege','produits','employes','etageres','nvproduits','produits2','pieces','types'));
+
+
+   
+     }
 }

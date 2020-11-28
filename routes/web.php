@@ -181,6 +181,11 @@ Route::get('/home/achats/TelechargerProduitCaracteristique/{IdProduit}', 'Demand
 
 /***************************** Achat Prestation ************************/
 
+
+Route::get('/home/achats/AchatArrivage', 'DemandeAchat\DemandeAchatController@AchatArrivage');
+
+/***************************** Achat Prestation ************************/
+
 Route::get('/home/achats/DemandeAchatPrestation', 'DemandeAchat\DemandeAchatController@indexPrestation');
 
 Route::post('/home/achats/AddDemandeAchatPrestation', 'DemandeAchat\DemandeAchatController@AddDemandeAchatPrestation');

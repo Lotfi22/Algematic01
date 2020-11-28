@@ -292,10 +292,10 @@
 
                         <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAchatPrestation" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande d'Achat</span></a></li>
 
-                        
-                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande en Attente</span></a></li>
 
                         <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAttente2" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Achats</span></a></li>
+
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/AchatArrivage" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Achat/Arrivage</span></a></li>
                         
                         {{-- fin achat --}}
 
