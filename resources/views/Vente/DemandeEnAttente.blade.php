@@ -28,22 +28,25 @@
     
     <br>
 
-    <div>
+    <div class="row">
         
-        <table id="table_id" class="table-responsive table-striped table-dark display">
+        <table id="table_id" style="" class="table-responsive table-striped table-dark display">
           
             <thead>
             
                 <tr>
                       
-                    <th scope="col"><B>Client</B></th>
-                    <th scope="col"><B>Date</B></th>
+                    {{-- <th>Numéro</th> --}}
+                    <th scope="col"><B>Date Demande</B></th>
                     <th scope="col"><B>Infos Client</B></th>
                     <th scope="col"><B>Infos Demande</B></th>
+                    <th scope="col"><B>Date D'échue</B></th>
+                    <th scope="col"><B>Employé Demande</B></th>
+                    <th scope="col"><B>Client</B></th>
                     <th scope="col"><B>Statut</B></th>
                   
                     @if($privilege ?? '' == 1)
-                        <th scope="col" style="text-align: center;"><B>Action</B></th>
+                        <th scope="col" style="text-align: left;"><B>Action</B></th>
                     @endif
 
                     {{--  --}}
@@ -58,7 +61,7 @@
 
                     <tr>
 
-                        <td scope="row"><B>{{$vente->code_client}}</B></td>
+                        {{-- <td scope="row"><B>{{$vente->preVente}}</B></td> --}}
                         
                         <td scope="row"><B>{{$vente->date_demande}}</B></td>
                         
@@ -76,6 +79,10 @@
                             </button>
 
                         </td>
+
+                        <td>{!! substr($vente->date_echue,0,10) !!}</td>
+                        <td>{!! $vente->name !!}  {!! $vente->prenom !!}</td>
+                        <td scope="row"><B>{{$vente->code_client}}</B></td>
 
                         
                         <td>
@@ -104,11 +111,11 @@
                                 @if( ($privilege ?? '' == 1) && ($vente->statut_validation == 0 ) )
                                 
                                                                                                                              
-                                    <button type="button" class="{{-- btn-sm --}} col-md-3 btn btn-outline-success" data-toggle="modal" data-target="#valider{{$vente->preVente}}">
+                                    <button type="button" class="{{-- btn-sm --}} col-md-6 btn btn-outline-success" data-toggle="modal" data-target="#valider{{$vente->preVente}}">
                                         Valider
                                     </button>
-
-                                    <button type="button" class="{{-- btn-sm --}} col-md-3 btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERvente{{$vente->preVente}}">
+                                    <br>
+                                    <button type="button" class="{{-- btn-sm --}} col-md-6 btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERvente{{$vente->preVente}}">
                                        Refuser
                                     </button>
                                                                     
@@ -121,7 +128,7 @@
                                     <!--  -->
                                  @else   
 
-                                    <button type="button" class="{{-- btn-sm --}} col-md-7 btn btn-outline-warning" data-toggle="modal" data-target="#Commentaire{{$vente->preVente}}">
+                                    <button type="button" class="{{-- btn-sm --}} col-md-8 btn btn-outline-warning" data-toggle="modal" data-target="#Commentaire{{$vente->preVente}}">
                                        
                                        Voir détails
                                     </button>

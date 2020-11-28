@@ -31,6 +31,8 @@ class DemandeVenteController extends Controller
 
         $produits = DB::select("select p.id,p.code_produit,p.description from produits p order by code_produit");
         
+        $prestations = DB::select("select p.id,p.code_produit,p.description from produits p where p.prestation = \"oui\" order by code_produit");
+
 
         $produitss = DB::select("select p.id,p.code_produit,p.description from produits p order by code_produit");
     	
@@ -113,11 +115,10 @@ class DemandeVenteController extends Controller
 
         $employes=DB::select("select * from employes");
 
-        $ventes=DB::select(" select  *,p.id as preVente,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects c,pre_ventes p, categorie_clients ca , activite_clients ac
-            where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id
+        $ventes=DB::select(" select  *,p.id as preVente,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom,u.name as nom_employe, u.prenom as prenom_employe 
+            from client_prospects c,pre_ventes p, categorie_clients ca , activite_clients ac,users u
+            where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id and u.id=p.id_employe
             order by p.id DESC");
-
-
 
         $ligne_ventes=DB::select("select *,a.nom,a.description,l.total,a.total as PrixArticleAchat from ligne_ventes l, articles a where l.id_article=a.id");
 
