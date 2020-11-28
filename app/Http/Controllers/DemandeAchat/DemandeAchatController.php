@@ -593,7 +593,7 @@ class DemandeAchatController extends Controller
 
 
 
-	  public function ValiderPreAchat(Request $request,$idpreachat,$numfactureproformat)
+	  public function ValiderPreAchat(Request $request,$idpreachat)
 	 {
 
         $test=DB::select("select * from pre_achat where id='$idpreachat' ");
@@ -603,9 +603,9 @@ class DemandeAchatController extends Controller
 
 
 
-		$year = Carbon::now()->format('Y');
+	   	$year = Carbon::now()->format('Y');
 
-	    $pre=DB::select("select count(*) as number from pre_achat where annee_bc='$year' and id not in (select id from pre_achat where num_facture_proformat='$numfactureproformat')");
+	    $pre=DB::select("select count(*) as number from pre_achat where annee_bc='$year' and id <> '$idpreachat' ");
 
 
 	     $nbNumBCExistant= $pre[0]->number;
@@ -616,9 +616,9 @@ class DemandeAchatController extends Controller
 
 	     $now = Carbon::now()->format('d/m/Y');
 
-	     DB::update("update pre_achat f set num_bc='$NewNumBC' where f.num_facture_proformat='$numfactureproformat'  ");
-	     DB::update("update pre_achat f set annee_bc='$year' where f.num_facture_proformat='$numfactureproformat'  ");
-	     DB::update("update pre_achat f set demande_valide=1 where f.num_facture_proformat='$numfactureproformat'  ");
+	     DB::update("update pre_achat f set num_bc='$NewNumBC' where f.id='$idpreachat'  ");
+	     DB::update("update pre_achat f set annee_bc='$year' where f.id='$idpreachat' ");
+	     DB::update("update pre_achat f set demande_valide=1 where  f.id='$idpreachat' ");
 
 	     $produits=DB::select("select  p.id,p.code_produit,l.prix,l.qte_demande,l.id_pre_achat
 	      from ligne_produit l, produits p 
@@ -631,6 +631,10 @@ class DemandeAchatController extends Controller
 	     $fournisseurs=DB::select("select * from fournisseurs where  id='$id_fournisseur'");
 
 	     $pre_achat=DB::select("select * from pre_achat where  id='$idpreachat'");
+
+       $FacturePro=DB::select(" select numero_piece from pieces 
+        where id_pre_achat='$idpreachat'
+        and id_type =( select id from type_pieces where type ='fp') ");
 
     	 $dompdf = new Dompdf();
 
@@ -673,7 +677,7 @@ class DemandeAchatController extends Controller
                   <h3 style="text-align: center;"> IDENTIFICATION DU PRESTATAIRE </h3>
                   <hr>
                     <h4 style="text-align: center;>'.$fournisseurs[0]->nom.' </h4>
-                    <h4 style="text-align: center;>Relatif à la Facture Pro Format N° '.$pre_achat[0]->num_facture_proformat.' du '.$pre_achat[0]->date_achat.' </h4>
+                    <h4 style="text-align: center;>Relatif à la Facture Pro Format N° '.$FacturePro[0]->numero_piece.' du '.$pre_achat[0]->date_achat.' </h4>
                     <hr>
 
                 </td>
@@ -814,6 +818,10 @@ class DemandeAchatController extends Controller
 
          $pre_achat=DB::select("select * from pre_achat where  id='$idpreachat'");
 
+         $FacturePro=DB::select(" select numero_piece from pieces 
+        where id_pre_achat='$idpreachat'
+        and id_type =( select id from type_pieces where type ='fp') ");
+
          $dompdf = new Dompdf();
 
         $html = '<!doctype html>
@@ -855,7 +863,7 @@ class DemandeAchatController extends Controller
                   <h3 style="text-align: center;"> IDENTIFICATION DU PRESTATAIRE </h3>
                   <hr>
                     <h4 style="text-align: center;">'.$fournisseurs[0]->nom.' </h4>
-                    <h4 style="text-align: center;">Relatif à la Facture Pro Format N° '.$pre_achat[0]->num_facture_proformat.' du '.$pre_achat[0]->date_achat.' </h4>
+                    <h4 style="text-align: center;">Relatif à la Facture Pro Format N° '.$FacturePro[0]->numero_piece.' du '.$pre_achat[0]->date_achat.' </h4>
                     <hr>
 
                 </td>

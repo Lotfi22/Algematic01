@@ -42,6 +42,8 @@
                 <th scope="col"><B>Date</B></th>
                 <th scope="col"><B>Fournisseur</B></th>
                 <th scope="col"><B>Informations</B></th>
+                <th scope="col"><B>Approbation</B></th>
+               
                 
             </tr>
       </thead>
@@ -288,6 +290,150 @@
               </td>
 
 
+               <!--Td d'approbation -->
+               
+               <td>
+
+          <div class="dropdown">
+
+            @if($preachat->refuser==0)
+          <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Plus 
+          </button>
+          @endif
+          @if($preachat->refuser==1)
+          <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Plus 
+          </button>
+          @endif
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+            @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0) && ($preachat->refuser==0))
+            <button type="button" class="dropdown-item"   data-toggle="modal" data-target="#valider{{$preachat->idpreachat}}">
+                      Valider
+            </button>
+            @endif
+            @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0) && ($preachat->refuser==0))
+             <button type="button" class="dropdown-item"  data-toggle="modal" data-target="#exampleModalSUPPRIMERpreachat{{$preachat->idpreachat}}">
+                       Refuser
+            </button>
+            @endif
+
+            @if( ($preachat->demande_valide==1) && ($preachat->refuser==0) )
+
+              <button type="button" class="dropdown-item" data-toggle="modal" data-target="#TelechargerBC{{$preachat->idpreachat}}">Télecharger BC
+                      
+              </button>
+
+            @endif
+
+            @if( $preachat->refuser==1 )
+
+              <ul>
+                <li>Demande Refusée</li>
+                <li>Motif: {{$preachat->commentaire}}</li>
+              </ul>
+           
+
+
+            @endif
+
+           
+
+          </div>
+          <!-- Modal de validation -->
+                    <div class="modal fade" id="valider{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Voulez Vous Vraiment Valider</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                     <form class="needs-validation" novalidate action="/home/achats/ValiderPreAchat/{{$preachat->idpreachat}}" method="POST">
+                        {{ csrf_field()}}
+                          <div class="modal-body">
+                              
+                          <div class="modal-footer">
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn-sm btn btn-primary">Valider</button>
+                          </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+               
+
+        </div>
+          <!-- Modal de refus -->
+
+                    <div class="modal fade" id="exampleModalSUPPRIMERpreachat{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Voulez vous vraiment Refuser</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                     <form class="needs-validation" novalidate action="/home/achats/RefuserDemande/{{$preachat->idpreachat}}" method="POST">
+                        {{ csrf_field()}}
+
+                            <div class="modal-body">
+                    
+                              <div class="col-md-6 mb-3">
+                                  <label for="validationTooltip03"><B>Motif refus</B></label>
+                                  <input type="text" name="commentaire"class="form-control" placeholder="Prix Invalide" required>
+                             </div>
+
+                        </div>
+                          
+                          <div class="modal-footer">
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn-sm btn btn-primary">Refuser</button>
+                          </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+                    <!-- Modal de telechargement du BC -->
+
+                    <div class="modal fade" id="TelechargerBC{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Telecharger</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                     <form class="needs-validation" novalidate action="/home/achats/ValiderPreAchat/{{$preachat->idpreachat}}/{{$preachat->num_facture_proformat}}" method="POST">
+                        {{ csrf_field()}}
+                          <div class="modal-body">
+                              
+                          <div class="modal-footer">
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn-sm btn btn-primary">Telecharger</button>
+                          </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Fin Modal de telechargement du BC -->
+
+
+
+                    
+
+               </td>
+           
 
           </tr>
 
@@ -303,5 +449,19 @@
 @endsection
 
 
+<script type="text/javascript">
+        
+        function clin() 
+        {
+            
+            $(".encours")./*parent().parent().*/fadeToggle('slow');
 
+            clin();
+            // 
+        }
+
+        clin();
+
+        {{----}}
+    </script>
 

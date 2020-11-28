@@ -169,7 +169,7 @@ Route::get('/home/achats/DemandeAttente2', 'DemandeAchat\DemandeAchatController@
 
 Route::post('/home/achats/RefuserDemande/{idpreachat}', 'DemandeAchat\DemandeAchatController@RefuserDemande');
 
-Route::post('/home/achats/ValiderPreAchat/{idpreachat}/{numfactureproformat}', 'DemandeAchat\DemandeAchatController@ValiderPreAchat');
+Route::post('/home/achats/ValiderPreAchat/{idpreachat}', 'DemandeAchat\DemandeAchatController@ValiderPreAchat');
 
 Route::get('/home/achats/TelechargerPiece/{IdPiece}', 'DemandeAchat\DemandeAchatController@TelechargerPiece');
 

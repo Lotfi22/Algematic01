@@ -481,7 +481,7 @@
                       Télecharger BC
                     </button>
 
-                    <!-- Boutom d'Ajouter une Maman -->
+                    <!-- Modal de telechargement du BC -->
                     <div class="modal fade" id="valider{{$preachat->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
