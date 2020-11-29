@@ -92,7 +92,7 @@
                           </div>
                                 
                                   
-                             <table  id="table_id" class="display" style="width:100%">
+                             <table   class="display" style="width:100%">
 
                                 <thead>
                                   <tr>
@@ -296,9 +296,14 @@
 
           <div class="dropdown">
 
-            @if($preachat->refuser==0)
+            @if(($preachat->demande_valide==0) && ($preachat->refuser==0))
           <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Plus 
+          </button>
+          @endif
+          @if(($preachat->demande_valide==1) && ($preachat->refuser==0))
+          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            BC 
           </button>
           @endif
           @if($preachat->refuser==1)
@@ -342,11 +347,11 @@
 
           </div>
           <!-- Modal de validation -->
-                    <div class="modal fade" id="valider{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="valider{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="exampleModalLabelValidation{{$preachat->idpreachat}}" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Voulez Vous Vraiment Valider</h5>
+                            <h5 class="modal-title" id="exampleModalLabelValidation{{$preachat->idpreachat}}">Voulez Vous Vraiment Valider</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -369,11 +374,11 @@
         </div>
           <!-- Modal de refus -->
 
-                    <div class="modal fade" id="exampleModalSUPPRIMERpreachat{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalSUPPRIMERpreachat{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="exampleModalLabelRefuser{{$preachat->idpreachat}}" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Voulez vous vraiment Refuser</h5>
+                            <h5 class="modal-title" id="exampleModalLabelRefuser{{$preachat->idpreachat}}">Voulez vous vraiment Refuser</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -404,11 +409,11 @@
 
                     <!-- Modal de telechargement du BC -->
 
-                    <div class="modal fade" id="TelechargerBC{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="TelechargerBC{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="exampleModalLabelTelecharger{{$preachat->idpreachat}}" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Telecharger</h5>
+                            <h5 class="modal-title" id="exampleModalLabelTelecharger{{$preachat->idpreachat}}">Telecharger</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>

@@ -302,7 +302,7 @@
           @endif
           @if($preachat->achat_done==1)
           <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Done 
+            effectué 
           </button>
           @endif
           <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -353,10 +353,27 @@
         {{ csrf_field()}}
         
           
-                    <div class="modal-body">
+        <div class="modal-body">
                     
 
                        <h4 ><B>Ajouter des pièces jointes</B></h4>
+
+            <div class="form-row">
+            
+                <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="Joint{{$preachat->idpreachat}}" name="joint{{$preachat->idpreachat}}" value="yes" checked  onclick="yesnoCheckJoint{{ $preachat->idpreachat }}()" >
+                <label class="custom-control-label" for="Joint{{$preachat->idpreachat}}">Oui</label>
+              </div>
+
+              <!-- Default checked -->
+              <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="NonJoint{{$preachat->idpreachat}}" name="joint{{$preachat->idpreachat}}" value="non" onclick="yesnoCheckJoint()">
+                <label class="custom-control-label" for="NonJoint{{$preachat->idpreachat}}">Non</label>
+            
+              </div>
+
+          </div>
+          <br> 
       
        
       <br> 
@@ -365,7 +382,7 @@
       <div class="form-row" id="Monjoint{{$preachat->idpreachat}}">
 
 
-          <div class="form-group items" id="{{$preachat->idpreachat}}">
+          <div class="form-group items" id="dynamic_form{{$preachat->idpreachat}}">
 
                   <div class="row">
                   <div class="button-group" style="padding: 27px;">
@@ -377,10 +394,10 @@
 
                       <div class="col-md-3">
                           <label class="small mb-1" for="inputFirstName">Type Pièce: </label>
-                          <select class='form-control produits' class="js-example-basic-single" name='typepiece' id="typepiece" >
+                          <select class='form-control produits' class="js-example-basic-single" name='typepiece{{$preachat->idpreachat}}' id="typepiece{{$preachat->idpreachat}}" >
                               <option value=""></option>
                               @foreach($types as $type)
-                              <option id="{{$type->type}}"  value="{{$type->id}}">
+                              <option id="{{$type->type}}{{$preachat->idpreachat}}"  value="{{$type->id}}">
                                   <B>{{$type->type}} </B>
                               </option>
                               @endforeach 
@@ -389,7 +406,7 @@
 
                           <div class="col-md-3">
                               <label class="small mb-1" for="inputEmailAddress">Numéro/Dénomination</label>
-                              <input type="text" class="form-control quantites" name="facture" id="facture" placeholder="FP001/2020, Contrat 001, BL001 ....";>
+                              <input type="text" class="form-control quantites" name="facture{{$preachat->idpreachat}}" id="facture{{$preachat->idpreachat}}" placeholder="FP001/2020, Contrat 001, BL001 ....";>
                           </div>
                     
 
@@ -404,13 +421,13 @@
 
                        <div class="col-md-3">
                         <label class="small mb-1" for="inputEmailAddress">Date pièce </label>
-                        <input type="date" class="form-control quantites" name="date" id="date" placeholder="02/05/2018";>
+                        <input type="date" class="form-control quantites" name="date{{$preachat->idpreachat}}" id="date{{$preachat->idpreachat}}" placeholder="02/05/2018";>
                     </div>
 
                      
                     <div class="col-md-3">
                         <label class="small mb-1" for="inputEmailAddress">Pièce Jointe </label>
-                        <input type="file"  class="form-control-file" name="photo" id="photo" >
+                        <input type="file"  class="form-control-file" name="photo{{$preachat->idpreachat}}" id="photo{{$preachat->idpreachat}}" >
                     </div>
 
                   
@@ -429,7 +446,7 @@
                          <div class="col-md-6 mb-3">
                             <div class="form-group">
                               <label for="exampleFormControlSelect1"><B>Nature Doc_Payement</B></label>
-                              <select name="doc" class="form-control" id="exampleFormControlSelect1">
+                              <select name="doc{{$preachat->idpreachat}}" class="form-control">
                                @foreach($nature_doc_payments as $doc)
                                <option value="{{$doc->id}}"> {{  $doc->nom  }} </option>
                                 @endforeach
@@ -469,7 +486,7 @@
                     </div>
                <form class="needs-validation" novalidate action="/home/achats/ValiderPreAchat/{{$preachat->idpreachat}}/{{$preachat->num_facture_proformat}}" method="POST">
                   {{ csrf_field()}}
-                    <div class="modal-body">
+                    
                         
                     <div class="modal-footer">
                       <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -522,5 +539,59 @@
     </script>
 
 
+@foreach($presachats as $preachat)
 
 
+
+    <script type="text/javascript">
+
+      $(document).ready(function() {
+                var dynamic_form{{ $preachat->idpreachat }} =  $("#dynamic_form{{ $preachat->idpreachat }}").dynamicForm("#dynamic_form{{ $preachat->idpreachat }}","#plus{{ $preachat->idpreachat }}", "#minus{{ $preachat->idpreachat }}", {
+                    limit:10,
+                    formPrefix : "dynamic_form{{ $preachat->idpreachat }}",
+                    normalizeFullForm : false
+                });
+
+                dynamic_form{{ $preachat->idpreachat }}.inject([{p_name: 'Hemant',quantity: '123',remarks: 'testing remark'},{p_name: 'Harshal',quantity: '123',remarks: 'testing remark'}]);
+
+                $("#dynamic_form{{ $preachat->idpreachat }} #minus{{ $preachat->idpreachat }}").on('click', function(){
+                    var initDynamicId = $(this).closest('#dynamic_form{{ $preachat->idpreachat }}').parent().find("[id^='dynamic_form{{ $preachat->idpreachat }}']").length;
+                    if (initDynamicId === 2) {
+                        $(this).closest('#dynamic_form{{ $preachat->idpreachat }}').next().find('#minus{{ $preachat->idpreachat }}').hide();
+                    }
+                    $(this).closest('#dynamic_form{{ $preachat->idpreachat }}').remove();
+                });
+
+                $('form').on('submit', function(event){
+                    var values = {};
+                    $.each($('form').serializeArray(), function(i, field) {
+                        values[field.name] = field.value;
+                    });
+                    console.log(values)
+                    event.preventDefault();
+                })
+            });
+
+    </script>
+
+
+@endforeach
+
+@foreach($presachats as $preachat)
+
+<script type="text/javascript">
+
+            document.getElementById('Monjoint{{ $preachat->idpreachat }}').style.display = 'block';
+       function yesnoCheckJoint{{$preachat->idpreachat }}() {
+            if (document.getElementById('Joint{{ $preachat->idpreachat }}').checked) {
+                document.getElementById('Monjoint{{ $preachat->idpreachat }}').style.display = 'block';
+            } 
+            else if(document.getElementById('NonJoint{{ $preachat->idpreachat }}').checked) {
+                document.getElementById('Monjoint{{ $preachat->idpreachat }}').style.display = 'none';
+           }
+        }
+
+        //
+</script>
+
+@endforeach
