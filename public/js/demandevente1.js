@@ -186,7 +186,7 @@ function fit_select()
         {   
             $(id_prochain_select).append($("<option></option>")
                                 .attr("value", value.id)
-                                .text(value.code_produit + ' | ' + value.description)); 
+                                .text(value.nom + ' | ' + value.description)); 
         });
 
         //

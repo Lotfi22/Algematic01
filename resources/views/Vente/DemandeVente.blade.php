@@ -127,7 +127,7 @@
 
                     <div class="col-md-3">
                         
-                        <label class="small mb-1" for="inputEmailAddress">Prix Unitaire : </label>
+                        <label class="small mb-1" for="inputEmailAddress">Prix Unitaire H.T : </label>
                         <input type="number" class="form-control prixs" name="prix" id="prix" >
                     </div>
                 </div>
@@ -176,7 +176,7 @@
 
 
 
-        <form class="needs-validation" id="ventes_produits" novalidate action="/AddDemandeVente" method="POST" enctype="multipart/form-data">
+        <form class="needs-validation" id="ventes_produits" novalidate action="/home/vente/DemandeVente/AddDemandeVente" method="POST" enctype="multipart/form-data">
 
             {{ csrf_field()}}
 
@@ -252,7 +252,7 @@
 
                                 <option value="{{$produit->id}}">
                                     
-                                    {{$produit->code_produit}} | {{  $produit->description }} 
+                                    {{$produit->nom}} | {{  $produit->description }} 
 
                                     {{--  --}}
                                 </option>
@@ -272,7 +272,7 @@
 
                     <div class="col-md-2">
                         
-                        <label class="small mb-1" for="inputEmailAddress">Prix Unitaire : </label>
+                        <label class="small mb-1" for="inputEmailAddress">Prix Unitaire H.T : </label>
                         <input type="number" required="true" class="form-control prixs" name="prix_prod" id="prix_prod">
                     </div>
                 </div>
@@ -368,30 +368,30 @@
                         </a>
                     </div>
 
-                    <div class="col-md-3">
-                        <label class="small mb-1" for="inputFirstName">Article : </label>
+                    <div class="col-md-5">
+                        <label class="small mb-1" for="inputFirstName">Préstation : </label>
                 
                         <select class='form-control produits' class="js-example-basic-single" name='produit' id="produit" >
                 
                             <option value=""></option>
                     
-                            @foreach($articles as $article)
+                            @foreach($prestations as $prestation)
 
-                                <option  value="{{$article->id}}">
-                                  {{$article->nom}} -*-  {{  $article->description }} -*- Total _Vente:  {{ $article->total}} 
+                                <option  value="{{$prestation->id}}">
+                                  {{$prestation->nom}} | {{  $prestation->description }} 
                                 </option>
                             @endforeach 
                         </select>   
                     </div>
                     
-                    <div class="col-md-3">
+{{--                     <div class="col-md-5">
                         <label class="small mb-1" for="inputEmailAddress">Quantité : </label>
                         <input type="number" class="form-control quantites" min="1"  name="quantite" id="quantite">
                     </div>
-
-                    <div class="col-md-3">
+ --}}
+                    <div class="col-md-5">
                         
-                        <label class="small mb-1" for="inputEmailAddress">Prix Unitaire : </label>
+                        <label class="small mb-1" for="inputEmailAddress">Prix Unitaire H.T : </label>
                         <input type="number" class="form-control prixs" name="prix" id="prix" >
                     </div>
                 </div>

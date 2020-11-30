@@ -29,12 +29,15 @@ class DemandeVenteController extends Controller
 
     	$articles=DB::select("select * from articles order by nom");
 
-        $produits = DB::select("select p.id,p.code_produit,p.description from produits p order by code_produit");
+        $produits = DB::select("select p.id,p.code_produit as nom,p.description from produits p where p.prestation = \"non\" order by code_produit");
         
-        $prestations = DB::select("select p.id,p.code_produit,p.description from produits p where p.prestation = \"oui\" order by code_produit");
+        $prestations = DB::select("select p.id,p.code_produit as nom,p.description from produits p where p.prestation = \"yes\" order by code_produit");
 
-
-        $produitss = DB::select("select p.id,p.code_produit,p.description from produits p order by code_produit");
+        $all = array_merge($produits,$prestations,$articles);
+        
+        $produits = $all;
+        
+        $produitss = $all;
     	
         $clients=DB::select("select * from client_prospects order by code_client");
 
@@ -42,20 +45,19 @@ class DemandeVenteController extends Controller
 
         $produitss = json_encode($produitss);
     	
-    	return view('Vente\DemandeVente',compact('employes','clients','articles','produits','produitss'));
+    	return view('Vente\DemandeVente',compact('prestations','employes','clients','articles','produits','produitss'));
     }
 
     public function AddDemandeVente(Request $request)
     {
 
         $id = Auth::id();
+        
         $actuel = User::FindOrFail($id);
 
         $privilege=$actuel->privilege;
 
-
-
-        $articles=DB::select("select * from articles ");
+        $articles=DB::select("select * from articles");
 
         $clients=DB::select("select * from client_prospects");
 
@@ -69,7 +71,7 @@ class DemandeVenteController extends Controller
 
         $total=0;
 
-        DB::insert("insert into pre_ventes (id_validateur,id_client) 
+        DB::insert("insert into pre_ventes (id_employe,id_client) 
                         values('$id','$id_client') ");
 
         $pre_vente=DB::select("select * from pre_ventes order by id  DESC limit 1");
@@ -96,7 +98,7 @@ class DemandeVenteController extends Controller
 
         DB::update(" update pre_ventes p set montant='$total' where p.id='$id_preVente' ");
 
-        return redirect('/DemandeVente')->with('success','Demande Envoyée avec succée');
+        return back()->with('success','Demande Envoyée avec succée');
     }
 
     public function DemandeVenteAttente()
