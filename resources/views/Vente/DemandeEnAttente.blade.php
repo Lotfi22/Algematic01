@@ -30,7 +30,7 @@
 
     <div class="row">
         
-        <table id="table_id" style="" class="table-responsive table-striped table-dark display">
+        <table id="table_id" class="table-responsive table-striped table-dark display">
           
             <thead>
             
@@ -38,8 +38,8 @@
                       
                     {{-- <th>Numéro</th> --}}
                     <th scope="col"><B>Date Demande</B></th>
-                    <th scope="col"><B>Infos Client</B></th>
-                    <th scope="col"><B>Infos Demande</B></th>
+                    <th scope="col" style="display: none;"><B>Infos Client</B></th>
+                    <th scope="col" style="display: none;"><B>Infos Demande</B></th>
                     <th scope="col"><B>Date D'échue</B></th>
                     <th scope="col"><B>Employé Demande</B></th>
                     <th scope="col"><B>Client</B></th>
@@ -59,22 +59,22 @@
             
                 @foreach($ventes as $vente)
 
-                    <tr>
+                    <tr id="info_demande{{$vente->preVente}}" data-toggle="modal" data-target="#InfosDemande{{$vente->preVente}}" {{-- id="row{{$vente->preVente}}" --}} {{-- onclick="simulate_click(this);" --}}>
 
                         {{-- <td scope="row"><B>{{$vente->preVente}}</B></td> --}}
                         
                         <td scope="row"><B>{{$vente->date_demande}}</B></td>
                         
-                        <td>
+                        <td style="display: none;">
 
                             <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#infosClient{{$vente->preVente}}">
                                 Infos  
                             </button>
                         </td>
                         
-                        <td>
+                        <td style="display: none;">
                             
-                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#InfosDemande{{$vente->preVente}}">
+                            <button class="btn btn-outline-secondary" type="button" id="info_demande{{$vente->preVente}}" data-toggle="modal" data-target="#InfosDemande{{$vente->preVente}}">
                                Infos
                             </button>
 
@@ -109,17 +109,18 @@
                             <td>
                                 
                                 @if( ($privilege ?? '' == 1) && ($vente->statut_validation == 0 ) )
-                                
-                                                                                                                             
-                                    <button type="button" class="{{-- btn-sm --}} col-md-6 btn btn-outline-success" data-toggle="modal" data-target="#valider{{$vente->preVente}}">
+                                    
+                                    <span class="badge badge-primary">A Valider</span>                           
+{{--                                                                                                                              
+                                    <button type="button" class="col-md-6 btn btn-outline-success" data-toggle="modal" data-target="#valider{{$vente->preVente}}">
                                         Valider
                                     </button>
                                     <br>
-                                    <button type="button" class="{{-- btn-sm --}} col-md-6 btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERvente{{$vente->preVente}}">
+                                    <button type="button" class="col-md-6 btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERvente{{$vente->preVente}}">
                                        Refuser
                                     </button>
                                                                     
-
+ --}}
                                  @elseif(  ($vente->statut_validation == 2 ) )
                                     <button type="button" class="{{-- btn-sm --}} col-md-7 btn btn-outline-info" data-toggle="modal" data-target="#FP{{$vente->preVente}}">
                                       Editer FP
@@ -359,7 +360,7 @@
 
     @foreach($ventes as $vente)
 
-        <div class="modal fade" role="dialog" id="InfosDemande{{$vente->preVente}}" tabindex="-1" aria-labelledby="InfosDemande{{$vente->preVente}}" aria-hidden="true">
+        <div style="width: 100%; height: 100%; overflow: scroll;" class="modal fade" role="dialog" id="InfosDemande{{$vente->preVente}}" tabindex="-1" aria-labelledby="InfosDemande{{$vente->preVente}}" aria-hidden="true">
 
             <div class="modal-dialog modal-lg col-md-12">
 
@@ -460,9 +461,75 @@
 
                     </div>
 
+                    @if( ($privilege ?? '' == 1) && ($vente->statut_validation == 0 ) )
+    
+                        <div class="form-row">
+
+                            <div class="row col-md-12" style="margin-bottom: 2%;">
+                                
+                                <label class="col-md-4" for="commentaire{{ $vente->preVente }}">Commentaire sur la Vente </label>
+                                
+                                <input type="text" onchange="remplir_comment(this);" id="commentaire{{ $vente->preVente }}" name="commentaire" class="form-control col-md-6">
+
+                            </div>      
+
+                            {{--  --}}
+                        </div>
+
+
+                        <div class="row" style="margin-bottom: 2%;">
+                            
+                            <form class="needs-validation col-md-6" novalidate action="/ValiderDemandeVente/{{$vente->preVente}}" method="POST">
+                                
+                                {{ csrf_field()}}
+                                
+                                <input style="visibility: hidden;" type="text" id="commentaire_accept{{ $vente->preVente }}" name="commentaire_accept">
+
+                                <button type="submit" class="col-md-12 btn btn-outline-success">Approuver</button>
+                                    
+                            </form>
+
+
+                            <form class="needs-validation col-md-6" novalidate action="/RefuserDemandeVente/{{$vente->preVente}}" method="POST">
+                                
+                                {{ csrf_field()}}
+
+                                <input style="visibility: hidden;" type="text" id="commentaire_refus{{ $vente->preVente }}" name="commentaire_refus">
+
+                                <button type="submit" class="col-md-12 btn btn-outline-danger col-md-6">Refuser</button>
+                            </form>
+                        </div>
+
+                     @elseif($vente->statut_validation == 1)
+                                                                
+                        <p style="text-align: center;" class="alert alert-danger">Refusée</p>
+
+                        @if($vente->commentaire == "")
+                            <h5 style="text-align: center;"><B> Pas de motif pour cette Vente </B> </h5>
+                         @else   
+                            <h5 style="text-align: center;"> Commentaire : <B> {{$vente->commentaire}} </B> </h5>
+                        @endif
+
+                     
+                     @else
+
+                        <p style="text-align: center;" class="alert alert-success">Approuvée</p>
+
+                        @if($vente->commentaire == "")
+                            <h5 style="text-align: center;"><B> Pas de motif pour cette Vente </B> </h5>
+                         @else   
+                            <h5 style="text-align: center;"> Commentaire : <B> {{$vente->commentaire}} </B> </h5>
+                        @endif
+
+
+                        <!-- -->    
+                    @endif
+                        
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
                     </div>
+
+
 
                     {{--  --}}
                 </div>
@@ -504,9 +571,9 @@
 
                                 <div class="row col-md-12">
                                     
-                                    <label class="col-md-4" for="{{ $vente->id }}">Commentaire sur le Refus </label>
+                                    <label class="col-md-4" for="commentaire{{ $vente->preVente }}">Commentaire sur le Refus </label>
                                     
-                                    <input type="text" id="{{ $vente->id }}" name="commentaire" class="form-control col-md-6">
+                                    <input type="text" id="commentaire{{ $vente->preVente }}" name="commentaire" class="form-control col-md-6">
                                     {{--  --}}
                                 </div>      
 
@@ -525,19 +592,10 @@
         </div>
     @endforeach
 
+    <script src="{{ asset('../js/prevente.js') }}"></script>
 
     <script type="text/javascript">
         
-        function clin() 
-        {
-            
-            $(".encours")./*parent().parent().*/fadeToggle('slow');
-
-            clin();
-            // 
-        }
-
-        clin();
 
         {{----}}
     </script>

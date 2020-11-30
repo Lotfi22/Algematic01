@@ -64,6 +64,9 @@ Route::post('/Supprimerarticle/{idArticleSupprimer}', 'DemandeVente\ArticleContr
 Route::get('/home/vente/DemandeVente', 'DemandeVente\DemandeVenteController@index');
 Route::get('/home/vente/DemandeVenteAttente', 'DemandeVente\DemandeVenteController@DemandeVenteAttente');
 Route::post('/home/vente/DemandeVente/GetPrice','DemandeVente\DemandeVenteController@get_price');
+Route::post('/home/vente/DemandeVente/AddDemandeVente', 'DemandeVente\DemandeVenteController@AddDemandeVente');
+Route::post('/home/vente/DemandeVenteAttente/RefuserDemandeVente/{idPreVente}' , 'DemandeVente\DemandeVenteController@RefuserDemandeVente');
+
 
 
 

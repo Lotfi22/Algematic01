@@ -132,7 +132,8 @@ class DemandeVenteController extends Controller
 
     public function RefuserDemandeVente(Request $request,$idPreVente)
     {
-
+        dd($request->all());
+        
         $commentaire=$request->input('commentaire');
 
         DB::update("update pre_ventes p set statut_validation= 1, commentaire ='$commentaire' where p.id='$idPreVente' ");
@@ -144,8 +145,8 @@ class DemandeVenteController extends Controller
 
     public function ValiderDemandeVente(Request $request,$idPreVente)
     {
-       
-        DB::update("update pre_ventes p set statut_validation= 2 where p.id='$idPreVente' ");
+
+        DB::update("update pre_ventes p set statut_validation= 2,commentaire='$request->commentaire_accept' where p.id='$idPreVente'");
 
         return back()->with('success','La demande de Vente a été Validé avec succé');
     }
