@@ -46,29 +46,12 @@
                           </div>
 
 
-                     <form class="needs-validation" novalidate action="/AddFournisseur" method="POST">
-                        {{ csrf_field()}}
-                          <div class="modal-body">
+       <form class="needs-validation" novalidate action="/AddFournisseur" method="POST">
+          {{ csrf_field()}}
 
-                      <div class="form-row">
+            <div class="modal-body">
 
-                      <h4 ><B>Anonyme ?</B></h4>
-                      
-                          <div class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" id="AnonymeOui" name="AnonymeYN" value="yes"   onclick="yesnoCheckAnonymeYN()" >
-                          <label class="custom-control-label" for="AnonymeOui">Oui</label>
-                        </div>
-
-                        <!-- Default checked -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" id="AnonymeNon" name="AnonymeYN" value="non" checked onclick="yesnoCheckAnonymeYN()">
-                          <label class="custom-control-label" for="AnonymeNon">Non</label>
-                        </div>
-                    </div>
-
-                       
-                    
-                     
+  
 
               <div id="anonyme">
 
@@ -102,6 +85,8 @@
 
               </div>
 
+              <hr>
+
               <div id="nonanonyme">
 
                       <div class="form-row">
@@ -130,7 +115,7 @@
                         </div>
 
                       </div>
-
+<hr>
                       <div class="form-row">
 
                         <div class="col-md-6 mb-3">
@@ -467,3 +452,17 @@
 
 
 @endsection
+
+ <script>
+            
+       function yesnoCheckFabricant() {
+            if (document.getElementById('FabricantOui').checked) {
+                document.getElementById('JeSuisFabricat').style.display = 'block';
+            } 
+            else if(document.getElementById('FabricantNon').checked) {
+                document.getElementById('JeSuisFabricat').style.display = 'none';
+           }
+        }
+
+        //
+    </script>

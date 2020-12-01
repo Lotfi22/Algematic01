@@ -40,7 +40,7 @@
             <tr>
                 <th scope="col"><B>Type</B></th>
                 <th scope="col"><B>Date</B></th>
-                <th scope="col"><B>Fournisseur</B></th>
+                <th scope="col"><B>Détail</B></th>
                 <th scope="col"><B>Informations</B></th>
                 <th scope="col"><B>Approbation</B></th>
                
@@ -85,42 +85,139 @@
                         <div class="modal-content">
 
                           <div class="modal-header">
-                            <h5 class="modal-title" id="FournisseurmyHugeModalLabel{{$preachat->idpreachat}}">Informations du Fournisseur</h5>
+                            <h5 class="modal-title" id="FournisseurmyHugeModalLabel{{$preachat->idpreachat}}">Informations sur La Demande</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                                 
-                                  
-                             <table   class="display" style="width:100%">
+                                <!--  Information du Fournisseur-->
 
-                                <thead>
-                                  <tr>
-                                    <th scope="col"><B>Nom</B></th>
-                                    <th scope="col"><B>Adresse</B></th>
-                                    <th scope="col"><B>Activite</B></th>
-                                    <th scope="col"><B>Tele</B></th>
-                                    <th scope="col"><B>Fax</B></th>
-                                    <th scope="col"><B>Email</B></th>
-                                    <th scope="col"><B>Fabricant</B></th>
-                                    <th scope="col"><B>Anonyme</B></th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                 
-                                  <tr>
-                                     <td scope="row"><B>{{$preachat->nom}}</B></td>
-                                     <td scope="row"><B>{{$preachat->adresse}}</B></td>
-                                     <td scope="row"><B>{{$preachat->activite}}</B></td>
-                                     <td scope="row"><B>{{$preachat->tele}}</B></td>
-                                     <td scope="row"><B>{{$preachat->fax}}</B></td>
-                                     <td scope="row"><B>{{$preachat->email}}</B></td>
-                                     <td scope="row"><B>{{$preachat->fabricant}}</B></td>
-                                     <td scope="row"><B>{{$preachat->anonyme}}</B></td>
-                                  </tr>
+                                  <h2 style="text-align: center;"><B>* Information du Fournisseur *</B></h2>
+                            
+                                    <ul>
+                                      
+                                     <li>Nom:<B>{{$preachat->nom}}</B></li>
+                                     <li>Adresse:<B>{{$preachat->adresse}}</B></li>
+                                     <li>Activité:<B>{{$preachat->activite}}</B></li>
+                                     <li>Télé:<B>{{$preachat->tele}}</B></li>
+                                     <li>Email:<B>{{$preachat->email}}</B></li>
+                                    </ul>
 
+                                    <!--  Fin Information du Fournisseur-->
+                                    <br>
+                                    <B><hr></B>
+
+                                    <!--   Pièces jointes FP CONTRAT ...-->
+
+                                    @if( $preachat->pieces_jointes == 'non')
+
+                                      <h4 style="text-align: center;"><B>Aucun Document Ajouté !</B></h4>
+
+                                    @endif
+
+                                     @if( $preachat->pieces_jointes == 'yes')
+
+                                      <h2 style="text-align: center;"><B>* Documents Joints *</B></h2>
+
+                                      <table>
+                                      <thead>
+                                        <tr>
+                                          <th><B>Pièce</B></th>
+                                          <th><B>Détail</B></th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+
+                                        @foreach($pieces as $piece)
+                                        @if($piece->id_pre_achat== $preachat->idpreachat)
+
+                                          <tr>
+                                             <td><B>{{$piece->type}}</B></td>
+                                             
+                                             <td><a class="btn btn-primary" href="/home/achats/TelechargerPiece/{{$piece->IdPiece}}" role="button">Télécharger</a>
+                                             </td>
+                                          </tr>
+
+                     
+                                        @endif
+                                        @endforeach
+                                      </tbody>
+                                    </table>
+
+
+                                    @endif
+
+                                    <!--  FIN  Pièces jointes FP CONTRAT ...-->
+                                    <br>
+                                    <B><hr></B>
+                                    <!--   Information des produits-->
+
+                                     <h2 style="text-align: center;"  ><B>* Liste des Produits demandés *</B></h2>
+                                   <table   style="width:100%">
+                                      <thead>
+                                        <tr>
+                                          <th scope="col"><B>Code_Produit</B></th>
+                                          <th scope="col"><B>Qte En Stock</B></th>
+                                          <th scope="col"><B>Qte Demandée</B></th>
+                                          <th scope="col"><B>Ancien_Prix</B></th>
+                                          <th scope="col"><B>Nv_Prix</B></th>
+                                          <th scope="col"><B>Joint</B></th>
+                               
+
+                                         
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        @foreach($produits2 as $prod2)
+                                        @if($prod2->id_pre_achat== $preachat->idpreachat)
+                                        <tr>
+                                           <td scope="row"><B>{{$prod2->code_produit}}</B></td>
+                                           <td scope="row">
+                                              @foreach($produits as $prod)
+                                                 @if($prod->id_produit == $prod2->id_produit)
+                                                  <B>{{$prod->quantite}}</B>
+                                                 @endif
+                                               @endforeach
+                                           </td>
+                                           <td scope="row"><B>{{$prod2->qte_demande}}</B></td>
+                                           <td scope="row">
+                                              @foreach($produits as $prod)
+                                                 @if($prod->id_produit == $prod2->id_produit)
+                                                  <B>{{$prod->prix}}</B>
+                                                 @endif
+                                               @endforeach
+                                           </td>
+                                           <td scope="row"><B>{{$prod2->nv_prix}}</B></td>
+
+                                          @if($prod2->ficheYN =='yes')
+                                            <td scope="row"><a class="btn btn-primary" href="/home/achats/TelechargerProduitPhoto/{{$prod2->id_produit}}" role="button">Télécharger</a>
+                                             </td>
+                                          @endif
+                                           @if($prod2->ficheYN =='non')
+                                            <td scope="row">Rien</td>
+                                          @endif
+
+                                         
+                                        
+
+                                         
+
+
+                                        </tr>
+                                        @endif
+                                        @endforeach
                               </tbody>
                             </table>
+                             <h4 style="text-align: center;" ><B>Montant HT: {{$preachat->montant}}</B></h4>
+                             @if($preachat->remiseradio =='oui')
+                             <h4 style="text-align: center;" ><B>Remise: {{$preachat->remise}} %</B></h4>
+                             <h4 style="text-align: center;" ><B>Montant Avec remise: {{$preachat->montant - ($preachat->montant * $preachat->remise / 100)}}</B></h4>
+                             @endif
+                             <!--   Information des produits-->
+
+                       <br>
+
                            
                                 <div class="modal-footer">
                             <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Fermer</

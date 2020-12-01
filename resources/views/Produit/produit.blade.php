@@ -124,128 +124,98 @@
                               
 
                           </div>
-<br>
-<hr>
+                        <br>
+                        <hr>
 
-                            <div class="form-row">
-
-                               <h4><B>Ajoutez une photo du produit ?</B></h4>
-
-                        
-                              
-
-                                <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="YesPhoto" name="PhotoYN" value="yes" checked  onclick="PhotoProduit()" >
-                                <label class="custom-control-label" for="YesPhoto">Oui</label>
-                              </div>
-
-                              <!-- Default checked -->
-                              <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="NoPhoto" name="PhotoYN" value="non"  onclick="PhotoProduit()">
-                                <label class="custom-control-label" for="NoPhoto">Non</label>
-                              </div>
-
-                            
-                            
-
-
-                              </div>
-
-
-                             <div class="form-row" id="MaPhoto">
-
-
-                                <div class="form-group" >
-                                  <label for="exampleFormControlFile1"></label>
-                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
-                                </div>
-
-                             </div>
 
                              <!-- ajouter une piece jointe-->
 
-                             <br>
-<hr>
 
-                            <div class="form-row">
+                                  <h4 ><B>Ajouter des pièces jointes</B></h4>
+      
+       <div class="form-row">
+            
+            <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="Joint" name="joint" value="yes" checked  onclick="yesnoCheckJoint()" >
+            <label class="custom-control-label" for="Joint">Oui</label>
+          </div>
 
-                               <h4><B>Ajoutez une fiche technique ?</B></h4>
+          <!-- Default checked -->
+          <div class="custom-control custom-radio">
+            
+            <input type="radio" class="custom-control-input" id="NonJoint" name="joint" value="non" onclick="yesnoCheckJoint()">
+            <label class="custom-control-label" for="NonJoint">Non</label>
+        
+          </div>
 
-                        
-                              
+      </div>
+      <br> 
 
-                                <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="YesPiece" name="PieceYN" value="yes" checked  onclick="FichePiece()" >
-                                <label class="custom-control-label" for="YesPiece">Oui</label>
-                              </div>
-
-                              <!-- Default checked -->
-                              <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="NoPiece" name="PieceYN" value="non"  onclick="FichePiece()">
-                                <label class="custom-control-label" for="NoPiece">Non</label>
-                              </div>
-
-                            
-                            
-
-
-                              </div>
+                           
+      <div class="form-row" id="Monjoint">
 
 
-                             <div class="form-row" id="MaPiece">
+          <div class="form-group items" id="dynamic_form2">
+
+                  <div class="row">
+                  <div class="button-group" style="padding: 27px;">
+                          <a href="javascript:void(0)" class="btn btn-primary" id="plus55"><i class="fa fa-plus"></i></a>
+                          <a href="javascript:void(0)" class="btn btn-danger" id="minus55"><i class="fa fa-minus"></i></a>
+                      </div>
+
+                  <div class="form-row">
+
+                      <div class="col-md-3">
+                          <label class="small mb-1" for="inputFirstName">Type Pièce: </label>
+                          <select class='form-control produits' class="js-example-basic-single" name='typepiece' id="typepiece" >
+                              <option value=""></option>
+                              @foreach($types as $type)
+                              <option id="{{$type->type}}"  value="{{$type->id}}">
+                                  <B>{{$type->type}} </B>
+                              </option>
+                              @endforeach 
+                          </select>   
+                      </div>
+
+                          <div class="col-md-3">
+                              <label class="small mb-1" for="inputEmailAddress">Numéro/Dénomination</label>
+                              <input type="text" class="form-control quantites" name="facture" id="facture" placeholder="FP001/2020, Contrat 001, BL001 ....";>
+                          </div>
+                    
+
+                    
+
+                  </div>
 
 
-                                <div class="form-group" >
-                                  <label for="exampleFormControlFile1"></label>
-                                  <input type="file" name="phototechnique"  class="form-control-file" id="exampleFormControlFile1">
-                                </div>
+                  
 
-                             </div>
+                  <div class="form-row" style="margin-left: 100px">
+
+                       <div class="col-md-3">
+                        <label class="small mb-1" for="inputEmailAddress">Date pièce </label>
+                        <input type="date" class="form-control quantites" name="date" id="date" placeholder="02/05/2018";>
+                    </div>
+
+                     
+                    <div class="col-md-3">
+                        <label class="small mb-1" for="inputEmailAddress">Pièce Jointe </label>
+                        <input type="file"  class="form-control-file" name="photoPiece" id="photoPiece" >
+                    </div>
+
+                  
+                </div>
+
+              </div>
+
+        </div>
+
+                       
+     </div>
 <br>
 <hr>
-                               <div class="form-row">
-
-                                 <h4><B>AJOUTEZ DES CARACTÉRISTIQUES TECHNIQUES ?</B></h4>
-
-                        
-                              <div class="form-row">
-
-                                <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="YesFiche" name="FicheYN" value="yes" checked  onclick="FicheTechnique()" >
-                                <label class="custom-control-label" for="YesFiche">Oui</label>
-                              </div>
-
-                              <!-- Default checked -->
-                              <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="NoFiche" name="FicheYN" value="non"  onclick="FicheTechnique()">
-                                <label class="custom-control-label" for="NoFiche">Non</label>
-                              </div>
-
-                            </div>
-
-                          </div>
-                   <br>
-                   <br>          
-
-              <div class="form-group items" id="dynamic_form">
-
-                      <div class="row">
-                      <div class="button-group" style="padding: 27px;">
-                              <a href="javascript:void(0)" class="btn btn-primary" id="plus5"><i class="fa fa-plus"></i></a>
-                              <a href="javascript:void(0)" class="btn btn-danger" id="minus5"><i class="fa fa-minus"></i></a>
-                          </div>
-
+                              
               
-                          <div class="col-md-3">
-                              <label class="small mb-1" for="inputEmailAddress">Spécficité </label>
-                              <input type="text" class="form-control quantites" name="specificite" id="specificite" placeholder="";>
-                          </div>
-                          <div class="col-md-3">
-                              <label class="small mb-1" for="inputEmailAddress">Description </label>
-                              <input type="text" class="form-control prixs" name="specification" id="specification" placeholder="";>
-                          </div>
-                      </div>
-            </div>
 
                               
 
@@ -305,16 +275,13 @@
                     </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
-                    <button type="button"  class="dropdown-item" data-toggle="modal" data-target="#staticBackdrop{{$produit->id}}"><B>Photo</B></button>
+                    
                     
 
                   <!-- Button Information -->
                      <button type="button"  class="dropdown-item" data-toggle="modal" data-target="#InfosPlus{{$produit->id}}"><B>Infos</B></button>
                      
-                     <!-- Button Data -->
-                     @if($produit->pieceYN =='yes')
-                     <button type="button" class="dropdown-item" data-toggle="modal" data-target="#data{{$produit->id}}"><B>Telecharger Fiche technique</B></button>
-                     @endif
+                    
 
                      @if($produit->ficheYN =='yes')
                      <button type="button" class="dropdown-item" data-toggle="modal" data-target="#caracteristique{{$produit->id}}"><B>Caracteristique Technique</B></button>
@@ -323,25 +290,7 @@
                 </div>
               </div>
 
-                <!-- modal de photo-->
-                <div class="modal fade" id="staticBackdrop{{$produit->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="staticBackdropLabel">Photo_Marque</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <img src="{{asset('images/produit/'.$produit->photo ?? "nimi")}}">
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                
 
                   <!-- Modal de informations supp-->
                    <div class="modal fade" id="InfosPlus{{$produit->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -379,26 +328,7 @@
                       </div>
                     </div>
 
-                     <!-- Modal de data-->
-                  <div class="modal fade" id="data{{$produit->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog ">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="staticBackdropLabel">Photo_Data</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <img width="100%" src="{{asset('images/produit/'.$produit->data ?? "nimi")}}">
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
+                    
                   <!-- Modal caracteriqtiques-->
 
                   <div class="modal fade" id="caracteristique{{$produit->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -422,8 +352,8 @@
                             <tbody>
                               @foreach($proprietes as $propriete)
                                 <tr>
-                                  <td>{{$propriete->specificite}}</td>
-                                  <td>{{$propriete->specification}}</td>
+                                  <td></td>
+                                  <td></td>
                                 </tr>
                               @endforeach
                             </tbody>
@@ -438,14 +368,7 @@
 
               </td>
              
-
  
-
-
-                
-              
-
-
 
               <td>
 
