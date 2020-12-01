@@ -77,12 +77,23 @@ id_prochain_select = "";
 
 var li_rah = [{id: "ZZXWEEVBD", code_produit: " ", description: "  "}];
 
+
 function get_prices(object) 
 {
 
-    var $id = $(object).find(":selected").val();
+    var id_win_insiri = (object.id.substr(0,7) + object.id.substr(8));
 
-    var num =(object.id.substr(object.id.length-1))
+    var $id = $(object).find(":selected").val();
+    
+    $("#"+id_win_insiri).val($id);
+
+    var num =(object.id.substr(object.id.length-1));
+
+    id_type = "type"+num;
+
+    document.getElementById(id_type).value = $(object).find(":selected").attr("class");  
+
+    /*$("#type"+num).val($(object).find(":selected").attr("class"))*/
 
     var new_id = "#quantite_dispo"+num;
 
@@ -123,13 +134,15 @@ function get_prices(object)
 
             $(new_id).val(data.quantite);
 
-            $(prix_new_id).val(data.prix);  
+            $(prix_new_id).val(data.prix_vente);  
 
             $("#"+object.id).prop('disabled', true);             
 
             //
         }
     }); 
+
+    return 0;
 
     // body...
 }
@@ -186,6 +199,7 @@ function fit_select()
         {   
             $(id_prochain_select).append($("<option></option>")
                                 .attr("value", value.id)
+                                .attr("class", value.nom.substr(0,7))
                                 .text(value.nom + ' | ' + value.description)); 
         });
 

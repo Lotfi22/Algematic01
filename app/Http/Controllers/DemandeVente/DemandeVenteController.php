@@ -27,12 +27,17 @@ class DemandeVenteController extends Controller
 
         $actuel = User::FindOrFail($id);
 
-    	$articles=DB::select("select * from articles order by nom");
 
         $produits = DB::select("select p.id,p.code_produit as nom,p.description from produits p where p.prestation = \"non\" order by code_produit");
         
         $prestations = DB::select("select p.id,p.code_produit as nom,p.description from produits p where p.prestation = \"yes\" order by code_produit");
+    	
+        $articles=DB::select("select * from articles order by nom");
 
+        $produits = User::ajuster_produits($produits);
+        $articles = User::ajuster_articles($articles);
+        $prestations = User::ajuster_prestations($prestations);
+        
         $all = array_merge($produits,$prestations,$articles);
         
         $produits = $all;
@@ -63,37 +68,47 @@ class DemandeVenteController extends Controller
 
         $employes=DB::select("select * from employes");
 
-        $client=$request->input('client');
+        $id_client=$request->input('client');
 
-        $client=DB::select("select *  from client_prospects where id='$client'");
-
-        $id_client=$client[0]->id;
 
         $total=0;
 
-        DB::insert("insert into pre_ventes (id_employe,id_client) 
-                        values('$id','$id_client') ");
+        DB::insert("insert into pre_ventes (id_employe,id_client,date_echue) values('$id','$id_client','$request->valabilite') ");
 
         $pre_vente=DB::select("select * from pre_ventes order by id  DESC limit 1");
 
         $id_preVente=$pre_vente[0]->id;
-
+        
         $total=0;
-
+        
         foreach ($request['dynamic_form']['dynamic_form'] as $key=>$array) 
         {
+
             $index = $key +1;
+            $type=$array['type'];
             $id_article=$array['produit'];
-            $quantite=$array['quantite'];
-            $prix=$array['prix'];
+            $quantite=$array['quantite_prod'];
+            $prix=$array['prix_prod'];
             $tot=$quantite*$prix;
 
-            DB::insert("insert into ligne_ventes (id_article,id_client,id_pre_vente,quantite,prix_u,total) 
-            values('$id_article','$id_client','$id_preVente','$quantite','$prix','$tot') ;");
-              
+            if($type == "article")
+            {
+    
+                DB::insert("insert into ligne_ventes (id_article,id_client,id_pre_vente,quantite,prix_u,total) 
+                values('$id_article','$id_client','$id_preVente','$quantite','$prix','$tot') ;");
 
-                    
-            $total=$total+$array['prix']*$array['quantite'];
+                //
+            }
+            else
+            {
+
+                DB::insert("insert into ligne_ventes (id_produit,id_client,id_pre_vente,quantite,prix_u,total) 
+                values('$id_article','$id_client','$id_preVente','$quantite','$prix','$tot') ;");
+
+                //
+            }
+
+            $total=$total+$prix*$quantite;
         }
 
         DB::update(" update pre_ventes p set montant='$total' where p.id='$id_preVente' ");
@@ -118,14 +133,67 @@ class DemandeVenteController extends Controller
         $employes=DB::select("select * from employes");
 
         $ventes=DB::select(" select  *,p.id as preVente,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom,u.name as nom_employe, u.prenom as prenom_employe 
+            
             from client_prospects c,pre_ventes p, categorie_clients ca , activite_clients ac,users u
+            
             where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id and u.id=p.id_employe
             order by p.id DESC");
 
-        $ligne_ventes=DB::select("select *,a.nom,a.description,l.total,a.total as PrixArticleAchat from ligne_ventes l, articles a where l.id_article=a.id");
+        $ligne_ventes1=DB::select("select *,a.nom,a.description,l.quantite,l.total,a.total as PrixArticleAchat
+            from ligne_ventes l, articles a 
+            where (l.id_article=a.id) ");
 
-         
-        return view('Vente\DemandeEnAttente',compact('employes','ventes','ligne_ventes','privilege'));
+        $ligne_ventes2=DB::select("select *,a.code_produit as nom,a.description,l.quantite,l.total,l.prix_u as PrixArticleAchat
+            from ligne_ventes l, produits a 
+            where (l.id_produit=a.id) ");
+
+        foreach ($ligne_ventes2 as $value) 
+        {
+            $prix = (DB::select("select prix from stocks where id_produit = '$value->id_produit'"));    
+
+            if (count($prix)>0) 
+            {
+
+                $value->PrixArticleAchat = $prix[0]->prix;       
+
+                # code...
+            }
+            else
+            {
+
+                $value->PrixArticleAchat = "indispo";       
+            }
+            
+
+
+            # code...
+        }
+        
+        $ligne_ventes = array_merge($ligne_ventes1,$ligne_ventes2);
+        
+        $total_achats=0;
+        $total_ventes=0;        
+        $fausse_estime = false;
+
+        foreach ($ligne_ventes as $ligne) 
+        {
+
+            if ($ligne->PrixArticleAchat == "indispo") 
+            {
+                
+                $fausse_estime = true;
+
+                # code...
+            }
+
+            $total_achats = $total_achats+(float)$ligne->PrixArticleAchat;
+
+            $total_ventes = (float)$total_ventes+$ligne->total;
+
+            # code...
+        }
+
+        return view('Vente\DemandeEnAttente',compact('fausse_estime','employes','ventes','ligne_ventes','privilege'));
     }
 
 
@@ -163,7 +231,7 @@ class DemandeVenteController extends Controller
     public function get_price(Request $request)
     {
         
-        $qte = DB::select("select quantite,prix from stocks where id_produit = \"$request->id\" ");
+        $qte = DB::select("select * from stocks where id_produit = \"$request->id\" ");
 
         if(count($qte) > 0)
         {
@@ -175,7 +243,7 @@ class DemandeVenteController extends Controller
         else
         {
 
-            $qte = ["quantite" => 0 , "prix"=>""];
+            $qte = ["quantite" => 0 , "prix_vente"=>""];
             
             //
         }

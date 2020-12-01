@@ -37,6 +37,58 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    public static function ajuster_produits($array)
+    {
+
+        foreach ($array as $value) 
+        {
+            
+            $value->nom = "produit_".$value->nom;
+            
+            # code...
+        }  
+
+        return $array;
+
+        # code...
+    }
+
+    public static function ajuster_articles($array)
+    {
+
+        foreach ($array as $value) 
+        {
+            
+            $value->nom = "article_".$value->nom;
+            
+            # code...
+        }  
+
+        return $array;
+
+        # code...
+    }
+
+    public static function ajuster_prestations($array)
+    {
+
+        foreach ($array as $value) 
+        {
+            
+            $value->nom = "prestat_".$value->nom;
+            
+            # code...
+        }  
+
+        return $array;
+
+        # code...
+    }
+
+
+
+
     public static function asLetters($number,$separateur=",") {
     
     $convert = explode($separateur, $number);

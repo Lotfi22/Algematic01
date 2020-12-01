@@ -195,15 +195,17 @@
  --}}                <th scope="col">
                     <B>Date</B>
                 </th>
+
+                <th scope="col">
+                    <B>Cout de l'article</B>
+                </th>
+
                 <th scope="col">
                     <B>Prix de vente</B>
                 </th>
                 <th scope="col">
                     <B>Bénifice</B>
                 </th>                
-                <th style="text-align: center;">
-                    <B>Action</B>
-                </th>
             </tr>
         </thead>
         
@@ -218,48 +220,24 @@
                 </td>
                 
                 <td>{{$article->description}}</td>
-                
-{{--                 <td>
-                    <!-- Button Infos Client -->
-                    
-                     <button type="button" class="btn-sm btn btn-info" id="Infos{{$article->id}}" data-toggle="modal" data-target="#infos{{$article->id}}">
-                        Informations
-                    </button>
-                    
-                    <!-- Modal -->
-                </td>
- --}}                    
+                                   
                 <td>{!! substr($article->created_at,0,10) !!} - {!! substr($article->created_at,10,6) !!}</td>
+                
+                    
+                <td style="text-align: center;">{!! number_format($article->total-$article->benifice) !!}</td> 
                 <td style="text-align: center;">{!! number_format($article->total) !!}</td> 
-                <td style="text-align: center;">{!! number_format($article->benifice) !!}</td> 
-                <td>
-                    <button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERarticle{{$article->id}}">Supprimer</button>
-                    
-                    <!-- Boutom d'Ajouter une Maman -->
-                    
-                    <div class="modal fade" id="exampleModalSUPPRIMERarticle{{$article->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Voulez vous vraiment Supprimer</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form class="needs-validation" novalidate action="/Supprimerarticle/{{$article->id}}" method="POST">
+                
+                @if($article->benifice>0)
+    
+                    <td class="alert alert-success" style="text-align: center;">
+                        
+                 @else
+                    <td class="alert alert-warning" style="text-align: center;">
+                        
 
-                                    {{ csrf_field()}}
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-secondary col-md-5" data-dismiss="modal">Annuler</button>
-                                        <button type="submit" class="btn btn-outline-danger col-md-6">Supprimer</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                </td>
+                @endif
+                    {!! number_format($article->benifice) !!}
+                </td> 
             </tr>
         @endforeach
         
@@ -324,8 +302,33 @@
                                 @endif
                             @endforeach
                         </tbody>
+
+                        {{--  --}}
                     </table>
                 </div>
+
+                <form class="needs-validation" action="/Supprimerarticle/{{$article->id}}" method="POST">
+
+                    {{ csrf_field()}}
+
+                    <div class="modal-footer">
+
+                        <button style="margin: 0% 25%;" type="submit" class="btn btn-outline-danger col-md-6">Supprimer</button>
+                    </div>
+                </form>
+
+                @if($article->benifice>0)
+                    
+                    <p class="alert alert-success" style="text-align: center;"> 
+                        <b> Sur cet Article vous bénificiez de {!! $article->benifice !!} DA </b> 
+                 @else                           
+                    <p class="alert alert-warning" style="text-align: center;"> 
+                        <b> Sur cet Article vous déficitez de {!! $article->benifice !!} DA </b> 
+                    {{--  --}}
+                @endif
+                
+                </p>                    
+
                     
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
