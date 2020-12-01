@@ -28,15 +28,15 @@
     
     <br>
 
-    <div>
-    
-        <table class="table table-striped display table-dark" id="table_id">
+    <div class="row">
+        
+        <table id="table_id" class="table-responsive table-striped table-dark display">
           
             <thead>
             
                 <tr>
                       
-                    <th>Numéro</th>
+                    {{-- <th>Numéro</th> --}}
                     <th scope="col"><B>Date Demande</B></th>
                     <th scope="col" style="display: none;"><B>Infos Client</B></th>
                     <th scope="col" style="display: none;"><B>Infos Demande</B></th>
@@ -44,6 +44,11 @@
                     <th scope="col"><B>Employé Demande</B></th>
                     <th scope="col"><B>Client</B></th>
                     <th scope="col"><B>Statut</B></th>
+                  
+                    @if($privilege ?? '' == 1)
+                        <th scope="col" style="text-align: left;"><B>Action</B></th>
+                    @endif
+
                     {{--  --}}
                 </tr>
 
@@ -54,9 +59,9 @@
             
                 @foreach($ventes as $vente)
 
-                    <tr style="cursor: pointer;" id="info_demande{{$vente->preVente}}" data-toggle="modal" data-target="#InfosDemande{{$vente->preVente}}" {{-- id="row{{$vente->preVente}}" --}} {{-- onclick="simulate_click(this);" --}}>
+                    <tr id="info_demande{{$vente->preVente}}" data-toggle="modal" data-target="#InfosDemande{{$vente->preVente}}" {{-- id="row{{$vente->preVente}}" --}} {{-- onclick="simulate_click(this);" --}}>
 
-                        <td scope="row"><B>{{$vente->preVente}}</B></td>
+                        {{-- <td scope="row"><B>{{$vente->preVente}}</B></td> --}}
                         
                         <td scope="row"><B>{{$vente->date_demande}}</B></td>
                         
@@ -101,6 +106,40 @@
                         
                         @if($privilege ?? '' == 1)
 
+                            <td>
+                                
+                                @if( ($privilege ?? '' == 1) && ($vente->statut_validation == 0 ) )
+                                    
+                                    <span class="badge badge-primary">A Valider</span>                           
+{{--                                                                                                                              
+                                    <button type="button" class="col-md-6 btn btn-outline-success" data-toggle="modal" data-target="#valider{{$vente->preVente}}">
+                                        Valider
+                                    </button>
+                                    <br>
+                                    <button type="button" class="col-md-6 btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERvente{{$vente->preVente}}">
+                                       Refuser
+                                    </button>
+                                                                    
+ --}}
+                                 @elseif(  ($vente->statut_validation == 2 ) )
+                                    <button type="button" class="{{-- btn-sm --}} col-md-7 btn btn-outline-info" data-toggle="modal" data-target="#FP{{$vente->preVente}}">
+                                      Editer FP
+                                    </button>
+
+                                    <!--  -->
+                                 @else   
+
+                                    <button type="button" class="{{-- btn-sm --}} col-md-8 btn btn-outline-warning" data-toggle="modal" data-target="#Commentaire{{$vente->preVente}}">
+                                       
+                                       Voir détails
+                                    </button>
+
+                                    <!--  -->
+                                @endif
+
+
+                                <!--  -->
+                            </td>
                                 
                             <!--  -->                            
                         @endif
@@ -119,6 +158,7 @@
 
         <!--  -->
     </div>
+
 
 
 
@@ -187,10 +227,7 @@
                         <div class="modal-body">
                                                         
                             <div class="modal-footer">
-
-                                <button type="button" class="btn btn-outline-secondary col-md-5" data-dismiss="modal">Annuler</button>
-                                    
-
+                                <button type="button" class="btn btn-outline-danger col-md-6" data-dismiss="modal">Plus tard
                                 </button>
                                 <button type="submit" class="btn btn-outline-success col-md-6">Oui, Tétécharger maintenant</button>
                             </div>
@@ -323,19 +360,11 @@
 
     @foreach($ventes as $vente)
 
-        <div style="width: 100%; height: 100%; overflow: scroll;" class="modal fade" role="dialog" id="InfosDemande{{$vente->preVente}}" tabindex="-1" aria-labelledby="InfosDemande{{$vente->preVente}}" aria-hidden="false">
-    
+        <div style="width: 100%; height: 100%; overflow: scroll;" class="modal fade" role="dialog" id="InfosDemande{{$vente->preVente}}" tabindex="-1" aria-labelledby="InfosDemande{{$vente->preVente}}" aria-hidden="true">
+
             <div class="modal-dialog modal-lg col-md-12">
 
                 <div class="modal-content">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Voulez vous vraiment Supprimer</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
 
                     <div style="padding-top: 2%;">
                         
@@ -440,7 +469,7 @@
                                 
                                 <label class="col-md-4" for="commentaire{{ $vente->preVente }}">Commentaire sur la Vente </label>
                                 
-                                <input type="text" onkeydown="remplir_comment(this);" id="commentaire{{ $vente->preVente }}" name="commentaire" class="form-control col-md-6">
+                                <input type="text" onchange="remplir_comment(this);" id="commentaire{{ $vente->preVente }}" name="commentaire" class="form-control col-md-6">
 
                             </div>      
 
@@ -508,7 +537,6 @@
                     @endif
                         
                     <div class="modal-footer">
-                        
                         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
                     </div>
 

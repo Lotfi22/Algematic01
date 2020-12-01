@@ -132,13 +132,16 @@ class DemandeVenteController extends Controller
 
     public function RefuserDemandeVente(Request $request,$idPreVente)
     {
-        dd($request->all());
-        
-        $commentaire=$request->input('commentaire');
+            
+        $id = Auth::id();
 
-        DB::update("update pre_ventes p set statut_validation= 1, commentaire ='$commentaire' where p.id='$idPreVente' ");
+        $actuel = User::FindOrFail($id);        
 
-        return back()->with('success','La demande de Vente a été refusé avec succé');
+        $commentaire=$request->input('commentaire_refus');
+     
+        DB::update("update pre_ventes p set statut_validation= 1, commentaire ='$commentaire', id_validateur='$id'  where p.id='$idPreVente' ");
+
+        return back()->with('success','La demande :  de Vente '.$idPreVente.' a été refusé avec succé');
      }
 
 
@@ -146,9 +149,13 @@ class DemandeVenteController extends Controller
     public function ValiderDemandeVente(Request $request,$idPreVente)
     {
 
-        DB::update("update pre_ventes p set statut_validation= 2,commentaire='$request->commentaire_accept' where p.id='$idPreVente'");
+        $id = Auth::id();
 
-        return back()->with('success','La demande de Vente a été Validé avec succé');
+        $actuel = User::FindOrFail($id);
+
+        DB::update("update pre_ventes p set statut_validation= 2, commentaire='$request->commentaire_accept',id_validateur='$id'  where p.id='$idPreVente'");
+
+        return back()->with('success','La demande :  de Vente '.$idPreVente.' a été Approuvée avec succé');
     }
 
 

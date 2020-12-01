@@ -24,13 +24,12 @@ class ArticleController extends Controller
     {
 
      	$id = Auth::id();
+
         $actuel = User::FindOrFail($id);
 
-        
-    	$produits=DB::select("select p.id, p.code_produit,p.description,s.quantite,s.prix
-    		from produits p, stocks s
-    		where p.id=s.id_produit  ");
-
+    	$produits=DB::select("select p.id, p.code_produit, p.description, s.quantite, s.prix,s.prix_vente
+        from produits p, stocks s
+        where p.id=s.id_produit");
 
     	$clients=DB::select("select * from client_prospects");
 
@@ -45,42 +44,43 @@ class ArticleController extends Controller
 
 
     public function AddArticle(Request $request)
-    {
+    {   
+        
     	$this->validate($request,[
-            'nom' => 'required|max:300',
-            'description' => 'required|max:1000'
+            'Réferance' => 'required',
+            'description_article' => 'required'
             ]);
         
-        $nom=$request->input('nom');
-        $description=$request->input('description');
+        $nom=$request->input('Réferance');
+        $description=$request->input('description_article');
+        $Prix_propose=$request->input('Prix_propose');
+        $benifice=$request->input('fayda');
 
-        DB::insert("insert into articles (nom,description) values(\"$nom\",\"$description\")");
+        DB::insert("insert into articles (nom,description,total,benifice) values(\"$nom\",\"$description\",\"$Prix_propose\",\"$benifice\" )");
 
         $id_article=DB::select("select * from articles where nom='$nom'");
 
         $id_article=$id_article[0]->id;
 
-        $total=0;
-
      	foreach ($request['dynamic_form']['dynamic_form'] as $key=>$array) 
         {
+            
             $index = $key +1;
             $code_produit=$array['produit'];
-            $id_produit=DB::select("select id  from produits where code_produit='$code_produit'");
+            
+            $id_produit=DB::select("select id from produits where id='$code_produit'");
             $id_prod=$id_produit[0]->id;
             
             $quantite=$array['quantite'];
-            $prix=$array['prix'];
+            
+            /*$prix=$array['prix'];*/
            
-            DB::insert("insert into prix_vente_produits (id_produit,id_article,prix,quantite) 
-            values('$id_prod','$id_article','$prix','$quantite') ;");
+            DB::insert("insert into prix_vente_produits (id_produit,id_article/*,prix*/,quantite) 
+            values('$id_prod','$id_article'/*,'prix'*/,'$quantite') ;");
                        
-            $total=$total+$array['prix']*$array['quantite'];
         }
-
-       DB::update("update articles a set total='$total' where a.id='$id_article' ");
         
-       return redirect('/article')->with('success','Article Ajouté avec succée');
+        return back()->with('success','Article Ajouté avec succée');
     }
 
     public function SupprimerArticle($id)
@@ -94,6 +94,18 @@ class ArticleController extends Controller
 
         return back();
 
+
+        # code...
+    }
+
+    public function getprice(Request $request)
+    {
+
+        $id = $request->id;
+
+        $produit = (DB::select("select * from stocks where id_produit = '$id' "))[0];
+
+        return response()->json($produit);
 
         # code...
     }

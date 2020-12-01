@@ -60,12 +60,15 @@ Route::post('/AddArticle', 'DemandeVente\ArticleController@AddArticle');
 Route::post('/ModifArticle/{idArticleModif}', 'DemandeVente\ArticleController@ModifArticle');
 /*Suppression d'un  dépot*/
 Route::post('/Supprimerarticle/{idArticleSupprimer}', 'DemandeVente\ArticleController@SupprimerArticle');
+Route::post('/home/vente/article/GetPrice','DemandeVente\ArticleController@getprice');
 
 Route::get('/home/vente/DemandeVente', 'DemandeVente\DemandeVenteController@index');
 Route::get('/home/vente/DemandeVenteAttente', 'DemandeVente\DemandeVenteController@DemandeVenteAttente');
 Route::post('/home/vente/DemandeVente/GetPrice','DemandeVente\DemandeVenteController@get_price');
 Route::post('/home/vente/DemandeVente/AddDemandeVente', 'DemandeVente\DemandeVenteController@AddDemandeVente');
 Route::post('/home/vente/DemandeVenteAttente/RefuserDemandeVente/{idPreVente}' , 'DemandeVente\DemandeVenteController@RefuserDemandeVente');
+
+
 
 
 
