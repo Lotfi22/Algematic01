@@ -32,8 +32,7 @@
               <h1 style=" text-align: center; " ><B>Demande d'Achat </B></h1>     <br>
               <hr>
              
-
-
+   
                 <form class="needs-validation" novalidate action="/home/achats/AddDemandeAchatPrestation/" method="POST" enctype="multipart/form-data">
 
                         {{ csrf_field()}}
@@ -161,7 +160,7 @@
 
                       <div class="col-md-3">
                           <label class="small mb-1" for="inputFirstName">Type Pièce: </label>
-                          <select class='form-control produits' class="js-example-basic-single" name='typepiece' id="typepiece" >
+                          <select class='form-control ' class="js-example-basic-single" name='typepiece' id="typepiece" >
                               <option value=""></option>
                               @foreach($types as $type)
                               <option id="{{$type->type}}"  value="{{$type->id}}">
@@ -173,7 +172,7 @@
 
                           <div class="col-md-3">
                               <label class="small mb-1" for="inputEmailAddress">Numéro/Dénomination</label>
-                              <input type="text" class="form-control quantites" name="facture" id="facture" placeholder="FP001/2020, Contrat 001, BL001 ....";>
+                              <input type="text" class="form-control " name="facture" id="facture" placeholder="FP001/2020, Contrat 001, BL001 ....";>
                           </div>
                     
 
@@ -188,7 +187,7 @@
 
                        <div class="col-md-3">
                         <label class="small mb-1" for="inputEmailAddress">Date pièce </label>
-                        <input type="date" class="form-control quantites" name="date" id="date" placeholder="02/05/2018";>
+                        <input type="date" class="form-control " name="date" id="date" placeholder="02/05/2018";>
                     </div>
 
                      
@@ -205,7 +204,7 @@
         </div>
 
                        
-                        </div>
+     </div>
 
                               
                         <hr>
@@ -268,7 +267,7 @@
                           </div>
 
                           <div class="col-md-3">
-                              <label class="small mb-1" for="inputFirstName">Produit: </label>
+                              <label class="small mb-1 produitsLabels" for="inputFirstName">Produit: </label>
                               <select class='form-control produits' class="js-example-basic-single" name='produit' id="produit" >
                                   <option value=""></option>
                                   @foreach($produits as $produit)
@@ -281,6 +280,7 @@
                           <div class="col-md-3">
                               <label class="small mb-1" for="inputEmailAddress">Quantité : </label>
                               <input type="number" class="form-control quantites" name="quantite" id="quantite" placeholder="2";>
+
                           </div>
                           <div class="col-md-3">
                               <label class="small mb-1" for="inputEmailAddress">Prix Unitaire : </label>
@@ -290,7 +290,8 @@
             </div>
 
              <div class="modal-footer">
-                           
+
+                        <input type="button" id="total" name="total" class="btn-sm btn btn-success" >             
                         <button type="submit" class="btn-sm btn btn-primary">Valier La Demande</button>
                         <a class="btn-sm btn btn-dark" href="/home" aria-expanded="false">Annuler</span></a>
              </div>
@@ -298,5 +299,109 @@
         </form>
 
 
+
+@endsection
+
+@section('scripts') 
+
+<script type="text/javascript">
+  
+ function onChangeProduit()
+{
+    
+    $('.produits').on('change', function (e) {
+        let pro = ''
+        let produits = $('.produits')
+        let prixs = $('.prixs')
+        let quantities = $('.quantites')
+       
+        $('#_table').empty()
+
+        $('.produits').each(function(i, obj) {
+            var valueSelected = this.value;
+            var obj = JSON.parse(valueSelected);
+            console.log(valueSelected)
+            var image = obj.image;
+            let prix_vente = obj.prix_fournisseur 
+
+            var elt = '<tr><td><img src="/storage/app/public/'+image+'" width="70px"/>'+obj.nom +'</td><td id=_prix'+i+'>'+prix_vente+'</td><td id=_quantite'+i+'>';
+                elt+= '0</td><td id=_total'+i+'></td></tr>'
+            $('#_table').prepend(elt)   
+            pro = pro+'<br>'+'<img src="/storage/app/public/'+image+'" width="70px"/>'+obj.nom
+
+            $('#prix'+i).val(prix_vente)        
+            $('#quantite'+i).attr('max',obj.quantite)
+            $('#quantite'+i).attr('min',0)
+        });
+        setTimeout(function(){ 
+            $('#_produit').html(pro)
+        }, 1000);
+        
+    });
+
+}
+function onChangeQte()
+{
+
+  $(document).on("change", ".quantites", function(){
+        var valueSelected = this.value;
+        $('#_'+this.id).html(valueSelected)
+      
+
+        var total = 0    
+        var numItems = $('.produits').length
+
+        $('.produits').each(function(i, obj) {
+            
+             var qte = parseInt($('#quantite'+i).val())
+            var prix = parseInt($('#prix'+i).val())
+            var countProduit = qte*prix
+            $('#_total'+index).html(countProduit)
+            total+=countProduit
+        });
+
+       
+        $('#total').val(total);
+
+    });
+
+
+}
+function onChangePrix()
+{
+
+  $(document).on("change", ".prixs", function(){
+     
+
+        var total = 0    
+        var numItems = $('.produitsLabels').length
+        for (let index = 0; index < numItems; index++) {
+            var qte = parseInt($('#quantite'+index).val())
+            var prix = parseInt($('#prix'+index).val())
+            var countProduit = qte*prix
+            $('#_total'+index).html(countProduit)
+
+            total+=countProduit
+
+        }
+
+        $('#total').val(total);
+
+  
+
+    });
+
+
+}
+
+$(document).ready(function () {
+          
+            
+            onChangeQte();
+            
+            onChangePrix();
+        });
+
+</script>
 
 @endsection

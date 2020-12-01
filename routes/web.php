@@ -251,3 +251,7 @@ Route::post('/SupprimerArticle/{idArticleSupprimer}', 'DemandeVente\ArticleContr
 
 Route::get('/home/stocks/ProduitStock', 'Produit\ProduitController@ProduitController');
 
+
+
+/**********************************************AJAX NIMI*****************************/
+

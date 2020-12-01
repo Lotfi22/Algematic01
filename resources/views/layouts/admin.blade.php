@@ -4,6 +4,9 @@
 
 <head>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
     <meta charset="utf-8">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -487,6 +490,10 @@
 </body>
     
     <script type="text/javascript">
+
+         
+
+
         
 
         $(document).ready(function() {
@@ -496,14 +503,29 @@
                 normalizeFullForm : false
             });
 
-            dynamic_form.inject([{p_name: 'Hemant',quantity: '123',remarks: 'testing remark'},{p_name: 'Harshal',quantity: '123',remarks: 'testing remark'}]);
 
             $("#dynamic_form #minus5").on('click', function(){
+
+                 
+
                 var initDynamicId = $(this).closest('#dynamic_form').parent().find("[id^='dynamic_form']").length;
                 if (initDynamicId === 2) {
                     $(this).closest('#dynamic_form').next().find('#minus5').hide();
                 }
                 $(this).closest('#dynamic_form').remove();
+                var total = 0    
+        var numItems = $('.produitsLabels').length
+        for (let index = 0; index < numItems; index++) {
+            var qte = parseInt($('#quantite'+index).val())
+            var prix = parseInt($('#prix'+index).val())
+            var countProduit = qte*prix
+            $('#_total'+index).html(countProduit)
+
+            total+=countProduit
+
+        }
+
+        $('#total').val(total)
             });
 
             $('form').on('submit', function(event){
@@ -514,6 +536,7 @@
                 console.log(values)
                 event.preventDefault();
             })
+
         });
 
         /*achat prestation*/
@@ -846,34 +869,9 @@
         //
     </script>
 
-     <script>
-            
-       function yesnoCheckFabricant() {
-            if (document.getElementById('FabricantOui').checked) {
-                document.getElementById('JeSuisFabricat').style.display = 'block';
-            } 
-            else if(document.getElementById('FabricantNon').checked) {
-                document.getElementById('JeSuisFabricat').style.display = 'none';
-           }
-        }
+    
 
-        //
-    </script>
-
-     <script>
-            
-       function yesnoCheckAnonymeYN() {
-            if (document.getElementById('AnonymeOui').checked) {
-                document.getElementById('nonanonyme').style.display = 'none';
-            } 
-            else if(document.getElementById('AnonymeNon').checked) {
-                document.getElementById('nonanonyme').style.display = 'block';
-           }
-        }
-
-        //
-    </script>
-
+     
      <script>
             
        function FicheTechnique() 
@@ -985,6 +983,11 @@
 
         {{--  --}}
     </script>
+
+
+    @yield('scripts')
+
+
 
 
     {{--  --}}
