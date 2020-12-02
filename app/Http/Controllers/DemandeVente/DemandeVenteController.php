@@ -139,7 +139,7 @@ class DemandeVenteController extends Controller
             where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id and u.id=p.id_employe
             order by p.id DESC");
 
-        $ligne_ventes1=DB::select("select *,a.nom,a.description,l.quantite,l.total,a.total as PrixArticleAchat
+        $ligne_ventes1=DB::select("select *,a.nom,a.description,l.quantite,l.total,(a.total-a.benifice) as PrixArticleAchat
             from ligne_ventes l, articles a 
             where (l.id_article=a.id) ");
 
@@ -223,30 +223,78 @@ class DemandeVenteController extends Controller
 
         DB::update("update pre_ventes p set statut_validation= 2, commentaire='$request->commentaire_accept',id_validateur='$id'  where p.id='$idPreVente'");
 
+        /*DB::insert("insert into ventes")*/
+
         return back()->with('success','La demande :  de Vente '.$idPreVente.' a été Approuvée avec succé');
     }
 
 
 
     public function get_price(Request $request)
-    {
-        
-        $qte = DB::select("select * from stocks where id_produit = \"$request->id\" ");
+    {   
 
-        if(count($qte) > 0)
+        if ($request->type != "article") 
         {
+        
+            $qte = DB::select("select * from stocks where id_produit = \"$request->id\" ");
 
-            $qte = $qte[0];
+            if(count($qte) > 0)
+            {
 
-            //
+                $qte = $qte[0];
+
+                //
+            }
+            else
+            {
+
+                $qte = ["quantite" => 0 , "prix_vente"=>""];
+                
+                //
+            }
+
+            # code...
         }
         else
         {
 
-            $qte = ["quantite" => 0 , "prix_vente"=>""];
+            $prod_requis = (DB::select("select pvp.id_article,pvp.id_produit,pvp.quantite,a.total as prix_vente from articles a,prix_vente_produits pvp 
+                where a.id=pvp.id_article and a.id = '$request->id' "));
+
+            $u=0;
+
+            foreach ($prod_requis as $prod) 
+            {
             
-            //
+                $qte = (DB::select("select quantite/'$prod->quantite' as qte from stocks where id_produit = '$prod->id_produit' "));
+
+                if (count($qte)>0) 
+                {
+
+                    $quantities[$u] = (int)$qte[0]->qte;
+                    
+                    $u++;
+                    
+                    # code...
+                }
+                else
+                {
+
+                    $quantities[$u] = 0;
+                    
+                    $u++;
+
+                    #..
+                }
+
+                # code...
+            }
+
+            $qte = ["quantite" => min($quantities) , "prix_vente"=>$prod_requis[0]->prix_vente];
+            
+            #...
         }
+        
 
         return response()->json($qte);        
 
@@ -258,8 +306,7 @@ class DemandeVenteController extends Controller
     {
          
         $ventes=DB::select(" select  *,p.id as preVente,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects c,pre_ventes p, categorie_clients ca , activite_clients ac
-             where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id and p.id='$idPreVente'");
-
+            where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id and p.id='$idPreVente'");
 
 
         $ligne_ventes=DB::select("select *,a.nom,a.description,l.total from ligne_ventes l, articles a where l.id_article=a.id and l.id_pre_vente='$idPreVente' ");

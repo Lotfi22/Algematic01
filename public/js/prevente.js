@@ -1,3 +1,17 @@
+
+for (var i = 2; i > -1; i--) 
+{
+	
+	$("#recap_achat"+i).text("Le cout d'acht : "+$("#cout_achat"+i).attr("name") );
+	
+	$("#recap_vente"+i).text("Le monatant total TTC de vente : "+$("#montant_vente"+i).attr("name") );
+
+	$("#recap_benifice"+i).text("Le bénifice approximatif : "+$("#montant_benifice"+i).attr("name") );
+
+	//
+}
+
+
 function clin() 
 {
     
@@ -8,6 +22,9 @@ function clin()
 }
 
 clin();
+
+
+
 
 function remplir_comment(objet) 
 {

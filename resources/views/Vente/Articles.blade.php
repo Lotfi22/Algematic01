@@ -312,8 +312,6 @@
 
                     {{ csrf_field()}}
 
-                    <input style="margin: 3% 25%;" type="submit" class="btn btn-outline-danger col-md-6">
-
                     <button style="margin: 3% 25%;" type="submit" class="btn btn-outline-danger col-md-6">Supprimer</button>
                 </form>
 

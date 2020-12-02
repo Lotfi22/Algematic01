@@ -93,7 +93,7 @@ function get_prices(object)
 
     document.getElementById(id_type).value = $(object).find(":selected").attr("class");  
 
-    /*$("#type"+num).val($(object).find(":selected").attr("class"))*/
+    var le_type = $(object).find(":selected").attr("class")
 
     var new_id = "#quantite_dispo"+num;
 
@@ -125,7 +125,7 @@ function get_prices(object)
         },                    
         type:"POST",
         url:"/home/vente/DemandeVente/GetPrice",
-        data:{id:$id},
+        data:{id:$id,type:le_type},
         
         success:function(data) 
         {   

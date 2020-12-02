@@ -192,11 +192,13 @@
                     </div>
                     <div class="modal-body">
                         <hr>
-                        <ul>
-                            <li><B>Client :  </B>  {{$vente->code_client}}</li>
-                            <li><B>Mobile :  </B>  {{$vente->mobile}}</li>
-                            <li><B>Email :  </B>  {{$vente->email}}</li>
-                        </ul>
+
+                        <h3>Récap : </h3>
+                        <p id="recap_achat{{ $i }}"></p>
+                        <p id="recap_vente{{ $i }}"></p>
+                        <p id="recap_benifice{{ $i }}"></p>
+
+                        <hr>
 
                         @if($vente->taux_remise_spec!=0)
 
@@ -204,9 +206,8 @@
 
                             {{--  --}}
                         @endif
-                    </div>
-                    
-                    
+                    </div>                
+
                     <table class="table table-striped table-dark display">
 
                         <thead>
@@ -236,7 +237,7 @@
                                         <td scope="row"> {!! $ligne->description !!} </td>
                                         <td scope="row"> {!! number_format((float)$ligne->PrixArticleAchat) !!} </td>
 
-                                        <?php $cout = $cout+(float)$ligne->PrixArticleAchat; ?>
+                                        <?php $cout = $cout+((float)$ligne->PrixArticleAchat)*$ligne->quantite; ?>
 
                                         <td scope="row"> {!! number_format((float)$ligne->prix_u) !!} </td>
                                         <td scope="row"> {!! $ligne->quantite !!} </td>
@@ -247,12 +248,18 @@
                                 {{----}}
                             @endforeach
 
-                            <?php $couts[$i] = $cout; $i++; ?>
 
                             {{----}}
                         </tbody>
                     </table>
 
+                    <p style="display: none;" id="cout_achat{{ $i }}" name="{{  number_format($cout)}}"> Le cout d'acht : {!! number_format($cout) !!} </p>
+
+                    <p style="display: none;" id="montant_vente{{ $i }}" name="{{  number_format($vente->montant*1.19) }}"> Le Montant de vente : {!! number_format($vente->montant*1.19) !!}</p>
+
+                    <p style="display: none;" id="montant_benifice{{ $i }}" name="{{ number_format($vente->montant-$cout) }}"> Le Bénifice : {!! number_format($vente->montant-$cout) !!}</p>
+
+                    <?php $couts[$i] = $cout; $i++; ?>
 
                     <div style="margin-left: 60%; float: right;">
 
