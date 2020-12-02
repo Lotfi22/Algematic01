@@ -83,7 +83,8 @@
                                 <label for="validationTooltip02">
                                     <B>Description</B>
                                 </label>
-                                <input type="text" required name="description_article"class="form-control" required>
+                                <textarea type="text" required name="description_article" class="form-control" required ></textarea>
+                                {{-- <input type="text" required name="description_article" class="form-control" required> --}}
                             </div>
 
                         </div>
@@ -311,10 +312,9 @@
 
                     {{ csrf_field()}}
 
-                    <div class="modal-footer">
+                    <input style="margin: 3% 25%;" type="submit" class="btn btn-outline-danger col-md-6">
 
-                        <button style="margin: 0% 25%;" type="submit" class="btn btn-outline-danger col-md-6">Supprimer</button>
-                    </div>
+                    <button style="margin: 3% 25%;" type="submit" class="btn btn-outline-danger col-md-6">Supprimer</button>
                 </form>
 
                 @if($article->benifice>0)

@@ -534,7 +534,6 @@
                     values[field.name] = field.value;
                 });
                 console.log(values)
-                event.preventDefault();
             })
 
         });
@@ -564,7 +563,6 @@
                     values[field.name] = field.value;
                 });
                 console.log(values)
-                event.preventDefault();
             })
         });
 
@@ -591,7 +589,6 @@
                     values[field.name] = field.value;
                 });
                 console.log(values)
-                event.preventDefault();
             })
         });
 
