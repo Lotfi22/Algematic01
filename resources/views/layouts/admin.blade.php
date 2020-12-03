@@ -296,9 +296,11 @@
                         <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAchatPrestation" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande d'Achat</span></a></li>
 
 
-                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAttente2" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Achats</span></a></li>
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/DemandeAttente2" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Approbation</span></a></li>
 
-                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/AchatArrivage" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Achat/Arrivage</span></a></li>
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/AchatArrivage" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Arrivage</span></a></li>
+
+                        <li class="DemandeAchat"> <a class="waves-effect waves-dark" href="/home/achats/Rangement" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Rangement</span></a></li>
                         
                         {{-- fin achat --}}
 
@@ -513,18 +515,7 @@
                     $(this).closest('#dynamic_form').next().find('#minus5').hide();
                 }
                 $(this).closest('#dynamic_form').remove();
-                var total = 0    
-        var numItems = $('.produitsLabels').length
-        for (let index = 0; index < numItems; index++) {
-            var qte = parseInt($('#quantite'+index).val())
-            var prix = parseInt($('#prix'+index).val())
-            var countProduit = qte*prix
-            $('#_total'+index).html(countProduit)
-
-            total+=countProduit
-
-        }
-
+                
         $('#total').val(total)
             });
 

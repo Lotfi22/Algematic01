@@ -40,12 +40,12 @@
             <tr>
                 <th scope="col"><B>Type</B></th>
                 <th scope="col"><B>Date</B></th>
-                <th scope="col"><B>Détail</B></th>
                 <th scope="col"><B>Informations</B></th>
-                <th scope="col"><B>Approbation</B></th>
+                <th scope="col"><B>Statut</B></th>
                
                 
             </tr>
+
       </thead>
           <tbody>
             @foreach($presachats as $preachat)
@@ -56,42 +56,29 @@
 
               <td scope="row"><B>{{$preachat->date_achat}}</B></td>
 
+              
+
               <td>
 
-                <div class="dropdown">
-
-                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu{{$preachat->idpreachat}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Infos
-                    </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenu{{$preachat->idpreachat}}">
-
-                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#Fournisseur{{$preachat->idpreachat}}">
-                       Fournisseur
+                <button type="button"  class="btn-sm btn btn-primary" data-toggle="modal" data-target="#InfosDemande{{$preachat->idpreachat}}">
+                       Infos 
                     </button>
 
-                    
 
-                    
-
-                
-                </div>
-
-              </div>
-
-
-               <!-- Infos Fournis -->
-                    <div class="modal fade bd-example-modal-xl" id="Fournisseur{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="FournisseurmyHugeModalLabel{{$preachat->idpreachat}}" aria-hidden="true">
+                     <!-- Liste des produits 1er buttom -->
+                     
+                    <div class="modal fade" id="InfosDemande{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="InfosDemandeexampleModalLabel{{$preachat->idpreachat}}" aria-hidden="true">
                       <div class="modal-dialog modal-lg">
                         <div class="modal-content">
 
                           <div class="modal-header">
-                            <h5 class="modal-title" id="FournisseurmyHugeModalLabel{{$preachat->idpreachat}}">Informations sur La Demande</h5>
+                            <h5 class="modal-title" id="InfosDemandeexampleModalLabel{{$preachat->idpreachat}}">Informations sur la Demande</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                                 
-                                <!--  Information du Fournisseur-->
+                                  <!--  Information du Fournisseur-->
 
                                   <h2 style="text-align: center;"><B>* Information du Fournisseur *</B></h2>
                             
@@ -191,7 +178,7 @@
                                            <td scope="row"><B>{{$prod2->nv_prix}}</B></td>
 
                                           @if($prod2->ficheYN =='yes')
-                                            <td scope="row"><a class="btn btn-primary" href="/home/achats/TelechargerProduitPhoto/{{$prod2->id_produit}}" role="button">Télécharger</a>
+                                            <td scope="row"><a class="btn btn-primary" href="/home/achats/TelechargerProduitFiche/{{$prod2->id_produit}}" role="button">Télécharger</a>
                                              </td>
                                           @endif
                                            @if($prod2->ficheYN =='non')
@@ -217,233 +204,38 @@
                              <!--   Information des produits-->
 
                        <br>
+                  
+                  <div class="modal-footer">
 
-                           
-                                <div class="modal-footer">
-                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Fermer</
-                          </div>
+                     @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0) && ($preachat->refuser==0))
+                      <button type="button" class="btn-sm btn btn-primary"   data-toggle="modal" data-target="#valider{{$preachat->idpreachat}}">
+                                Valider
+                      </button>
+                      @endif
 
+                      @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0) && ($preachat->refuser==0))
+                       <button type="button" class="btn-sm btn btn-danger"  data-toggle="modal" data-target="#exampleModalSUPPRIMERpreachat{{$preachat->idpreachat}}">
+                                 Refuser
+                      </button>
+                      @endif
 
-                        </div>
-                      </div>
-                    </div>
+                      @if( ($preachat->demande_valide==1) && ($preachat->refuser==0) )
 
+                        <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#TelechargerBC{{$preachat->idpreachat}}">Télecharger BC
+                        </button>
+                      @endif
+        
 
-
-
-                 
-                        
-              </td>
-
-
-              <td>
-
-                <button type="button"  class="btn-sm btn btn-primary" data-toggle="modal" data-target="#InfosDemande{{$preachat->idpreachat}}">
-                       Infos 
-                    </button>
-
-
-                     <!-- Liste des produits 1er buttom -->
-                     
-                    <div class="modal fade" id="InfosDemande{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="InfosDemandeexampleModalLabel{{$preachat->idpreachat}}" aria-hidden="true">
-                      <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="InfosDemandeexampleModalLabel{{$preachat->idpreachat}}">Informations sur la Demande</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                                
-                                  <h3 style="text-align: center;"  ><B>Liste des Produits demandés</B></h3>
-                                   <table   style="width:100%">
-                                      <thead>
-                                        <tr>
-                                          <th scope="col"><B>Code_Produit</B></th>
-                                          <th scope="col"><B>Qte En Stock</B></th>
-                                          <th scope="col"><B>Qte Demandée</B></th>
-                                          <th scope="col"><B>Ancien_Prix</B></th>
-                                          <th scope="col"><B>Nv_Prix</B></th>
-                                          <th scope="col"><B>Photo</B></th>
-                                          <th scope="col"><B>Fiche</B></th>
-                                          <th scope="col"><B>Caractéristiques</B></th>
-
-                                         
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        @foreach($produits2 as $prod2)
-                                        @if($prod2->id_pre_achat== $preachat->idpreachat)
-                                        <tr>
-                                           <td scope="row"><B>{{$prod2->code_produit}}</B></td>
-                                           <td scope="row">
-                                              @foreach($produits as $prod)
-                                                 @if($prod->id_produit == $prod2->id_produit)
-                                                  <B>{{$prod->quantite}}</B>
-                                                 @endif
-                                               @endforeach
-                                           </td>
-                                           <td scope="row"><B>{{$prod2->qte_demande}}</B></td>
-                                           <td scope="row">
-                                              @foreach($produits as $prod)
-                                                 @if($prod->id_produit == $prod2->id_produit)
-                                                  <B>{{$prod->prix}}</B>
-                                                 @endif
-                                               @endforeach
-                                           </td>
-                                           <td scope="row"><B>{{$prod2->nv_prix}}</B></td>
-
-                                          @if($prod2->photoYN =='yes')
-                                            <td scope="row"><a class="btn btn-primary" href="/home/achats/TelechargerProduitPhoto/{{$prod2->id_produit}}" role="button">Télécharger</a>
-                                             </td>
-                                          @endif
-                                           @if($prod2->photoYN =='non')
-                                            <td scope="row">Rien</td>
-                                          @endif
-
-                                          @if($prod2->pieceYN =='yes')
-                                            <td scope="row"><a class="btn btn-primary" href="/home/achats/TelechargerProduitFiche/{{$prod2->id_produit}}" role="button">Télécharger</a>
-                                             </td>
-                                          @endif
-                                           @if($prod2->pieceYN =='non')
-                                            <td scope="row">Rien</td>
-                                          @endif
-
-                                          @if($prod2->ficheYN =='yes')
-                                            <td scope="row"><a class="btn btn-primary" href="/home/achats/TelechargerProduitCaracteristique/{{$prod2->id_produit}}" role="button">Télécharger</a>
-                                             </td>
-                                          @endif
-                                           @if($prod2->ficheYN =='non')
-                                            <td scope="row">Rien</td>
-                                          @endif
-
-
-                                        </tr>
-                                        @endif
-                                        @endforeach
-                              </tbody>
-                            </table>
-                             <h3 style="text-align: center;" ><B>Montant HT: {{$preachat->montant}}</B></h3>
-                             @if($preachat->remiseradio =='oui')
-                             <h3 style="text-align: center;" ><B>Remise: {{$preachat->remise}} %</B></h3>
-                             <h3 style="text-align: center;" ><B>Montant Avec remise: {{$preachat->montant - ($preachat->montant * $preachat->remise / 100)}}</B></h3>
-                             @endif
-
-                       <br>     
-                   <B><hr></B>
-                   
-
-                          <!-- pieces jointes-->
-
-                   <div class="modal-body">
-
-
-                        <h3 style="text-align: center;"  ><B>Liste des Pièces Jointes</B></h3>
-
-                                   <table   style="width:100%">
-                                      <thead>
-                                        <tr>
-                                          <th scope="col"><B>Pièce</B></th>
-                                          <th scope="col"><B>Détail</B></th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-
-                                        @foreach($pieces as $piece)
-                                        @if($piece->id_pre_achat== $preachat->idpreachat)
-
-                                          <tr>
-                                             <td scope="row"><B>{{$piece->type}}</B></td>
-                                             
-                                             <td scope="row"><a class="btn btn-primary" href="/home/achats/TelechargerPiece/{{$piece->IdPiece}}" role="button">Télécharger</a>
-                                             </td>
-                                          </tr>
-
-                     
-                                        @endif
-                                        @endforeach
-                              </tbody>
-                            </table>
-
-                    </div>
-
-
-                          <!-- Fin pieces jointes-->
-
-                                <div class="modal-footer">
-                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Fermer</
-                          </div>
+                    
+                    <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Fermer</
+                  </div>
 
 
                         </div>
                       </div>
                     </div>
 
-                    <!--Fin  Liste des produits 1er buttom -->
-            
-
-
-              </td>
-
-
-               <!--Td d'approbation -->
-               
-               <td>
-
-          <div class="dropdown">
-
-            @if(($preachat->demande_valide==0) && ($preachat->refuser==0))
-          <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Plus 
-          </button>
-          @endif
-          @if(($preachat->demande_valide==1) && ($preachat->refuser==0))
-          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            BC 
-          </button>
-          @endif
-          @if($preachat->refuser==1)
-          <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Plus 
-          </button>
-          @endif
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-
-            @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0) && ($preachat->refuser==0))
-            <button type="button" class="dropdown-item"   data-toggle="modal" data-target="#valider{{$preachat->idpreachat}}">
-                      Valider
-            </button>
-            @endif
-            @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0) && ($preachat->refuser==0))
-             <button type="button" class="dropdown-item"  data-toggle="modal" data-target="#exampleModalSUPPRIMERpreachat{{$preachat->idpreachat}}">
-                       Refuser
-            </button>
-            @endif
-
-            @if( ($preachat->demande_valide==1) && ($preachat->refuser==0) )
-
-              <button type="button" class="dropdown-item" data-toggle="modal" data-target="#TelechargerBC{{$preachat->idpreachat}}">Télecharger BC
-                      
-              </button>
-
-            @endif
-
-            @if( $preachat->refuser==1 )
-
-              <ul>
-                <li>Demande Refusée</li>
-                <li>Motif: {{$preachat->commentaire}}</li>
-              </ul>
-           
-
-
-            @endif
-
-           
-
-          </div>
-          <!-- Modal de validation -->
+                     <!-- Modal de validation -->
                     <div class="modal fade" id="valider{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="exampleModalLabelValidation{{$preachat->idpreachat}}" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -455,7 +247,7 @@
                           </div>
                      <form class="needs-validation" novalidate action="/home/achats/ValiderPreAchat/{{$preachat->idpreachat}}" method="POST">
                         {{ csrf_field()}}
-                          <div class="modal-body">
+                  
                               
                           <div class="modal-footer">
                             <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -530,12 +322,66 @@
 
                     <!-- Fin Modal de telechargement du BC -->
 
+              </td>
+
+              <!-- TD du STATUT -->
+              <td>
+                      @if(  ($preachat->demande_valide==0) && ($preachat->refuser==0))
+                        
+                   
+                        <button type="button" class="encours alert alert-primary">En Cours</button>
+
+                      @endif
+
+                      @if(  ($preachat->demande_valide==1) && ($preachat->refuser==0))
+                        
+                        <button type="button" class="btn-sm btn btn-success" >Validée</button>
+
+                      @endif
+                      
+
+                      @if( $preachat->refuser==1 )
 
 
+                        <button type="button" class="btn-sm btn btn-danger"   data-toggle="modal" data-target="#MotifRefus{{$preachat->idpreachat}}">
+                                Refusée
+                      </button>
+
+                         <!-- Modal de refus -->
+
+                    <div class="modal fade" id="MotifRefus{{$preachat->idpreachat}}" tabindex="-1" aria-labelledby="exampleModalLabelMotifRefuser{{$preachat->idpreachat}}" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabelMotifRefuser{{$preachat->idpreachat}}">Motif de Refus</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                     <form class="needs-validation" novalidate action="/home/achats/RefuserDemande/{{$preachat->idpreachat}}" method="POST">
+                        {{ csrf_field()}}
+
+                            <div class="modal-body">
                     
+                              <p>Motif: <B>{{$preachat->commentaire}}</B></p>
 
-               </td>
-           
+                          </div>
+                          
+                          <div class="modal-footer">
+                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Fermer</button>
+                           
+                          </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                      @endif
+              </td>
+
+             
 
           </tr>
 
@@ -547,23 +393,9 @@
 
 
 
+<script src="{{ asset('../js/prevente.js') }}"></script>
 
 @endsection
 
 
-<script type="text/javascript">
-        
-        function clin() 
-        {
-            
-            $(".encours")./*parent().parent().*/fadeToggle('slow');
-
-            clin();
-            // 
-        }
-
-        clin();
-
-        {{----}}
-    </script>
 

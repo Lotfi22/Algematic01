@@ -135,7 +135,7 @@ class DemandeAchatController extends Controller
 
         
 
-      $presachats=DB::select("select *,p.id as idpreachat from pre_achat p,fournisseurs f where p.id_fournisseur=f.id ");
+      $presachats=DB::select("select *,p.id as idpreachat from pre_achat p,fournisseurs f where p.id_fournisseur=f.id and p.demande_valide='0' ");
 
       $pieces=DB::select(" select *,p.id as IdPiece from pieces p, type_pieces t
                             where p.id_type=t.id ");
@@ -347,9 +347,12 @@ class DemandeAchatController extends Controller
 
       
       
-       $MaPiece=DB::select(" select * from produits where id='$IdProduit'");
+       $MaPiece=DB::select(" select p.piece from proprietes p
+        where p.id_produit='$IdProduit' and p.id_type=(select id from type_pieces t where t.type='fiche technique')  ");
 
-       $piece=$MaPiece[0]->data;
+      
+
+       $piece=$MaPiece[0]->piece;
 
        $file=public_path()."/images/produit/$piece";
 
@@ -989,76 +992,70 @@ class DemandeAchatController extends Controller
 
 	 public function AddAchat(Request $request,$idPreAchat)
      {
-         $this->validate($request,[
-            'bl' => 'required|max:100',
-            'facture' => 'required|max:100',
-            'decharge' => 'required|max:100',
-            'attachement' => 'required|max:100'
-            ]);
+         
 
-        $facture=$request->input('facture');
-        $info=DB::select("select * from bl_achat where facture='$facture'");
+
        
+      $now = Carbon::now()->format('d/m/Y');
+
+      $fullnametestjoint="joint".$idPreAchat;
+
+      $testjoint=$request->$fullnametestjoint;
         
+      $AllPreAchatIDS=("select id from pre_achat");  
 
-         if (count($info)>0) 
-               {
-                   
-                session()->flash('notif' , ' Erreur Oupss Cette Facture  existe déja  !!! ');
-
-                return redirect()->back(); 
-               }
-        else
-               {
-                    $file_extension= $request->photofacture->getClientOriginalExtension();
-                    $file_name=time().'.'.$file_extension;
-                    $path='images/achat';
-                    $request->photofacture->move($path,$file_name);
-                    $photofacture=$file_name;
-
-                    $file_extension= $request->photobl->getClientOriginalExtension();
-                    $file_name=time().'.'.$file_extension;
-                    $path='images/achat';
-                    $request->photobl->move($path,$file_name);
-                    $photobl=$file_name;
-
-                    $file_extension= $request->photoattachement->getClientOriginalExtension();
-                    $file_name=time().'.'.$file_extension;
-                    $path='images/achat';
-                    $request->photoattachement->move($path,$file_name);
-                    $photoattachement=$file_name;
-
-                    $file_extension= $request->photodecharge->getClientOriginalExtension();
-                    $file_name=time().'.'.$file_extension;
-                    $path='images/achat';
-                    $request->photodecharge->move($path,$file_name);
-                    $photodecharge=$file_name;
-
-                    $numbl=$request->input('bl');
-                    $attachement=$request->input('attachement');
-                    $decharge=$request->input('decharge');
-                    $facture=$request->input('facture');
-                    $date=$request->input('date');
-                    $nature_doc=$request->input('doc');
-
-                    $now = Carbon::now()->format('d/m/Y');
+      $nature_doc_payment=$request->doc;
 
 
-                    DB::insert("insert into bl_achat (num_bl,photo_bl,  num_decharge,photo_decharge,num_attachement,photo_attachement,facture,photo_facture) 
-                        values('$numbl','$photobl','$decharge','$photodecharge','$attachement','$photoattachement','$facture','$photofacture') ");
 
-                    $id_bl_achat=DB::select("select id from bl_achat where num_bl='$numbl' ");
 
-                    $id_bl_achat=$id_bl_achat[0]->id;
+                  
 
-                    DB::insert("insert into achat (id_pre_achat,id_nature_doc,id_bl_achat) 
-                        values('$idPreAchat','$nature_doc','$id_bl_achat') ");
+
+      if($testjoint == 'yes')   /* Yap there is a document like BL ATTACHMENT... to save it in achat_document*/
+      {   
+
+         
+
+          foreach ($request['dynamic_form'.$idPreAchat]['dynamic_form'.$idPreAchat] as $key=>$array) 
+            {
+
+                $index = $key +1;
+
+                $IdTypePiece=$array['typepiece'];
+              
+                $facture=$array['facture'];
+
+                $date=$array['date'];
+
+
+                $file_extension= $array['photo']->getClientOriginalExtension();
+                $file_name=time().'.'.$file_extension;
+                $path='images/achat';
+                $array['photo']->move($path,$file_name);
+                $photofacture=$file_name;
+
+
+                
+                 DB::insert("insert into achat_document(id_pre_achat ,id_type,piece,date_Piece,numero_piece, date_Ajout)
+                  values('$idPreAchat','$IdTypePiece','$photofacture','$date','$facture','$now')");
+            
+
+            }
+
+
+
+      }
+
+        DB::insert("insert into achat(id_pre_achat ,id_nature_payement)
+                  values('$idPreAchat','$nature_doc_payment')");
+                 
                     
-                    DB::update("update pre_achat p set achat_done=1 where p.id='$idPreAchat' ");
-                    
-                    return redirect('/home/achats/DemandeAttente')->with('success','Achat enregistré avec succée');
+        DB::update("update pre_achat p set achat_done=1 where p.id='$idPreAchat' ");
+        
+        return redirect('/home/achats/DemandeAttente2')->with('success','Achat enregistré avec succée');
 
-                }
+             
        
 
 
@@ -1356,7 +1353,7 @@ class DemandeAchatController extends Controller
 
 
 
-      return redirect('/home/achats/AchatAttente2')->with('success','La demande a été envoyé avec succée');
+      return redirect('/home/achats/DemandeAchatPrestation')->with('success','La demande a été envoyé avec succée');
 
       //return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types'));
      }
@@ -1369,7 +1366,7 @@ class DemandeAchatController extends Controller
 
        
 
-       $presachats=DB::select("select *,p.id as idpreachat from pre_achat p,fournisseurs f where p.id_fournisseur=f.id and p.demande_valide='1'");
+       $presachats=DB::select("select *,p.id as idpreachat from pre_achat p,fournisseurs f where p.id_fournisseur=f.id and p.demande_valide='1' and p.achat_done='0' ");
 
        $pieces=DB::select(" select *,p.id as IdPiece from pieces p, type_pieces t
                             where p.id_type=t.id ");
@@ -1402,5 +1399,41 @@ class DemandeAchatController extends Controller
 
 
    
+     }
+
+
+     public function Rangement()
+     {
+        
+        $presachats=DB::select("select *,p.id as idpreachat from pre_achat p,fournisseurs f where p.id_fournisseur=f.id and p.achat_done='1' "); 
+
+        $documents=DB::select("select * from achat_document ");
+
+        $produits=DB::select("select * from stocks");
+
+        $produits2=DB::select("select *,d.id as id_produit,l.id_pre_achat,d.code_produit,l.id_produit,l.qte_demande,l.prix as nv_prix,d.photo,d.data
+              from  ligne_produit l, produits d
+              where l.id_produit=d.id  ");
+
+        $types=DB::select("select * from type_pieces");
+
+        $pieces=DB::select(" select *,p.id as IdPiece from pieces p, type_pieces t
+                            where p.id_type=t.id ");
+       
+        $nvproduits=DB::select("select l.id_produit,l.id_pre_achat,p.code_produit,p.description
+          from ligne_produit l, produits p where l.id_produit=p.id");
+
+        $employes=DB::select("select * from employes ");
+        
+        $etageres=DB::select("select * from etageres where id not in ( select id_etagere from arrivages) ");
+
+        $nature_doc_payments=DB::select("select * from nature_doc_payment");
+
+        $id = Auth::id();
+        $actuel = User::FindOrFail($id);
+
+        $privilege=$actuel->privilege;
+
+        return view('Achat\Rangement',compact('presachats','documents','privilege','produits','employes','etageres','nvproduits','produits2','pieces','types','nature_doc_payments'));
      }
 }

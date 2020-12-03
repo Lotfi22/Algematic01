@@ -181,8 +181,9 @@ Route::get('/home/achats/TelechargerProduitCaracteristique/{IdProduit}', 'Demand
 
 /***************************** Achat Prestation ************************/
 
-
 Route::get('/home/achats/AchatArrivage', 'DemandeAchat\DemandeAchatController@AchatArrivage');
+
+Route::get('/home/achats/Rangement', 'DemandeAchat\DemandeAchatController@Rangement');
 
 /***************************** Achat Prestation ************************/
 
@@ -255,3 +256,15 @@ Route::get('/home/stocks/ProduitStock', 'Produit\ProduitController@ProduitContro
 
 /**********************************************AJAX NIMI*****************************/
 
+Route::get('/home/achats/getRequest', function(){
+				if(Request::ajax())
+				{
+					return 'sahaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa wlh ajaaaaaax';
+				}
+				else
+				{
+					return 'khraaaaaaaaa';
+				}
+			}
+
+			);
