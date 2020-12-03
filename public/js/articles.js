@@ -15,6 +15,40 @@ function moins1()
 
 	nb_produits = nb_produits-1;
 
+	var quantites = [];
+
+	var prix_achats = [];
+
+	var prix_ventes = [];
+
+	var total_achats = 0;
+
+	var total_ventes = 0;
+
+	for (var i = 0; i < nb_produits; i++) 
+	{
+		quantites[i] = $("#quantite"+i).val();
+		
+		prix_achats[i] = $("#prix"+i).val();
+		
+		prix_ventes[i] = $("#prix_vente"+i).val();
+
+		total_achats = total_achats+parseInt(quantites[i])*parseInt(prix_achats[i]); 
+	}
+
+	/*$("#Prix_propose").val(total_ventes);*/
+
+	var prix_vente = ($("#Prix_propose").val());
+
+	var benifice = (new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(prix_vente-total_achats));
+
+	$("#benifice").text('Le bénifice de l\'Article est : '+ benifice +'DA');
+	
+	$("#fayda").val(prix_vente-total_achats);
+
+	$("#benifice").show(1000);
+	
+
 	// body...
 }
 

@@ -498,7 +498,7 @@
 
         $(document).ready(function() {
             var dynamic_form =  $("#dynamic_form").dynamicForm("#dynamic_form","#plus5", "#minus5", {
-                limit:10,
+                limit:100,
                 formPrefix : "dynamic_form",
                 normalizeFullForm : false
             });
@@ -542,7 +542,7 @@
 
         $(document).ready(function() {
             var dynamic_form2 =  $("#dynamic_form2").dynamicForm("#dynamic_form2","#plus55", "#minus55", {
-                limit:10,
+                limit:100,
                 formPrefix : "dynamic_form2",
                 normalizeFullForm : false
             });
@@ -568,7 +568,7 @@
 
         $(document).ready(function() {
             var dynamic_form3 =  $("#dynamic_form3").dynamicForm("#dynamic_form3","#plus555", "#minus555", {
-                limit:10,
+                limit:100,
                 formPrefix : "dynamic_form3",
                 normalizeFullForm : false
             });

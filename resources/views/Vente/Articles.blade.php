@@ -318,10 +318,10 @@
                 @if($article->benifice>0)
                     
                     <p class="alert alert-success" style="text-align: center;"> 
-                        <b> Sur cet Article vous bénificiez de {!! $article->benifice !!} DA </b> 
+                        <b> Sur cet Article vous bénificiez de {!! number_format($article->benifice) !!} DA </b> 
                  @else                           
                     <p class="alert alert-warning" style="text-align: center;"> 
-                        <b> Sur cet Article vous déficitez de {!! $article->benifice !!} DA </b> 
+                        <b> Sur cet Article vous déficitez de {!! number_format($article->benifice) !!} DA </b> 
                     {{--  --}}
                 @endif
                 

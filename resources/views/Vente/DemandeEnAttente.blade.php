@@ -253,18 +253,18 @@
                         </tbody>
                     </table>
 
-                    <p style="display: none;" id="cout_achat{{ $i }}" name="{{  number_format($cout)}}"> Le cout d'acht : {!! number_format($cout) !!} </p>
+                    <p style="display: none;" id="cout_achat{{ $i }}" name="{{  number_format((float)$cout)}}"> Le cout d'acht : {!! number_format((float)$cout) !!} </p>
 
-                    <p style="display: none;" id="montant_vente{{ $i }}" name="{{  number_format($vente->montant*1.19) }}"> Le Montant de vente : {!! number_format($vente->montant*1.19) !!}</p>
+                    <p style="display: none;" id="montant_vente{{ $i }}" name="{{  number_format((float)$vente->montant*1.19) }}"> Le Montant de vente : {!! number_format((float)$vente->montant*1.19) !!}</p>
 
-                    <p style="display: none;" id="montant_benifice{{ $i }}" name="{{ number_format($vente->montant-$cout) }}"> Le Bénifice : {!! number_format($vente->montant-$cout) !!}</p>
+                    <p style="display: none;" id="montant_benifice{{ $i }}" name="{{ number_format((float)$vente->montant-$cout) }}"> Le Bénifice : {!! number_format((float)$vente->montant-$cout) !!}</p>
 
                     <?php $couts[$i] = $cout; $i++; ?>
 
                     <div style="margin-left: 60%; float: right;">
 
                         <p style="font-weight: bold;">
-                            <b> Montant Total HT : <B style="float: right; margin-right: 2%" >{!! number_format($vente->montant) !!}</B></b>
+                            <b> Montant Total HT : <B style="float: right; margin-right: 2%" >{!! number_format((float)$vente->montant) !!}</B></b>
                         </p>                            
                         
                         @if($vente->taux_remise_spec != 0)
@@ -394,14 +394,17 @@
 
     {{-- {{ dd($couts) }} --}}
     
-
-    <script src="{{ asset('../js/prevente.js') }}"></script>
-
     <script type="text/javascript">
         
+        var nb_vente = {!! count($ventes) !!}        
+
+        nb_vente = parseInt(nb_vente);
 
         {{----}}
     </script>
+
+    <script src="{{ asset('../js/prevente.js') }}"></script>
+
 
 
     {{--  --}}

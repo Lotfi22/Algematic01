@@ -1,5 +1,5 @@
 
-for (var i = 2; i > -1; i--) 
+for (var i = (nb_vente-1) ; i > -1; i--) 
 {
 	
 	$("#recap_achat"+i).text("Le cout d'acht : "+$("#cout_achat"+i).attr("name") );
@@ -21,7 +21,7 @@ function clin()
     // 
 }
 
-clin();
+/*clin();*/
 
 
 

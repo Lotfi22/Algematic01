@@ -137,8 +137,8 @@ class DemandeVenteController extends Controller
             from client_prospects c,pre_ventes p, categorie_clients ca , activite_clients ac,users u
             
             where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id and u.id=p.id_employe
-            order by p.id DESC");
-
+            order by preVente desc");
+        
         $ligne_ventes1=DB::select("select *,a.nom,a.description,l.quantite,l.total,(a.total-a.benifice) as PrixArticleAchat
             from ligne_ventes l, articles a 
             where (l.id_article=a.id) ");
@@ -171,29 +171,7 @@ class DemandeVenteController extends Controller
         
         $ligne_ventes = array_merge($ligne_ventes1,$ligne_ventes2);
         
-        $total_achats=0;
-        $total_ventes=0;        
-        $fausse_estime = false;
-
-        foreach ($ligne_ventes as $ligne) 
-        {
-
-            if ($ligne->PrixArticleAchat == "indispo") 
-            {
-                
-                $fausse_estime = true;
-
-                # code...
-            }
-
-            $total_achats = $total_achats+(float)$ligne->PrixArticleAchat;
-
-            $total_ventes = (float)$total_ventes+$ligne->total;
-
-            # code...
-        }
-
-        return view('Vente\DemandeEnAttente',compact('fausse_estime','employes','ventes','ligne_ventes','privilege'));
+        return view('Vente\DemandeEnAttente',compact('employes','ventes','ligne_ventes','privilege'));
     }
 
 
@@ -304,363 +282,212 @@ class DemandeVenteController extends Controller
 
     public function VenteFactureProformat(Request $request,$idPreVente)
     {
-         
-        $ventes=DB::select(" select  *,p.id as preVente,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects c,pre_ventes p, categorie_clients ca , activite_clients ac
-            where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id and p.id='$idPreVente'");
 
-
-        $ligne_ventes=DB::select("select *,a.nom,a.description,l.total from ligne_ventes l, articles a where l.id_article=a.id and l.id_pre_vente='$idPreVente' ");
-
-
-
+        $ventetest=DB::select("select * from pre_ventes where id='$idPreVente'");
         
+        $ligne_ventes1=DB::select("select a.nom,a.description,l.prix_u,l.quantite,l.total 
+            from ligne_ventes l, articles a 
+            where (l.id_article=a.id and l.id_pre_vente = '$idPreVente' ) ");
 
+        $ligne_ventes2=DB::select("select a.code_produit as nom,a.description,l.prix_u,l.quantite,l.total 
+            from ligne_ventes l, produits a 
+            where (l.id_produit=a.id and l.id_pre_vente = '$idPreVente' ) ");
+
+        $ligne_ventes = array_merge($ligne_ventes1,$ligne_ventes2);
+        
+        $client = DB::select("select *,code_client as code from client_prospects where id = (select id_client from pre_ventes where id = '$idPreVente' ) ");
+        
         $now = Carbon::now()->format('d/m/Y');
 
-        $year = Carbon::now()->format('Y');
+        $year = Carbon::now()->format('Y');        
 
-        
+        $NbNumFP=DB::select("select count(*) as number from  pre_ventes where statut_validation = 2 and num_facture_proformat like '%$year' ");
 
-        $NbNumFP=DB::select("select count(*) as number from  pre_ventes where num_facture_proformat like '%$year' ");
-
+        $en_lettre = User::asLetters($ventetest[0]->montant*1.19);
 
         $NbNumFP=$NbNumFP[0]->number;
 
-        
-
         $NbNumFP=$NbNumFP+1;
-        
 
         $numfp= $NbNumFP."/".$year;
 
-        $ventetest=DB::select("select * from pre_ventes where id='$idPreVente'");
-
         if($ventetest[0]->num_facture_proformat == NULL)
         {
-            DB::update("update pre_ventes p set num_facture_proformat='$numfp' where p.id='$idPreVente'");
+            //DB::update("update pre_ventes p set num_facture_proformat='$numfp' where p.id='$idPreVente'");
             
             DB::update("update pre_ventes p set date_edition_FP='$now' where p.id='$idPreVente'");
 
             $dompdf = new Dompdf();
 
+            $les_produits = '';
+            $k = 1;
+
+            foreach ($ligne_ventes as $ligne) 
+            {
+    
+                $les_produits = $les_produits .
+                '<tr class="item">
+                    
+                    <td style="text-align: center;" >
+                        '.$k.'
+                    </td>
+                    <td style="text-align: center;" >
+                        '.$ligne->nom.'
+                    </td>                    
+                    <td style="text-align: center;" >
+                        '.$ligne->description.'
+                    </td>
+                    <td style="text-align: center;" >
+                        '.number_format($ligne->prix_u).'
+                    </td>
+                    <td style="text-align: center;" >
+                        '.$ligne->quantite.'
+                    </td>
+                    <td style="text-align: center;" >
+                        '.number_format($ligne->total).'
+                    </td>
+                </tr>';
+
+                $k++;
+                # code...
+            }
+
+            
             $html = '<!doctype html>
 
-            <html lang="en">
+<html lang="en">
 
-            <head>
+    <head>
 
-                <meta charset="UTF-8">
+        <meta charset="UTF-8">
+        
+        <title>Facture Pro format </title>
 
-                <title>Bon de Commande </title>
+        <style type="text/css">
+            * {
+                font-family: Verdana, Arial, sans-serif;
+            }
 
-                <style type="text/css">
-                    * {
-                        font-family: Verdana, Arial, sans-serif;
-                    }
-                    table{
-                    }
-                    tfoot tr td{
-                        font-weight: bold;
-                    }
-                    .gray {
-                        background-color: lightgray;
-                    }
-                    tbody {
-                        width: 100%;
-                    }
-                </style>
-            </head>
+        </style>
+    </head>
 
-            <body> 
-                <table width="100%">
-                    <tr>
+    <body style="font-size : 12px;" > 
+        
+        <table id="tabla" width="100%">
+            <tr>
+                <td>
+                    <img src="logo.jpg">
+                    
+                    <h4 style="text-align: left;">Facture Pro Format N° : '.$numfp.' <span style="float:right; margin-right:4%;"> Alger, le 29/08/2020 </span></h4>
+                    
+                    <div style="padding: 4px; border: solid; border-radius: 5%; width: 48%; float: right;" > 
                         
-                        <td valign="top"></td>
-                        
-                        <td align="left">
-                        
-                        <h1><B> ALGEMATIC</B></h1>
-                        
-                        <h2 style="text-align: center;">Facture Pro Format N° '.$numfp.'   ---   Alger, le '.$now.'  </h2>
-                        
-                        <div style="border: solid;" >  Raison: SARL ALGEMATIC <br> Adresse: Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger.  </div>
+                        <b>Client: </b> 001 <br> 
+                        <b>Adresse :</b> Adresse: '.$client[0]->adresse.' <br>  
+                        <b>RC :</b> '.$client[0]->RC.' <br>  
+                        <b>NIF :</b> '.$client[0]->RC.' <br>  
+                        <b>AI :</b> '.$client[0]->n_art_imp.' <br>  
+                    </div>
 
-                        <div style="border: solid;" >  Client: '.$ventes[0]->code_client.'  </div>
-                     
-                     
-                    </td>
-                    <td align="right">
-                        <img src=""  />
-                    </td>
-                </tr>
-              </table>
-              
-              <br/>
-              <table width="100%">
-                <thead style="background-color: lightgray;">
-                  <tr>
+                    <div style="padding: 4px; border: solid; border-radius: 5%; width: 48%; float: left;" >   
+                        <b>Raison :</b>  SARL ALGEMARTIC <br>
+                        <b>Adresse :</b> Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger. 16120<br>  
+                        <b>RC :</b> 16/00-0984669 B 12 <br>  
+                        <b>AI :</b> 16390745693 <br>  
+                        <b>NIF :</b> 00 1216098466902 <br>  
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+        <br/><br/><br/><br/><br/><br/><br/><br/> Relatif au bon de commande N°'.$ventetest[0]->num_bc.' <br/><br/>
+        
+        <table width="100%" border="1">
+        
+            <thead>
+                <tr>
+                    <th>N°</th>
                     <th>Référance</th>
                     <th>Désignation</th>
                     <th>Quantité</th>
                     <th>Prix U.HT</th>
                     <th>Montant HT</th>
-                  </tr>
-                </thead>
-                <tbody>';
-
-            $total = 0;
-
-            $i=0;
-
-            foreach ($ligne_ventes as $ligne) 
-            {
-                    
-
-                    $ref=$ligne->nom;
-               
-                    $description=$ligne->description;
-
-                    $quantite=$ligne->quantite;
-
-                    $prix=$ligne->prix_u;
-
-                    $totale=$ligne->total;
-
-                    
-
-                        
-                    $html.='<tr class="item">
-                    
-                    <td>
-                        '.$ref.'
-                    </td>
-                    <td>
-
-                        '.$description.'
-                    </td>
-                    <td align="right">
-                        '.$quantite.'
-                    </td>
-                    <td align="right">
-                    '.$prix.'
-                    </td>
-                    <td align="right">
-                    '.$totale.'
-                    </td>
-                </tr>';
-
-                $total=$total+$totale;
-            }
-
+                </tr>
+            </thead>
             
-
-            
-            $total_HT=$total;
-            $montant_tva=$total_HT*19/100;
-            $total_TTC=$montant_tva+$total_HT;
-
-        $html.='
+            <tbody>
+                '.$les_produits.'
             </tbody>
-            <tfoot>';
-            $html.='                 
-                <tr>
-                    <td colspan="4"></td>
-                    <td align="right">Montant Total HT </td>
-                    <td align="right">'.$total_HT.'</td>
-                </tr>
-                
-                
-                <tr>
-                    <td colspan="4"></td>
-                    <td align="right">Montant TVA 19% </td>
-                    <td align="right">'.$montant_tva.'</td>
-                </tr>
-                <tr>
-                    <td colspan="4"></td>
-                    <td align="right">Total TTC</td>
-                    <td align="right">'.$total_TTC.'</td>
-                </tr>';
             
-            $html.='</tfoot>
-          </table>
-          <h5>Arrête le présent Bon de Commande à la somme de:</h5>
-          <br>
-          <h5 style="text-align: right;">Cachet et signature</h5>
-          <br>
-          <hr>
-          <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
-          <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
+        </table>
 
-        </body>
-        </html>';
-
-        $dompdf->loadHtml($html);
-        $dompdf->render();
-        $dompdf->stream("FP'.$NbNumFP.'_'$year'", array('Attachment'=>0));
-
-        } 
-
-        else
-        {
-             
-        
-       
-
-
-
-        $dompdf = new Dompdf();
-
-        $html = '<!doctype html>
-        <html lang="en">
+        <table border="1" style="float: right; width: 34%;" >
     
-            <head>
-        
-                <meta charset="UTF-8">
-                <title>Bon de Commande </title>
-                <style type="text/css">
-                    * {
-                        font-family: Verdana, Arial, sans-serif;
-                    }
-                    table{
-                    }
-                    tfoot tr td{
-                        font-weight: bold;
-                    }
-                    .gray {
-                        background-color: lightgray;
-                    }
-                    tbody {
-                        width: 100%;
-                    }
-                </style>
-            </head>
-        
-            <body> 
-                <table width="100%">
-                    <tr>
-                        <td valign="top"></td>
-
-                        <td align="left">
-                            
-                            <h1><B> ALGEMATIC</B></h1>
-                            
-                            <h2 style="text-align: center;">Facture Pro Format N° '.$ventetest[0]->num_facture_proformat.'   ---   Alger, le '.$ventetest[0]->date_edition_FP.'  </h2>
-                            
-                            <div style="border: solid;" >  Raison: SARL ALGEMATIC <br> Adresse: Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger.  
-                            </div>
-
-                            <div style="border: solid;" >  Client: '.$ventes[0]->code_client.'  </div>
-                        </td>
-                        
-                        <td align="right">
-                            <img src=""  />
-                        </td>
-                    </tr>
-                </table>
-              
-                <br/>
+            <tr>
                 
-                <table width="100%">
+                <td align="left" style="width: 45%;"><b> Montant Total HT  </b> </td>
+                <td align="center"> '.number_format($ventetest[0]->montant).' </td>
+            </tr>
+
+            <tr>
                 
-                <thead style="background-color: lightgray;">
-                    <tr>
-                        <th>Référance</th>
-                        <th>Désignation</th>
-                        <th>Quantité</th>
-                        <th>Prix U.HT</th>
-                        <th>Montant HT</th>
-                    </tr>
-                </thead>
-            <tbody>';
+                <td align="left" style="width: 45%;"><b> Remise   </b> </td>
+                <td align="center"> 2% </td>
+            </tr>
 
-                $total = 0;
-
-                $i=0;
-
-                foreach ($ligne_ventes as $ligne) 
-                {
-                        
-
-                        $ref=$ligne->nom;
-                   
-                        $description=$ligne->description;
-
-                        $quantite=$ligne->quantite;
-
-                        $prix=$ligne->prix_u;
-
-                        $totale=$ligne->total;
-
-                        
-
-                            
-                        $html.='<tr class="item">
-                        
-                        <td>
-                            '.$ref.'
-                        </td>
-                        <td>
-
-                            '.$description.'
-                        </td>
-                        <td align="right">
-                            '.$quantite.'
-                        </td>
-                        <td align="right">
-                        '.$prix.'
-                        </td>
-                        <td align="right">
-                        '.$totale.'
-                        </td>
-                    </tr>';
-
-                    $total=$total+$totale;
-                }
-     
-                $total_HT=$total;
-                $montant_tva=$total_HT*19/100;
-                $total_TTC=$montant_tva+$total_HT;
-
-                $html.='
+            <tr>
                 
-                </tbody>
-            <tfoot>';
+                <td align="left" style="width: 45%;"><b>Montant aprés Remise   </b> </td>
+                <td align="center"> 6 </td>
+            </tr>            
             
-            $html.='                 
-                <tr>
-                    <td colspan="4"></td>
-                    <td align="right">Montant Total HT </td>
-                    <td align="right">'.$total_HT.'</td>
-                </tr>
+            <tr>
                 
+                <td align="left" style="width: 45%;"><b> Montant TVA 19%  </b> </td>
+                <td align="center"> '.number_format($ventetest[0]->montant*0.19).' </td>
+            </tr>
+
+            <tr>
                 
-                <tr>
-                    <td colspan="4"></td>
-                    <td align="right">Montant TVA 19% </td>
-                    <td align="right">'.$montant_tva.'</td>
-                </tr>
-                <tr>
-                    <td colspan="4"></td>
-                    <td align="right">Total TTC</td>
-                    <td align="right">'.$total_TTC.'</td>
-                </tr>';
+                <td align="left" style="width: 45%;"><b> Total TTC </b> </td>
+                <td align="center"> '.number_format($ventetest[0]->montant*1.19).' </td>
+            </tr>
+    
+        </table>
+
+        <br><br><br><br><br><br><br><br>
+
+        <div style="margin-left: 3%;">
+
+            <h5 >Arrête le présent Bon de Commande à la somme de : </h5>
+            <h5 >'.$en_lettre.' </h5>
             
-            $html.='</tfoot>
-            </table>
-            <h5>Arrête le présent Bon de Commande à la somme de:</h5>
-            <br>
-            <h5 style="text-align: right;">Cachet et signature</h5>
-            <br>
-            <hr>
-            <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
-            <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
+            <h5 >NB : </h5>
+            <h5 > Valable 30 jours </h5>
+            <h5 > modalité de paiment 50% à la commande 50% à la livraison </h5>
+        </div>
+        
+        <div style="margin-left: 3%;">
+            
+            <h5 style="float: right; margin-right: 10%;">P/SARL ALGEMARTIC Cachet et signature</h5>
+            <h5 style="float: left;" >Approbation de la commande par le client</h5>
+        </div>
+        
+        <br><br><br><br><br>
+        
+        <hr style="border: solid 2px;">
 
-            </body>
-        </html>';
+        <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
+        <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
+    
+    </body>
 
-        $dompdf->loadHtml($html);
-        $dompdf->render();
-        $dompdf->stream("FP'.$NbNumFP.'_'$year'", array('Attachment'=>0));
+</html>';
+
+            $dompdf->loadHtml($html);
+            $dompdf->render();
+            $dompdf->stream("FP'.$NbNumFP.'_'$year'", array('Attachment'=>0));
 
         } 
     }
