@@ -264,10 +264,10 @@
                
                <td>
 
-                   @if( ($preachat->achat_done==1) && ($preachat->ranger==1))
+                   @if(   $preachat->ranger==1)
                         
                    
-                        <button type="button" class="btn-sm btn btn-success">Achat Effectué</button>
+                        <button type="button" class="btn-sm btn btn-success">Stockage éffectué</button>
 
                       @endif
 

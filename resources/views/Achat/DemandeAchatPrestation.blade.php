@@ -1,7 +1,7 @@
 @extends('../layouts.admin')
 @section('content')         
     
-     @if (session('status'))
+                  @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
@@ -33,7 +33,7 @@
               <hr>
              
    
-                <form class="needs-validation" novalidate action="/home/achats/AddDemandeAchatPrestation/" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate action="/home/achats/AddDemandeAchatPrestation/" method="POST" enctype="multipart/form-data" id="MaForm">
 
                         {{ csrf_field()}}
 
@@ -291,117 +291,23 @@
 
              <div class="modal-footer">
 
-                        <input type="button" id="total" name="total" class="btn-sm btn btn-success" >             
-                        <button type="submit" class="btn-sm btn btn-primary">Valier La Demande</button>
-                        <a class="btn-sm btn btn-dark" href="/home" aria-expanded="false">Annuler</span></a>
+                                     
+                <button type="submit"  class="btn-sm btn btn-primary">Valier La Demande</button>
+
+                <a class="btn-sm btn btn-dark" href="/home" aria-expanded="false">Annuler</span></a>
+
              </div>
 
         </form>
 
+              
 
-
-@endsection
-
-@section('scripts') 
-
-<script type="text/javascript">
-  
- function onChangeProduit()
-{
-    
-    $('.produits').on('change', function (e) {
-        let pro = ''
-        let produits = $('.produits')
-        let prixs = $('.prixs')
-        let quantities = $('.quantites')
-       
-        $('#_table').empty()
-
-        $('.produits').each(function(i, obj) {
-            var valueSelected = this.value;
-            var obj = JSON.parse(valueSelected);
-            console.log(valueSelected)
-            var image = obj.image;
-            let prix_vente = obj.prix_fournisseur 
-
-            var elt = '<tr><td><img src="/storage/app/public/'+image+'" width="70px"/>'+obj.nom +'</td><td id=_prix'+i+'>'+prix_vente+'</td><td id=_quantite'+i+'>';
-                elt+= '0</td><td id=_total'+i+'></td></tr>'
-            $('#_table').prepend(elt)   
-            pro = pro+'<br>'+'<img src="/storage/app/public/'+image+'" width="70px"/>'+obj.nom
-
-            $('#prix'+i).val(prix_vente)        
-            $('#quantite'+i).attr('max',obj.quantite)
-            $('#quantite'+i).attr('min',0)
-        });
-        setTimeout(function(){ 
-            $('#_produit').html(pro)
-        }, 1000);
-        
-    });
-
-}
-function onChangeQte()
-{
-
-  $(document).on("change", ".quantites", function(){
-        var valueSelected = this.value;
-        $('#_'+this.id).html(valueSelected)
-      
-
-        var total = 0    
-        var numItems = $('.produits').length
-
-        $('.produits').each(function(i, obj) {
-            
-             var qte = parseInt($('#quantite'+i).val())
-            var prix = parseInt($('#prix'+i).val())
-            var countProduit = qte*prix
-            $('#_total'+index).html(countProduit)
-            total+=countProduit
-        });
-
-       
-        $('#total').val(total);
-
-    });
-
-
-}
-function onChangePrix()
-{
-
-  $(document).on("change", ".prixs", function(){
-     
-
-        var total = 0    
-        var numItems = $('.produitsLabels').length
-        for (let index = 0; index < numItems; index++) {
-            var qte = parseInt($('#quantite'+index).val())
-            var prix = parseInt($('#prix'+index).val())
-            var countProduit = qte*prix
-            $('#_total'+index).html(countProduit)
-
-            total+=countProduit
-
-        }
-
-        $('#total').val(total);
-
-  
-
-    });
-
-
-}
-
-$(document).ready(function () {
-          
-            
-            onChangeQte();
-            
-            onChangePrix();
-        });
-
-</script>
+              
 
 @endsection
+
+
+
+
+
+
