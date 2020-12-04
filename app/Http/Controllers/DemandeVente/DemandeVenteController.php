@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use DateTime;
 use App\User;
 use Auth;
+use Storage;
 
 class DemandeVenteController extends Controller
 {
@@ -69,7 +70,6 @@ class DemandeVenteController extends Controller
         $employes=DB::select("select * from employes");
 
         $id_client=$request->input('client');
-
 
         $total=0;
 
@@ -322,6 +322,8 @@ class DemandeVenteController extends Controller
             $les_produits = '';
             $k = 1;
 
+
+
             foreach ($ligne_ventes as $ligne) 
             {
     
@@ -338,10 +340,10 @@ class DemandeVenteController extends Controller
                         '.$ligne->description.'
                     </td>
                     <td style="text-align: center;" >
-                        '.number_format($ligne->prix_u).'
+                        '.$ligne->quantite.'
                     </td>
                     <td style="text-align: center;" >
-                        '.$ligne->quantite.'
+                        '.number_format($ligne->prix_u).'
                     </td>
                     <td style="text-align: center;" >
                         '.number_format($ligne->total).'
@@ -355,139 +357,142 @@ class DemandeVenteController extends Controller
             
             $html = '<!doctype html>
 
-<html lang="en">
+            <html lang="en">
 
-    <head>
+                <head>
 
-        <meta charset="UTF-8">
-        
-        <title>Facture Pro format </title>
-
-        <style type="text/css">
-            * {
-                font-family: Verdana, Arial, sans-serif;
-            }
-
-        </style>
-    </head>
-
-    <body style="font-size : 12px;" > 
-        
-        <table id="tabla" width="100%">
-            <tr>
-                <td>
-                    <img src="logo.jpg">
+                    <meta charset="UTF-8">
                     
-                    <h4 style="text-align: left;">Facture Pro Format N° : '.$numfp.' <span style="float:right; margin-right:4%;"> Alger, le 29/08/2020 </span></h4>
+                    <title>Facture Pro format </title>
+
+                    <style type="text/css">
+                        * {
+                            font-family: Verdana, Arial, sans-serif;
+                        }
+
+                    </style>
+                </head>
+
+                <body style="font-size : 12px;" > 
                     
-                    <div style="padding: 4px; border: solid; border-radius: 5%; width: 48%; float: right;" > 
+                    <table id="tabla" width="100%">
+                        <tr>
+                            <td>
+                                
+                                <img src="'.public_path("algematic.png").'">
+                                
+                                <h4 style="text-align: left;">Facture Pro Format N° : '.$numfp.' <span style="float:right; margin-right:4%;"> Alger, le 29/08/2020 </span></h4>
+                                
+                                <div style="padding: 4px; border: solid; border-radius: 5%; width: 48%; float: right;" > 
+                                    
+                                    <b>Client: </b> 001 <br> 
+                                    <b>Adresse :</b> Adresse: '.$client[0]->adresse.' <br>  
+                                    <b>RC :</b> '.$client[0]->RC.' <br>  
+                                    <b>NIF :</b> '.$client[0]->RC.' <br>  
+                                    <b>AI :</b> '.$client[0]->n_art_imp.' <br>  
+                                </div>
+
+                                <div style="padding: 4px; border: solid; border-radius: 5%; width: 48%; float: left;" >   
+                                    <b>Raison :</b>  SARL ALGEMARTIC <br>
+                                    <b>Adresse :</b> Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger. 16120<br>  
+                                    <b>RC :</b> 16/00-0984669 B 12 <br>  
+                                    <b>AI :</b> 16390745693 <br>  
+                                    <b>NIF :</b> 00 1216098466902 <br>  
+
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <br/><br/><br/><br/><br/><br/><br/><br/> Relatif au bon de commande N°'.$ventetest[0]->num_bc.' <br/><br/>
+                    
+                    <table width="100%" border="1">
+                    
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Référance</th>
+                                <th>Désignation</th>
+                                <th>Quantité</th>
+                                <th>Prix U.HT</th>
+                                <th>Montant HT</th>
+                            </tr>
+                        </thead>
                         
-                        <b>Client: </b> 001 <br> 
-                        <b>Adresse :</b> Adresse: '.$client[0]->adresse.' <br>  
-                        <b>RC :</b> '.$client[0]->RC.' <br>  
-                        <b>NIF :</b> '.$client[0]->RC.' <br>  
-                        <b>AI :</b> '.$client[0]->n_art_imp.' <br>  
+                        <tbody>
+                            '.$les_produits.'
+                        </tbody>
+
+                    </table>
+
+                    <table border="1" style="float: right; width: 34%;" >
+                
+                        <tr>
+                            
+                            <td align="left" style="width: 45%;"><b> Montant Total HT  </b> </td>
+                            <td align="center"> '.number_format($ventetest[0]->montant).' </td>
+                        </tr>
+
+                        <tr>
+                            
+                            <td align="left" style="width: 45%;"><b> Remise   </b> </td>
+                            <td align="center"> 2% </td>
+                        </tr>
+
+                        <tr>
+                            
+                            <td align="left" style="width: 45%;"><b>Montant aprés Remise   </b> </td>
+                            <td align="center"> 6 </td>
+                        </tr>            
+                        
+                        <tr>
+                            
+                            <td align="left" style="width: 45%;"><b> Montant TVA 19%  </b> </td>
+                            <td align="center"> '.number_format($ventetest[0]->montant*0.19).' </td>
+                        </tr>
+
+                        <tr>
+                            
+                            <td align="left" style="width: 45%;"><b> Total TTC </b> </td>
+                            <td align="center"> '.number_format($ventetest[0]->montant*1.19).' </td>
+                        </tr>
+                
+                    </table>
+
+                    <br><br><br><br><br><br><br><br>
+
+                    <div style="margin-left: 3%;">
+
+                        <h5 >Arrête le présent Bon de Commande à la somme de : </h5>
+                        <h5 >'.$en_lettre.' </h5>
+                        
+                        <h5 >NB : </h5>
+                        <h5 > Valable 30 jours </h5>
+                        <h5 > modalité de paiment 50% à la commande 50% à la livraison </h5>
                     </div>
-
-                    <div style="padding: 4px; border: solid; border-radius: 5%; width: 48%; float: left;" >   
-                        <b>Raison :</b>  SARL ALGEMARTIC <br>
-                        <b>Adresse :</b> Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger. 16120<br>  
-                        <b>RC :</b> 16/00-0984669 B 12 <br>  
-                        <b>AI :</b> 16390745693 <br>  
-                        <b>NIF :</b> 00 1216098466902 <br>  
-
+                    
+                    <div style="margin-left: 3%;">
+                        
+                        <h5 style="float: right; margin-right: 10%;">P/SARL ALGEMARTIC Cachet et signature</h5>
+                        <h5 style="float: left;" >Approbation de la commande par le client</h5>
                     </div>
-                </td>
-            </tr>
-        </table>
-        
-        <br/><br/><br/><br/><br/><br/><br/><br/> Relatif au bon de commande N°'.$ventetest[0]->num_bc.' <br/><br/>
-        
-        <table width="100%" border="1">
-        
-            <thead>
-                <tr>
-                    <th>N°</th>
-                    <th>Référance</th>
-                    <th>Désignation</th>
-                    <th>Quantité</th>
-                    <th>Prix U.HT</th>
-                    <th>Montant HT</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                '.$les_produits.'
-            </tbody>
-            
-        </table>
+                    
+                    <br><br><br>
+                    
+                    <hr style="border: solid 2px;">
 
-        <table border="1" style="float: right; width: 34%;" >
-    
-            <tr>
-                
-                <td align="left" style="width: 45%;"><b> Montant Total HT  </b> </td>
-                <td align="center"> '.number_format($ventetest[0]->montant).' </td>
-            </tr>
-
-            <tr>
-                
-                <td align="left" style="width: 45%;"><b> Remise   </b> </td>
-                <td align="center"> 2% </td>
-            </tr>
-
-            <tr>
-                
-                <td align="left" style="width: 45%;"><b>Montant aprés Remise   </b> </td>
-                <td align="center"> 6 </td>
-            </tr>            
-            
-            <tr>
-                
-                <td align="left" style="width: 45%;"><b> Montant TVA 19%  </b> </td>
-                <td align="center"> '.number_format($ventetest[0]->montant*0.19).' </td>
-            </tr>
-
-            <tr>
-                
-                <td align="left" style="width: 45%;"><b> Total TTC </b> </td>
-                <td align="center"> '.number_format($ventetest[0]->montant*1.19).' </td>
-            </tr>
-    
-        </table>
-
-        <br><br><br><br><br><br><br><br>
-
-        <div style="margin-left: 3%;">
-
-            <h5 >Arrête le présent Bon de Commande à la somme de : </h5>
-            <h5 >'.$en_lettre.' </h5>
-            
-            <h5 >NB : </h5>
-            <h5 > Valable 30 jours </h5>
-            <h5 > modalité de paiment 50% à la commande 50% à la livraison </h5>
-        </div>
-        
-        <div style="margin-left: 3%;">
-            
-            <h5 style="float: right; margin-right: 10%;">P/SARL ALGEMARTIC Cachet et signature</h5>
-            <h5 style="float: left;" >Approbation de la commande par le client</h5>
-        </div>
-        
-        <br><br><br><br><br>
-        
-        <hr style="border: solid 2px;">
-
-        <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
-        <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
-    
-    </body>
-
-</html>';
+                    <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
+                    <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
+                </body>
+            </html>';
 
             $dompdf->loadHtml($html);
             $dompdf->render();
-            $dompdf->stream("FP'.$NbNumFP.'_'$year'", array('Attachment'=>0));
+            $content = $dompdf->output();
+            $file = $content;
+            Storage::put('Proforma/file_'.'FP'.$NbNumFP.'_'.$year.'.pdf',$file);
+            $dompdf->stream('FP'.$NbNumFP.'_'.$year.'.pdf', array('Attachment'=>0));
+
 
         } 
     }
