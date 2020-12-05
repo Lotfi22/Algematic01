@@ -65,11 +65,8 @@ class ClientController extends Controller
 
         $client = (DB::select("select *,cl.id as id,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects cl , categorie_clients ca , activite_clients ac where cl.id_categorie = ca.id and id_activite = ac.id and cl.id = \"$id_client\" "))[0];
 
-        
-        $client = (DB::select("select *,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects cl , categorie_clients ca , activite_clients ac where cl.id_categorie = ca.id and id_activite = ac.id and cl.id = \"$id_client\" "))[0];
-
-
-
+/*        $client = (DB::select("select *,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom from client_prospects cl , categorie_clients ca , activite_clients ac where cl.id_categorie = ca.id and id_activite = ac.id and cl.id = \"$id_client\" "))[0];
+*/
 
         $categories = DB::select("select * from categorie_clients where visible = 1 order by nom");
 
@@ -121,7 +118,9 @@ class ClientController extends Controller
             tel = \"$request->tel\",
             fax = \"$request->fax\",
             mobile = \"$request->mobile\", 
-            email = \"$request->email\" 
+            email = \"$request->email\" ,
+            id_categorie = \"$request->categorie\",
+            id_activite = \"$request->activite\"             
             where id = \"$id_client\"");
 
             //

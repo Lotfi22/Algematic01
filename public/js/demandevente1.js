@@ -2,6 +2,28 @@ id_prochain_select = "";
 
 var li_rah = [{id: "ZZXWEEVBD", code_produit: " ", description: "  "}];
 
+$("#dynamic_form2").hide();    
+
+function show_d_f2(object) 
+{
+
+    if($(object).find(":selected").val() == "OUI")
+    {
+
+        $("#dynamic_form2").show(1000);        
+
+        //
+    }
+    else
+    {
+
+        $("#dynamic_form2").hide(1000);        
+
+        //
+    }    
+
+    // body...
+}
 
 function get_prices(object) 
 {
@@ -12,8 +34,8 @@ function get_prices(object)
     
     $("#"+id_win_insiri).val($id);
 
-    var num =(object.id.substr(object.id.length-1));
-
+    var num =(object.id.substr(8));
+    
     id_type = "type"+num;
 
     document.getElementById(id_type).value = $(object).find(":selected").attr("class");  
@@ -25,6 +47,8 @@ function get_prices(object)
     var prix_new_id = "#prix_prod"+num;
 
     svt_num = parseInt(num)+1;
+
+    
 
     id_prochain_select = "#produits"+(svt_num)
 
@@ -75,8 +99,8 @@ function get_prices(object)
 function get_stock(object) 
 {
     
-    var num =(object.id.substr(object.id.length-1))
-
+    var num =(object.id.substr(13))
+    
     var new_id = "#quantite_dispo"+num;
 
     var qte_dispo = $(new_id).val()
@@ -117,7 +141,7 @@ function fit_select()
         $("#produits"+past).prop('disabled', true);
 */
         console.log(produits);
-        
+
         $(id_prochain_select).html(" <option value =\" \">  </option>");
 
         $.each(produits, function(key, value) 
@@ -129,7 +153,7 @@ function fit_select()
         });
 
         //
-    }, 1000);
+    }, 100);
     
 
 

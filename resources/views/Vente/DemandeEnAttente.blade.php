@@ -179,7 +179,6 @@
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Voulez vous vraiment Supprimer</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -197,6 +196,27 @@
                         <p id="recap_achat{{ $i }}"></p>
                         <p id="recap_vente{{ $i }}"></p>
                         <p id="recap_benifice{{ $i }}"></p>
+                        <hr>
+                        
+                        <h3>Fichiers joints</h3>
+                        <?php $kk=0; ?>                        
+                        @foreach($pieces as $piece)
+
+                            @if($vente->preVente == $piece->id_prevente)
+                                <h4> Le {!! $piece->type !!} inclut dans la demande de vente  : <a href="{!! asset($piece->chemin_piece) !!}" download><B>{!! $piece->type !!}</B> </a> </h4>
+                                <br><br>
+
+                                <?php $kk++; ?>
+
+                                {{--  --}}
+                            @endif
+
+                            {{--  --}}
+                        @endforeach
+                        
+                        @if($kk == 0)                    
+                            <h5>Pas de fichiers joints</h5>
+                        @endif
 
                         <hr>
 
@@ -344,7 +364,7 @@
                         <p style="text-align: center;" class="alert alert-danger">Refusée</p>
 
                         @if($vente->commentaire == "")
-                            <h5 style="text-align: center;"><B> Pas de motif pour cette Vente </B> </h5>
+                            <h5 style="text-align: center;"><B> Pas de commentaire pour cette Vente </B> </h5>
                          @else   
                             <h5 style="text-align: center;"> Commentaire : <B> {{$vente->commentaire}} </B> </h5>
                         @endif

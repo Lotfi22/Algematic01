@@ -22,6 +22,7 @@
         </ul>
     @endif
 
+
     <div class="container">
 
         @if(session()->has('notif'))
@@ -37,23 +38,76 @@
             </div>
         @endif
       
-        <h1 style=" text-align: center;"><B id="demandedevente">Demande De Vente D'Articles</B></h1>     
+        <h1 style=" text-align: center;"><B id="demandedevente">Demande De Vente</B></h1>     
 
         <hr>
 
         <form class="needs-validation" id="ventes_produits" action="/home/vente/DemandeVente/AddDemandeVente" method="POST" enctype="multipart/form-data">
 
             {{ csrf_field()}}
+            
+
+            <div class="form-group">
+                <label for="doc">Attacher des documents ?</label>
+                <select class="form-control" name="existe_doc" onchange="show_d_f2(this)" id="oui_ou_non">
+                    <option value="NON">NON</option>
+                    <option value="OUI">OUI</option>
+              </select>
+            </div>
+
+            <div class="form-group items" id="dynamic_form2">
+                
+                <div class="row">
+                
+                    <div class="button-group" style="padding: 27px;">
+                        
+                        <a href="javascript:void(0)" class="btn btn-primary" id="plus55"><i class="fa fa-plus"></i>
+                        </a>
+
+                        <a href="javascript:void(0)" class="btn btn-danger" id="minus55"><i class="fa fa-minus"></i>
+                        </a>
+                    </div>
+
+                    <div class="col-md-5">
+                        <label class="small mb-1" for="type_doc">document </label>
+                
+                        <select class="form-control type_doc" name="type_doc" id="type_doc" >
+                
+                            <option value=""></option>
+                    
+                            @foreach($type_pieces as $type_piece)
+
+                                <option value="{{$type_piece->id}}" class="{{$type_piece->type}}">
+                                    
+                                    {{$type_piece->type}} 
+
+                                    {{--  --}}
+                                </option>
+                            @endforeach 
+                        </select>   
+
+
+                    </div>
+
+                    <div class="col-md-5">
+                        <label class="small mb-1" for="document">Document </label>
+                        <input type="file" class="form-control document" name="document" id="document">
+                    </div>
+
+                </div>
+            </div>
+
+
 
             <div class="modal-body">
 
                 <div class="form-row">
             
-                    <div class="col-md-9 mb-6" >
+                    <div class="col-md-6 mb-6" >
             
                         <div class="form-group">
 
-                            <br><br>
+                            <br>
                         
                             <label  for="exampleFormControlSelect1"><B >Client</B></label>
                             
@@ -67,18 +121,33 @@
                         </div>
                     </div> 
                     
-                    <div class="col-md-3 mb-6" >
+                    <div class="col-md-6 mb-6" >
             
                         <div class="form-group">
 
-                            <br><br>
+                            <br>
                         
-                            <label for="valabilite"><B >Date D'échue</B></label>
-                            <input class="form-control" value="{{ date('Y-m-d', strtotime(' +30 day')) }}" type="date" name="valabilite" id="valabilite">
+                            <label for="valabilite"><B >Mois de valabilité</B></label>
+                            <input class="form-control" min="1" value="1" type="number" name="valabilite" id="valabilite">
 
                             {{--  --}}
                         </div>
                     </div> 
+
+                    <div class="col-md-12 mb-6" >
+            
+                        <div class="form-group">
+
+                            <br>
+                        
+                            <label for="NB"><B > NB </B></label>
+                            <textarea class="form-control" name="NB" rows="3" id="NB">paiement 50% à la demande. 
+50% à la livraison. </textarea>
+
+                            {{--  --}}
+                        </div>
+                    </div> 
+
 
                 </div>
             </div>

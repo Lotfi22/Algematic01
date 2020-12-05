@@ -7,7 +7,7 @@
 <div class="card">
     <div class="card-header row" style="width: 100%; margin: auto;">
         <p onclick="f_affich1();" class="col-md-5 btn btn-outline-primary" style="margin: 0.1% 4%;" >Informations génerales</p>
-        <p onclick="f_affich2();" class="col-md-5 btn btn-outline-primary" style="margin: 0.1% 4%;" >Informations D'Identification + Facturation</p>
+        <p onclick="f_affich2();" class="col-md-5 btn btn-outline-primary" style="margin: 0.1% 4%;" >Informations D'Identification et Facturation</p>
     </div>
     
     <div id="info1" class="card-body">
@@ -126,7 +126,7 @@
                         @foreach ($categories as $categorie)
                             
 
-                            <option value="{{$categorie->id}}">{!! $categorie->num !!}-{!! $categorie->nom !!}</option>
+                            <option value="{{$categorie->id}}">{!! $categorie->nom !!}</option>
 
                             {{--  --}}                                              
                         @endforeach                                             
@@ -141,12 +141,12 @@
                     
                     <select class="col-md-12 form-control mdb-select md-form" data-live-search="true" searchable="Search here.." name="activite" id="le_select1">
 
-                        <option value="{{ $client->activite_id }}"> {{ $client->activite_nom }} </option>
+                        <option value="{{ $client->activite_id }}">{{ $client->activite_nom }} </option>
 
                         @foreach ($activites as $activite)
                             
 
-                            <option value="{{$activite->id}}">{!! $activite->num !!}-{!! $activite->nom !!}</option>
+                            <option value="{{$activite->id}}">{!! $activite->nom !!}</option>
 
                             {{--  --}}                                              
                         @endforeach                                             
