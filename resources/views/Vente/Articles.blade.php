@@ -188,7 +188,7 @@
                     <B>Référance</B>
                 </th>
                 <th scope="col">
-                    <B>description</B>
+                    <B>Description</B>
                 </th>
 {{--                 <th scope="col">
                     <B>Infos</B>
@@ -198,14 +198,14 @@
                 </th>
 
                 <th scope="col">
-                    <B>Cout de l'article</B>
+                    <B>Prix de revient</B>
                 </th>
 
                 <th scope="col">
                     <B>Prix de vente</B>
                 </th>
                 <th scope="col">
-                    <B>Bénifice</B>
+                    <B>Bénifice Brut</B>
                 </th>                
             </tr>
         </thead>

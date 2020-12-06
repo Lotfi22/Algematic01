@@ -55,49 +55,52 @@
               </select>
             </div>
 
-            <div class="form-group items" id="dynamic_form2">
-                
-                <div class="row">
-                
-                    <div class="button-group" style="padding: 27px;">
-                        
-                        <a href="javascript:void(0)" class="btn btn-primary" id="plus55"><i class="fa fa-plus"></i>
-                        </a>
+            <div id="les_docccs">
 
-                        <a href="javascript:void(0)" class="btn btn-danger" id="minus55"><i class="fa fa-minus"></i>
-                        </a>
-                    </div>
 
-                    <div class="col-md-5">
-                        <label class="small mb-1" for="type_doc">document </label>
-                
-                        <select class="form-control type_doc" name="type_doc" id="type_doc" >
-                
-                            <option value=""></option>
+                <div class="form-group items" id="dynamic_form3">
                     
-                            @foreach($type_pieces as $type_piece)
+                    <div class="row">
+                    
+                        <div class="button-group" style="padding: 27px;">
+                            
+                            <a href="javascript:void(0)" class="btn btn-primary" id="plus555"><i class="fa fa-plus"></i>
+                            </a>
 
-                                <option value="{{$type_piece->id}}" class="{{$type_piece->type}}">
-                                    
-                                    {{$type_piece->type}} 
+                            <a href="javascript:void(0)" class="btn btn-danger" id="minus555"><i class="fa fa-minus"></i>
+                            </a>
+                        </div>
 
-                                    {{--  --}}
-                                </option>
-                            @endforeach 
-                        </select>   
+                        <div class="col-md-5">
+                            <label class="small mb-1" for="type_doc">document </label>
+                    
+                            <select class="form-control type_doc" name="type_doc" id="type_doc" >
+                    
+                                <option value=""></option>
+                        
+                                @foreach($type_pieces as $type_piece)
 
+                                    <option value="{{$type_piece->id}}" class="{{$type_piece->type}}">
+                                        
+                                        {{$type_piece->type}} 
+
+                                        {{--  --}}
+                                    </option>
+                                @endforeach 
+                            </select>   
+
+
+                        </div>
+
+                        <div class="col-md-5">
+                            <label class="small mb-1" for="document">Document </label>
+                            <input type="file" class="form-control document" name="document" id="document">
+                        </div>
 
                     </div>
-
-                    <div class="col-md-5">
-                        <label class="small mb-1" for="document">Document </label>
-                        <input type="file" class="form-control document" name="document" id="document">
-                    </div>
-
                 </div>
+
             </div>
-
-
 
             <div class="modal-body">
 
@@ -127,7 +130,7 @@
 
                             <br>
                         
-                            <label for="valabilite"><B >Mois de valabilité</B></label>
+                            <label for="valabilite"><B >Validité</B></label>
                             <input class="form-control" min="1" value="1" type="number" name="valabilite" id="valabilite">
 
                             {{--  --}}
@@ -140,7 +143,7 @@
 
                             <br>
                         
-                            <label for="NB"><B > NB </B></label>
+                            <label for="NB"><B > Commentaire </B></label>
                             <textarea class="form-control" name="NB" rows="3" id="NB">paiement 50% à la demande. 
 50% à la livraison. </textarea>
 

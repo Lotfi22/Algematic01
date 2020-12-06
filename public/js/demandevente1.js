@@ -2,7 +2,7 @@ id_prochain_select = "";
 
 var li_rah = [{id: "ZZXWEEVBD", code_produit: " ", description: "  "}];
 
-$("#dynamic_form2").hide();    
+$("#les_docccs").hide();    
 
 function show_d_f2(object) 
 {
@@ -10,14 +10,14 @@ function show_d_f2(object)
     if($(object).find(":selected").val() == "OUI")
     {
 
-        $("#dynamic_form2").show(1000);        
+        $("#les_docccs").show(1000);        
 
         //
     }
     else
     {
 
-        $("#dynamic_form2").hide(1000);        
+        $("#les_docccs").hide(1000);        
 
         //
     }    

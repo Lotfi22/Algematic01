@@ -123,7 +123,7 @@ class DemandeVenteController extends Controller
         if ($request->existe_doc == "OUI") 
         {
    
-            foreach ($request['dynamic_form2']['dynamic_form2'] as $key=>$array) 
+            foreach ($request['dynamic_form3']['dynamic_form3'] as $key=>$array) 
             {
                 
                 $type_piece = ($array['type_doc']);
