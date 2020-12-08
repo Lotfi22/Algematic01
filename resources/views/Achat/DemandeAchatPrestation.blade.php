@@ -30,7 +30,7 @@
                       @endif
               
               <h1 style=" text-align: center; " ><B>Demande d'Achat </B></h1>     <br>
-              <hr>
+              <B><hr></B>
              
    
                 <form class="needs-validation" novalidate action="/home/achats/AddDemandeAchatPrestation/" method="POST" enctype="multipart/form-data" id="MaForm">
@@ -40,7 +40,7 @@
                     <div class="modal-body">
 
                             
-                            <h4 ><B>Type d'achat </B></h4>
+                            <h3 ><h3><B>Type d'achat </B></h3></h3>
                              <div class="form-row">
                               
                                   <div class="custom-control custom-radio">
@@ -56,13 +56,13 @@
                             </div>
 
                             <br>
-                            <hr>
+                            <B><hr></B>
 
                             <div class="form-row" id="InfoProduit">
 
                              <div class="col-md-12 mb-6" >
                             
-                                 <label for="validationTooltip03"><B>Information du Produit</B></label>
+                                 <label for="validationTooltip03"><h3><B>Information du Produit</B></h3></label>
                                     <input type="text" name="NomProduitPrestation"class="form-control" placeholder="Application Web" required>
 
                             </div> 
@@ -72,28 +72,17 @@
                           </div>
 
                           <br>
-                          <hr>
-                            <h4 ><B>Fournisseur déclaré ?</B></h4>
+                          <B><hr></B>
+                           
                             
-                             <div class="form-row">
-                                  <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" id="Fournisseur" name="anonyme" value="non" checked  onclick="yesnoCheckAnonyme()" >
-                                  <label class="custom-control-label" for="Fournisseur">Oui</label>
-                                </div>
-
-                                <!-- Default checked -->
-                                <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" id="Anonyme" name="anonyme" value="yes" onclick="yesnoCheckAnonyme()">
-                                  <label class="custom-control-label" for="Anonyme">Non</label>
-                                </div>
-                            </div>
+                            
                             <br>
 
 
                             <div class="form-row" id="fournisseurdeclare">
                                <div class="col-md-12 mb-6" >
                                   <div class="form-group">
-                                    <label  for="exampleFormControlSelect1"><B >Fournisseur</B></label>
+                                    <label  for="exampleFormControlSelect1"><h3><B >Fournisseur</B></h3></label>
                                     <select name="fournisseur" class="form-control" id="exampleFormControlSelect1">
                                      @foreach($fournisseurs as $fournisseur)
                                      <option value="{{$fournisseur->id}}"> {{  $fournisseur->nom  }} </option>
@@ -105,26 +94,13 @@
                             </div> 
                           </div>
 
-                          <div class="form-row" id="fournisseuranonyme">
-                               <div class="col-md-12 mb-6" >
-                                  <div class="form-group">
-                                    <label  for="exampleFormControlSelect1"><B >Fournisseur Anonyme</B></label>
-                                    <select name="FournisseurNon" class="form-control" id="exampleFormControlSelect1">
-                                     @foreach($anonymes as $anonyme)
-                                     <option value="{{$anonyme->id}}"> {{  $anonyme->nom  }} </option>
-                                      @endforeach
-                                     
-                                    </select>
-                                  </div>
+                         
 
-                            </div> 
-                          </div>
-
-                          <hr>
+                          <B><hr></B>
 
                           <br>
 
-                       <h4 ><B>Ajouter des pièces jointes</B></h4>
+                       <h3 ><B>Ajouter des pièces jointes</B></h3>
       
        <div class="form-row">
             
@@ -158,7 +134,7 @@
 
                   <div class="form-row">
 
-                      <div class="col-md-3">
+                      <div class="col-md-12 mb-6">
                           <label class="small mb-1" for="inputFirstName">Type Pièce: </label>
                           <select class='form-control ' class="js-example-basic-single" name='typepiece' id="typepiece" >
                               <option value=""></option>
@@ -170,7 +146,7 @@
                           </select>   
                       </div>
 
-                          <div class="col-md-3">
+                          <div class="col-md-12 mb-6">
                               <label class="small mb-1" for="inputEmailAddress">Numéro/Dénomination</label>
                               <input type="text" class="form-control " name="facture" id="facture" placeholder="FP001/2020, Contrat 001, BL001 ....";>
                           </div>
@@ -183,15 +159,15 @@
 
                   
 
-                  <div class="form-row" style="margin-left: 100px">
+                  <div class="form-row" style="margin-left: 100px;">
 
-                       <div class="col-md-3">
+                       <div class="col-md-12 mb-6">
                         <label class="small mb-1" for="inputEmailAddress">Date pièce </label>
                         <input type="date" class="form-control " name="date" id="date" placeholder="02/05/2018";>
                     </div>
 
                      
-                    <div class="col-md-3">
+                    <div class="col-md-12 mb-6">
                         <label class="small mb-1" for="inputEmailAddress">Pièce Jointe </label>
                         <input type="file"  class="form-control-file" name="photo" id="photo" >
                     </div>
@@ -207,9 +183,9 @@
      </div>
 
                               
-                        <hr>
+                        <B><hr></B>
                         <br>
-                        <h4 ><B>Remise ?</B></h4>
+                        <h3 ><B>Remise ?</B></h3>
 
 
                               <div class="form-row">
@@ -224,22 +200,48 @@
                                 <label class="custom-control-label" for="noCheck">Sans Remise</label>
                               </div>
                             </div>
+
+                              <B><hr></B>
+                               <br>
+
+                            <div id="myDIV">
+
+
                               <div class="form-row">
-                                <div class="col-md-6 mb-3" id="myDIV">
+                                <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="pourcentageyes" name="typepourcentage" value="pourcentage" checked  onclick="poucentage()" >
+                                <label class="custom-control-label" for="pourcentageyes">Remise %</label>
+                              </div>
+
+                              <!-- Default checked -->
+                              <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="pourcentagenon" name="typepourcentage" value="montant" onclick="poucentage()">
+                                <label class="custom-control-label" for="pourcentagenon">Remise Montant</label>
+                              </div>
+                            </div>
+
+                            
+
+                              <div class="form-row" id="pourcentage" >
+                                <div class="col-md-6 mb-3" >
                                       <label for="validationTooltip03"><B>Remise</B></label>
                                       <input type="text" name="remise" class="form-control" placeholder="3" required>
                                 </div>
                               </div>
 
+                              
+
+
+                           </div>
 
                               
                 </div>
 
-          <hr>
+          <B><hr></B>
 
                        <br>
 
-                        <h4><B>Ajoutez des Produits</B></h4>
+                        <h3><B>Ajoutez des Produits</B></h3>
 
                         
                               <div class="form-row">
@@ -300,14 +302,14 @@
 
         </form>
 
-              
+ 
 
               
 
 @endsection
 
 
-
+  
 
 
 

@@ -30,7 +30,8 @@ class ProduitController extends Controller
              from produits p,unites u,sous_familles s 
             where p.id_unite=u.id and p.id_sous_famille=s.id  and p.visible=1");
         $prix=DB::select("select s.id_produit,s.prix from stocks s");
-        $proprietes=DB::select("select * from proprietes");
+        $proprietes=DB::select("select *,p.id as IdPropriete from proprietes p,type_pieces t 
+        where p.id_type=t.id  ");
         $types=DB::select("select * from type_pieces");
 
     	
@@ -45,6 +46,8 @@ class ProduitController extends Controller
         
         
         $TestProduitBien=$request->input('ProduitBien');
+
+        dd($TestProduitBien);
 
         $testjoint=$request->input('joint');
 
@@ -174,6 +177,93 @@ class ProduitController extends Controller
         
         return view('Produit\Produit_Stock',compact('stocks'));
     }
+
+
+     public function TelechargerProduitFicheProduit($IdPropriete)
+    {
+
+      
+      
+       $MaPiece=DB::select(" select * from proprietes where id='$IdPropriete'");
+
+       $piece=$MaPiece[0]->piece;
+
+       $file=public_path()."/images/produit/$piece";
+
+       $extention = pathinfo($piece, PATHINFO_EXTENSION);
+
+       if($extention == 'jpg')
+       {
+
+          $headers= array('Content_type:  application/jpg');
+
+          return Response::download($file,"PhotoJointe",$headers);
+       }
+
+       if($extention == 'jpeg')
+       {
+
+          $headers= array('Content_type:  application/jpeg');
+
+          return Response::download($file,"PhotoJointe",$headers);
+       }
+
+       if($extention == 'PNG')
+       {
+
+          $headers= array('Content_type:  application/PNG');
+
+          return Response::download($file,"PhotoJointe",$headers);
+       }
+
+       if($extention == 'pdf')
+       {
+
+          $headers= array('Content_type:  application/pdf');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       if($extention == 'docx')
+       {
+
+          $headers= array('Content_type:  application/docx');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       if($extention == 'docx')
+       {
+
+          $headers= array('Content_type:  application/docx');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       if($extention == 'doc')
+       {
+
+          $headers= array('Content_type:  application/doc');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+
+       if($extention == 'xlsx')
+       {
+
+          $headers= array('Content_type:  application/xlsx');
+
+          return Response::download($file,"PieceJointe",$headers);
+       }
+
+       
+
+       
+
+       
+    }
+
 
 
 }

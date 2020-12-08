@@ -812,15 +812,16 @@
         //
     </script>
 
+   
+
      <script>
-            document.getElementById('fournisseuranonyme').style.display = 'none';
+            
        function yesnoCheckAnonyme() {
             if (document.getElementById('Fournisseur').checked) {
                 document.getElementById('fournisseurdeclare').style.display = 'block';
-                document.getElementById('fournisseuranonyme').style.display = 'none';
+             
             } 
             else if(document.getElementById('Anonyme').checked) {
-                document.getElementById('fournisseuranonyme').style.display = 'block';
                 document.getElementById('fournisseurdeclare').style.display = 'none';
            }
         }
