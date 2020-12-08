@@ -59,7 +59,9 @@ class DemandeVenteController extends Controller
     public function AddDemandeVente(Request $request)
     {   
 
-        $date_echue=(date('Y-m-d', strtotime(' +'.$request->valabilite.' month')));
+        $all_modalites = (DB::select("select UPPER(modalite) as modalite from modalites"));
+        
+        $date_echue=(date('Y-m-d', strtotime(' +'.$request->valabilite.' month'.' +'.$request->valabilite.' days')));
 
         $id = Auth::id();
         
@@ -140,6 +142,46 @@ class DemandeVenteController extends Controller
    
             # code...
         }
+
+
+        foreach ($request['dynamic_form2']['dynamic_form2'] as $key=>$array) 
+        {
+            
+            $prop = $array['Propriete'];
+            $val = $array['Valeur'];
+
+            $prop = strtoupper($prop);
+
+            $o=0;
+            
+            foreach ($all_modalites as $modalite) 
+            {
+
+                if ($prop == $modalite->modalite) 
+                {
+
+                    $o++;
+
+                    # code...
+                }
+
+                # code...
+            }
+            
+            if ($o==0) 
+            {
+                # it means modalité doesn't exist
+
+                DB::insert("insert into modalites (modalite) values ('$prop')");
+
+                #.. 
+            }
+
+
+            DB::insert("insert into preventes_modalites (id_prevente,id_modalite,value) values ('$id_preVente','$prop','$val')");
+        }        
+
+
 
         return back()->with('success','Demande N° '.$id_preVente.' Envoyée avec succée');
     }

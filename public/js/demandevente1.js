@@ -46,6 +46,8 @@ function get_prices(object)
 
     var prix_new_id = "#prix_prod"+num;
 
+    var prix_liste_new_id = "#prix_liste"+num;
+
     svt_num = parseInt(num)+1;
 
     
@@ -84,6 +86,8 @@ function get_prices(object)
             $(new_id).val(data.quantite);
 
             $(prix_new_id).val(data.prix_vente);  
+
+            $(prix_liste_new_id).val(data.prix_vente);
 
             $("#"+object.id).prop('disabled', true);             
 
