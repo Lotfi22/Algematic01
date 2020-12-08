@@ -239,7 +239,7 @@
                           </div>
                      <form class="needs-validation" novalidate action="/home/achats/ValiderPreAchat/{{$preachat->idpreachat}}/{{$preachat->num_facture_proformat}}" method="POST">
                         {{ csrf_field()}}
-                          <div class="modal-body">
+                        
                               
                           <div class="modal-footer">
                             <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>

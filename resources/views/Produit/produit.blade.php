@@ -256,11 +256,11 @@
               <td>
                   @if($produit->prestation =='non')
 
-                          Bien
+                          Préstation
                   @endif
                   @if($produit->prestation =='yes')
 
-                          Préstation
+                          Bien
                   @endif
               </td>
 
@@ -284,7 +284,7 @@
                     
 
                      @if($produit->ficheYN =='yes')
-                     <button type="button" class="dropdown-item" data-toggle="modal" data-target="#caracteristique{{$produit->id}}"><B>Caracteristique Technique</B></button>
+                     <button type="button" class="dropdown-item" data-toggle="modal" data-target="#caracteristique{{$produit->id}}"><B>Caracteristiques Techniques</B></button>
                      @endif
 
                 </div>
@@ -335,29 +335,43 @@
                     <div class="modal-dialog ">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="staticBackdropLabel">Caractéristiques</h5>
+                          <h5 class="modal-title" id="staticBackdropLabel">Fiche techniques</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
                         <div class="modal-body">
-                          <table>
-                            <thead>
-                              <tr>
-                                  <th>Spécificité</th>
-                                  <th>Caractéristique</th>
-                              </tr>
-                            </thead>
+                           <table   style="width:100%">
+                                      <thead>
+                                        <tr>
+                                          <th scope="col"><B>Type Document</B></th>
+                                          <th scope="col"><B>Joint</B></th>
+                               
 
-                            <tbody>
-                              @foreach($proprietes as $propriete)
-                                <tr>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                              @endforeach
-                            </tbody>
-                          </table>
+                                         
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+
+                                        @foreach($proprietes as $propriete)
+                                      <tr>
+                                            
+                                          
+                                            <td scope="row">{{$propriete->type}}</td>
+
+                                            <td scope="row"><a class="btn btn-primary" href="/TelechargerProduitFicheProduit/{{$propriete->IdPropriete}}" role="button">Télécharger</a>
+                                             </td>
+                                          
+
+                                            
+                                         
+
+                                        </tr>
+                                        @endforeach
+                                       
+                                       
+                              </tbody>
+                            </table>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

@@ -139,6 +139,8 @@ Route::post('/ModifProduit/{idProduitModiff}', 'Produit\ProduitController@ModifP
 /*Suppression d'un  Produit*/
 Route::post('/SupprimerProduit/{idProduitSupprimer}', 'Produit\ProduitController@SupprimerProduit');
 
+Route::get('/TelechargerProduitFicheProduit/{IdPropriete}', 'Produit\ProduitController@TelechargerProduitFicheProduit');
+
 
 
 /***************************** Création d'une Spécifité technique_Produit (CRUD)************************/
@@ -179,11 +181,19 @@ Route::get('/home/achats/TelechargerProduitFiche/{IdProduit}', 'DemandeAchat\Dem
 
 Route::get('/home/achats/TelechargerProduitCaracteristique/{IdProduit}', 'DemandeAchat\DemandeAchatController@TelechargerProduitCaracteristique');
 
+Route::get('/home/achats/TelechargerPieceAchat/{IdPiece}', 'DemandeAchat\DemandeAchatController@TelechargerPieceAchat');
+
+Route::get('/home/achats/RangerPreAchat/{idpreachat}', 'DemandeAchat\DemandeAchatController@RangerPreAchat');
+
+
 /***************************** Achat Prestation ************************/
 
 Route::get('/home/achats/AchatArrivage', 'DemandeAchat\DemandeAchatController@AchatArrivage');
 
 Route::get('/home/achats/Rangement', 'DemandeAchat\DemandeAchatController@Rangement');
+
+Route::post('/home/achats/Placement/{idpreachat}/{idProduit}', 'DemandeAchat\DemandeAchatController@Placement');
+
 
 /***************************** Achat Prestation ************************/
 
