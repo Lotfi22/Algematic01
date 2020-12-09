@@ -46,7 +46,7 @@
                           </div>
 
 
-       <form class="needs-validation" novalidate action="/AddFournisseur" method="POST">
+       <form class="needs-validation" novalidate action="/home/fournisseurs/AddFournisseur" method="POST">
           {{ csrf_field()}}
 
             <div class="modal-body">
@@ -321,7 +321,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifFournisseur/{{$fournisseur->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/fournisseurs/ModifFournisseur/{{$fournisseur->id}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">

@@ -104,7 +104,7 @@ class ProduitController extends Controller
      
       
             
-            return redirect('/produit')->with('success','Le Nouveau Produit est enregistré avec succée');
+            return redirect('/home/produits/produit')->with('success','Le Nouveau Produit est enregistré avec succée');
 
     }
     
@@ -171,10 +171,15 @@ class ProduitController extends Controller
     public function ProduitController()
     {
 
-         $stocks=DB::select("select * from stocks s,produits p where p.id=s.id_produit");
+         $stocks=DB::select("select *,s.id as IdStock from stocks s,produits p where p.id=s.id_produit");
+
+
+         $pieces=DB::select(" select *,p.id as IdPiece from proprietes p, type_pieces t
+                            where p.id_type=t.id ");
+      
 
         
-        return view('Produit\Produit_Stock',compact('stocks'));
+        return view('Produit\Produit_Stock',compact('stocks','pieces'));
     }
 
 

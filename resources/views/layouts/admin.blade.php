@@ -270,7 +270,7 @@
 
                         <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/sousFamille" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Sous Famille</span></a></li>
 
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/propriete" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Propriétes</span></a></li>
+                    
 
                         <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/unite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Unité de Mesure</span></a></li>
 
@@ -279,10 +279,10 @@
 
                         {{-- fin produit --}}
 
-                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Fournisseur</span></a></li>
+                        <li> <a id="fournisseurs" class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Fournisseur</span></a></li>
 
 
-                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/fournisseur" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fournisseur</span></a></li>
+                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/home/fournisseurs/fournisseur" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Fournisseurs</span></a></li>
 
 
                         {{-- fin fournisseur --}}                        
@@ -325,9 +325,21 @@
                         <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande de Vente</span></a></li>
 
                         
-                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVenteAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes PréVentes</span></a></li>                        
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVenteAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes PréVentes</span></a></li>    
+                        <hr>
+
+                        @if( $privilege ?? '' == 1 )
+                        <li> <a id="parametres" class="waves-effect waves-dark" href="/home4" onclick="Parametre(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Paramètre</span></a></li>
+
+
+                        <li class="Parametre"> <a class="waves-effect waves-dark" href="/home/parametres/TypeDocument" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Type Document</span></a></li>
+                        @endif
+
+                        {{-- fin fournisseur --}}                     
 
                         <li>
+
+
 
                             <a href="{{ url('/logout') }}"
 
@@ -680,6 +692,37 @@
                 event.preventDefault();
 
                 $(".acacher2").hide(1000);
+
+                $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
+                /**/                
+            }
+
+            j=j+1;
+
+            // body... 
+        }
+
+         $(".Parametre").hide(0);
+
+        var j=0;
+
+        function Parametre (event) 
+        {
+            
+            if (j%2==0)
+            {
+                event.preventDefault();
+
+                $(".Parametre").show(1000);
+
+                $(".mdi-arrow-down-drop-circle-outline").attr('class','mdi mdi-arrow-up-drop-circle-outline');
+            }
+            else
+            {
+                
+                event.preventDefault();
+
+                $(".Parametre").hide(1000);
 
                 $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
                 /**/                

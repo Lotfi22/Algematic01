@@ -76,11 +76,11 @@ class FournisseurController extends Controller
             
             //$depot->save();
 
-            DB::insert("insert into fournisseurs (nom,adresse,activite,tele,fax,mobile,email,nif,nis,rc,num_art_imp,fabricant,marque) values('$fournisseur_nom','$fournisseur_adresse','$fournisseur_activite','$fournisseur_tele','$fournisseur_fax','$fournisseur_mobile','$fournisseur_email','$fournisseur_nif','$fournisseur_nis','$fournisseur_rc','$fournisseur_num_art_imp') ");   
+            DB::insert("insert into fournisseurs (nom,adresse,activite,tele,fax,mobile,email,nif,nis,rc,num_art_imp) values('$fournisseur_nom','$fournisseur_adresse','$fournisseur_activite','$fournisseur_tele','$fournisseur_fax','$fournisseur_mobile','$fournisseur_email','$fournisseur_nif','$fournisseur_nis','$fournisseur_rc','$fournisseur_num_art_imp') ");   
         }
    
         
-        return redirect('/fournisseur')->with('success','Le Fournisseur est enregistré avec succée');
+        return redirect('/home/fournisseurs/fournisseur')->with('success','Le Fournisseur est enregistré avec succée');
 
 
        
