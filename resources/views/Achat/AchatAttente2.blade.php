@@ -214,7 +214,7 @@
                   <div class="modal-footer">
 
                      @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0) && ($preachat->refuser==0))
-                      <button type="button" class="btn-sm btn btn-primary"   data-toggle="modal" data-target="#valider{{$preachat->idpreachat}}">
+                      <button type="button"  class="btn-sm btn btn-primary"   data-toggle="modal" data-target="#valider{{$preachat->idpreachat}}">
                                 Valider
                       </button>
                       @endif
@@ -332,10 +332,10 @@
 
               <!-- TD du STATUT -->
               <td>
-                      @if(  ($preachat->demande_valide==0) && ($preachat->refuser==0))
+                      @if(  ($preachat->demande_valide==0) && ($preachat->refuser==0) )
                         
                    
-                        <button type="button" class="btn-sm btn btn-dark">En Cours</button>
+                        <button  type="button" class="btn-sm btn btn-dark">En Cours</button>
 
                       @endif
 

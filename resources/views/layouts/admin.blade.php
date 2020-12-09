@@ -56,6 +56,8 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('../DataTables/datatables.min.css') }}"/>
 
+     <link rel="stylesheet" type="text/css" href="{{ asset('../Nimi/nimi.css') }}"/>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -1055,6 +1057,15 @@
             }
         }
     </script> 
+
+    @if( $nbNonValide  != 0 )
+    <script type="text/javascript">
+        var blink_speed = 700; 
+        var t = setInterval(function () 
+            { var ele = document.getElementById('achats'); 
+            ele.style.visibility = (ele.style.visibility == 'hidden' ? '' : 'hidden'); }, blink_speed);
+    </script>
+    @endif
 
     @yield('scripts')
 
