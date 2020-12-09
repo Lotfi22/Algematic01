@@ -225,7 +225,7 @@
                       </button>
                       @endif
 
-                      @if( ($preachat->demande_valide==1) && ($preachat->refuser==0) )
+                      @if( ($preachat->demande_valide==1) && ($preachat->refuser==0) && ($preachat->anonyme=='non') )
 
                         <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#TelechargerBC{{$preachat->idpreachat}}">Télecharger BC
                         </button>

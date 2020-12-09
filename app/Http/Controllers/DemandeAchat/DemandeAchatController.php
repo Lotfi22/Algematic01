@@ -602,6 +602,22 @@ class DemandeAchatController extends Controller
 
         $test=DB::select("select * from pre_achat where id='$idpreachat' ");
 
+        $IdFournisseur=$test[0]->id_fournisseur;
+
+        $FournisseurTest=DB::select(" select * from fournisseurs where id='$IdFournisseur' ");
+
+        $TestAnnonyme=$FournisseurTest[0]->anonyme;
+
+        if($TestAnnonyme == 'oui') /* In this case we musn't edit a BC*/
+        {
+            DB::update("update pre_achat f set demande_valide=1 where  f.id='$idpreachat' ");
+
+            session()->flash('success' , ' Demande Validé Avec succée ');
+
+            return redirect()->back(); 
+
+        }
+
         if($test[0]->demande_valide == 0)
         {
 
@@ -609,7 +625,7 @@ class DemandeAchatController extends Controller
 
       	   	$year = Carbon::now()->format('Y');
 
-      	    $pre=DB::select("select count(*) as number from pre_achat where annee_bc='$year' and id <> '$idpreachat' ");
+      	    $pre=DB::select("select count(*) as number from pre_achat where annee_bc='$year' and id <> '$idpreachat' and id_fournisseur <> (select id from fournisseurs where anonyme='oui') ");
 
 
       	     $nbNumBCExistant= $pre[0]->number;
