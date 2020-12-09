@@ -47,7 +47,6 @@ class ProduitController extends Controller
         
         $TestProduitBien=$request->input('ProduitBien');
 
-        dd($TestProduitBien);
 
         $testjoint=$request->input('joint');
 

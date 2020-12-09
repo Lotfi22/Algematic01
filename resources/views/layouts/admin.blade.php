@@ -531,6 +531,36 @@
 
         /*achat prestation*/
 
+
+        
+    
+    $(document).ready(function() {
+            var dynamic_form2 =  $("#dynamic_form4").dynamicForm("#dynamic_form4","#plus44", "#minus44", {
+                limit:100,
+                formPrefix : "dynamic_form4",
+                normalizeFullForm : false
+            });
+
+            dynamic_form4.inject([{p_name: 'Hemant',quantity: '123',remarks: 'testing remark'},{p_name: 'Harshal',quantity: '123',remarks: 'testing remark'}]);
+
+            $("#dynamic_form4 #minus44").on('click', function(){
+                var initDynamicId = $(this).closest('#dynamic_form4').parent().find("[id^='dynamic_form4']").length;
+                if (initDynamicId === 2) {
+                    $(this).closest('#dynamic_form4').next().find('#minus44').hide();
+                }
+                $(this).closest('#dynamic_form4').remove();
+            });
+
+            $('form').on('submit', function(event){
+                var values = {};
+                $.each($('form').serializeArray(), function(i, field) {
+                    values[field.name] = field.value;
+                });
+                console.log(values)
+            })
+        });
+
+
         $(document).ready(function() {
             var dynamic_form2 =  $("#dynamic_form2").dynamicForm("#dynamic_form2","#plus55", "#minus55", {
                 limit:100,
@@ -906,21 +936,7 @@
         //
     </script>
 
-     <script>
-             document.getElementById('InfoProduit').style.display = 'block';
-       function TypeDAchat() 
-       {    
-           
-            if (document.getElementById('TypeBien').checked) {
-                document.getElementById('InfoProduit').style.display = 'none';
-            } 
-            else if(document.getElementById('TypePrestation').checked) {
-                document.getElementById('InfoProduit').style.display = 'block';
-           }
-        }
-
-        //
-    </script>
+    
 
 
     <script>

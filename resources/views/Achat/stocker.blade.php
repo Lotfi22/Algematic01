@@ -30,7 +30,7 @@
                       @endif
 
                       <div>
-                        <h1 style="text-align: center;  " >Ranger les Produit du pré_Achat: {{$presachats->idpreachat}}</h1>
+                        <h1 style="text-align: center;  " >Rangement des Produit </h1>
                       </div>
                       <br>
 

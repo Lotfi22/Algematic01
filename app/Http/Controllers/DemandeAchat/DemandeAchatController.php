@@ -152,6 +152,7 @@ class DemandeAchatController extends Controller
       $nvproduits=DB::select("select l.id_produit,l.id_pre_achat,p.code_produit,p.description
         from ligne_produit l, produits p where l.id_produit=p.id");
 
+
       $employes=DB::select("select * from employes ");
       
       $etageres=DB::select("select * from etageres where id not in ( select id_etagere from arrivages) ");
@@ -679,8 +680,8 @@ class DemandeAchatController extends Controller
                         <hr>
                         <h3 style="text-align: center;"> IDENTIFICATION DU PRESTATAIRE </h3>
                         <hr>
-                          <h4 style="text-align: center;>'.$fournisseurs[0]->nom.' </h4>
-                          <h4 style="text-align: center;>Relatif à la Facture Pro Format N° '.$FacturePro[0]->numero_piece.' du '.$pre_achat[0]->date_achat.' </h4>
+                          <h4 style="text-align: center;">'.$fournisseurs[0]->nom.' </h4>
+                          <h4 style="text-align: center;">Relatif à la Facture Pro Format N° '.$FacturePro[0]->numero_piece.' du '.$pre_achat[0]->date_achat.' </h4>
                           <hr>
 
                       </td>
@@ -804,6 +805,10 @@ class DemandeAchatController extends Controller
                             $dompdf->render();
                             $dompdf->stream("BC", array('Attachment'=>1));
 
+                            session()->flash('success' , ' Produit Ranger Avec succée ');
+
+                            return redirect()->back(); 
+
                       }
                       else
                       {
@@ -860,6 +865,10 @@ class DemandeAchatController extends Controller
                             $dompdf->render();
                             $dompdf->stream("BC", array('Attachment'=>1));
 
+                            session()->flash('success' , ' Produit Ranger Avec succée ');
+
+                            return redirect()->back();
+
 
                       }
                   }
@@ -909,6 +918,10 @@ class DemandeAchatController extends Controller
                             $dompdf->loadHtml($html);
                             $dompdf->render();
                             $dompdf->stream("BC", array('Attachment'=>1));
+
+                            session()->flash('success' , ' Produit Ranger Avec succée ');
+
+                            return redirect()->back();
 
             }     
                   
@@ -1104,6 +1117,10 @@ class DemandeAchatController extends Controller
                       $dompdf->render();
                       $dompdf->stream("BC", array('Attachment'=>1));
 
+                      session()->flash('success' , ' Produit Ranger Avec succée ');
+
+                            return redirect()->back();
+
                     }
                     else
                     {
@@ -1159,6 +1176,10 @@ class DemandeAchatController extends Controller
                       $dompdf->loadHtml($html);
                       $dompdf->render();
                       $dompdf->stream("BC", array('Attachment'=>1));
+
+                      session()->flash('success' , ' Produit Ranger Avec succée ');
+
+                            return redirect()->back();
                     }
         }
         else
@@ -1205,6 +1226,10 @@ class DemandeAchatController extends Controller
                             $dompdf->loadHtml($html);
                             $dompdf->render();
                             $dompdf->stream("BC", array('Attachment'=>1));
+
+                            session()->flash('success' , ' Produit Ranger Avec succée ');
+
+                            return redirect()->back();
         }
 
 
@@ -1431,21 +1456,12 @@ class DemandeAchatController extends Controller
          
             $remise=$request->input('remise');
 
-            if($TypeAchat =='prestation')
-            {
+           
 
-                $NomPrestation=$request->NomProduitPrestation;
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remise,type_remise,typeachat) 
+                           values('$fournisseur','$now','$remise', '$type_remise' ,'$TypeAchat') ");
 
-                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remise,type_remise,typeachat, NomPrestation) 
-                           values('$fournisseur','$now','$remise', '$type_remise' ,'$TypeAchat','$NomPrestation') ");
-
-            }
-
-            else
-            {
-                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remise,type_remise) 
-                           values('$fournisseur','$now','$remise','$type_remise') ");
-            }
+           
 
           
         }
@@ -1453,27 +1469,13 @@ class DemandeAchatController extends Controller
       else
       {
 
-           if($TypeAchat =='prestation')
-            {
 
-                $NomPrestation=$request->NomProduitPrestation;
-
-                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remiseradio, typeachat, NomPrestation) 
-                           values('$fournisseur','$now','$testremise','$TypeAchat','$NomPrestation') ");
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remiseradio, typeachat) 
+                           values('$fournisseur','$now','$testremise','$TypeAchat') ");
 
                
 
-            }
-
-            else
-            {
-                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remiseradio) 
-                           values('$fournisseur','$now','$testremise') ");
-
-               
-            }
-
-  
+           
        
 
       }
@@ -1581,7 +1583,7 @@ class DemandeAchatController extends Controller
 
        
 
-       $presachats=DB::select("select *,p.id as idpreachat from pre_achat p,fournisseurs f where p.id_fournisseur=f.id and p.demande_valide='1' and p.achat_done='0' ");
+       $presachats=DB::select("select *,p.id as idpreachat from pre_achat p,fournisseurs f where p.id_fournisseur=f.id and p.demande_valide='1' ");
 
        $pieces=DB::select(" select *,p.id as IdPiece from pieces p, type_pieces t
                             where p.id_type=t.id ");
@@ -1814,11 +1816,16 @@ class DemandeAchatController extends Controller
 
           
 
-          $RangementNotYet=DB::select("select * from ligne_produit where id_pre_achat='$idpreachat' and ranger='0'  ");
+        $RangementNotYet=DB::select("select count(*) as nb from ligne_produit l where l.id_pre_achat='$idpreachat' and l.ranger='0'  ");
 
-          if(count($RangementNotYet) == 0)
+         $test=$RangementNotYet[0]->nb;
+
+          if($test==0)
           {
-              DB::update("update pre_achat p set ranger='1' where p.id='idpreachat' ");
+
+              DB::update("update pre_achat p set ranger='1' where p.id='$idpreachat' ");
+
+             
 
               $presachats=DB::select("select *,p.id as idpreachat from pre_achat p,fournisseurs f where p.id_fournisseur=f.id and p.demande_valide='1' and p.achat_done='1' ");
 

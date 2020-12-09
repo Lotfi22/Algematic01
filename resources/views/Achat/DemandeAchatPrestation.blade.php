@@ -44,13 +44,13 @@
                              <div class="form-row">
                               
                                   <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" id="TypeBien" name="TypeAchat" value="bien"   onclick="TypeDAchat()" >
+                                  <input type="radio" class="custom-control-input" id="TypeBien" name="TypeAchat" value="bien"    >
                                   <label class="custom-control-label" for="TypeBien">Achat Bien</label>
                                 </div>
 
                                 <!-- Default checked -->
                                 <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" id="TypePrestation" name="TypeAchat" checked value="prestation" onclick="TypeDAchat()">
+                                  <input type="radio" class="custom-control-input" id="TypePrestation" name="TypeAchat" checked value="prestation" >
                                   <label class="custom-control-label" for="TypePrestation">Achat Préstation</label>
                                 </div>
                             </div>
@@ -58,21 +58,9 @@
                             <br>
                             <B><hr></B>
 
-                            <div class="form-row" id="InfoProduit">
-
-                             <div class="col-md-12 mb-6" >
                             
-                                 <label for="validationTooltip03"><h3><B>Information du Produit</B></h3></label>
-                                    <input type="text" name="NomProduitPrestation"class="form-control" placeholder="Application Web" required>
 
-                            </div> 
-
-
-
-                          </div>
-
-                          <br>
-                          <B><hr></B>
+                       
                            
                             
                             

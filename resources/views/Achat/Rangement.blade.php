@@ -30,7 +30,7 @@
                       @endif
 
                       <div>
-                        <h1 style="text-align: center;  " >Liste Des Achats/Arrivages</h1>
+                        <h1 style="text-align: center;  " >Liste Des Achats|Arrivages</h1>
                       </div>
                       <br>
 
@@ -41,7 +41,7 @@
                 <th scope="col"><B>Type</B></th>
                 <th scope="col"><B>Date</B></th>
                 <th scope="col"><B>Informations</B></th>
-                <th scope="col"><B>Achat</B></th>
+                <th scope="col"><B>Rangement</B></th>
                 
             </tr>
       </thead>
@@ -325,7 +325,7 @@
 
                   @if(   $preachat->ranger==0)
 
-                 <a class="btn btn-warning" href="/home/achats/RangerPreAchat/{{$preachat->idpreachat}}" role="button">Ranger</a>
+                 <a class="btn btn-warning" type="button" href="/home/achats/RangerPreAchat/{{$preachat->idpreachat}}" role="button">Ranger</a>
 
                   @endif
 
