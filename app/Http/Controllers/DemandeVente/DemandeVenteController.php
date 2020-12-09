@@ -22,18 +22,17 @@ class DemandeVenteController extends Controller
 
     public function index()
     {
-        /*dd(User::asLetters("1003,66"));*/
 
      	$id = Auth::id();
 
         $actuel = User::FindOrFail($id);
 
 
-        $produits = DB::select("select p.id,p.code_produit as nom,p.description from produits p where p.prestation = \"non\" order by code_produit");
+        $produits = DB::select("select p.id,p.code_produit as nom,p.description from produits p where p.prestation = \"non\" and p.visible =1 order by code_produit");
         
-        $prestations = DB::select("select p.id,p.code_produit as nom,p.description from produits p where p.prestation = \"yes\" order by code_produit");
+        $prestations = DB::select("select p.id,p.code_produit as nom,p.description from produits p where p.prestation = \"yes\" and p.visible =1 order by code_produit");
     	
-        $articles=DB::select("select * from articles order by nom");
+        $articles=DB::select("select * from articles where visible =1 order by nom");
 
         $type_pieces=DB::select("select * from type_pieces");
 
@@ -49,7 +48,7 @@ class DemandeVenteController extends Controller
     	
         $clients=DB::select("select * from client_prospects order by code_client");
 
-    	$employes=DB::select("select * from employes order by nom");
+    	$employes=DB::select("select *,name as nom from users order by nom");
 
         $produitss = json_encode($produitss);
     	
@@ -69,11 +68,11 @@ class DemandeVenteController extends Controller
 
         $privilege=$actuel->privilege;
 
-        $articles=DB::select("select * from articles");
+        $articles=DB::select("select * from articles where visible = 1");
 
-        $clients=DB::select("select * from client_prospects");
+        $clients=DB::select("select * from client_prospects where visible = 1");
 
-        $employes=DB::select("select * from employes");
+        $employes=DB::select("select *,name as nom from users");
 
         $id_client=$request->input('client');
 
@@ -196,19 +195,20 @@ class DemandeVenteController extends Controller
 
         $privilege=$actuel->privilege;
 
-        $articles=DB::select("select * from articles ");
+        $articles=DB::select("select * from articles where visible =1");
 
-        $clients=DB::select("select * from client_prospects");
+        $clients=DB::select("select * from client_prospects where visible =1");
 
-        $employes=DB::select("select * from employes");
+        $employes=DB::select("select *,name as nom from users");
 
-        $ventes=DB::select(" select  *,p.id as preVente,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom,u.name as nom_employe, u.prenom as prenom_employe 
+        $ventes=DB::select(" select  *,p.id as preVente,ca.id as categorie_id, ca.nom as categorie_nom, ac.id as activite_id, ac.nom as activite_nom,u.name as nom_employe, u.prenom as prenom_employe, p.commentaire 
             
             from client_prospects c,pre_ventes p, categorie_clients ca , activite_clients ac,users u
             
             where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id and u.id=p.id_employe
             order by preVente desc");
         
+
         $ligne_ventes1=DB::select("select *,a.nom,a.description,l.quantite,l.total,(a.total-a.benifice) as PrixArticleAchat
             from ligne_ventes l, articles a 
             where (l.id_article=a.id)");
@@ -238,12 +238,14 @@ class DemandeVenteController extends Controller
 
             # code...
         }
+
+        $modalities = (DB::select("select * from preventes_modalites"));
         
         $ligne_ventes = array_merge($ligne_ventes1,$ligne_ventes2);
 
         $pieces = DB::select("select * from type_pieces tp, pieces_preventes pp where tp.id = pp.id_piece");
         
-        return view('Vente\DemandeEnAttente',compact('pieces','employes','ventes','ligne_ventes','privilege'));
+        return view('Vente\DemandeEnAttente',compact('pieces','employes','ventes','ligne_ventes','privilege','modalities'));
     }
 
 

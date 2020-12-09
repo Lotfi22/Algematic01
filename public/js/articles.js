@@ -155,9 +155,11 @@ function fit_benifice(object)
 		prix_achats[i] = $("#prix"+i).val();
 		
 		prix_ventes[i] = $("#prix_vente"+i).val();
-
+		
 		total_achats = total_achats+parseInt(quantites[i])*parseInt(prix_achats[i]); 
 	}
+
+
 
 	/*$("#Prix_propose").val(total_ventes);*/
 
@@ -172,6 +174,14 @@ function fit_benifice(object)
 	$("#benifice").show(1000);
 
 
+	// body...
+}
+
+
+function able(object) 
+{
+
+	($(object).children('input').eq(0).prop('disabled', false));
 
 	// body...
 }

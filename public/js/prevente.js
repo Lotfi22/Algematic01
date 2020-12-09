@@ -6,7 +6,7 @@ for (var i = (nb_vente-1) ; i > -1; i--)
 	
 	$("#recap_vente"+i).text("Le monatant total TTC de vente : "+$("#montant_vente"+i).attr("name") );
 
-	$("#recap_benifice"+i).text("Le bénifice approximatif : "+$("#montant_benifice"+i).attr("name") );
+	$("#recap_benifice"+i).text("Le bénifice brut : "+$("#montant_benifice"+i).attr("name") );
 
 	//
 }

@@ -134,7 +134,7 @@
                                 <input type="number" disabled class="form-control prixs" required name="prix" id="prix">
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-2" onclick="able(this);" onchange="fill_arrays(this);" onkeyup="fill_arrays(this);">
                                 <label class="small mb-1" for="prix_vente">PU H.T </label>
                                 <input type="number" disabled class="form-control prix_ventes" required name="prix_vente" id="prix_vente">
                             </div>

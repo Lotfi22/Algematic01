@@ -196,8 +196,26 @@
                         <p id="recap_achat{{ $i }}"></p>
                         <p id="recap_vente{{ $i }}"></p>
                         <p id="recap_benifice{{ $i }}"></p>
-                        <hr>
                         
+                        <hr>
+                            <ul>
+                                
+                                @foreach($modalities as $modalite)
+                                    
+                                    @if($modalite->id_prevente == $vente->preVente)
+                                        
+                                        <li>{!! $modalite->id_modalite !!} : {!! $modalite->value !!}</li>
+                                    @endif
+                                @endforeach
+
+                                @if($vente->NB != NULL)
+                                    <li>Commentaire : {!! nl2br($vente->NB) !!}</li> 
+                                @endif
+
+                            </ul>
+                        <hr>
+
+
                         <h3>Fichiers joints</h3>
                         <?php $kk=0; ?>                        
                         @foreach($pieces as $piece)
