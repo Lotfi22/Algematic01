@@ -138,8 +138,6 @@
                                 <label class="small mb-1" for="prix_vente">PU H.T </label>
                                 <input type="number" disabled class="form-control prix_ventes" required name="prix_vente" id="prix_vente">
                             </div>
-
-
                         </div>
                     </div>
 

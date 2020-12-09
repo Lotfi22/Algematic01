@@ -46,6 +46,162 @@
 
             {{ csrf_field()}}
             
+            <div class="modal-body">
+
+                <div class="form-row">
+            
+                    <div class="col-md-12 mb-6" >
+            
+                        <div class="form-group">
+
+                            <br>
+                        
+                            <label  for="exampleFormControlSelect1"><B >Client</B></label>
+                            
+                            <select name="client" class="form-control" id="exampleFormControlSelect1">
+                            
+                                @foreach($clients as $client)
+                                    <option value="{{$client->id}}"> {{  $client->code_client  }} </option>
+                                @endforeach
+
+                            </select>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+            <div class="form-group items" id="dynamic_form">
+                
+                <div class="row">
+                
+                    <div class="button-group" style="padding: 27px;">
+                        
+                        <a href="javascript:void(0)" class="btn btn-primary" onclick="fit_select();" id="plus5"><i class="fa fa-plus"></i>
+                        </a>
+
+                        <a href="javascript:void(0)" class="btn btn-danger" id="minus5"><i class="fa fa-minus"></i>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="small mb-1" for="produits">Produit : </label>
+                
+                        <select class="form-control produits" name="produits" required id="produits" onchange="get_prices(this);">
+                
+                            <option value=""></option>
+                    
+                            @foreach($produits as $produit)
+
+                                <option value="{{$produit->id}}" class="{{substr($produit->nom,0,7)}}">
+                                    
+                                    {{substr($produit->nom,0,7)}} : {{substr($produit->nom,8)}} | {{  $produit->description }} 
+
+                                    {{--  --}}
+                                </option>
+                            @endforeach 
+                        </select>   
+
+
+                    </div>
+
+                    <div class="col-md-2" style="display: none;">
+                        <label class="small mb-1" for="produit">Prod </label>
+                        <input type="number" class="form-control produit" name="produit" id="produit" readonly>
+                    </div>
+
+                    <div class="col-md-2" style="display:none;">
+                        <label class="small mb-1" for="type">type </label>
+                        <input type="text" class="form-control type" name="type" id="type" readonly>
+                    </div>
+
+                    <div class="col-md-1">
+                        <label class="small mb-1" for="quantite_dispo">Disponible  </label>
+                        <input type="number" class="form-control quantites" name="quantite_dispo" id="quantite_dispo" readonly>
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <label class="small mb-1" for="quantite_prod">Quantité : </label>
+                        <input type="number" required onchange="get_stock(this);" class="form-control quantites" min="1"  name="quantite_prod" id="quantite_prod">
+                    </div>
+
+                    <div class="col-md-2">
+                        
+                        <label class="small mb-1" for="prix_liste">Prix Listé : </label>
+                        <input type="number" required="true" required disabled class="form-control prix_listes" name="prix_prod" id="prix_liste">
+                    </div>
+
+
+                    <div class="col-md-2">
+                        
+                        <label class="small mb-1" for="prix_prod">Prix Unitaire H.T : </label>
+                        <input type="number" required="true" required class="form-control prixs" name="prix_prod" id="prix_prod">
+                    </div>                    
+
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row form-group">
+
+                <br>
+
+                <label for="valabilite"><B>Validité Mois : </B></label>
+                <input class="form-control col-md-3" min="1" value="1" type="number" name="valabilite" id="valabilite">
+            
+                <label style="margin-left: 20%;" for="valabilite_jours"><B>Validité Jours : </B></label>
+                <input class="form-control col-md-3" min="0" value="0" type="number" name="valabilite_jours" id="valabilite_jours">
+
+
+                <div class="form-group items" id="dynamic_form2" style="margin-top: 3%;">
+                    
+                    <div class="row">
+                    
+                        <div class="button-group" style="padding: 27px;">
+                            
+                            <a href="javascript:void(0)" class="btn btn-primary" id="plus55"><i class="fa fa-plus"></i>
+                            </a>
+
+                            <a href="javascript:void(0)" class="btn btn-danger" id="minus55"><i class="fa fa-minus"></i>
+                            </a>
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label class="small mb-1" for="Propriete">Propriété </label>
+                            <input type="text" class="form-control Propriete" name="Propriete" id="Propriete">
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="small mb-1" for="Valeur">Valeur </label>
+                            <textarea class="form-control Valeur" name="Valeur" id="Valeur" rows="4" cols="200"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                {{--  --}}
+            </div> 
+
+
+            <div class="col-md-12 mb-6" >
+    
+                <div class="form-group">
+
+                    <br>
+                
+                    <label for="NB"><B > Commentaire </B></label>
+                    <textarea class="form-control" name="NB" rows="3" id="NB">paiement 50% à la demande. 
+50% à la livraison.</textarea>
+
+                    {{--  --}}
+                </div>
+            </div> 
+
+            <hr>
 
             <div class="form-group">
                 <label for="doc">Attacher des documents ?</label>
@@ -102,121 +258,7 @@
 
             </div>
 
-            <div class="modal-body">
 
-                <div class="form-row">
-            
-                    <div class="col-md-6 mb-6" >
-            
-                        <div class="form-group">
-
-                            <br>
-                        
-                            <label  for="exampleFormControlSelect1"><B >Client</B></label>
-                            
-                            <select name="client" class="form-control" id="exampleFormControlSelect1">
-                            
-                                @foreach($clients as $client)
-                                    <option value="{{$client->id}}"> {{  $client->code_client  }} </option>
-                                @endforeach
-
-                            </select>
-                        </div>
-                    </div> 
-                    
-                    <div class="col-md-6 mb-6" >
-            
-                        <div class="form-group">
-
-                            <br>
-                        
-                            <label for="valabilite"><B >Validité</B></label>
-                            <input class="form-control" min="1" value="1" type="number" name="valabilite" id="valabilite">
-
-                            {{--  --}}
-                        </div>
-                    </div> 
-
-                    <div class="col-md-12 mb-6" >
-            
-                        <div class="form-group">
-
-                            <br>
-                        
-                            <label for="NB"><B > Commentaire </B></label>
-                            <textarea class="form-control" name="NB" rows="3" id="NB">paiement 50% à la demande. 
-50% à la livraison. </textarea>
-
-                            {{--  --}}
-                        </div>
-                    </div> 
-
-
-                </div>
-            </div>
-
-
-            <div class="form-group items" id="dynamic_form">
-                
-                <div class="row">
-                
-                    <div class="button-group" style="padding: 27px;">
-                        
-                        <a href="javascript:void(0)" class="btn btn-primary" onclick="fit_select();" id="plus5"><i class="fa fa-plus"></i>
-                        </a>
-
-                        <a href="javascript:void(0)" class="btn btn-danger" id="minus5"><i class="fa fa-minus"></i>
-                        </a>
-                    </div>
-
-                    <div class="col-md-3">
-                        <label class="small mb-1" for="produits">Produit : </label>
-                
-                        <select class="form-control produits" name="produits" required id="produits" onchange="get_prices(this);">
-                
-                            <option value=""></option>
-                    
-                            @foreach($produits as $produit)
-
-                                <option value="{{$produit->id}}" class="{{substr($produit->nom,0,7)}}">
-                                    
-                                    {{substr($produit->nom,0,7)}} : {{substr($produit->nom,8)}} | {{  $produit->description }} 
-
-                                    {{--  --}}
-                                </option>
-                            @endforeach 
-                        </select>   
-
-
-                    </div>
-
-                    <div class="col-md-2" style="display: none;">
-                        <label class="small mb-1" for="produit">Prod </label>
-                        <input type="number" class="form-control produit" name="produit" id="produit" readonly>
-                    </div>
-
-                    <div class="col-md-2" style="display:none;">
-                        <label class="small mb-1" for="type">type </label>
-                        <input type="text" class="form-control type" name="type" id="type" readonly>
-                    </div>
-
-                    <div class="col-md-2">
-                        <label class="small mb-1" for="quantite_dispo">Quantité disponible : </label>
-                        <input type="number" class="form-control quantites" name="quantite_dispo" id="quantite_dispo" readonly>
-                    </div>
-                    
-                    <div class="col-md-2">
-                        <label class="small mb-1" for="quantite_prod">Quantité : </label>
-                        <input type="number" required onchange="get_stock(this);" class="form-control quantites" min="1"  name="quantite_prod" id="quantite_prod">
-                    </div>
-
-                    <div class="col-md-2">
-                        
-                        <label class="small mb-1" for="inputEmailAddress">Prix Unitaire H.T : </label>
-                        <input type="number" required="true" required class="form-control prixs" name="prix_prod" id="prix_prod">
-                    </div>
-                </div>
-            </div>
 
             <div class="modal-footer">
                 

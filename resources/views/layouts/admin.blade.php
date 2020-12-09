@@ -73,7 +73,7 @@
 
 
 
-<body class="fix-header fix-sidebar card-no-border">
+<body id="body" class="fix-header fix-sidebar card-no-border">
 
     <!-- ============================================================== -->
 
@@ -99,7 +99,7 @@
 
     <!-- ============================================================== -->
 
-    <div id="main-wrapper">
+    <div id="main-wrapper" >
 
         <!-- ============================================================== -->
 
@@ -130,9 +130,6 @@
                         <!--End Logo icon -->
 
                         <!-- Logo text -->
-
-                      
-
                     </a>
 
                 </div>
@@ -172,8 +169,10 @@
                         <!-- Search -->
 
                         <!-- ============================================================== -->
-{{-- 
-                        <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
+
+                        {{--<li class="nav-item hidden-xs-down search-box"> 
+
+                             <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i> 
 
                             <form class="app-search">
 
@@ -181,7 +180,8 @@
 
                             </form>
 
-                        </li> --}}
+                        </li>--}} 
+
 
                         <!-- ============================================================== -->
 
@@ -399,7 +399,7 @@
         @endif               
 
 
-        <div class="page-wrapper">
+        <div class="page-wrapper" >
 
 
             <div class="container-fluid">
@@ -989,6 +989,29 @@
         {{--  --}}
     </script>
 
+    <script type="text/javascript">
+        
+        window.onload = maxWindow;
+
+        function maxWindow() 
+        {
+            window.moveTo(0, 0);
+
+            if (document.all) 
+            {
+                top.window.resizeTo(screen.availWidth, screen.availHeight);
+            }
+
+            else if (document.layers || document.getElementById) 
+            {
+                if (top.window.outerHeight < screen.availHeight || top.window.outerWidth < screen.availWidth) 
+                {
+                    top.window.outerHeight = screen.availHeight;
+                    top.window.outerWidth = screen.availWidth;
+                }
+            }
+        }
+    </script> 
 
     @yield('scripts')
 
