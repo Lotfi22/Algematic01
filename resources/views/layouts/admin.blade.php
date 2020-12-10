@@ -330,15 +330,15 @@
                         
                         <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/VenteConfirmed" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Ventes</span></a></li>                        
 
-                        
+
                         <hr>
 
-                        @if( $privilege == 1 )
+                        {{-- @if( $privilege == 1 ) --}}
     
                             <li> <a id="parametres" class="waves-effect waves-dark" href="/home4" onclick="Parametre(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Paramètre</span></a></li>
 
                             <li class="Parametre"> <a class="waves-effect waves-dark" href="/home/parametres/TypeDocument" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Type Document</span></a></li>
-                        @endif
+                        {{-- @endif --}}
 
                         {{-- fin fournisseur --}}                    
                         <li>
