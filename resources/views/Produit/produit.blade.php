@@ -271,7 +271,7 @@
               <td>
 
                 <div class="dropdown">
-                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2{{$produit->IdProduit}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Infos
                     </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -280,12 +280,12 @@
                     
 
                   <!-- Button Information -->
-                     <button type="button"  class="dropdown-item" data-toggle="modal" data-target="#InfosPlus{{$produit->id}}"><B>Infos</B></button>
+                     <button type="button"  class="dropdown-item" data-toggle="modal" data-target="#InfosPlus{{$produit->IdProduit}}"><B>Infos</B></button>
                      
                     
 
                      @if($produit->ficheYN =='yes')
-                     <button type="button" class="dropdown-item" data-toggle="modal" data-target="#caracteristique{{$produit->id}}"><B>Caracteristiques Techniques</B></button>
+                     <button type="button" class="dropdown-item" data-toggle="modal" data-target="#caracteristique{{$produit->IdProduit}}"><B>Caracteristiques Techniques</B></button>
                      @endif
 
                 </div>
@@ -294,7 +294,7 @@
                 
 
                   <!-- Modal de informations supp-->
-                   <div class="modal fade" id="InfosPlus{{$produit->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                   <div class="modal fade" id="InfosPlus{{$produit->IdProduit}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -310,7 +310,7 @@
                                           Pas encore
                                     @endif
                                     @foreach($prix as $pri)
-                                    @if( ($produit->prix_achat != 0) && ($produit->id == $pri->id_produit) )
+                                    @if( ($produit->prix_achat != 0) && ($produit->IdProduit == $pri->id_produit) )
                                           
                                           {{$pri->prix}}
 
@@ -332,7 +332,7 @@
                     
                   <!-- Modal caracteriqtiques-->
 
-                  <div class="modal fade" id="caracteristique{{$produit->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal fade" id="caracteristique{{$produit->IdProduit}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog ">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -355,19 +355,22 @@
                                       <tbody>
 
                                         @foreach($proprietes as $propriete)
-                                      <tr>
-                                            
-                                          
-                                            <td scope="row">{{$propriete->type}}</td>
 
-                                            <td scope="row"><a class="btn btn-primary" href="/TelechargerProduitFicheProduit/{{$propriete->IdPropriete}}" role="button">Télécharger</a>
-                                             </td>
-                                          
+                                        @if($propriete->id_produit == $produit->IdProduit)
+                                          <tr>
+                                                
+                                              
+                                                <td scope="row">{{$propriete->type}}</td>
 
-                                            
-                                         
+                                                <td scope="row"><a class="btn btn-primary" href="/TelechargerProduitFicheProduit/{{$propriete->IdPropriete}}" role="button">Télécharger</a>
+                                                 </td>
+                                              
 
-                                        </tr>
+                                                
+                                             
+
+                                            </tr>
+                                          @endif
                                         @endforeach
                                        
                                        
@@ -387,12 +390,12 @@
 
               <td>
 
-                <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFproduit{{$produit->id}}">
+                <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFproduit{{$produit->IdProduit}}">
                       Modifier
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalMODIFproduit{{$produit->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalMODIFproduit{{$produit->IdProduit}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -401,7 +404,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifProduit/{{$produit->id}}" method="POST" enctype="multipart/form-data">
+                     <form class="needs-validation" novalidate action="/ModifProduit/{{$produit->IdProduit}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field()}}
                            <div class="modal-body">
                               <div class="form-row">
@@ -498,12 +501,12 @@
                       </div>
                     </div>
                 </td>
-                 <td><button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERproduit{{$produit->id}}">
+                 <td><button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERproduit{{$produit->IdProduit}}">
                        Supprimer
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalSUPPRIMERproduit{{$produit->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalSUPPRIMERproduit{{$produit->IdProduit}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -512,7 +515,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerProduit/{{$produit->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/SupprimerProduit/{{$produit->IdProduit}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">
