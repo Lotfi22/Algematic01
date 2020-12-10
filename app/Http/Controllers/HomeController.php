@@ -31,10 +31,13 @@ class HomeController extends Controller
     public function index()
     {
         $id = Auth::id();
+        
         $actuel = User::FindOrFail($id);
 
-        $privilege=$actuel->privilege;
+        //$privilege=$actuel->privilege;
 
+        $privilege = (DB::select("select privilege from users where id ='$id' ")[0]->privilege);
+        
         $test=DB::select("select * from pre_achat where demande_valide ='0' ");
 
         $nbNonValide=count($test);
