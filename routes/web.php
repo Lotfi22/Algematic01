@@ -70,17 +70,17 @@ Route::post('/ModifFabricant/{idFabricantModif}', 'Fabricant\FabricantController
 Route::post('/SupprimerFabricant/{idFabricantSupprimer}', 'Fabricant\FabricantController@SupprimerFabricant');
 
 /***************************** Création d'un Fournisseur (CRUD)************************/
-Route::get('/fournisseur', 'Fournisseur\FournisseurController@index');
+Route::get('/home/fournisseurs/fournisseur', 'Fournisseur\FournisseurController@index');
 /*L'ajout d'un nouveau fournisseur*/
 Route::post('/commande/{idFournisseur}', 'Fournisseur\FournisseurController@commande');
 /*L'ajout d'un nouveau fournisseur*/
-Route::post('/ADDcommande/{idFournisseur}/{numfactureproformat}','Fournisseur\FournisseurController@ADDcommande');
+Route::post('ADDcommande/{idFournisseur}/{numfactureproformat}','Fournisseur\FournisseurController@ADDcommande');
 /*L'ajout d'un nouveau fournisseur*/
-Route::post('/AddFournisseur', 'Fournisseur\FournisseurController@AddFournisseur');
+Route::post('/home/fournisseurs/AddFournisseur', 'Fournisseur\FournisseurController@AddFournisseur');
 /*Modification d'un  fournisseur*/
-Route::post('/ModifFournisseur/{idFournisseurModif}', 'Fournisseur\FournisseurController@ModifFournisseur');
+Route::post('/home/fournisseurs/ModifFournisseur/{idFournisseurModif}', 'Fournisseur\FournisseurController@ModifFournisseur');
 /*Suppression d'un  fournisseur*/
-Route::post('/SupprimerFournisseur/{idFournisseurSupprimer}', 'Fournisseur\FournisseurController@SupprimerFournisseur');
+Route::post('/home/fournisseurs/SupprimerFournisseur/{idFournisseurSupprimer}', 'Fournisseur\FournisseurController@SupprimerFournisseur');
 
 
 /***************************** Création d'une CatégorieProduit (CRUD)************************/
@@ -131,9 +131,9 @@ Route::post('/SupprimerUnite/{idUniteSupprimer}', 'Produit\UniteController@Suppr
 
 
 /***************************** Création d'un Produits (CRUD)************************/
-Route::get('/produit', 'Produit\ProduitController@index');
+Route::get('/home/produits/produit', 'Produit\ProduitController@index');
 /*L'ajout d'un nouveau Produit*/
-Route::post('/AddProduit', 'Produit\ProduitController@AddProduit');
+Route::post('/home/produits/AddProduit', 'Produit\ProduitController@AddProduit');
 /*Modification d'un  Produit*/
 Route::post('/ModifProduit/{idProduitModiff}', 'Produit\ProduitController@ModifProduit');
 /*Suppression d'un  Produit*/
@@ -264,17 +264,13 @@ Route::get('/home/stocks/ProduitStock', 'Produit\ProduitController@ProduitContro
 
 
 
-/**********************************************AJAX NIMI*****************************/
+/**********************************************Type document*****************************/
 
-Route::get('/home/achats/getRequest', function(){
-				if(Request::ajax())
-				{
-					return 'sahaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa wlh ajaaaaaax';
-				}
-				else
-				{
-					return 'khraaaaaaaaa';
-				}
-			}
+Route::get('/home/parametres/TypeDocument', 'Parametre\ParametreController@index');
 
-			);
+/*L'ajout d'un nouveau Type Document*/
+Route::post('/home/parametres/AddType', 'Parametre\ParametreController@AddType');
+/*Modification d'un  Type Document*/
+Route::post('/home/parametres/ModifierTypeDocument/{IdTypeModif}', 'Parametre\ParametreController@ModifierTypeDocument');
+/*Suppression d'un  Type Document*/
+Route::post('/home/parametres/SupprimerTypeDocument/{IdTypeSupprimer}', 'Parametre\ParametreController@SupprimerTypeDocument');

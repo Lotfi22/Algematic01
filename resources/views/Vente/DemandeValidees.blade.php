@@ -42,7 +42,7 @@
 
         <hr>
 
-        <form class="needs-validation" id="ventes_produits" action="/home/vente/DemandeVente/AddDemandeVente" method="POST" enctype="multipart/form-data">
+        <form class="needs-validation" id="ventes_produits" action="/home/vente/VenteConfirmed/AddVente" method="POST" enctype="multipart/form-data">
 
             {{ csrf_field()}}
 
@@ -59,14 +59,14 @@
                             <a href="javascript:void(0)" class="btn btn-primary" id="plus55"><i class="fa fa-plus"></i>
                             </a>
 
-                            {{-- <a href="javascript:void(0)" class="btn btn-danger" id="minus55"><i class="fa fa-minus"></i>
-                            </a> --}}
+                            <a href="javascript:void(0)" class="btn btn-danger" id="minus55"><i class="fa fa-minus"></i>
+                            </a>
                         </div>
 
                         <div class="col-md-8">
                             <label class="small mb-1" for="Prevente">Prevente </label>
                     
-                            <select class="form-control type_doc" onchange="get_preventes(this)" name="Prevente" id="Prevente" >
+                            <select onchange="get_preventes(this);" class="form-control Preventes" name="Prevente" id="Prevente" >
                     
                                 <option value=""></option>
                         
@@ -93,14 +93,14 @@
 
                     <div class="col-md-6">
 
-                        <label class="small mb-1" for="type_doc">Avance </label>
+                        <label class="small mb-1" for="avance">Avance </label>
                 
                         <input type="number" value="0" min="0" class="form-control" onkeyup="fit_reste(this);" onchange="fit_reste(this);" id="avance" name="avance">
                     </div>
 
                     <div class="col-md-6">
 
-                        <label class="small mb-1" for="type_doc">Reste </label>
+                        <label class="small mb-1" for="reste">Reste </label>
                 
                         <input type="number" disabled class="form-control" id="reste" name="reste">
                     </div>
@@ -132,14 +132,14 @@
 
                         <label class="small mb-1" for="Pourcentage"> Pourcentage %</label>
                         
-                        <input type="number" min="0" max="99" id="Pourcentage" class="form-control">
+                        <input type="number" min="0" max="99" id="Pourcentage" class="form-control" onkeyup="fit_rdg(this);" onchange="fit_rdg(this);">
                     </div>
 
                     <div class="RDG form-check form-check-inline col-md-2">
 
-                        <label class="small mb-1" for="Pourcentage"> RDG </label>
+                        <label class="small mb-1" for="RDG"> RDG </label>
                         
-                        <input type="number" min="0" max="99" disabled id="Pourcentage" class="form-control">
+                        <input type="number" min="0" max="99" disabled id="RDG" class="form-control">
                     </div>
 
 
@@ -234,7 +234,6 @@
 
         {{--  --}}
     </div>    
-
 
     <script src="{{ asset('../js/confirmedvente1.js') }}" ></script>
 

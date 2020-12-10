@@ -101,10 +101,19 @@ function fit_reste(object)
 	// body...
 }
 
-function grisoner(object) 
-{
+function fit_rdg(object) 
+{	
 
-	alert(object.id);
+	var pourcentage = parseInt($(object).val());
 
-	// body...
+	var reste = ($("#reste").val());
+
+	var avance = ($("#avance").val());
+	
+	var total = parseInt(reste) + parseInt(avance);
+	
+	var rdg = total*(pourcentage/100); 
+	
+	$("#RDG").val(rdg);
+	// 
 }

@@ -87,5 +87,13 @@ class VenteController extends Controller
     	# code...
     }
 
+    public function add_vente(Request $request)
+    {
+
+    	dd($request->all());
+
+    	# code...
+    }
+
     //
 }

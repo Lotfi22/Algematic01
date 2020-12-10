@@ -34,7 +34,11 @@ class HomeController extends Controller
         $actuel = User::FindOrFail($id);
 
         $privilege=$actuel->privilege;
+
+        $test=DB::select("select * from pre_achat where demande_valide ='0' ");
+
+        $nbNonValide=count($test);
         
-        return view('home',compact('actuel','privilege'));
+        return view('home',compact('actuel','privilege','nbNonValide'));
     }
 }

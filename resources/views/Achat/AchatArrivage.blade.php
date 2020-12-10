@@ -30,7 +30,7 @@
                       @endif
 
                       <div>
-                        <h1 style="text-align: center;  " >Liste Des Achats/Arrivages</h1>
+                        <h1 style="text-align: center;  " >Liste Des Arrivages</h1>
                       </div>
                       <br>
 
@@ -209,7 +209,7 @@
 
                     
 
-                      @if( ($preachat->demande_valide==1)  )
+                      @if( ($preachat->demande_valide==1) && ($preachat->anonyme=='non') )
 
                         <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#TelechargerBC{{$preachat->idpreachat}}">Télecharger BC
                         </button>
@@ -264,7 +264,7 @@
                
                <td>
 
-                   @if( ($preachat->achat_done==1) && ($preachat->ranger==1))
+                   @if( ($preachat->achat_done==1) )
                         
                    
                         <button type="button" class="btn-sm btn btn-success">Achat Effectué</button>

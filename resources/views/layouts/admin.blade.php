@@ -56,6 +56,8 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('../DataTables/datatables.min.css') }}"/>
 
+     <link rel="stylesheet" type="text/css" href="{{ asset('../Nimi/nimi.css') }}"/>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -270,7 +272,7 @@
 
                         <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/sousFamille" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Sous Famille</span></a></li>
 
-                        <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/propriete" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Propriétes</span></a></li>
+                    
 
                         <li class="acacherProduit"> <a class="waves-effect waves-dark" href="/home/produits/unite" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Unité de Mesure</span></a></li>
 
@@ -279,10 +281,10 @@
 
                         {{-- fin produit --}}
 
-                        <li> <a class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Fournisseur</span></a></li>
+                        <li> <a id="fournisseurs" class="waves-effect waves-dark" href="/home4" onclick="fshow2(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Fournisseur</span></a></li>
 
 
-                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/fournisseur" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Fournisseur</span></a></li>
+                        <li class="acacher2"> <a class="waves-effect waves-dark" href="/home/fournisseurs/fournisseur" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Fournisseurs</span></a></li>
 
 
                         {{-- fin fournisseur --}}                        
@@ -324,11 +326,31 @@
 
                         <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande de Vente</span></a></li>
 
+<<<<<<< HEAD
                         <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVenteAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes PréVentes</span></a></li>                        
+||||||| 48db5ae
+                        
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVenteAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes PréVentes</span></a></li>                        
+=======
+                        
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVenteAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes PréVentes</span></a></li>    
+                        <hr>
+
+                        @if( $privilege ?? '' == 1 )
+                        <li> <a id="parametres" class="waves-effect waves-dark" href="/home4" onclick="Parametre(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Paramètre</span></a></li>
+
+
+                        <li class="Parametre"> <a class="waves-effect waves-dark" href="/home/parametres/TypeDocument" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Type Document</span></a></li>
+                        @endif
+
+                        {{-- fin fournisseur --}}                     
+>>>>>>> 22234d3d3ba19b220dc848010cbe6a599d2a5294
 
                         <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/VenteConfirmed" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Ventes</span></a></li>                        
 
                         <li>
+
+
 
                             <a href="{{ url('/logout') }}"
 
@@ -532,6 +554,36 @@
 
         /*achat prestation*/
 
+
+        
+    
+    $(document).ready(function() {
+            var dynamic_form2 =  $("#dynamic_form4").dynamicForm("#dynamic_form4","#plus44", "#minus44", {
+                limit:100,
+                formPrefix : "dynamic_form4",
+                normalizeFullForm : false
+            });
+
+            dynamic_form4.inject([{p_name: 'Hemant',quantity: '123',remarks: 'testing remark'},{p_name: 'Harshal',quantity: '123',remarks: 'testing remark'}]);
+
+            $("#dynamic_form4 #minus44").on('click', function(){
+                var initDynamicId = $(this).closest('#dynamic_form4').parent().find("[id^='dynamic_form4']").length;
+                if (initDynamicId === 2) {
+                    $(this).closest('#dynamic_form4').next().find('#minus44').hide();
+                }
+                $(this).closest('#dynamic_form4').remove();
+            });
+
+            $('form').on('submit', function(event){
+                var values = {};
+                $.each($('form').serializeArray(), function(i, field) {
+                    values[field.name] = field.value;
+                });
+                console.log(values)
+            })
+        });
+
+
         $(document).ready(function() {
             var dynamic_form2 =  $("#dynamic_form2").dynamicForm("#dynamic_form2","#plus55", "#minus55", {
                 limit:100,
@@ -651,6 +703,37 @@
                 event.preventDefault();
 
                 $(".acacher2").hide(1000);
+
+                $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
+                /**/                
+            }
+
+            j=j+1;
+
+            // body... 
+        }
+
+         $(".Parametre").hide(0);
+
+        var j=0;
+
+        function Parametre (event) 
+        {
+            
+            if (j%2==0)
+            {
+                event.preventDefault();
+
+                $(".Parametre").show(1000);
+
+                $(".mdi-arrow-down-drop-circle-outline").attr('class','mdi mdi-arrow-up-drop-circle-outline');
+            }
+            else
+            {
+                
+                event.preventDefault();
+
+                $(".Parametre").hide(1000);
 
                 $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
                 /**/                
@@ -907,21 +990,7 @@
         //
     </script>
 
-     <script>
-             document.getElementById('InfoProduit').style.display = 'block';
-       function TypeDAchat() 
-       {    
-           
-            if (document.getElementById('TypeBien').checked) {
-                document.getElementById('InfoProduit').style.display = 'none';
-            } 
-            else if(document.getElementById('TypePrestation').checked) {
-                document.getElementById('InfoProduit').style.display = 'block';
-           }
-        }
-
-        //
-    </script>
+    
 
 
     <script>
@@ -997,6 +1066,15 @@
             }
         }
     </script> 
+
+    @if( $nbNonValide  != 0 )
+    <script type="text/javascript">
+        var blink_speed = 700; 
+        var t = setInterval(function () 
+            { var ele = document.getElementById('achats'); 
+            ele.style.visibility = (ele.style.visibility == 'hidden' ? '' : 'hidden'); }, blink_speed);
+    </script>
+    @endif
 
     @yield('scripts')
 

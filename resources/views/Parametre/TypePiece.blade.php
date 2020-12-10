@@ -29,32 +29,31 @@
                       </div>
                       @endif
     <div>
-      <h1 style="text-align: center;" ><B>Liste Des Unités de Mesure </B></h1>
-      <br>
 
+      <h1 style="text-align: center;" ><B>Liste Des Types des Documents Joints </B></h1>
          <!-- Button trigger modal -->
-                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalNVunite">
-                      Ajouter Une Unité de Mesure pour les Produits
+                    <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalNVtype">
+                      Ajouter Un Type
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalNVunite" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalNVtype" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Informations de la Nouvelle Unnité</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Informations du Nouveau Type</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/AddUnite" method="POST">
+                     <form class="needs-validation" novalidate action="/home/parametres/AddType" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
 
                                   <div class="col-md-6 mb-3">
-                                        <label for="validationTooltip02"><B>Description</B></label>
-                                        <input type="text" name="description"class="form-control"  placeholder="EL HAMIZ" required>
+                                        <label for="validationTooltip02"><B>Type</B></label>
+                                        <input type="text" name="type"class="form-control"  placeholder="BL" required>
                                   </div>
                                 
 
@@ -87,16 +86,16 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($unites as $unite)
+            @foreach($types as $type)
             <tr>
-              <td scope="row"><B>{{$unite->id}}</B></td>
-              <td>{{$unite->description}}</td>
-              <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFunite{{$unite->id}}">
+              <td scope="row"><B>{{$type->id}}</B></td>
+              <td>{{$type->type}}</td>
+              <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFtype{{$type->id}}">
                       Modifier
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalMODIFunite{{$unite->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalMODIFtype{{$type->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -105,14 +104,14 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifUnite/{{$unite->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/parametres/ModifierTypeDocument/{{$type->id}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>Nouvelle Description</B></label>
-                                  <input type="text" name="description"class="form-control"  placeholder="{{$unite->description}}" required>
+                                  <input type="text" name="type"class="form-control"  placeholder="{{$type->type}}" required>
                                 </div>
 
                               </div>
@@ -129,12 +128,12 @@
                       </div>
                     </div>
                 </td>
-                 <td><button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERunite{{$unite->id}}">
+                 <td><button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERtype{{$type->id}}">
                        Supprimer
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalSUPPRIMERunite{{$unite->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalSUPPRIMERtype{{$type->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -143,7 +142,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerUnite/{{$unite->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/parametres/SupprimerTypeDocument/{{$type->id}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">

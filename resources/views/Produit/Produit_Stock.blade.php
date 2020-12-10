@@ -40,7 +40,7 @@
             <tr>
               <th scope="col"><B>Code_Produit</B></th>
               <th scope="col"><B>Description</B></th>
-              <th scope="col"><B>Photo</B></th>
+              <th scope="col"><B>Fiche</B></th>
               <th scope="col"><B>Quantité</B></th>
               <th scope="col"><B>Prix</B></th>
               <th scope="col"><B>Date_Stock</B></th>
@@ -52,24 +52,61 @@
             @foreach($stocks as $stock)
             <tr>
               <td scope="row"><B>{{$stock->code_produit}}</B></td>
+
               <td>{{$stock->description}}</td>
+
                 <td><!-- Button trigger modal -->
-                  <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#staticBackdrop{{$stock->id}}">
-                    Photo
+
+                  @if($stock->ficheYN =='non')
+                  <p><B>Rien</B></p>
+                  @endif
+                  @if($stock->ficheYN =='yes')
+                  <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#staticBackdrop{{$stock->IdStock}}">
+                    Document
                   </button>
 
                   <!-- Modal -->
-                  <div class="modal fade" id="staticBackdrop{{$stock->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal fade" id="staticBackdrop{{$stock->IdStock}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="staticBackdropLabel">Photo</h5>
+                          <h5 class="modal-title" id="staticBackdropLabel">Document Joints</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
                         <div class="modal-body">
-                          <img width="100%" src="{{asset('images/produit/'.$stock->photo ?? "nimi")}}">
+                            
+                            <table>
+                              <thead>
+                                  
+                                  <tr>
+                                    <th>Type Document</th>
+                                    <th>Joint</th>
+                                  </tr>
+
+                              </thead>
+
+                              <tbody>
+
+                               @foreach($pieces as $piece) 
+
+                                @if($piece->id_produit==$stock->id_produit)
+                                <tr>
+
+                                    <td>{{$piece->type}}</td>
+
+                                    <td>
+                                          <a class="btn btn-primary" href="/home/achats/TelechargerProduitFiche/{{$piece->IdPiece}}" role="button">Télécharger</a>
+                                    </td>
+
+                                </tr>
+                                @endif
+                                @endforeach
+                              </tbody>
+
+                            </table>
+
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -77,17 +114,19 @@
                       </div>
                     </div>
                   </div>
+                  @endif
+
                 </td>
                
               <td>{{$stock->quantite}}</td>
               <td>{{$stock->prix}}</td>
               <td>{{$stock->date_arrivage}}</td>
-              <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$stock->id}}">
+              <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$stock->IdStock}}">
                       Modifier
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModal{{$stock->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal{{$stock->IdStock}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -96,7 +135,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/home/stocks/Modifstock/{{$stock->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/stocks/Modifstock/{{$stock->IdStock}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">

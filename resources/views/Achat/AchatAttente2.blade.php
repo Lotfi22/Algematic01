@@ -198,8 +198,14 @@
                             </table>
                              <h4 style="text-align: center;" ><B>Montant HT: {{$preachat->montant}}</B></h4>
                              @if($preachat->remiseradio =='oui')
+                             @if($preachat->type_remise =='pourcentage')
                              <h4 style="text-align: center;" ><B>Remise: {{$preachat->remise}} %</B></h4>
                              <h4 style="text-align: center;" ><B>Montant Avec remise: {{$preachat->montant - ($preachat->montant * $preachat->remise / 100)}}</B></h4>
+                             @endif
+                             @if($preachat->type_remise =='montant')
+                             <h4 style="text-align: center;" ><B>Remise: {{$preachat->remise}} DA</B></h4>
+                             <h4 style="text-align: center;" ><B>Montant Avec remise: {{$preachat->montant -$preachat->remise }}</B></h4>
+                             @endif
                              @endif
                              <!--   Information des produits-->
 
@@ -208,7 +214,7 @@
                   <div class="modal-footer">
 
                      @if( ($privilege ?? '' == 1) && ($preachat->demande_valide==0) && ($preachat->refuser==0))
-                      <button type="button" class="btn-sm btn btn-primary"   data-toggle="modal" data-target="#valider{{$preachat->idpreachat}}">
+                      <button type="button"  class="btn-sm btn btn-primary"   data-toggle="modal" data-target="#valider{{$preachat->idpreachat}}">
                                 Valider
                       </button>
                       @endif
@@ -219,7 +225,7 @@
                       </button>
                       @endif
 
-                      @if( ($preachat->demande_valide==1) && ($preachat->refuser==0) )
+                      @if( ($preachat->demande_valide==1) && ($preachat->refuser==0) && ($preachat->anonyme=='non') )
 
                         <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#TelechargerBC{{$preachat->idpreachat}}">Télecharger BC
                         </button>
@@ -326,10 +332,10 @@
 
               <!-- TD du STATUT -->
               <td>
-                      @if(  ($preachat->demande_valide==0) && ($preachat->refuser==0))
+                      @if(  ($preachat->demande_valide==0) && ($preachat->refuser==0) )
                         
                    
-                        <button type="button" class="encours alert alert-primary">En Cours</button>
+                        <button  type="button" class="btn-sm btn btn-dark">En Cours</button>
 
                       @endif
 
@@ -394,6 +400,8 @@
 
 
 <script src="{{ asset('../js/prevente.js') }}"></script>
+
+
 
 @endsection
 

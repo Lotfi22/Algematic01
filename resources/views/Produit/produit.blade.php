@@ -29,6 +29,7 @@
                       </div>
                       @endif
     <div>
+      <h1 style="text-align: center;" ><B>Liste Des Produits</B></h1>
          <!-- Button trigger modal -->
                     <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalNVProduit">
                       Ajouter Un Produit
@@ -44,7 +45,7 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-               <form class="needs-validation" novalidate action="/AddProduit" method="POST" enctype="multipart/form-data">
+               <form class="needs-validation" novalidate action="/home/produits/AddProduit" method="POST" enctype="multipart/form-data">
                   {{ csrf_field()}}
                     <div class="modal-body">
 
