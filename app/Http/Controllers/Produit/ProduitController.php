@@ -26,7 +26,7 @@ class ProduitController extends Controller
     	$fabricants=DB::select("select id,nom,marque from fabricants");
     	$sfamilles=DB::select("select id,nom from sous_familles where visible=1");
         $unites=DB::select("select id,description from unites");
-    	$produits=DB::select("select *,u.description as UniteDescription,p.data,p.id_sous_famille,s.nom as NomFamille
+    	$produits=DB::select("select *,p.id as IdProduit,u.description as UniteDescription,p.data,p.id_sous_famille,s.nom as NomFamille
              from produits p,unites u,sous_familles s 
             where p.id_unite=u.id and p.id_sous_famille=s.id  and p.visible=1");
         $prix=DB::select("select s.id_produit,s.prix from stocks s");
