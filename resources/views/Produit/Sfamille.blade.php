@@ -28,6 +28,9 @@
                         </div>
                       </div>
                       @endif
+
+                        <h1 style="text-align: center;" ><B>Liste Des Sous_Familles_Produits </B></h1>
+      <br>
     <div>
          <!-- Button trigger modal -->
                     <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalNVSfamille">
@@ -44,7 +47,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/AddSousFamille" method="POST">
+                     <form class="needs-validation" novalidate action="/home/produits/AddSousFamille" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
@@ -60,7 +63,8 @@
                                 </div>
                               </div>
 
-                            <div class="col-md-3 mb-3">
+                              <div class="form-row">
+                            <div class="col-md-6 mb-3">
                                   <div class="form-group">
                                     <label for="exampleFormControlSelect1"><B>Famille</B></label>
                                     <select name="famille" class="form-control" id="exampleFormControlSelect1">
@@ -71,6 +75,7 @@
                                     </select>
                                   </div>
                             </div> 
+                          </div>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -87,7 +92,7 @@
      <br>
 
     <div>
-        <table class="table table-striped table-dark">
+        <table class="table table-striped table-dark" id="table_id">
           <thead>
             <tr>
               <th scope="col"><B>Numéro</B></th>
@@ -119,23 +124,24 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifSousFamille/{{$Sfamille->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/produits/ModifSousFamille/{{$Sfamille->id}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip01"><B>Nouveau Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="{{$Sfamille->nom}}" required>
+                                  <input type="text" value="{{$Sfamille->nom}}"  name="nom" class="form-control" placeholder="{{$Sfamille->nom}}" required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>Nouvelle Description</B></label>
-                                  <input type="text" name="description"class="form-control"  placeholder="{{$Sfamille->description}}" required>
+                                  <input type="text" value="{{$Sfamille->description}}" name="description"class="form-control"  placeholder="{{$Sfamille->description}}" required>
                                 </div>
                               </div>
 
-                              <div class="col-md-3 mb-3">
+                              <div class="form-row">
+                            <div class="col-md-6 mb-3">
                                   <div class="form-group">
                                     <label for="exampleFormControlSelect1"><B>Nouvelle_Famille</B></label>
                                     <select name="famille" class="form-control" id="exampleFormControlSelect1">
@@ -146,7 +152,7 @@
                                     </select>
                                   </div>
                             </div> 
-                              
+                              </div>
                             
                           </div>
                           <div class="modal-footer">
@@ -172,7 +178,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerSousFamille/{{$Sfamille->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/produits/SupprimerSousFamille/{{$Sfamille->id}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">

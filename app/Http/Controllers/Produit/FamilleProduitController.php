@@ -53,7 +53,7 @@ class FamilleProduitController extends Controller
 		        DB::insert("insert into familles (id_categorie,nom,description) values('$famille_categorie','$famille_nom','$famille_description') ");
 		        
 		        
-		        return redirect('/familleProd')->with('success','La Famille est enregistré avec succée');	
+		        return redirect('/home/produits/familleProd')->with('success','La Famille est enregistré avec succée');	
 		}
         
 
@@ -63,7 +63,7 @@ class FamilleProduitController extends Controller
     {
     	
     	$this->validate($request,[
-            'nom' => 'required|max:300',
+            'nom' => 'required|max:500',
             'description' => 'required|max:800'
             ]);
 
@@ -87,7 +87,7 @@ class FamilleProduitController extends Controller
 
 		         DB::update("update familles f set id_categorie='$famille_categorie' ,nom='$famille_nom',description='$famille_description ' where f.id='$idFamilleProduitModiff'  ");
                  
-       			 return redirect('/familleProd')->with('success','La Famiile a été Modifiée avec succée');
+       			 return redirect('/home/produits/familleProd')->with('success','La Famiile a été Modifiée avec succée');
 		}
         
 
@@ -96,9 +96,11 @@ class FamilleProduitController extends Controller
     public function SupprimerFamilleProduit(Request $request,$idFamilleProduitSupprimer)
     {
         
-        DB::delete("delete from familles  where id='$idFamilleProduitSupprimer'");
 
-        return redirect('/familleProd')->with('success','La Famille a été supprimée avec succée');
+         DB::update("update familles f set visible=0 where f.id='$idFamilleProduitSupprimer'  ");
+
+
+        return redirect('/home/produits/familleProd')->with('success','La Famille a été supprimée avec succée');
 
     }
 

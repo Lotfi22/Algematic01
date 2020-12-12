@@ -84,31 +84,31 @@ Route::post('/home/fournisseurs/SupprimerFournisseur/{idFournisseurSupprimer}', 
 
 
 /***************************** Création d'une CatégorieProduit (CRUD)************************/
-Route::get('/categorie', 'Produit\CategorieController@index');
+Route::get('/home/produits/categorie', 'Produit\CategorieController@index');
 /*L'ajout d'un nouveau Catégorie*/
-Route::post('/AddCategorie', 'Produit\CategorieController@AddCategorie');
+Route::post('/home/produits/AddCategorie', 'Produit\CategorieController@AddCategorie');
 /*Modification d'un  Catégorie*/
-Route::post('/ModifCategorie/{idCategorieModiff}', 'Produit\CategorieController@ModifCategorie');
+Route::post('/home/produits/ModifCategorie/{idCategorieModiff}', 'Produit\CategorieController@ModifCategorie');
 /*Suppression d'un  Catégorie*/
-Route::post('/SupprimerCategorie/{idCategorieSupprimer}', 'Produit\CategorieController@SupprimerCategorie');
+Route::post('/home/produits/SupprimerCategorie/{idCategorieSupprimer}', 'Produit\CategorieController@SupprimerCategorie');
 
 /***************************** Création d'une Famille_Produit (CRUD)************************/
-Route::get('/familleProd', 'Produit\FamilleProduitController@index');
+Route::get('/home/produits/familleProd', 'Produit\FamilleProduitController@index');
 /*L'ajout d'un nouveau Famille_Produit*/
-Route::post('/AddFamilleProduit', 'Produit\FamilleProduitController@AddFamilleProduit');
+Route::post('/home/produits/AddFamilleProduit', 'Produit\FamilleProduitController@AddFamilleProduit');
 /*Modification d'un  Famille_Produit*/
-Route::post('/ModifFamilleProduit/{idFamilleProduitModiff}', 'Produit\FamilleProduitController@ModifFamilleProduit');
+Route::post('/home/produits/ModifFamilleProduit/{idFamilleProduitModiff}', 'Produit\FamilleProduitController@ModifFamilleProduit');
 /*Suppression d'un  Famille_Produit*/
-Route::post('/SupprimerFamilleProduit/{idFamilleProduitSupprimer}', 'Produit\FamilleProduitController@SupprimerFamilleProduit');
+Route::post('/home/produits/SupprimerFamilleProduit/{idFamilleProduitSupprimer}', 'Produit\FamilleProduitController@SupprimerFamilleProduit');
 
 /***************************** Création d'une SOUSFamille_Produit (CRUD)************************/
-Route::get('/sousFamille', 'Produit\SousFamilleController@index');
+Route::get('/home/produits/sousFamille', 'Produit\SousFamilleController@index');
 /*L'ajout d'un nouveau Famille_Produit*/
-Route::post('/AddSousFamille', 'Produit\SousFamilleController@AddSousFamille');
+Route::post('/home/produits/AddSousFamille', 'Produit\SousFamilleController@AddSousFamille');
 /*Modification d'un  Famille_Produit*/
-Route::post('/ModifSousFamille/{idSousFamilleModiff}', 'Produit\SousFamilleController@ModifSousFamille');
+Route::post('/home/produits/ModifSousFamille/{idSousFamilleModiff}', 'Produit\SousFamilleController@ModifSousFamille');
 /*Suppression d'un  Famille_Produit*/
-Route::post('/SupprimerSousFamille/{idSousFamilleSupprimer}', 'Produit\SousFamilleController@SupprimerSousFamille');
+Route::post('/home/produits/SupprimerSousFamille/{idSousFamilleSupprimer}', 'Produit\SousFamilleController@SupprimerSousFamille');
 
 
 /***************************** Création d'une Propriété_Produit (CRUD)************************/
@@ -121,13 +121,13 @@ Route::post('/ModifPropriete/{idProprieteModiff}', 'Produit\ProprieteController@
 Route::post('/SupprimerPropriete/{idProprieteSupprimer}', 'Produit\ProprieteController@SupprimerPropriete');
 
 /***************************** Création d'une Unite (CRUD)************************/
-Route::get('/unite', 'Produit\UniteController@index');
+Route::get('/home/produits/unite', 'Produit\UniteController@index');
 /*L'ajout d'un nouveau Produit*/
-Route::post('/AddUnite', 'Produit\UniteController@AddUnite');
+Route::post('/home/produits/AddUnite', 'Produit\UniteController@AddUnite');
 /*Modification d'un  Unite*/
-Route::post('/ModifUnite/{idUniteModiff}', 'Produit\UniteController@ModifUnite');
+Route::post('/home/produits/ModifUnite/{idUniteModiff}', 'Produit\UniteController@ModifUnite');
 /*Suppression d'un  Unite*/
-Route::post('/SupprimerUnite/{idUniteSupprimer}', 'Produit\UniteController@SupprimerUnite');
+Route::post('/home/produits/SupprimerUnite/{idUniteSupprimer}', 'Produit\UniteController@SupprimerUnite');
 
 
 /***************************** Création d'un Produits (CRUD)************************/

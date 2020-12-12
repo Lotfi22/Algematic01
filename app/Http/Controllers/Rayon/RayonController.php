@@ -10,8 +10,8 @@ class RayonController extends Controller
 {
      public function index()
      {
-    	$locals=DB::select("select * from locals ");
-    	$rayons=DB::select("select * from rayons ");
+    	$locals=DB::select("select * from locals where visible='1' ");
+    	$rayons=DB::select("select * from rayons where visible='1' ");
 
     	return view('Rayon\rayon',compact('rayons','locals'));
      }
@@ -20,7 +20,7 @@ class RayonController extends Controller
     {
     	
     	$this->validate($request,[
-            'nom' => 'required|max:300',
+            'nom' => 'required|max:500',
             'description' => 'required|max:800'
             ]);
 
@@ -46,14 +46,14 @@ class RayonController extends Controller
         DB::insert("insert into rayons (id_local,nom,description) values('$rayon_Local','$rayon_nom','$rayon_description') ");
         
         
-        return redirect('/rayon')->with('success','Le Rayon est enregistré avec succée');
+        return redirect('/home/stocks/rayon')->with('success','Le Rayon est enregistré avec succée');
 
     }
 
     public function ModifRayon(Request $request,$idRayonModif)
     {
     	$this->validate($request,[
-            'nom' => 'required|max:300',
+            'nom' => 'required|max:500',
             'description' => 'required|max:1000'
             ]);
     	/*
@@ -78,15 +78,16 @@ class RayonController extends Controller
 
         
         DB::update("update rayons r set nom='$rayon_nom',description='$rayon_description' where r.id='$idRayonModif'  ");
-        return redirect('/rayon')->with('success','Le Rayon a été Modifié avec succée');
+        return redirect('/home/stocks/rayon')->with('success','Le Rayon a été Modifié avec succée');
 
     }
 
      public function SupprimerRayon(Request $request,$idRayonSupprimer)
     {
         
-        DB::delete("delete from rayons  where id='$idRayonSupprimer'");
-        return redirect('/rayon')->with('success','Le Rayon a été supprimé avec succée');
+        DB::update("update rayons r set visible='0' where r.id='$idRayonSupprimer'  ");
+        
+        return redirect('/home/stocks/rayon')->with('success','Le Rayon a été supprimé avec succée');
 
     }
 

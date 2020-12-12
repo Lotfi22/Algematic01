@@ -19,8 +19,10 @@ class LocalController extends Controller
     
 	 public function index()
      {
-    	$depots=DB::select("select * from depots ");
-    	$locals=DB::select("select * from locals ");
+    	$depots=DB::select("select * from depots where visible='1' ");
+    	$locals=DB::select("select * from locals where visible='1' ");
+
+        
     	return view('Local\local',compact('depots','locals'));
      }
 
@@ -28,7 +30,7 @@ class LocalController extends Controller
     {
     	
     	$this->validate($request,[
-            'nom' => 'required|max:300',
+            'nom' => 'required|max:500',
             'description' => 'required|max:800',
             'superficie' => 'required|numeric|between:0,99.1000'
             ]);
@@ -63,7 +65,7 @@ class LocalController extends Controller
     public function ModifLocal(Request $request,$idLocalModif)
     {
     	$this->validate($request,[
-            'nom' => 'required|max:300',
+            'nom' => 'required|max:500',
             'description' => 'required|max:1000',
             'superficie' => 'required|numeric|between:0,99.1000'
             ]);
@@ -97,7 +99,8 @@ class LocalController extends Controller
     public function SupprimerLocal(Request $request,$idLocalSupprimer)
     {
         
-        DB::delete("delete from locals  where id='$idLocalSupprimer'");
+        DB::update("update locals l set visible='0' where l.id='$idLocalSupprimer'  ");
+
         return redirect('/home/stocks/local')->with('success','Le local a été supprimé avec succée');
 
     }

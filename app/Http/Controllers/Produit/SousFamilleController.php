@@ -53,7 +53,7 @@ class SousFamilleController extends Controller
 		        DB::insert("insert into sous_familles (id_famille,nom,description) values('$famille_famille','$famille_nom','$famille_description') ");
 		        
 		        
-		        return redirect('/sousFamille')->with('success','La Sous_Famille est enregistré avec succée');	
+		        return redirect('/home/produits/sousFamille')->with('success','La Sous_Famille est enregistré avec succée');	
 		}
         
 
@@ -88,7 +88,7 @@ class SousFamilleController extends Controller
 		        DB::update("update sous_familles f set id_famille='$famille_famille',nom='$famille_nom',description='$famille_description ' where f.id='$idSousFamilleModiff'  ");
 		        
 		        
-		        return redirect('/sousFamille')->with('success','La Sous_Famille a été modofiée avec succée');	
+		        return redirect('/home/produits/sousFamille')->with('success','La Sous_Famille a été modofiée avec succée');	
 		}
         
 
@@ -99,7 +99,7 @@ class SousFamilleController extends Controller
         
         DB::delete("delete from sous_familles  where id='$idSousFamilleSupprimer'");
 
-        return redirect('/sousFamille')->with('success','La Sous_Famille a été supprimée avec succée');
+        return redirect('/home/produits/sousFamille')->with('success','La Sous_Famille a été supprimée avec succée');
 
     }
 

@@ -276,8 +276,8 @@
 
                   @if( ($preachat->achat_done==0) && ($preachat->ranger==0))
 
-                   <button type="button" class="encours alert alert-primary"  data-toggle="modal" data-target="#ACHAT{{$preachat->idpreachat}}">
-                             Arrivage  en Attente
+                   <button type="button" class="btn-sm btn btn-secondary"  data-toggle="modal" data-target="#ACHAT{{$preachat->idpreachat}}">
+                             Arrivage  en Attente...
                           </button>
 
                   @endif

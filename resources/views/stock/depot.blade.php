@@ -29,6 +29,9 @@
                       </div>
                       @endif
     <div>
+            <h1 style="text-align: center;" ><B>Liste Des Dépôts </B></h1>
+      <br>
+
          <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
                       Ajouter Un dépot
@@ -83,7 +86,7 @@
      <br>
 
     <div>
-        <table class="table table-striped table-dark">
+        <table class="table table-striped table-dark" id="table_id">
           <thead>
             <tr>
               <th scope="col"><B>Numéro</B></th>

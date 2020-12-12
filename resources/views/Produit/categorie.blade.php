@@ -28,6 +28,9 @@
                         </div>
                       </div>
                       @endif
+
+                       <h1 style="text-align: center;" ><B>Liste Des Catégories_Produits </B></h1>
+      <br>
     <div>
          <!-- Button trigger modal -->
                     <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalcategorie">
@@ -85,7 +88,7 @@
      <br>
 
     <div>
-        <table class="table table-striped table-dark">
+        <table class="table table-striped table-dark"  id="table_id">
           <thead>
             <tr>
               <th scope="col"><B>Numéro</B></th>

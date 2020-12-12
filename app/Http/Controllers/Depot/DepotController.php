@@ -20,7 +20,7 @@ class DepotController extends Controller
 
     public function index()
     {
-    	$depots=DB::select("select * from depots ");
+    	$depots=DB::select("select * from depots where visible='1' ");
     	return view('stock\depot',compact('depots'));
     }
 
@@ -28,7 +28,7 @@ class DepotController extends Controller
     public function AddDepot(Request $request)
     {
     	$this->validate($request,[
-            'nom' => 'required|max:300',
+            'nom' => 'required|max:500',
             'adresse' => 'required|max:500',
             'superficie' => 'required|numeric|between:0,99.1000'
             ]);
@@ -64,7 +64,7 @@ class DepotController extends Controller
     public function ModifDepot(Request $request,$idDepotModif)
     {
     	$this->validate($request,[
-            'nom' => 'required|max:300',
+            'nom' => 'required|max:500',
             'adresse' => 'required|max:500',
             'superficie' => 'required|numeric|between:0,99.1000'
             ]);
@@ -97,8 +97,8 @@ class DepotController extends Controller
 
     public function SupprimerDepot(Request $request,$idDepotSupprimer)
     {
-        
-        DB::delete("delete from depots  where id='$idDepotSupprimer'");
+        DB::update("update depots d set visible='0' where d.id='$idDepotSupprimer'");
+      
         return redirect('/home/stocks/depot')->with('success','Le dépot a été supprimé avec succée');
 
     }

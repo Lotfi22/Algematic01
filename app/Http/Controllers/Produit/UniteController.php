@@ -37,7 +37,7 @@ class UniteController extends Controller
 		        DB::insert("insert into unites (description) values('$description') ");
 		        
 		        
-		        return redirect('/unite')->with('success',' Unité enregistrée avec succée');	
+		        return redirect('/home/produits/unite')->with('success',' Unité enregistrée avec succée');	
 		
         
 
@@ -58,7 +58,7 @@ class UniteController extends Controller
 		        DB::update("update  unites p set description='$description' where p.id='$idUniteModiff' ");
 		        
 		        
-		        return redirect('/unite')->with('success','Unité Modifiée avec succée');	
+		        return redirect('/home/produits/unite')->with('success','Unité Modifiée avec succée');	
 		
         
 
@@ -68,8 +68,10 @@ class UniteController extends Controller
     {
         
         DB::delete("delete from unites  where id='$idUniteSupprimer'");
+        DB::update("update  unites p set visible='0' where p.id='$idUniteSupprimer' ");
 
-        return redirect('/unite')->with('success','Unitésupprimée avec succée');
+
+        return redirect('/home/produits/unite')->with('success','Unitésupprimée avec succée');
 
     }
 

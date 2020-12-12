@@ -47,7 +47,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/AddUnite" method="POST">
+                     <form class="needs-validation" novalidate action="/home/produits/AddUnite" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
@@ -105,7 +105,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifUnite/{{$unite->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/produits/ModifUnite/{{$unite->id}}" method="POST">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
@@ -143,7 +143,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerUnite/{{$unite->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/produits/SupprimerUnite/{{$unite->id}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">

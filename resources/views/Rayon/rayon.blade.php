@@ -29,6 +29,9 @@
                       </div>
                       @endif
     <div>
+
+       <h1 style="text-align: center;" ><B>Liste Des Rayons </B></h1>
+      <br>
          <!-- Button trigger modal -->
                     <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalNVRAYON">
                       Ajouter Un Rayon
@@ -60,7 +63,8 @@
                                 </div>
                               </div>
 
-                            <div class="col-md-3 mb-3">
+                               <div class="form-row">
+                            <div class="col-md-6 mb-3">
                                   <div class="form-group">
                                     <label for="exampleFormControlSelect1"><B>Local</B></label>
                                     <select name="local" class="form-control" id="exampleFormControlSelect1">
@@ -72,6 +76,7 @@
                                   </div>
                             </div> 
                           </div>
+                        </div>
                           <div class="modal-footer">
                             <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
                             <button type="submit" class="btn-sm btn btn-primary">Ajouter</button>
@@ -87,7 +92,7 @@
      <br>
 
     <div>
-        <table class="table table-striped table-dark">
+        <table class="table table-striped table-dark" id="table_id">
           <thead>
             <tr>
               <th scope="col"><B>Numéro</B></th>
@@ -126,12 +131,12 @@
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip01"><B>Nouveau Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="CAMERA ET CABLES" required>
+                                  <input type="text" value="{{$rayon->nom}}"  name="nom" class="form-control" placeholder="CAMERA ET CABLES" required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>Nouvelle Description</B></label>
-                                  <input type="text" name="description"class="form-control"  placeholder="EL HAMIZ" required>
+                                  <input type="text" value="{{$rayon->description}}"  name="description"class="form-control"  placeholder="EL HAMIZ" required>
                                 </div>
                               </div>
 

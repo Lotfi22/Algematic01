@@ -35,7 +35,7 @@
                       <br>
 
 
-      <table class="table table-striped table-dark"  id="table_id" class="display">
+      <table   id="table_id" class="display">
       <thead>
             <tr>
                 <th scope="col"><B>Type</B></th>
@@ -60,7 +60,7 @@
 
               <td>
 
-                <button type="button"  class="btn-sm btn btn-primary" data-toggle="modal" data-target="#InfosDemande{{$preachat->idpreachat}}">
+                <button type="button" title="Information sur la demande"  class="btn-sm btn btn-info" data-toggle="modal" data-target="#InfosDemande{{$preachat->idpreachat}}">
                        Infos 
                     </button>
 
@@ -335,13 +335,13 @@
                       @if(  ($preachat->demande_valide==0) && ($preachat->refuser==0) )
                         
                    
-                        <button  type="button" class="btn-sm btn btn-dark">En Cours</button>
+                        <button  type="button"  class="btn-sm btn btn-secondary" title="Validez ou refusez la demande">En Cours ...</button>
 
                       @endif
 
                       @if(  ($preachat->demande_valide==1) && ($preachat->refuser==0))
                         
-                        <button type="button" class="btn-sm btn btn-success" >Validée</button>
+                        <button type="button" class="btn-sm btn btn-success" title="Demande Validée" >Validée</button>
 
                       @endif
                       
@@ -349,7 +349,7 @@
                       @if( $preachat->refuser==1 )
 
 
-                        <button type="button" class="btn-sm btn btn-danger"   data-toggle="modal" data-target="#MotifRefus{{$preachat->idpreachat}}">
+                        <button type="button" title="Cliquez Pour voir le Motif de refus" class="btn-sm btn btn-danger"   data-toggle="modal" data-target="#MotifRefus{{$preachat->idpreachat}}">
                                 Refusée
                       </button>
 

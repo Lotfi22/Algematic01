@@ -29,6 +29,9 @@
                       </div>
                       @endif
     <div>
+
+       <h1 style="text-align: center;" ><B>Liste Des Locaux </B></h1>
+      <br>
          <!-- Button trigger modal -->
                     <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalNVLOCAL">
                       Ajouter Un Local
@@ -65,8 +68,8 @@
                                   <label for="validationTooltip03"><B>Supérficie</B></label>
                                   <input type="text" name="superficie"class="form-control" placeholder="30 m2" required>
                                 </div>
-                              </div>
-                            <div class="col-md-3 mb-3">
+                              
+                            <div class="col-md-6 mb-3">
                                   <div class="form-group">
                                     <label for="exampleFormControlSelect1"><B>Dépot</B></label>
                                     <select name="depot" class="form-control" id="exampleFormControlSelect1">
@@ -77,6 +80,7 @@
                                     </select>
                                   </div>
                             </div> 
+                            </div>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -93,7 +97,7 @@
      <br>
 
     <div>
-        <table class="table table-striped table-dark">
+        <table class="table table-striped table-dark" id="table_id">
           <thead>
             <tr>
               <th scope="col"><B>Numéro</B></th>
@@ -134,19 +138,19 @@
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip01"><B>Nouveau Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="CAMERA ET CABLES" required>
+                                  <input type="text" value="{{$local->nom}}"  name="nom" class="form-control" placeholder="CAMERA ET CABLES" required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>Nouvelle Description</B></label>
-                                  <input type="text" name="description"class="form-control"  placeholder="EL HAMIZ" required>
+                                  <input type="text" value="{{$local->description}}"  name="description"class="form-control"  placeholder="EL HAMIZ" required>
                                 </div>
                               </div>
 
                               <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip03"><B>Nouvelle Supérficie</B></label>
-                                  <input type="text" name="superficie"class="form-control" placeholder="30 m2" required>
+                                  <input type="text" value="{{$local->superficie}}" name="superficie"class="form-control" placeholder="30 m2" required>
                                 </div>
                               </div>
                             

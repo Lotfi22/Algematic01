@@ -589,8 +589,9 @@ class DemandeAchatController extends Controller
       DB::update(" update pre_achat p set p.commentaire='commentaire' where p.id='$idpreachat' ");
       DB::update(" update pre_achat p set p.refuser='1' where p.id='$idpreachat' ");
    
+       session()->flash('success' , ' La demande a été refusé avec succé ');
 
-        return redirect('/home/achats/DemandeAttente')->with('success','La demande a été refusé avec succé');
+            return redirect()->back(); 
 
 	 }
 
@@ -625,7 +626,7 @@ class DemandeAchatController extends Controller
 
       	   	$year = Carbon::now()->format('Y');
 
-      	    $pre=DB::select("select count(*) as number from pre_achat where annee_bc='$year' and id <> '$idpreachat' and id_fournisseur <> (select id from fournisseurs where anonyme='oui') ");
+      	    $pre=DB::select("select count(*) as number from pre_achat where annee_bc='$year' and id <> '$idpreachat' and id_fournisseur <> (select id from fournisseurs where anonyme='oui') and demande_valide='1' ");
 
 
       	     $nbNumBCExistant= $pre[0]->number;
@@ -691,8 +692,8 @@ class DemandeAchatController extends Controller
                         <hr>
                         <h3 style="text-align: center;"> IDENTIFICATION DU SERVICE CONTRACTANT </h3>
                         <hr>
-                        <h4 style="text-align: center;>Dénomination: SARL ALGEMATIC</h4>
-                        <h4>Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger.</h4>
+                        <h4 style="text-align: center;">Dénomination: SARL ALGEMATIC</h4>
+                        <h4 style="text-align: center;">Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger.</h4>
                         <hr>
                         <h3 style="text-align: center;"> IDENTIFICATION DU PRESTATAIRE </h3>
                         <hr>
@@ -811,7 +812,7 @@ class DemandeAchatController extends Controller
                               <h5 style="text-align: right;">Cachet et signature</h5>
                               <br>
                               <hr>
-                              <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
+                              <h5 style="text-align: center;"><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
                               <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
 
                             </body>
@@ -821,7 +822,7 @@ class DemandeAchatController extends Controller
                             $dompdf->render();
                             $dompdf->stream("BC", array('Attachment'=>1));
 
-                            session()->flash('success' , ' Produit Ranger Avec succée ');
+                            session()->flash('success' , ' Télechargement terminé ');
 
                             return redirect()->back(); 
 
@@ -871,7 +872,7 @@ class DemandeAchatController extends Controller
                               <h5 style="text-align: right;">Cachet et signature</h5>
                               <br>
                               <hr>
-                              <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
+                              <h5 style="text-align: center;" ><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
                               <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
 
                             </body>
@@ -881,7 +882,7 @@ class DemandeAchatController extends Controller
                             $dompdf->render();
                             $dompdf->stream("BC", array('Attachment'=>1));
 
-                            session()->flash('success' , ' Produit Ranger Avec succée ');
+                            session()->flash('success' , ' Télechargement terminé ');
 
                             return redirect()->back();
 
@@ -935,7 +936,7 @@ class DemandeAchatController extends Controller
                             $dompdf->render();
                             $dompdf->stream("BC", array('Attachment'=>1));
 
-                            session()->flash('success' , ' Produit Ranger Avec succée ');
+                            session()->flash('success' , ' Télechargement terminé  ');
 
                             return redirect()->back();
 
@@ -996,19 +997,19 @@ class DemandeAchatController extends Controller
             <tr>
                 <td valign="top"></td>
                 <td align="left">
-                <h1><B> ALGEMATIC</B></h1>
-                  <h2 style="text-align: center;">BON DE COMMANDE</h2>
-                  <h3 style="text-align: center;">N°: '.$pre_achat[0]->num_bc.'   - Date: '.$now.' </h3>
+                <h2><B>SARL ALGEMATIC</B></h2>
+                  <h3 style="text-align: center;">BON DE COMMANDE</h3>
+                  <h5 style="text-align: center;">N°: '.$pre_achat[0]->num_bc.'   - Date: '.$now.' </h5>
                   <hr>
-                  <h3 style="text-align: center;"> IDENTIFICATION DU SERVICE CONTRACTANT </h3>
+                  <h5 style="text-align: center;"> IDENTIFICATION DU SERVICE CONTRACTANT </h5>
                   <hr>
-                  <h4 style="text-align: center;">Dénomination: SARL ALGEMATIC</h4>
-                  <h4>Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger.</h4>
+                  <h5 style="text-align: center;">Dénomination: SARL ALGEMATIC</h5>
+                  <h5 style="text-align: center;">Adresse: Ali Sadek Route National N° 145 local N°01 Hamiz Bordj El Kiffan Alger.</h5>
                   <hr>
                   <h3 style="text-align: center;"> IDENTIFICATION DU PRESTATAIRE </h3>
                   <hr>
-                    <h4 style="text-align: center;">'.$fournisseurs[0]->nom.' </h4>
-                    <h4 style="text-align: center;">Relatif à la Facture Pro Format N° '.$FacturePro[0]->numero_piece.' du '.$pre_achat[0]->date_achat.' </h4>
+                    <h5 style="text-align: center;">'.$fournisseurs[0]->nom.' </h5>
+                    <h5 style="text-align: center;">Relatif à la Facture Pro Format N° '.$FacturePro[0]->numero_piece.' du '.$pre_achat[0]->date_achat.' </h5>
                     <hr>
 
                 </td>
@@ -1118,13 +1119,13 @@ class DemandeAchatController extends Controller
                           
                           $html.='</tfoot>
                         </table>
-                        <h5>Arrête le présent Bon de Commande à la somme de:</h5>
+                        <h6>Arrête le présent Bon de Commande à la somme de:</h6>
                         <br>
-                        <h5 style="text-align: right;">Cachet et signature</h5>
+                        <h6 style="text-align: right;">Cachet et signature</h6>
                         <br>
                         <hr>
-                        <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
-                        <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
+                        <h6><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h6>
+                        <h6><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h6>
 
                       </body>
                       </html>';
@@ -1133,7 +1134,7 @@ class DemandeAchatController extends Controller
                       $dompdf->render();
                       $dompdf->stream("BC", array('Attachment'=>1));
 
-                      session()->flash('success' , ' Produit Ranger Avec succée ');
+                      session()->flash('success' , ' Télechargement terminé ');
 
                             return redirect()->back();
 
@@ -1178,13 +1179,13 @@ class DemandeAchatController extends Controller
                           
                           $html.='</tfoot>
                         </table>
-                        <h5>Arrête le présent Bon de Commande à la somme de:</h5>
+                        <h6>Arrête le présent Bon de Commande à la somme de:</h6>
                         <br>
-                        <h5 style="text-align: right;">Cachet et signature</h5>
+                        <h6 style="text-align: right;">Cachet et signature</h6>
                         <br>
                         <hr>
-                        <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
-                        <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
+                        <h6><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h6>
+                        <h6><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h6>
 
                       </body>
                       </html>';
@@ -1193,7 +1194,7 @@ class DemandeAchatController extends Controller
                       $dompdf->render();
                       $dompdf->stream("BC", array('Attachment'=>1));
 
-                      session()->flash('success' , ' Produit Ranger Avec succée ');
+                      session()->flash('success' , ' Télechargement terminé ');
 
                             return redirect()->back();
                     }
@@ -1228,13 +1229,13 @@ class DemandeAchatController extends Controller
                                 
                                 $html.='</tfoot>
                               </table>
-                              <h5>Arrête le présent Bon de Commande à la somme de:</h5>
+                              <h6>Arrête le présent Bon de Commande à la somme de:</h6>
                               <br>
-                              <h5 style="text-align: right;">Cachet et signature</h5>
+                              <h6 style="text-align: right;">Cachet et signature</h6>
                               <br>
                               <hr>
-                              <h5><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h5>
-                              <h5><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h5>
+                              <h6><B>Adresse: Ali Sadek R N° 145 Local N° 01 Hamiz Bordj EL Kiffan Alger, Algérie.</B>  SARL Capital: 30.000.000,00 DA </h6>
+                              <h6><B>Télé: 0550 81 48 41 </B>                                    RC N°: 16/00-0984669B12</h6>
 
                             </body>
                             </html>';
@@ -1243,7 +1244,7 @@ class DemandeAchatController extends Controller
                             $dompdf->render();
                             $dompdf->stream("BC", array('Attachment'=>1));
 
-                            session()->flash('success' , ' Produit Ranger Avec succée ');
+                            session()->flash('success' , ' Télechargement terminé ');
 
                             return redirect()->back();
         }
