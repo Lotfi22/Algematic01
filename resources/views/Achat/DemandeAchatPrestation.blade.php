@@ -281,7 +281,7 @@
 
              <div class="modal-footer">
 
-                                     
+                
                 <button type="submit"  class="btn-sm btn btn-primary">Valier La Demande</button>
 
                 <a class="btn-sm btn btn-dark" href="/home" aria-expanded="false">Annuler</span></a>
@@ -290,7 +290,10 @@
 
         </form>
 
- 
+ <script type="text/javascript">
+
+   
+ </script>
 
               
 
