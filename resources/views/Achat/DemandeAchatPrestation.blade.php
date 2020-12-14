@@ -280,10 +280,12 @@
             </div>
 
              <div class="modal-footer">
- 
-                <button type="button"  class="btn-sm btn btn-success" onclick="calculer();" >Calculer le total</button>
 
-                <button type="submit"  class="btn-sm btn btn-primary">Valier La Demande</button>
+
+ 
+                <button type="button"  class="btn-sm btn btn-success" onclick="generate_table()" >Verifiez Le Total</button>
+
+                <button type="submit" id="validerDemande" style="visibility: hidden;"  class="btn-sm btn btn-primary">Valier La Demande</button>
 
                 <a class="btn-sm btn btn-dark" href="/home" aria-expanded="false">Annuler</span></a>
 
@@ -291,31 +293,177 @@
 
         </form>
 
+        <div id="creation" style="margin:auto;"></div>
+
+
  <script type="text/javascript">
 
-    function calculer() 
-    {
-      
-      var qts = document.getElementsByClassName("quantites");
-      var prix = document.getElementsByClassName("prixs");
 
-      var somme=0;
+   
+   function generate_table() {
+  
+  var body = document.getElementsByTagName("body")[0];
 
-      for(var i = 0; i < qts.length; i++)
-      {
-         somme=somme+parseFloat(qts[i].value)*parseFloat(prix[i].value);
-      }
+  var tbl = document.createElement("table");
 
-     if (document.getElementById('yesCheck').checked) 
+  tbl.className = "table table-striped table-dark";
+
+  var tblBody = document.createElement("tbody");
+
+  var thead = document.createElement("thead");
+
+  var trth = document.createElement("tr");
+
+  var th0 = document.createElement("th");
+
+  var cellText = document.createTextNode(" Produit");
+
+  th0.appendChild(cellText);
+
+  trth.appendChild(th0);
+
+  var th1 = document.createElement("th");
+
+  var cellText = document.createTextNode(" Quantité");
+
+  th1.appendChild(cellText);
+
+  trth.appendChild(th1);
+
+  var th2 = document.createElement("th");
+
+  var cellText = document.createTextNode(" Prix U.HT");
+
+  th2.appendChild(cellText);
+  
+  trth.appendChild(th2);
+
+  var th3 = document.createElement("th");
+
+  var cellText = document.createTextNode(" Montant HT");
+
+  th3.appendChild(cellText);
+  
+  trth.appendChild(th3);
+
+  thead.appendChild(trth);
+
+  tbl.appendChild(thead);
+
+   var qts = document.getElementsByClassName("quantites");
+
+   var price = document.getElementsByClassName("prixs");
+  
+    var somme=0;
+
+  for(var i = 0; i < qts.length; i++)
+   {
+          
+          somme=somme+parseFloat(qts[i].value)*parseFloat(price[i].value);
+
+          var row = document.createElement("tr");
+
+          var cel = document.createElement("td");
+
+          var celText = document.createTextNode(i+1);
+
+          cel.appendChild(celText);
+
+          row.appendChild(cel);
+
+          var cell = document.createElement("td");
+
+          var cellText = document.createTextNode(qts[i].value);
+
+          cell.appendChild(cellText);
+
+          row.appendChild(cell);
+
+          var celll = document.createElement("td");
+
+          var celllText = document.createTextNode(price[i].value);
+
+          celll.appendChild(celllText);
+
+          row.appendChild(celll);
+
+          var cellll = document.createElement("td");
+
+          var cellllText = document.createTextNode(parseFloat(qts[i].value)*parseFloat(price[i].value));
+
+          cellll.appendChild(cellllText);
+
+          row.appendChild(cellll);
+ 
+     
+        tblBody.appendChild(row);
+  }
+
+  var creation= document.getElementById('creation');
+ 
+ 
+
+  tbl.appendChild(tblBody);
+
+  creation.appendChild(tbl);
+
+   if (document.getElementById('yesCheck').checked) 
       {
           if (document.getElementById('pourcentageyes').checked) 
           {
+              
               
               var Pourcentage = parseFloat(document.getElementById('taux').value);
 
               Somme_Remise=somme-somme*Pourcentage/100;
 
-              alert('Total Ht= '+somme + '     |   Total Avec Remise= '+Somme_Remise);
+              var ht = document.createElement("h4");
+
+              var totalht = document.createTextNode("Total Ht = "+somme);
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
+
+              var ht = document.createElement("h4");
+
+              var totalht = document.createTextNode("Remise = "+Pourcentage+ " %");
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
+
+              var ht = document.createElement("h4");
+
+              var totalht = document.createTextNode("Net Ht = "+Somme_Remise);
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
+
+              TVA=Somme_Remise*19/100;
+
+              var ht = document.createElement("h4");
+
+              var totalht = document.createTextNode("Montant TVA 19 % = "+TVA);
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
+
+              TTC=Somme_Remise+TVA;
+
+              var ht = document.createElement("h4");
+
+              var totalht = document.createTextNode("TOTAL TTC = "+TTC);
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
+
+
+
+
 
              
           }
@@ -327,20 +475,92 @@
 
               Somme_Remise=somme-Pourcentage;
 
-              alert('Total Ht= '+somme + '    |    Total Avec Remise= '+Somme_Remise);
+              var ht = document.createElement("h4");
+
+              var totalht = document.createTextNode("Total Ht = "+somme);
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
+
+              var ht = document.createElement("h4");
+
+              var totalht = document.createTextNode("Montant Remise = "+Pourcentage);
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
+
+              var ht = document.createElement("h4");
+
+              var totalht = document.createTextNode("Net Ht = "+Somme_Remise);
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
+
+              TVA=Somme_Remise*19/100;
+
+              var ht = document.createElement("h4");
+
+              var totalht = document.createTextNode("Montant TVA 19 % = "+TVA);
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
+
+              TTC=Somme_Remise+TVA;
+
+              var ht = document.createElement("h4");
+
+              var totalht = document.createTextNode("TOTAL TTC = "+TTC);
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
 
           }
       }
 
       else
       {
-            alert('Total Ht= '+somme );
-      }
-      
-        
-    }
+             var ht = document.createElement("h4");
 
-   
+              var totalht = document.createTextNode("Total Ht = "+somme);
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
+
+              TVA=somme*19/100;
+
+              var ht = document.createElement("h4");
+
+              var totalht = document.createTextNode("Montant TVA 19 % = "+TVA);
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
+
+              TTC=somme+TVA;
+
+              var ht = document.createElement("h4");
+
+              var totalht = document.createTextNode("TOTAL TTC = "+TTC);
+
+              ht.appendChild(totalht);
+
+              creation.appendChild(ht);
+      }
+
+  
+
+  tbl.setAttribute("border", "2");
+
+    document.getElementById('validerDemande').style.visibility = "visible";
+
+}
+
  </script>
 
               
