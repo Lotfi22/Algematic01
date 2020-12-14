@@ -28,6 +28,8 @@
                         </div>
                       </div>
                       @endif
+                       <h1 style="text-align: center;" ><B>Liste Des Fournisseurs </B></h1>
+      <br>
     <div>
          <!-- Button trigger modal -->
                     <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalFOURNISSEUR">
@@ -58,7 +60,7 @@
                       <div class="form-row" >
 
                         <div class="col-md-6 mb-3">
-                          <label for="validationTooltip01"><B>Nom</B></label>
+                          <label for="validationTooltip01"><B>Raison</B></label>
                           <input type="text"  name="nom" class="form-control" placeholder="COMPILS" required>
                         </div>
 
@@ -187,11 +189,7 @@
         <table class="table table-striped table-dark" id="table_id">
           <thead>
             <tr>
-              <th scope="col"><B>Numéro</B></th>
-              <th scope="col"><B>Nom</B></th>
-              <th scope="col"><B>Adresse</B></th>
-              <th scope="col"><B>Activité</B></th>
-              <th scope="col"><B>+ BC</B></th>
+              <th scope="col"><B>Raison</B></th>
               <th scope="col"><B>Autres Infos</B></th>
               <th scope="col"><B>Modifier</B></th>
               <th scope="col"><B>Supprimer</B></th>
@@ -200,80 +198,13 @@
           <tbody>
             @foreach($fournisseurs as $fournisseur)
             <tr>
-              <td scope="row"><B>{{$fournisseur->id}}</B></td>
+       
               <td>{{$fournisseur->nom}}</td>
-              <td>{{$fournisseur->adresse}}</td>
-              <td>{{$fournisseur->activite}}</td>
-              <td>
-                  <!--  <a href="/commande/{{$fournisseur->id}}" type="button" class="btn-sm btn btn-success">Ajouter BC</a>-->
-                  <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#exampleModalBC{{$fournisseur->id}}">
-                       Ajouter BC
-                    </button>
-
-                    <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalBC{{$fournisseur->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title"  id="exampleModalLabel">Ajouter Une Facture PROFORMAT</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                     <form class="needs-validation" novalidate action="/commande/{{$fournisseur->id}}" method="POST" enctype="multipart/form-data">
-                        {{ csrf_field()}}
-                        
-                          
-                          <div class="modal-body">
-                              <div class="form-row">
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip03"><B>Numéro Facture ProForma</B></label>
-                                  <input type="text" name="facture"class="form-control" placeholder="FP20600" required>
-                                </div>
-
-                              </div>
-
-                              <div class="form-row">
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip03"><B>Date de La facture</B></label>
-                                  <input type="date" name="date"class="form-control" placeholder="02/05/2018" required>
-                                </div>
-
-                              </div>
-                              <div class="form-row">
-                                 <div class="form-group" >
-                                  <label for="exampleFormControlFile1"><B>Photo</B></label>
-                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
-                                </div>
-                              </div>
-
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip03"><B>Remise</B></label>
-                                  <input type="text" name="remise"class="form-control" placeholder="3 %" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip03"><B>TVA</B></label>
-                                  <input type="text" name="tva"class="form-control" placeholder="19 %" required>
-                                </div>
-
-                              </div>
-                          </div>
-
-                          <div class="modal-footer">
-                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn-sm btn btn-primary">Ajouter</button>
-                          </div>
-                      </form>
-                        </div>
-                      </div>
-                    </div>
-
+     
+             
               <td>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn-sm btn btn-dark" data-toggle="modal" data-target="#InfosPlus{{$fournisseur->id}}">
+                    <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#InfosPlus{{$fournisseur->id}}">
                       Plus
                     </button>
 
@@ -288,6 +219,9 @@
                             </button>
                           </div>
                           <div class="modal-body">
+                            <p><B>Raison: </B>{{$fournisseur->nom}}</p>
+                            <p><B>Adresse: </B>{{$fournisseur->adresse}}</p>
+                            <p><B>Activité: </B>{{$fournisseur->activite}}</p>
                             <p><B>Mobile: </B>{{$fournisseur->mobile}}</p>
                             <p><B>Téléphone: </B>{{$fournisseur->tele}}</p>
                             <p><B>Fax:</B> {{$fournisseur->fax}}</p>

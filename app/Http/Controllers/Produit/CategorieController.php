@@ -30,7 +30,7 @@ class CategorieController extends Controller
     	
 
     	$this->validate($request,[
-            'nom' => 'required|max:300',
+            'nom' => 'required|max:500',
             'description' => 'required|max:800',
             //'photo' => 'required|image|max:5000'
             ]);
@@ -52,20 +52,16 @@ class CategorieController extends Controller
          else
          {
         	
-	    	$file_extension= $request->photo->getClientOriginalExtension();
-	    	$file_name=time().'.'.$file_extension;
-	    	$path='images/categorie';
-	    	$request->photo->move($path,$file_name);
-
+	    	
 	        $categorie_nom=$request->input('nom');
 	        $categorie_description=$request->input('description');
-	        $categorie_photo=$file_name;
+	       
 	        //$depot->save();
 
-	        DB::insert("insert into categories (nom,description,photo) values('$categorie_nom','$categorie_description','$categorie_photo') ");
+	        DB::insert("insert into categories (nom,description) values('$categorie_nom','$categorie_description') ");
 	        
 	        
-	        return redirect('/categorie')->with('success','La Nouvelle  Catégorie est enregistrée avec succée');
+	        return redirect('/home/produits/categorie')->with('success','La Nouvelle  Catégorie est enregistrée avec succée');
 
     	}
 
@@ -89,7 +85,7 @@ class CategorieController extends Controller
        
          
 
-         if (count($info)>1) 
+         if (count($info)>0) 
                {
                    
                 session()->flash('notif' , ' Erreur Oupss Le Nom de la catégorie existe déja  !!! ');
@@ -100,20 +96,15 @@ class CategorieController extends Controller
          else
          {
         	
-	    	$file_extension= $request->photo->getClientOriginalExtension();
-	    	$file_name=time().'.'.$file_extension;
-	    	$path='images/categorie';
-	    	$request->photo->move($path,$file_name);
-
+	    	
 	        $categorie_nom=$request->input('nom');
 	        $categorie_description=$request->input('description');
-	        $categorie_photo=$file_name;
-	        //$depot->save();
+	     
 
 	           DB::update("update categories c set nom='$categorie_nom',description='$categorie_description',photo='$categorie_photo' where c.id='$idCategorieModiff'  ");
 	        
 	        
-	        return redirect('/categorie')->with('success','La Nouvelle  Catégorie a été modifiée avec succée');
+	        return redirect('/home/produits/categorie')->with('success','La Nouvelle  Catégorie a été modifiée avec succée');
 
     	}
 
@@ -123,7 +114,7 @@ class CategorieController extends Controller
     {
         
         DB::update("update  categories c set visible=0  where id='$idCategorieSupprimer'");
-        return redirect('/categorie')->with('success','La catégorie a été supprimé avec succée');
+        return redirect('/home/produits/categorie')->with('success','La catégorie a été supprimé avec succée');
 
     }
 

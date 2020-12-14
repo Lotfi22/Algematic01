@@ -1316,7 +1316,7 @@ class DemandeAchatController extends Controller
                     
         DB::update("update pre_achat p set achat_done=1 where p.id='$idPreAchat' ");
         
-        return redirect('/home/achats/DemandeAttente2')->with('success','Achat enregistré avec succée');
+        return redirect('/home/achats/AchatArrivage')->with('success','Achat enregistré avec succée');
 
              
        

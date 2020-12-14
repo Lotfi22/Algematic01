@@ -47,7 +47,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/AddCategorie" method="POST" enctype="multipart/form-data">
+                     <form class="needs-validation" novalidate action="/home/produits/AddCategorie" method="POST" enctype="multipart/form-data">
                         {{ csrf_field()}}
                           <div class="modal-body">
                               <div class="form-row">
@@ -64,12 +64,7 @@
 
                               </div>
 
-                              <div class="form-row">
-                                 <div class="form-group">
-                                  <label for="exampleFormControlFile1"><B>Photo</B></label>
-                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
-                                </div>
-                              </div>
+                             
 
                           </div>
 
@@ -94,7 +89,7 @@
               <th scope="col"><B>Numéro</B></th>
               <th scope="col"><B>Nom</B></th>
               <th scope="col"><B>Description</B></th>
-              <th scope="col"><B>Photo</B></th>
+  
               <th scope="col"><B>Modifier</B></th>
               <th scope="col"><B>Supprimer</B></th>
             </tr>
@@ -105,32 +100,7 @@
               <td scope="row"><B>{{$categorie->id}}</B></td>
               <td>{{$categorie->nom}}</td>
               <td>{{$categorie->description}}</td>
-              <td>      <!-- Button Pour l'affichage de la photo -->
-
-                  <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#staticBackdrop{{$categorie->id}}">
-                    Photo
-                  </button>
-
-                  <!-- Modal -->
-                  <div class="modal fade" id="staticBackdrop{{$categorie->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="staticBackdropLabel">Photo_Categorie</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <img src="{{asset('images/categorie/'.$categorie->photo ?? "nimi")}}">
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
+             
               
               
               <td>
@@ -148,7 +118,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifCategorie/{{$categorie->id}}" method="POST" enctype="multipart/form-data">
+                     <form class="needs-validation" novalidate action="/home/produits/ModifCategorie/{{$categorie->id}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field()}}
                          <div class="modal-body">
 
@@ -201,7 +171,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerCategorie/{{$categorie->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/produits/SupprimerCategorie/{{$categorie->id}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">

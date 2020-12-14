@@ -30,7 +30,7 @@
                       @endif
 
                       <div>
-                        <h1 style="text-align: center;  " >Liste Des Arrivages</h1>
+                        <h1 style="text-align: center;  " ><B>Liste Des Arrivages</B></h1>
                       </div>
                       <br>
 
@@ -340,7 +340,7 @@
 
                   <div class="form-row">
 
-                      <div class="col-md-3">
+                      <div class="col-md-6 mb-3">
                           <label class="small mb-1" for="inputFirstName">Type Pièce: </label>
                           <select class='form-control produits' class="js-example-basic-single" name='typepiece' id="typepiece" >
                               <option value=""></option>
@@ -352,7 +352,7 @@
                           </select>   
                       </div>
 
-                          <div class="col-md-3">
+                          <div class="col-md-6 mb-3">
                               <label class="small mb-1" for="inputEmailAddress">Numéro/Dénomination</label>
                               <input type="text" class="form-control quantites" name="facture" id="facture" placeholder="FP001/2020, Contrat 001, BL001 ....";>
                           </div>
@@ -367,13 +367,13 @@
 
                   <div class="form-row" style="margin-left: 100px">
 
-                       <div class="col-md-3">
+                       <div class="col-md-6 mb-3">
                         <label class="small mb-1" for="inputEmailAddress">Date pièce </label>
                         <input type="date" class="form-control quantites" name="date" id="date" placeholder="02/05/2018";>
                     </div>
 
                      
-                    <div class="col-md-3">
+                    <div class="col-md-6 mb-3">
                         <label class="small mb-1" for="inputEmailAddress">Pièce Jointe </label>
                         <input type="file"  class="form-control-file" name="photo" id="photo" >
                     </div>
@@ -389,11 +389,11 @@
                         </div>
                         
 
-                         
+                         <hr>
                         <div class="form-row">
                          <div class="col-md-6 mb-3">
                             <div class="form-group">
-                              <label for="exampleFormControlSelect1"><B>Nature Doc_Payement</B></label>
+                              <label for="exampleFormControlSelect1"><h4><B>Nature de Payement</B></h4></label>
                               <select name="doc" class="form-control">
                                @foreach($nature_doc_payments as $doc)
                                <option value="{{$doc->id}}"> {{  $doc->nom  }} </option>
