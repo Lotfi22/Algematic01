@@ -213,7 +213,7 @@
                               <div class="form-row" id="pourcentage" >
                                 <div class="col-md-6 mb-3" >
                                       <label for="validationTooltip03"><B>Remise</B></label>
-                                      <input type="text" name="remise" class="form-control" placeholder="3" required>
+                                      <input type="text" name="remise" id="taux" class="form-control" placeholder="3" required>
                                 </div>
                               </div>
 
@@ -281,7 +281,8 @@
 
              <div class="modal-footer">
  
-                
+                <button type="button"  class="btn-sm btn btn-success" onclick="calculer();" >Calculer le total</button>
+
                 <button type="submit"  class="btn-sm btn btn-primary">Valier La Demande</button>
 
                 <a class="btn-sm btn btn-dark" href="/home" aria-expanded="false">Annuler</span></a>
@@ -291,6 +292,53 @@
         </form>
 
  <script type="text/javascript">
+
+    function calculer() 
+    {
+      
+      var qts = document.getElementsByClassName("quantites");
+      var prix = document.getElementsByClassName("prixs");
+
+      var somme=0;
+
+      for(var i = 0; i < qts.length; i++)
+      {
+         somme=somme+parseFloat(qts[i].value)*parseFloat(prix[i].value);
+      }
+
+     if (document.getElementById('yesCheck').checked) 
+      {
+          if (document.getElementById('pourcentageyes').checked) 
+          {
+              
+              var Pourcentage = parseFloat(document.getElementById('taux').value);
+
+              Somme_Remise=somme-somme*Pourcentage/100;
+
+              alert('Total Ht= '+somme + '     |   Total Avec Remise= '+Somme_Remise);
+
+             
+          }
+
+          if (document.getElementById('pourcentagenon').checked) 
+          {
+              
+              var Pourcentage = parseFloat(document.getElementById('taux').value);
+
+              Somme_Remise=somme-Pourcentage;
+
+              alert('Total Ht= '+somme + '    |    Total Avec Remise= '+Somme_Remise);
+
+          }
+      }
+
+      else
+      {
+            alert('Total Ht= '+somme );
+      }
+      
+        
+    }
 
    
  </script>
