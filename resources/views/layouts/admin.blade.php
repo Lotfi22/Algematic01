@@ -247,7 +247,7 @@
 
                         <li> <a class="waves-effect waves-dark" href="/home" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">Profile</span></a></li>
 
-
+                        <B><hr></B>
                         <li> <a id="stocks" class="waves-effect waves-dark" href="/home4" onclick="fshow(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Stock</span></a></li>
 
 
@@ -335,7 +335,7 @@
 
                         {{-- @if( $privilege == 1 ) --}}
     
-                            <li> <a id="parametres" class="waves-effect waves-dark" href="/home4" onclick="Parametre(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="hide-menu">Paramètre</span></a></li>
+                            <li> <a id="parametres" class="waves-effect waves-dark" href="/home4" onclick="Parametre(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="mdi mdi-settings-box">Paramètre</span></a></li>
 
                             <li class="Parametre"> <a class="waves-effect waves-dark" href="/home/parametres/TypeDocument" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Type Document</span></a></li>
                         {{-- @endif --}}

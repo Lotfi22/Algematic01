@@ -35,7 +35,7 @@
                       <br>
 
 
-      <table class="table table-striped table-dark"  id="table_id" class="display">
+      <table  id="table_id" class="display">
       <thead>
             <tr>
                 <th scope="col"><B>Type</B></th>

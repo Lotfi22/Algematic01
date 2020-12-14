@@ -30,7 +30,7 @@
                       @endif
 
                       <div>
-                        <h1 style="text-align: center;  " >Liste Des Demandes d'Achats</h1>
+                        <h1 style="text-align: center;  " ><B>Liste Des Demandes d'Achats</B></h1>
                       </div>
                       <br>
 

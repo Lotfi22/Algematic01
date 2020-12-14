@@ -586,7 +586,7 @@ class DemandeAchatController extends Controller
 	 {
 
       $commentaire=$request->commentaire;
-      DB::update(" update pre_achat p set p.commentaire='commentaire' where p.id='$idpreachat' ");
+      DB::update(" update pre_achat p set p.commentaire='$commentaire' where p.id='$idpreachat' ");
       DB::update(" update pre_achat p set p.refuser='1' where p.id='$idpreachat' ");
    
        session()->flash('success' , ' La demande a été refusé avec succé ');

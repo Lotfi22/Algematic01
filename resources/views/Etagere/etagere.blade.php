@@ -69,7 +69,8 @@
                                 </div>
                               </div>
 
-                            <div class="col-md-3 mb-3">
+                          <div class="form-row">
+                            <div class="col-md-6 mb-3">
                                   <div class="form-group">
                                     <label for="exampleFormControlSelect1"><B>Rayon</B></label>
                                     <select name="rayon" class="form-control" id="exampleFormControlSelect1">
@@ -80,6 +81,7 @@
                                     </select>
                                   </div>
                             </div> 
+                          </div>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -96,13 +98,12 @@
      <br>
 
     <div>
-        <table class="table table-striped table-dark"  id="table_id">
+        <table   id="table_id">
           <thead>
             <tr>
               <th scope="col"><B>Numéro</B></th>
-              <th scope="col"><B>description</B></th>
-              <th scope="col"><B>Num_Etage</B></th>
               <th scope="col"><B>Num_rayon</B></th>
+              <th scope="col"><B>description</B></th>
               <th scope="col"><B>Modifier</B></th>
               <th scope="col"><B>Supprimer</B></th>
             </tr>
@@ -110,10 +111,12 @@
           <tbody>
             @foreach($etageres as $etagere)
             <tr>
-              <td scope="row"><B>{{$etagere->id}}</B></td>
-              <td>{{$etagere->description}}</td>
-              <td>{{$etagere->num_etage}}</td>
+              <td scope="row"><B>{{$etagere->num_etage}}</B></td>
+
               <td>{{$etagere->id_rayon}}</td>
+              
+              <td>{{$etagere->description}}</td>
+            
               <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFetagere{{$etagere->id}}">
                       Modifier
                     </button>
