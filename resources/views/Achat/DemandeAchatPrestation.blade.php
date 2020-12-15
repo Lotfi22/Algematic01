@@ -259,7 +259,7 @@
                           <div class="col-md-3">
                               <label class="small mb-1 produitsLabels" for="inputFirstName">Produit: </label>
                               <select class='form-control produits' class="js-example-basic-single" name='produit' id="produit" >
-                                  <option value=""></option>
+                                  
                                   @foreach($produits as $produit)
                                   <option  value="{{$produit->code_produit}}">
                                       {{$produit->code_produit}} -- {{$produit->description}}
@@ -269,23 +269,23 @@
                           </div>
                           <div class="col-md-3">
                               <label class="small mb-1" for="inputEmailAddress">Quantité : </label>
-                              <input type="number" class="form-control quantites" name="quantite" id="quantite" placeholder="2";>
+                              <input type="number" class="form-control quantites" name="quantite" id="quantite" >
 
                           </div>
                           <div class="col-md-3">
                               <label class="small mb-1" for="inputEmailAddress">Prix Unitaire : </label>
-                              <input type="number" class="form-control prixs" name="prix" id="prix" placeholder="1000";>
+                              <input type="number" class="form-control prixs" name="prix" id="prix" >
                           </div>
                       </div>
             </div>
 
              <div class="modal-footer">
 
-
+                
+                <button type="submit" id="validerDemande" style="visibility: hidden;"  class="btn-sm btn btn-primary">Valier La Demande</button>
  
                 <button type="button"  class="btn-sm btn btn-success" onclick="generate_table()" >Verifiez Le Total</button>
 
-                <button type="submit" id="validerDemande" style="visibility: hidden;"  class="btn-sm btn btn-primary">Valier La Demande</button>
 
                 <a class="btn-sm btn btn-dark" href="/home" aria-expanded="false">Annuler</span></a>
 

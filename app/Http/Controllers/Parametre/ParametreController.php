@@ -103,6 +103,60 @@ class ParametreController extends Controller
     }
 
 
+    public function indextva()
+    {
+
+        $tvas=DB::select("select * from tvas");
+
+        
+        return view('Parametre\TVA',compact('tvas'));
+    }
+
+
+
+
+
+    public function AddTVA(Request $request)
+    {   
+
+        $this->validate($request,[
+            'tva' => 'required|max:800'
+            ]);
+
+        $testnom=$request->input('tva');
+        $info=DB::select("select tva  from tvas where tva='$testnom'");
+       
+
+         if (count($info) >0) 
+               {
+                   
+                session()->flash('notif' , ' Erreur Oupss Cette TVA existe déja  !!! ');
+
+                return redirect()->back(); 
+               }
+        else
+        {
+                $tva=$request->input('tva');
+          
+                //$depot->save();
+
+                DB::insert("insert into tvas (tva) values('$tva') ");
+                
+                
+                return redirect('/home/parametres/tva')->with('success','Le Nouveau Pourcentage de TVA est enregistré avec succée'); 
+        }
+    }
+
+
+
+     public function SupprimerTVA(Request $request,$IdTVASupprimer)
+    {
+        
+        DB::delete("delete from tvas  where id='$IdTVASupprimer'");
+
+        return redirect('/home/parametres/tva')->with('success','TVA supprimée avec succée');
+
+    }
 
 
     

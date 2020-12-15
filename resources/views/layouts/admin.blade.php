@@ -338,6 +338,8 @@
                             <li> <a id="parametres" class="waves-effect waves-dark" href="/home4" onclick="Parametre(event)" aria-expanded="false"><i class="mdi mdi-arrow-down-drop-circle-outline"></i><span class="mdi mdi-settings-box">Paramètre</span></a></li>
 
                             <li class="Parametre"> <a class="waves-effect waves-dark" href="/home/parametres/TypeDocument" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Type Document</span></a></li>
+
+                            <li class="Parametre"> <a class="waves-effect waves-dark" href="/home/parametres/tva" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">TVA</span></a></li>
                         {{-- @endif --}}
 
                         {{-- fin fournisseur --}}                    

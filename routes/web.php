@@ -274,3 +274,12 @@ Route::post('/home/parametres/AddType', 'Parametre\ParametreController@AddType')
 Route::post('/home/parametres/ModifierTypeDocument/{IdTypeModif}', 'Parametre\ParametreController@ModifierTypeDocument');
 /*Suppression d'un  Type Document*/
 Route::post('/home/parametres/SupprimerTypeDocument/{IdTypeSupprimer}', 'Parametre\ParametreController@SupprimerTypeDocument');
+
+
+/********************************************** TVA *****************************/
+
+Route::get('/home/parametres/tva', 'Parametre\ParametreController@indextva');
+/*L'ajout d'un nouveau TVA*/
+Route::post('/home/parametres/AddTVA', 'Parametre\ParametreController@AddTVA');
+/*Suppression d'un  TVA*/
+Route::post('/home/parametres/SupprimerTVA/{IdTVASupprimer}', 'Parametre\ParametreController@SupprimerTVA');
