@@ -196,18 +196,44 @@
                                         @endforeach
                               </tbody>
                             </table>
+
                              <h4 style="text-align: center;" ><B>Montant HT: {{$preachat->montant}}</B></h4>
+
                              @if($preachat->remiseradio =='oui')
-                             @if($preachat->type_remise =='pourcentage')
-                             <h4 style="text-align: center;" ><B>Remise: {{$preachat->remise}} %</B></h4>
-                             <h4 style="text-align: center;" ><B>Montant Avec remise: {{$preachat->montant - ($preachat->montant * $preachat->remise / 100)}}</B></h4>
+
+                                 @if($preachat->type_remise =='pourcentage')
+                                   <h4 style="text-align: center;" ><B>Remise: {{$preachat->remise}} %</B></h4>
+                                   <h4 style="text-align: center;" ><B>Montant Avec remise: {{$preachat->montant - ($preachat->montant * $preachat->remise / 100)}}</B></h4>
+
+                                    <h4 style="text-align: center;" ><B>Montant TVA {{$preachat->tva}} % : {{ ($preachat->montant - ($preachat->montant * $preachat->remise / 100))* $preachat->tva / 100   }}</B></h4>
+
+                                      <h4 style="text-align: center;" ><B>Total TTC: {{ ($preachat->montant - ($preachat->montant * $preachat->remise / 100)) +  ($preachat->montant - ($preachat->montant * $preachat->remise / 100))* $preachat->tva / 100   }} </B></h4>
+
+                                 @endif
+
+                                 @if($preachat->type_remise =='montant')
+                                 <h4 style="text-align: center;" ><B>Remise: {{$preachat->remise}} DA</B></h4>
+                                 <h4 style="text-align: center;" ><B>Montant Avec remise: {{$preachat->montant -$preachat->remise }}</B></h4>
+
+                                 <h4 style="text-align: center;" ><B>Montant TVA {{$preachat->tva}} % : {{ ($preachat->montant - ( $preachat->remise))* $preachat->tva / 100   }}</B></h4>
+
+                                     <h4 style="text-align: center;" ><B>Total TTC: {{ ($preachat->montant - ( $preachat->remise )) +  ($preachat->montant - ( $preachat->remise))* $preachat->tva / 100   }} </B></h4>
+                                 @endif
                              @endif
-                             @if($preachat->type_remise =='montant')
-                             <h4 style="text-align: center;" ><B>Remise: {{$preachat->remise}} DA</B></h4>
-                             <h4 style="text-align: center;" ><B>Montant Avec remise: {{$preachat->montant -$preachat->remise }}</B></h4>
-                             @endif
-                             @endif
-                             <!--   Information des produits-->
+
+                              
+                                    
+                                        
+                              @if($preachat->remiseradio =='non')
+
+                                 <h4 style="text-align: center;" ><B>Montant TVA {{$preachat->tva}} % : {{ ($preachat->montant * $preachat->tva / 100)   }}</B></h4>
+
+                                     <h4 style="text-align: center;" ><B>Total TTC: {{ ($preachat->montant ) +  (($preachat->montant * $preachat->tva / 100))  }} </B></h4>
+
+                               @endif
+                            
+
+                             
 
                        <br>
                   
