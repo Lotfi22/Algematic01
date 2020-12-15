@@ -29,6 +29,7 @@ class DemandeAchatController extends Controller
 
     	$produits=DB::select("select * from produits");
     	$fournisseurs=DB::select("select * from fournisseurs");
+      
         
 
     	
@@ -794,6 +795,9 @@ class DemandeAchatController extends Controller
                                         <td align="right">Net HT</td>
                                         <td align="right">'.$total_HT.'</td>
                                     </tr>
+
+
+
                                     <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Montant TVA '.$pre_achat[0]->tva.' %</td>
@@ -1201,7 +1205,7 @@ class DemandeAchatController extends Controller
         }
         else
         {
-          $total_HT=$total;
+                        $total_HT=$total;
                         $montant_tva=$total_HT*$pre_achat[0]->tva/100;
                         $total_TTC=$montant_tva+$total_HT;
 
@@ -1214,12 +1218,20 @@ class DemandeAchatController extends Controller
                                         <td align="right">Total HT </td>
                                         <td align="right">'.$total.'</td>
                                     </tr>
+
                                     
-                                    <tr>
-                                        <td colspan="4"></td>
-                                        <td align="right">Montant TVA '.$pre_achat[0]->tva.' %</td>
-                                        <td align="right">'.$montant_tva.'</td>
-                                    </tr>
+                                 
+                                    
+                                            
+                                       <tr>
+                                          <td colspan="4"></td>
+                                          <td align="right">Montant TVA '.$pre_achat[0]->tva.' %</td>
+                                          <td align="right">'.$montant_tva.'</td>
+                                      </tr>
+
+                                    
+                                    
+                                    
 
                                     <tr>
                                         <td colspan="4"></td>
@@ -1419,13 +1431,16 @@ class DemandeAchatController extends Controller
       
 
       $produits=DB::select("select * from produits");
+
       $fournisseurs=DB::select("select * from fournisseurs");
    
       $types=DB::select("select * from type_pieces");
+
+      $tvas=DB::select("select * from tvas");
         
 
       
-      return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types'));
+      return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types','tvas'));
      }
 
 
@@ -1462,6 +1477,10 @@ class DemandeAchatController extends Controller
      
       $fournisseur=$request->fournisseur;
 
+      $valeurtva=$request->tva;
+
+      
+
    
 
      
@@ -1475,8 +1494,8 @@ class DemandeAchatController extends Controller
 
            
 
-                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remise,type_remise,typeachat) 
-                           values('$fournisseur','$now','$remise', '$type_remise' ,'$TypeAchat') ");
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remise,type_remise,tva,typeachat) 
+                           values('$fournisseur','$now','$remise', '$type_remise','$valeurtva' ,'$TypeAchat') ");
 
            
 
@@ -1487,8 +1506,8 @@ class DemandeAchatController extends Controller
       {
 
 
-                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remiseradio, typeachat) 
-                           values('$fournisseur','$now','$testremise','$TypeAchat') ");
+                DB::insert("insert into pre_achat (id_fournisseur,date_achat,remiseradio,tva,typeachat) 
+                           values('$fournisseur','$now','$testremise','$valeurtva','$TypeAchat') ");
 
                
 
