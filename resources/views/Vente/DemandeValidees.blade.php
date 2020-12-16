@@ -81,6 +81,13 @@
                                 @endforeach 
                             </select>   
                         </div>
+
+                        <div class="col-md-2" >
+                            
+                            <input type="text" class="form-control la_prevente" style="display: none;" name="la_prevente" id="la_prevente">
+
+                            {{--  --}}
+                        </div>
                     </div>
                 </div>
 
@@ -102,7 +109,7 @@
 
                         <label class="small mb-1" for="reste">Reste </label>
                 
-                        <input type="number" disabled class="form-control" id="reste" name="reste">
+                        <input type="number" readonly min="0" class="form-control" id="reste" name="reste">
                     </div>
 
                 </div>
@@ -132,14 +139,14 @@
 
                         <label class="small mb-1" for="Pourcentage"> Pourcentage %</label>
                         
-                        <input type="number" min="0" max="99" id="Pourcentage" class="form-control" onkeyup="fit_rdg(this);" onchange="fit_rdg(this);">
+                        <input type="number" min="0" max="99" id="Pourcentage" name="Pourcentage" class="form-control" onkeyup="fit_rdg(this);" onchange="fit_rdg(this);">
                     </div>
 
                     <div class="RDG form-check form-check-inline col-md-2">
 
                         <label class="small mb-1" for="RDG"> RDG </label>
                         
-                        <input type="number" min="0" max="99" disabled id="RDG" class="form-control">
+                        <input type="number" min="0" max="99" name="la_rdg" readonly id="RDG" class="form-control">
                     </div>
 
 
@@ -147,14 +154,14 @@
 
                         <label class="small mb-1" for="mois"> Mois </label>
                         
-                        <input type="number" min="0" max="99" id="mois" class="form-control">
+                        <input type="number" min="0" max="99" value="12" name="mois" id="mois" class="form-control">
                     </div>
 
                     <div class="RDG form-check form-check-inline col-md-2">
 
                         <label class="small mb-1" for="jours"> jours </label>
                         
-                        <input type="number" value="0" min="0" max="99" id="jours" class="form-control">
+                        <input type="number" value="0" min="0" max="99" name="jours" id="jours" class="form-control">
                     </div>
 
 

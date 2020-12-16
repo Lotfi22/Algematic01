@@ -37,7 +37,7 @@ class VenteController extends Controller
             
             where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id and u.id=p.id_employe and p.statut_validation =2
             order by preVente asc");
-
+        
         $ligne_ventes1=DB::select("select *,a.nom,a.description,l.quantite,l.total,(a.total-a.benifice) as PrixArticleAchat
             from ligne_ventes l, articles a 
             where (l.id_article=a.id)");
@@ -71,8 +71,8 @@ class VenteController extends Controller
         $ligne_ventes = array_merge($ligne_ventes1,$ligne_ventes2);
 
         $pieces = DB::select("select * from type_pieces tp, pieces_preventes pp where tp.id = pp.id_piece");
-        
-        $type_pieces = $pieces;
+               
+        $type_pieces = DB::select("select * from type_pieces tp");
 
         return view('Vente\DemandeValidees',compact('pieces','employes','ventes','ligne_ventes','privilege','modalities','type_pieces'));
     }
@@ -90,10 +90,93 @@ class VenteController extends Controller
     public function add_vente(Request $request)
     {
 
-    	dd($request->all());
+    	$ventes = (DB::select("select * from ventes order by id desc"));
+
+    	if (count($ventes) == 0) 
+    	{
+
+    		$last_id = 1;
+
+    		# code...
+    	}
+    	else
+    	{
+
+			$last_id = $ventes[0]->id;    		
+
+    		//
+    	}
+		
+		$ligne_ventes =[];
+
+     	foreach ($request['dynamic_form2']['dynamic_form2'] as $key=>$array)
+        {
+        	
+        	$id_prevente = $array['la_prevente'];
+
+        	DB::update("update pre_ventes set id_vente = '$last_id' where id = '$id_prevente' ");
+
+	        $ligne_ventes1=DB::select("select *,a.nom,a.description,l.quantite,l.total,(a.total-a.benifice) as PrixArticleAchat
+	            from ligne_ventes l, articles a 
+	            where (l.id_article=a.id and l.id_pre_vente = '$id_prevente' )");
+	        
+	        $ligne_ventes2=DB::select("select *,a.code_produit as nom,a.description,l.quantite,l.total,l.prix_u as PrixArticleAchat
+	            from ligne_ventes l, produits a 
+	            where (l.id_produit=a.id and l.id_pre_vente = '$id_prevente' )");
+
+        	$ligne_ventes = array_merge($ligne_ventes,$ligne_ventes1,$ligne_ventes2);
+	        
+	        //
+        }
+
+        $le_montant=(DB::select("select sum(montant) as montant_total from pre_ventes where id_vente = '$last_id' ")[0]);
+        
+        DB::insert("insert into ventes(montant_total) values('$le_montant->montant_total')");
+
+        if ($request->existe_doc == "OUI") 
+        {
+   
+            foreach ($request['dynamic_form3']['dynamic_form3'] as $key=>$array) 
+            {
+                
+                $type_piece = ($array['type_doc']);
+                
+                $file1 = $array['document'];
+                
+                $file1->move('documents_ventes','Vente_'.$last_id.'_'.time().'_'.$file1->getClientOriginalName());
+                
+                $chemin1 = "documents_ventes/".'Vente_'.$last_id.'_'.time().'_'.$file1->getClientOriginalName();
+
+                DB::insert("insert into pieces_ventes (id_vente,id_piece,chemin_piece) 
+                values ('$last_id','$type_piece','$chemin1') ");
+            }        
+   
+            # code...
+        }
+
+        $ma_vente = (DB::select("select * from ventes where id = '$last_id' "));
+
+        $dates_dem = DB::select("select max(date_demande) as date_fin from pre_ventes where id_vente = '$last_id' ");
+        
+        $dates_dem = $dates_dem[0]->date_fin;
+
+        $dates_fin = DB::select("select max(date_echue) as date_fin from pre_ventes where id_vente = '$last_id' ");
+        
+        $dates_fin = $dates_fin[0]->date_fin;
+        
+        $pieces_jointes = DB::select("select * from pieces_ventes where id_vente = '$last_id'"); 
+
+        $client = DB::select("select * from client_prospects where id = (select max(id_client) from pre_ventes where id_vente = '$last_id')");
+        
+        $client=$client[0];
+        
+        return view('Vente\DetailsVente',compact('ligne_ventes','le_montant','ma_vente','pieces_jointes','dates_dem','dates_fin','client'));
+
+    	//DB::update("");
 
     	# code...
     }
+
 
     //
 }

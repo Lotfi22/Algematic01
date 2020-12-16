@@ -44,8 +44,13 @@ var total_total = 0;
 
 function get_preventes(object) 
 {
+	var num = parseInt(object.id.substr(8));
 
+	var la_prevente = "#la_prevente"+num;
+	
 	var id_prevente = ($(object).find(":selected").val());
+	
+	$(la_prevente).val(id_prevente);
 
     $.ajax({
         headers: 
