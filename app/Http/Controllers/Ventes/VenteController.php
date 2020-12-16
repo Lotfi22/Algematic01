@@ -37,7 +37,7 @@ class VenteController extends Controller
             
             where p.id_client=c.id and c.id_categorie = ca.id and c.id_activite = ac.id and u.id=p.id_employe and p.statut_validation =2
             order by preVente asc");
-        
+
         $ligne_ventes1=DB::select("select *,a.nom,a.description,l.quantite,l.total,(a.total-a.benifice) as PrixArticleAchat
             from ligne_ventes l, articles a 
             where (l.id_article=a.id)");
@@ -80,7 +80,7 @@ class VenteController extends Controller
     public function get_price(Request $request)
     {
 
-    	$montant = (DB::select("select * from pre_ventes where id = '$request->id' ")[0]);
+    	$montant = (DB::select("select *,montant*1 as montant_H_T,montant*1.19 as montant from pre_ventes where id = '$request->id' ")[0]);
 
     	return response()->json($montant);
 
@@ -169,8 +169,10 @@ class VenteController extends Controller
         $client = DB::select("select * from client_prospects where id = (select max(id_client) from pre_ventes where id_vente = '$last_id')");
         
         $client=$client[0];
+
+        $tout = $request->all();
         
-        return view('Vente\DetailsVente',compact('ligne_ventes','le_montant','ma_vente','pieces_jointes','dates_dem','dates_fin','client'));
+        return view('Vente\DetailsVente',compact('ligne_ventes','le_montant','ma_vente','pieces_jointes','dates_dem','dates_fin','client','tout'));
 
     	//DB::update("");
 

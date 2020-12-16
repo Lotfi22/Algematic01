@@ -324,11 +324,11 @@
 
                         <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/article" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Article de Vente</span></a></li>
 
-                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande de Vente</span></a></li>
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande de PréVente</span></a></li>
 
                         <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/DemandeVenteAttente" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes PréVentes</span></a></li>                        
                         
-                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/VenteConfirmed" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Ventes</span></a></li>                        
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/VenteConfirmed" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande de Vente</span></a></li>                        
 
 
                         <hr>
