@@ -331,7 +331,7 @@
                         <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/VenteConfirmed" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Demande de Vente</span></a></li>                        
 
 
-                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/VenteConfirmed" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Ventes</span></a></li>                        
+                        <li class="DemandeVente"> <a class="waves-effect waves-dark" href="/home/vente/VenteVentes" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Mes Ventes</span></a></li>                        
 
                         <hr>
 

@@ -73,26 +73,26 @@
         <div class="col-md-4" style="margin-left: 65%;">
 
             <p style="font-weight: bold;">
-                <b> Montant Total HT : <B style="float: right; margin-right: 2%" >{!! number_format((float)$le_montant->montant_total/1.19) !!}</B></b>
+                <b> Montant Total HT : <B style="float: right; margin-right: 2%" >{!! number_format((float)$le_montant->montant_total) !!}</B></b>
             </p>                            
             
             @if($client->taux_remise_spec != 0)
 
-                <p style="font-weight: bold;"><b> Remise ({!! $client->taux_remise_spec !!}%) : <B style="float: right; margin-right: 2%" >{!! number_format(($le_montant->montant_total/1.19)*$client->taux_remise_spec/100) !!}</B>
+                <p style="font-weight: bold;"><b> Remise ({!! $client->taux_remise_spec !!}%) : <B style="float: right; margin-right: 2%" >{!! number_format(($le_montant->montant_total)*$client->taux_remise_spec/100) !!}</B>
                 </b></p>
 
-                <p style="font-weight: bold;"><b> Montant aprés Remise : <B style="float: right; margin-right: 2%" >{!! number_format(($le_montant->montant_total/1.19)*(1-($client->taux_remise_spec/100))) !!}</B>
+                <p style="font-weight: bold;"><b> Montant aprés Remise : <B style="float: right; margin-right: 2%" >{!! number_format(($le_montant->montant_total)*(1-($client->taux_remise_spec/100))) !!}</B>
                 </b></p>
 
                 <p style="font-weight: bold;">
-                    <b> Montant TVA 19% : <B style="float: right; margin-right: 2%" >{!! number_format(($le_montant->montant_total/1.19)*(1-($client->taux_remise_spec/100))*0.19) !!}</B>
+                    <b> Montant TVA 19% : <B style="float: right; margin-right: 2%" >{!! number_format(($le_montant->montant_total){{-- *(1-($client->taux_remise_spec/100)) --}}*0.19) !!}</B>
                     </b>
                 </p>                            
 
              @else
 
                 <p style="font-weight: bold;">
-                    <b> Montant TVA 19% : <B style="float: right; margin-right: 2%" >{!! number_format($le_montant->montant_total/0.81) !!}</B>
+                    <b> Montant TVA 19% : <B style="float: right; margin-right: 2%" >{!! number_format($le_montant->montant_total*0.19) !!}</B>
                     </b>
                 </p>                            
 
@@ -100,7 +100,7 @@
             @endif
 
             <p style="font-weight: bold;">
-                <b> Total TTC : <B style="float: right; margin-right: 2%" >{!! number_format($le_montant->montant_total) !!}</B>
+                <b> Total TTC : <B style="float: right; margin-right: 2%" >{!! number_format($le_montant->montant_total*1.19) !!}</B>
                 </b>
             </p>    
 
@@ -122,7 +122,7 @@
             	{{--  --}}
             @endif
 
-            @if($tout['RDG'] == "OUI")
+            @if($tout['la_rdg'] != NULL)
 
                 <p style="font-weight: bold;">
                     
@@ -144,8 +144,54 @@
             	{{--  --}}
             @endif
 
+
             {{--  --}}
         </div>
+        
+		<hr class="col-md-12">
+        
+        <h1 class="col-md-12" style="text-align: center;">Génération Des Documents</h1>
+        
+        <br><br><br>    	
+    	
+    	<form method="post" action="/home/vente/VenteConfirmed/AddVente/" class="col-md-12">
+    		
+    		<input style="display: none;" class="form-check-input" name="id_vente" type="text" value="{{ $ma_vente[0]->id }}"/>
+
+			<div class="form-check form-check-inline col-md-3" style="font-weight: bold;">
+			  	
+			  	<input class="form-check-input" name="documentsss" checked type="checkbox" id="BL" value="BL"/>
+			  	
+			  	<label class="form-check-label" for="BL">Bon De Livraison</label>
+			</div>
+
+			<div class="form-check form-check-inline col-md-3" style="font-weight: bold;">
+			  	
+			  	<input class="form-check-input" name="documentsss" checked type="checkbox" id="facture" value="facture"/>
+
+			  	<label class="form-check-label" for="facture">Facture</label>
+			</div>
+
+			<div class="form-check form-check-inline col-md-3" style="font-weight: bold;">
+			  	
+			  	<input class="form-check-input" name="documentsss" checked type="checkbox" id="attachement" value="attachement"/>
+			  	
+			  	<label class="form-check-label" for="attachement">Attachement</label>
+			</div>
+
+			<div class="form-check form-check-inline col-md-2" style="font-weight: bold;">
+			  	
+			  	<input class="form-check-input" name="documentsss" checked type="checkbox" id="3afssa" value="3afssa"/>
+
+			  	<label class="form-check-label" for="3afssa">3afssa</label>
+			</div>
+
+			<br><br>
+
+			<input type="submit" value="Valider" class="btn btn-outline-success col-md-12">
+
+    		{{--  --}}
+    	</form>
 
         <!--  -->
     </div>

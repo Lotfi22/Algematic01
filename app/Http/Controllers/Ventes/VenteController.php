@@ -89,7 +89,7 @@ class VenteController extends Controller
 
     public function add_vente(Request $request)
     {
-
+    	
     	$ventes = (DB::select("select * from ventes order by id desc"));
 
     	if (count($ventes) == 0) 
@@ -179,6 +179,14 @@ class VenteController extends Controller
     	# code...
     }
 
+
+    public function mes_ventes()
+    {
+
+		dd(DB::select("select * from ventes"));
+    	
+    	# code...
+    }
 
     //
 }
