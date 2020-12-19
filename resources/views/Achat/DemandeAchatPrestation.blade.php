@@ -246,7 +246,7 @@
                               <div class="form-row" id="pourcentage" >
                                 <div class="col-md-6 mb-3" >
                                       <label for="validationTooltip03"><B>Remise</B></label>
-                                      <input type="text" name="remise" id="taux" class="form-control" >
+                                      <input type="number" name="remise" id="taux" class="form-control" >
                                 </div>
                               </div>
 
@@ -302,17 +302,20 @@
                           </div>
                           <div class="col-md-3">
                               <label class="small mb-1" for="inputEmailAddress">Quantité : </label>
-                              <input type="number" class="form-control quantites" name="quantite" id="quantite" >
+                              <input type="number" min="1" step="1" class="form-control quantites" name="quantite" id="quantite" >
 
                           </div>
                           <div class="col-md-3">
                               <label class="small mb-1" for="inputEmailAddress">Prix Unitaire : </label>
-                              <input type="number" class="form-control prixs" name="prix" id="prix" >
+                              <input type="number" class="form-control prixs" name="prix" id="prix" value=""   >
+
+                            
                           </div>
                       </div>
             </div>
 
              <div class="modal-footer">
+
 
                 
                 <button type="submit" id="validerDemande" style="visibility: hidden;"  class="btn-sm btn btn-primary">Valier La Demande</button>
@@ -333,9 +336,7 @@
 
  <script type="text/javascript">
 
-
-   
-   function generate_table() 
+function generate_table() 
    {  
 
 
@@ -596,9 +597,12 @@
 
 }
 
+   
+ 
  </script>
 
-              
+ 
+
 
 @endsection
 

@@ -87,7 +87,7 @@
 
           <tbody>
             @foreach($tvas as $tva)
-            <tr>
+            <tr  >
               <td scope="row"><B>{{$tva->tva}}</B></td>
               <td>{{$tva->date_ajout}}</td>
               

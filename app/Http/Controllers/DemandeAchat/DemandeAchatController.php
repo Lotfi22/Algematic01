@@ -654,7 +654,7 @@ class DemandeAchatController extends Controller
 
       	     $pre_achat=DB::select("select * from pre_achat where  id='$idpreachat'");
 
-             $FacturePro=DB::select(" select numero_piece from pieces 
+             $FacturePro=DB::select(" select * from pieces 
               where id_pre_achat='$idpreachat'
               and id_type =( select id from type_pieces where type ='fp') ");
 
@@ -698,8 +698,8 @@ class DemandeAchatController extends Controller
                         <hr>
                         <h3 style="text-align: center;"> IDENTIFICATION DU PRESTATAIRE </h3>
                         <hr>
-                          <h4 style="text-align: center;">'.$fournisseurs[0]->nom.' </h4>
-                          <h4 style="text-align: center;">Relatif à la Facture Pro Format N° '.$FacturePro[0]->numero_piece.' du '.$pre_achat[0]->date_achat.' </h4>
+                          <h4 style="text-align: center;">Fournisseur: '.$fournisseurs[0]->nom.' </h4>
+                          <h4 style="text-align: center;">Relatif à la Facture Pro Format N° '.$FacturePro[0]->numero_piece.' du '.$FacturePro[0]->date_Piece.' </h4>
                           <hr>
 
                       </td>
@@ -755,10 +755,10 @@ class DemandeAchatController extends Controller
                               '.$quantite.'
                           </td>
                           <td align="right">
-                          '.$prix.'
+                           '.number_format($prix).'
                           </td>
                           <td align="right">
-                          '.$prix*$quantite.'
+                          '.number_format($prix*$quantite).'
                           </td>
                       </tr>';
 
@@ -783,17 +783,17 @@ class DemandeAchatController extends Controller
                                     <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Total HT </td>
-                                        <td align="right">'.$total.'</td>
+                                        <td align="right">'.number_format($total).'</td>
                                     </tr>
                                      <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Remise '.$pre_achat[0]->remise.' %</td>
-                                        <td align="right">'.$prix_remise.'</td>
+                                        <td align="right">'.number_format($prix_remise).'</td>
                                     </tr>
                                      <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Net HT</td>
-                                        <td align="right">'.$total_HT.'</td>
+                                        <td align="right">'.number_format($total_HT).'</td>
                                     </tr>
 
 
@@ -801,12 +801,12 @@ class DemandeAchatController extends Controller
                                     <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Montant TVA '.$pre_achat[0]->tva.' %</td>
-                                        <td align="right">'.$montant_tva.'</td>
+                                        <td align="right">'.number_format($montant_tva).'</td>
                                     </tr>
                                     <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Total TTC</td>
-                                        <td align="right">'.$total_TTC.'</td>
+                                        <td align="right">'.number_format($total_TTC).'</td>
                                     </tr>';
                                 
                                 $html.='</tfoot>
@@ -846,27 +846,27 @@ class DemandeAchatController extends Controller
                                     <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Total HT </td>
-                                        <td align="right">'.$total.'</td>
+                                        <td align="right">'.number_format($total).'</td>
                                     </tr>
                                      <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Montant Remise  </td>
-                                        <td align="right">'.$prix_remise.'</td>
+                                        <td align="right">'.number_format($prix_remise).'</td>
                                     </tr>
                                      <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Net HT</td>
-                                        <td align="right">'.$total_HT.'</td>
+                                        <td align="right">'.number_format($total_HT).'</td>
                                     </tr>
                                     <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Montant TVA '.$pre_achat[0]->tva.' %</td>
-                                        <td align="right">'.$montant_tva.'</td>
+                                        <td align="right">'.number_format($montant_tva).'</td>
                                     </tr>
                                     <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Total TTC</td>
-                                        <td align="right">'.$total_TTC.'</td>
+                                        <td align="right">'.number_format($total_TTC).'</td>
                                     </tr>';
                                 
                                 $html.='</tfoot>
@@ -908,19 +908,19 @@ class DemandeAchatController extends Controller
                                     <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Total HT </td>
-                                        <td align="right">'.$total.'</td>
+                                        <td align="right">'.number_format($total).'</td>
                                     </tr>
                                     
                                     <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Montant TVA '.$pre_achat[0]->tva.' %</td>
-                                        <td align="right">'.$montant_tva.'</td>
+                                        <td align="right">'.number_format($montant_tva).'</td>
                                     </tr>
 
                                     <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Total TTC</td>
-                                        <td align="right">'.$total_TTC.'</td>
+                                        <td align="right">'.number_format($total_TTC).'</td>
                                     </tr>';
                                 
                                 $html.='</tfoot>
@@ -968,7 +968,7 @@ class DemandeAchatController extends Controller
 
          $pre_achat=DB::select("select * from pre_achat where  id='$idpreachat'");
 
-         $FacturePro=DB::select(" select numero_piece from pieces 
+         $FacturePro=DB::select(" select * from pieces 
         where id_pre_achat='$idpreachat'
         and id_type =( select id from type_pieces where type ='fp') ");
 
@@ -1012,8 +1012,8 @@ class DemandeAchatController extends Controller
                   <hr>
                   <h3 style="text-align: center;"> IDENTIFICATION DU PRESTATAIRE </h3>
                   <hr>
-                    <h5 style="text-align: center;">'.$fournisseurs[0]->nom.' </h5>
-                    <h5 style="text-align: center;">Relatif à la Facture Pro Format N° '.$FacturePro[0]->numero_piece.' du '.$pre_achat[0]->date_achat.' </h5>
+                    <h5 style="text-align: center;">Fournisseu: '.$fournisseurs[0]->nom.' </h5>
+                    <h5 style="text-align: center;">Relatif à la Facture Pro Format N° '.$FacturePro[0]->numero_piece.' du '.$FacturePro[0]->date_Piece.' </h5>
                     <hr>
 
                 </td>
@@ -1069,10 +1069,10 @@ class DemandeAchatController extends Controller
                         '.$quantite.'
                     </td>
                     <td align="right">
-                    '.$prix.'
+                    '.number_format($prix).'
                     </td>
                     <td align="right">
-                    '.$prix*$quantite.'
+                    '.number_format($prix*$quantite).'
                     </td>
                 </tr>';
 
@@ -1098,27 +1098,27 @@ class DemandeAchatController extends Controller
                               <tr>
                                   <td colspan="4"></td>
                                   <td align="right">Total HT </td>
-                                  <td align="right">'.$total.'</td>
+                                  <td align="right">'.number_format($total).'</td>
                               </tr>
                                <tr>
                                   <td colspan="4"></td>
                                   <td align="right">Remise '.$pre_achat[0]->remise.' %</td>
-                                  <td align="right">'.$prix_remise.'</td>
+                                  <td align="right">'.number_format($prix_remise).'</td>
                               </tr>
                                <tr>
                                   <td colspan="4"></td>
                                   <td align="right">Net HT</td>
-                                  <td align="right">'.$total_HT.'</td>
+                                  <td align="right">'.number_format($total_HT).'</td>
                               </tr>
                               <tr>
                                   <td colspan="4"></td>
                                   <td align="right">Montant TVA '.$pre_achat[0]->tva.' %</td>
-                                  <td align="right">'.$montant_tva.'</td>
+                                  <td align="right">'.number_format($montant_tva).'</td>
                               </tr>
                               <tr>
                                   <td colspan="4"></td>
                                   <td align="right">Total TTC</td>
-                                  <td align="right">'.$total_TTC.'</td>
+                                  <td align="right">'.number_format($total_TTC).'</td>
                               </tr>';
                           
                           $html.='</tfoot>
@@ -1157,28 +1157,28 @@ class DemandeAchatController extends Controller
                               <tr>
                                   <td colspan="4"></td>
                                   <td align="right">Total HT </td>
-                                  <td align="right">'.$total.'</td>
+                                  <td align="right">'.number_format($total).'</td>
                               </tr>
                                <tr>
                                   <td colspan="4"></td>
                                   <td align="right">Montant Remise </td>
-                                  <td align="right"> '.$pre_achat[0]->remise.' </td>
+                                  <td align="right"> '.number_format($pre_achat[0]->remise).' </td>
                                   
                               </tr>
                                <tr>
                                   <td colspan="4"></td>
                                   <td align="right">Net HT</td>
-                                  <td align="right">'.$total_HT.'</td>
+                                  <td align="right">'.number_format($total_HT).'</td>
                               </tr>
                               <tr>
                                   <td colspan="4"></td>
                                   <td align="right">Montant TVA '.$pre_achat[0]->tva.' %</td>
-                                  <td align="right">'.$montant_tva.'</td>
+                                  <td align="right">'.number_format($montant_tva).'</td>
                               </tr>
                               <tr>
                                   <td colspan="4"></td>
                                   <td align="right">Total TTC</td>
-                                  <td align="right">'.$total_TTC.'</td>
+                                  <td align="right">'.number_format($total_TTC).'</td>
                               </tr>';
                           
                           $html.='</tfoot>
@@ -1216,7 +1216,7 @@ class DemandeAchatController extends Controller
                                     <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Total HT </td>
-                                        <td align="right">'.$total.'</td>
+                                        <td align="right">'.number_format($total).'</td>
                                     </tr>
 
                                     
@@ -1226,7 +1226,7 @@ class DemandeAchatController extends Controller
                                        <tr>
                                           <td colspan="4"></td>
                                           <td align="right">Montant TVA '.$pre_achat[0]->tva.' %</td>
-                                          <td align="right">'.$montant_tva.'</td>
+                                          <td align="right">'.number_format($montant_tva).'</td>
                                       </tr>
 
                                     
@@ -1236,7 +1236,7 @@ class DemandeAchatController extends Controller
                                     <tr>
                                         <td colspan="4"></td>
                                         <td align="right">Total TTC</td>
-                                        <td align="right">'.$total_TTC.'</td>
+                                        <td align="right">'. number_format($total_TTC) .'</td>
                                     </tr>';
                                 
                                 $html.='</tfoot>
