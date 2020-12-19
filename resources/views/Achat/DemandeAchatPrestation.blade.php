@@ -246,7 +246,7 @@
                               <div class="form-row" id="pourcentage" >
                                 <div class="col-md-6 mb-3" >
                                       <label for="validationTooltip03"><B>Remise</B></label>
-                                      <input type="number" name="remise" id="taux" class="form-control" >
+                                      <input type="text" name="remise" id="taux" class="form-control" >
                                 </div>
                               </div>
 
@@ -302,12 +302,12 @@
                           </div>
                           <div class="col-md-3">
                               <label class="small mb-1" for="inputEmailAddress">Quantité : </label>
-                              <input type="number" min="1" step="1" class="form-control quantites" name="quantite" id="quantite" >
+                              <input type="text" min="1" step="1" class="form-control quantites" name="quantite" id="quantite" >
 
                           </div>
                           <div class="col-md-3">
                               <label class="small mb-1" for="inputEmailAddress">Prix Unitaire : </label>
-                              <input type="number" class="form-control prixs" name="prix" id="prix" value=""   >
+                              <input type="text" class="form-control prixs" name="prix" id="prix" value=""   >
 
                             
                           </div>
