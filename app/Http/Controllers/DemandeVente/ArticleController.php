@@ -27,10 +27,12 @@ class ArticleController extends Controller
 
         $actuel = User::FindOrFail($id);
 
-    	$produits=DB::select("select p.id, p.code_produit, p.description, s.quantite, s.prix,s.prix_vente
+        $produits=DB::select("select p.id, p.code_produit, p.description from produits p where visible =1");
+
+/*    	$produits=DB::select("select p.id, p.code_produit, p.description, s.quantite, s.prix,s.prix_vente
         from produits p, stocks s
         where p.id=s.id_produit");
-
+*/        
     	$clients=DB::select("select * from client_prospects");
 
     	$employes=DB::select("select * from employes");
