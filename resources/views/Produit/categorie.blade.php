@@ -136,13 +136,7 @@
 
                               </div>
 
-                              <div class="form-row">
-                                 <div class="form-group">
-                                  <label for="exampleFormControlFile1"><B>Nouvelle Photo</B></label>
-                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
-                                </div>
-                              </div>
-
+                            
                           </div>
 
                               
