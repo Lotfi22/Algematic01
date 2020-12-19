@@ -135,7 +135,7 @@ class FournisseurController extends Controller
 
 			        
 			        
-			        return redirect('/fournisseur')->with('success','Le Fournisseur a été Modifié avec succée');
+			        return redirect('/home/fournisseurs/fournisseur')->with('success','Le Fournisseur a été Modifié avec succée');
 
 				}
        
@@ -145,7 +145,7 @@ class FournisseurController extends Controller
     {
         
         DB::update("update  fournisseurs set visible=0  where id='$idFournisseurSupprimer'");
-        return redirect('/fournisseur')->with('success','Le Fournisseur a été supprimé avec succée');
+        return redirect('/home/fournisseurs/fournisseur')->with('success','Le Fournisseur a été supprimé avec succée');
 
     }
 
