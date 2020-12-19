@@ -223,8 +223,8 @@
                 <td>{!! substr($article->created_at,0,10) !!} - {!! substr($article->created_at,10,6) !!}</td>
                 
                     
-                <td style="text-align: center;">{!! number_format($article->total-$article->benifice) !!}</td> 
-                <td style="text-align: center;">{!! number_format($article->total) !!}</td> 
+                <td style="text-align: center;">{!! number_format((float)$article->total-$article->benifice) !!}</td> 
+                <td style="text-align: center;">{!! number_format((float)$article->total) !!}</td> 
                 
                 @if($article->benifice>0)
     
@@ -235,7 +235,7 @@
                         
 
                 @endif
-                    {!! number_format($article->benifice) !!}
+                    {!! number_format((float)$article->benifice) !!}
                 </td> 
             </tr>
         @endforeach
@@ -316,10 +316,10 @@
                 @if($article->benifice>0)
                     
                     <p class="alert alert-success" style="text-align: center;"> 
-                        <b> Sur cet Article vous bénificiez de {!! number_format($article->benifice) !!} DA </b> 
+                        <b> Sur cet Article vous bénificiez de {!! number_format((float)$article->benifice) !!} DA </b> 
                  @else                           
                     <p class="alert alert-warning" style="text-align: center;"> 
-                        <b> Sur cet Article vous déficitez de {!! number_format($article->benifice) !!} DA </b> 
+                        <b> Sur cet Article vous déficitez de {!! number_format((float)$article->benifice) !!} DA </b> 
                     {{--  --}}
                 @endif
                 
