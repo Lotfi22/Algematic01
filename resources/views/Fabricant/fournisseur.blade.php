@@ -364,7 +364,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerFournisseur/{{$fournisseur->id}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/fournisseurs/SupprimerFournisseur/{{$fournisseur->id}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">
