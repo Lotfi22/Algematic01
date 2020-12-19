@@ -101,7 +101,7 @@ class CategorieController extends Controller
 	        $categorie_description=$request->input('description');
 	     
 
-	           DB::update("update categories c set nom='$categorie_nom',description='$categorie_description',photo='$categorie_photo' where c.id='$idCategorieModiff'  ");
+	           DB::update("update categories c set nom='$categorie_nom',description='$categorie_description' where c.id='$idCategorieModiff'  ");
 	        
 	        
 	        return redirect('/home/produits/categorie')->with('success','La Nouvelle  Catégorie a été modifiée avec succée');
