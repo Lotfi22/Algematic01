@@ -10,6 +10,7 @@ use Dompdf\Dompdf;
 use Carbon\Carbon;
 use DateTime;
 use App\User;
+use App\Vente;
 use Auth;
 use Storage;
 
@@ -89,7 +90,7 @@ class VenteController extends Controller
 
     public function add_vente(Request $request)
     {
-    	
+
     	$ventes = (DB::select("select * from ventes order by id desc"));
 
     	if (count($ventes) == 0) 
@@ -131,7 +132,7 @@ class VenteController extends Controller
 
         $le_montant=(DB::select("select sum(montant) as montant_total from pre_ventes where id_vente = '$last_id' ")[0]);
         
-        DB::insert("insert into ventes(montant_total) values('$le_montant->montant_total')");
+        DB::insert("insert into ventes(montant_total,RDG,mois,avance,reste) values('$le_montant->montant_total','$request->Pourcentage','$request->mois','$request->avance','$request->reste')");
 
         if ($request->existe_doc == "OUI") 
         {
@@ -185,6 +186,58 @@ class VenteController extends Controller
 
 		dd(DB::select("select * from ventes"));
     	
+    	# code...
+    }
+
+    public function finalisation1(Request $request)
+    {	
+
+    	$ma_vente = (DB::select("select * from ventes where id = '$request->id_vente'"));
+    	
+    	$id_preventes = (DB::select("select * from pre_ventes where id_vente = '$request->id_vente'"));
+    	
+    	$id_client = ($id_preventes[0]->id_client);
+    	
+    	$client = DB::select("select * from client_prospects where id = '$id_client' ");
+    	
+        $now = Carbon::now()->format('d/m/Y');
+
+        $year = Carbon::now()->format('Y');        
+
+        $NbNumF = DB::select("select count(*) as number from ventes where num_facture like '%$year' ");
+
+        $NbNumF = $NbNumF[0]->number;
+
+        $NbNumF = $NbNumF+1;
+
+        $numf = $NbNumF."/".$year;
+
+        $en_lettre = User::asLetters($ma_vente[0]->montant_total*1.19);
+		
+		$ligne_ventes = [];
+
+     	foreach ($id_preventes as $id_prevente)
+        {
+        	$id_prevente = $id_prevente->id;	
+
+	        $ligne_ventes1=DB::select("select *,a.nom,a.description,l.quantite,l.total,(a.total-a.benifice) as PrixArticleAchat
+	            from ligne_ventes l, articles a 
+	            where (l.id_article=a.id and l.id_pre_vente = '$id_prevente' )");
+	        
+	        $ligne_ventes2=DB::select("select *,a.code_produit as nom,a.description,l.quantite,l.total,l.prix_u as PrixArticleAchat
+	            from ligne_ventes l, produits a 
+	            where (l.id_produit=a.id and l.id_pre_vente = '$id_prevente' )");
+
+        	$ligne_ventes = array_merge($ligne_ventes,$ligne_ventes1,$ligne_ventes2);
+	        
+	        //
+        }
+        
+        Vente::PDF_BL($ligne_ventes,$client,$now,$year,$NbNumF,$numf,$en_lettre,$ma_vente);
+
+        Vente::PDF_DECHARGE($ligne_ventes,$client,$now,$year,$NbNumF,$numf,$en_lettre,$ma_vente);
+
+
     	# code...
     }
 

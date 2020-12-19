@@ -154,37 +154,40 @@
         
         <br><br><br>    	
     	
-    	<form method="post" action="/home/vente/VenteConfirmed/AddVente/" class="col-md-12">
+    	<form method="post" action="/home/vente/VenteConfirmed/AddVente/Finalisation" class="col-md-12">
     		
+    		{{ csrf_field()}}
+
     		<input style="display: none;" class="form-check-input" name="id_vente" type="text" value="{{ $ma_vente[0]->id }}"/>
 
 			<div class="form-check form-check-inline col-md-3" style="font-weight: bold;">
 			  	
-			  	<input class="form-check-input" name="documentsss" checked type="checkbox" id="BL" value="BL"/>
+			  	<input class="form-check-input" name="BL" checked type="checkbox" id="BL" value="BL"/>
 			  	
 			  	<label class="form-check-label" for="BL">Bon De Livraison</label>
 			</div>
 
-			<div class="form-check form-check-inline col-md-3" style="font-weight: bold;">
+			<div class="form-check form-check-inline col-md-2" style="font-weight: bold;">
 			  	
-			  	<input class="form-check-input" name="documentsss" checked type="checkbox" id="facture" value="facture"/>
+			  	<input class="form-check-input" name="decharge" checked type="checkbox" id="Décharge" value="Décharge"/>
 
-			  	<label class="form-check-label" for="facture">Facture</label>
+			  	<label class="form-check-label" for="Décharge">Décharge</label>
 			</div>
 
 			<div class="form-check form-check-inline col-md-3" style="font-weight: bold;">
 			  	
-			  	<input class="form-check-input" name="documentsss" checked type="checkbox" id="attachement" value="attachement"/>
+			  	<input class="form-check-input" name="attachement" checked type="checkbox" id="attachement" value="attachement"/>
 			  	
 			  	<label class="form-check-label" for="attachement">Attachement</label>
 			</div>
 
-			<div class="form-check form-check-inline col-md-2" style="font-weight: bold;">
+			<div class="form-check form-check-inline col-md-3" style="font-weight: bold;">
 			  	
-			  	<input class="form-check-input" name="documentsss" checked type="checkbox" id="3afssa" value="3afssa"/>
+			  	<input class="form-check-input" name="facture" checked type="checkbox" id="facture" value="facture"/>
 
-			  	<label class="form-check-label" for="3afssa">3afssa</label>
+			  	<label class="form-check-label" for="facture">Facture</label>
 			</div>
+
 
 			<br><br>
 

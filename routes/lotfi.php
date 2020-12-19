@@ -74,5 +74,6 @@ Route::post('/home/vente/DemandeVenteAttente/RefuserDemandeVente/{idPreVente}' ,
 Route::get('/home/vente/VenteConfirmed','Ventes\VenteController@index');
 Route::post('/home/vente/VenteConfirmed/GetPrice','Ventes\VenteController@get_price');
 Route::post('/home/vente/VenteConfirmed/AddVente','Ventes\VenteController@add_vente');
+Route::post('/home/vente/VenteConfirmed/AddVente/Finalisation','Ventes\VenteController@finalisation1');
 Route::get('/home/vente/VenteVentes','Ventes\VenteController@mes_ventes');
 

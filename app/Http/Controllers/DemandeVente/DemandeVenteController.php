@@ -385,19 +385,18 @@ class DemandeVenteController extends Controller
 
         $numfp= $NbNumFP."/".$year;
 
-        if($ventetest[0]->num_facture_proformat == NULL)
+        if(/*$ventetest[0]->num_facture_proformat == NULL*/1)
         {
-            //DB::update("update pre_ventes p set num_facture_proformat='$numfp' where p.id='$idPreVente'");
+            DB::update("update pre_ventes p set num_facture_proformat='$numfp' where p.id='$idPreVente'");
             
             DB::update("update pre_ventes p set date_edition_FP='$now' where p.id='$idPreVente'");
 
             $dompdf = new Dompdf();
 
             $les_produits = '';
+            
             $k = 1;
-
-
-
+            
             foreach ($ligne_ventes as $ligne) 
             {
     
@@ -496,9 +495,6 @@ class DemandeVenteController extends Controller
             }
 
 
-
-
-            
             $html = '<!doctype html>
 
             <html lang="en">
