@@ -80,21 +80,7 @@ class CategorieController extends Controller
             ]);
 
     	
-    	$testnom=$request->input('nom');
-        $info=DB::select("select description  from categories where nom='$testnom'");
-       
-         
-
-         if (count($info)>0) 
-               {
-                   
-                session()->flash('notif' , ' Erreur Oupss Le Nom de la catégorie existe déja  !!! ');
-
-                return redirect()->back(); 
-               }
-		
-         else
-         {
+    	
         	
 	    	
 	        $categorie_nom=$request->input('nom');
@@ -106,7 +92,7 @@ class CategorieController extends Controller
 	        
 	        return redirect('/home/produits/categorie')->with('success','La Nouvelle  Catégorie a été modifiée avec succée');
 
-    	}
+    	
 
     }
 
