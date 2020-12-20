@@ -97,7 +97,7 @@
      <br>
 
     <div>
-        <table class="table table-striped table-dark" id="table_id">
+        <table  id="table_id">
           <thead>
             <tr>
               <th scope="col"><B>Numéro</B></th>
@@ -111,6 +111,7 @@
           </thead>
           <tbody>
             @foreach($locals as $local)
+            
             <tr>
               <td scope="row"><B>{{$local->id}}</B></td>
               <td>{{$local->nom}}</td>
