@@ -186,12 +186,11 @@
      <br>
 
     <div>
-        <table class="table table-striped table-dark" id="table_id">
+        <table  id="table_id">
           <thead>
             <tr>
               <th scope="col"><B>Raison</B></th>
               <th scope="col"><B>Autres Infos</B></th>
-              <th scope="col"><B>Modifier</B></th>
               <th scope="col"><B>Supprimer</B></th>
             </tr>
           </thead>
@@ -205,7 +204,7 @@
               <td>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn-sm btn btn-success" data-toggle="modal" data-target="#InfosPlus{{$fournisseur->id}}">
-                      Plus
+                      + Infos
                     </button>
 
                     <!-- Modal -->
@@ -239,7 +238,7 @@
                       </div>
                     </div>
               </td>
-              
+              {{-- 
               <td>
                     <button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFfournisseur{{$fournisseur->id}}">
                       Modifier
@@ -348,7 +347,7 @@
                       </div>
                     </div>
                 </td>
-                
+                --}}
                  <td>
                     <button type="button" class="btn-sm btn btn-danger" data-toggle="modal" data-target="#exampleModalSUPPRIMERfournisseur{{$fournisseur->id}}">
                        Supprimer
