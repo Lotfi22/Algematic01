@@ -44,7 +44,6 @@
               <th scope="col"><B>Quantité</B></th>
               <th scope="col"><B>Prix</B></th>
               <th scope="col"><B>Date_Stock</B></th>
-              <th scope="col"><B>Modifier</B></th>
               
             </tr>
           </thead>
@@ -121,54 +120,7 @@
               <td>{{$stock->quantite}}</td>
               <td>{{$stock->prix}}</td>
               <td>{{$stock->date_arrivage}}</td>
-              <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$stock->IdStock}}">
-                      Modifier
-                    </button>
-
-                    <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModal{{$stock->IdStock}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Nouvelle Infos</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                     <form class="needs-validation" novalidate action="/home/stocks/Modifstock/{{$stock->IdStock}}" method="POST">
-                        {{ csrf_field()}}
-                          <div class="modal-body">
-                              <div class="form-row">
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip01"><B>Nouveau Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="CAMERA ET CABLES" required>
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip02"><B>Nouvelle Adresse</B></label>
-                                  <input type="text" name="adresse"class="form-control"  placeholder="EL HAMIZ" required>
-                                </div>
-                              </div>
-
-                              <div class="form-row">
-                                <div class="col-md-6 mb-3">
-                                  <label for="validationTooltip03"><B>Nouvelle Supérficie</B></label>
-                                  <input type="text" name="superficie"class="form-control" placeholder="30 m2" required>
-                                </div>
-                              </div>
-                            
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn-sm btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn-sm btn btn-primary">Modifier</button>
-                          </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                </td>
-                 
+             
             </tr>
             @endforeach
           </tbody>
