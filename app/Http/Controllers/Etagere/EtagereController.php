@@ -19,7 +19,7 @@ class EtagereController extends Controller
     
     public function index()
      {
-    	$etageres=DB::select("select * from etageres");
+    	$etageres=DB::select("select * from etageres where visible=1 ");
     	$rayons=DB::select("select * from rayons ");
 
     	return view('Etagere\etagere',compact('rayons','etageres'));
@@ -93,7 +93,8 @@ class EtagereController extends Controller
      public function SupprimerEtagere(Request $request,$idEtagereSupprimer)
     {
         
-        DB::delete("delete from etageres  where id='$idEtagereSupprimer'");
+        DB::update("update etageres e set visible=0 where e.id='$idEtagereSupprimer' ");
+
         return redirect('/home/stocks/etagere')->with('success','Etagère supprimée avec succée');
     }
 
