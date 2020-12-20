@@ -80,8 +80,8 @@
         <table class="table table-striped table-dark" id="table_id">
           <thead>
             <tr>
-              <th scope="col"><B>Numéro</B></th>
-              <th scope="col"><B>description</B></th>
+   
+              <th scope="col"><B>Description</B></th>
               <th scope="col"><B>Modifier</B></th>
               <th scope="col"><B>Supprimer</B></th>
             </tr>
@@ -89,18 +89,18 @@
           <tbody>
             @foreach($unites as $unite)
             <tr>
-              <td scope="row"><B>{{$unite->id}}</B></td>
+
               <td>{{$unite->description}}</td>
-              <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFunite{{$unite->id}}">
+              <td><button type="button" class="btn-sm btn btn-primary" data-toggle="modal" data-target="#exampleModalMODIFunitee{{$unite->id}}">
                       Modifier
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalMODIFunite{{$unite->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalMODIFunitee{{$unite->id}}" tabindex="-1" aria-labelledby="exampleModalLabell{{$unite->id}}" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Nouvelles Infos</h5>
+                            <h5 class="modal-title" id="exampleModalLabell{{$unite->id}}">Nouvelles Infos</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -112,7 +112,7 @@
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>Nouvelle Description</B></label>
-                                  <input type="text" name="description"class="form-control"  placeholder="{{$unite->description}}" required>
+                                  <input type="text" name="description"class="form-control"  value="{{$unite->description}}" required>
                                 </div>
 
                               </div>
@@ -134,11 +134,11 @@
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalSUPPRIMERunite{{$unite->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalSUPPRIMERunite{{$unite->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$unite->id}}" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Voulez vous vraiment Supprimer</h5>
+                            <h5 class="modal-title" id="exampleModalLabel{{$unite->id}}">Voulez vous vraiment Supprimer</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
