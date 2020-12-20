@@ -28,7 +28,7 @@ class ProduitController extends Controller
         $unites=DB::select("select id,description from unites");
     	$produits=DB::select("select *,p.id as IdProduit,u.description as UniteDescription,p.data,p.id_sous_famille,s.nom as NomFamille
              from produits p,unites u,sous_familles s 
-            where p.id_unite=u.id and p.id_sous_famille=s.id  and p.visible=1");
+            where p.id_unite=u.id and p.id_sous_famille=s.id  and p.visible=1 ");
         $prix=DB::select("select s.id_produit,s.prix from stocks s");
         $proprietes=DB::select("select *,p.id as IdPropriete from proprietes p,type_pieces t 
         where p.id_type=t.id  ");
@@ -117,11 +117,12 @@ class ProduitController extends Controller
         
 
         
-        $testnom=$request->input('code');
-        $info=DB::select("select description from produits where code_produit='$testnom'");
+        $testnom=$request->input('nvcode');
+
+        $info=DB::select("select * from produits where code_produit = '$testnom' and id <> '$idProduitModiff' ");
        
 
-         if (count($info)>1) 
+         if (count($info)>0) 
                {
                    
                 session()->flash('notif' , ' Erreur Oupss Ce Code_Produit  existe déja  !!! ');
@@ -131,40 +132,30 @@ class ProduitController extends Controller
       
         else
         {
-            $file_extension= $request->photo->getClientOriginalExtension();
-            $file_name=time().'.'.$file_extension;
-            $path='images/produit';
-            $request->photo->move($path,$file_name);
+           
 
-            $file_extension= $request->detail->getClientOriginalExtension();
-            $file_name2=time().'.'.$file_extension;
-            $path='images/produit';
-            $request->detail->move($path,$file_name2);
-
-            $produit_unite=$request->input('unite');
-            $produit_sfamille=$request->input('sfamille');
-            $produit_fabricant=$request->input('fabricant');
-            $produit_code=$request->input('code');
-            $produit_description=$request->input('description');
-            $produit_model=$request->input('model');
-            $produit_photo=$file_name;
-            $produit_detail=$file_name2;
+            $produit_unite=$request->input('nvunite');
+            $produit_sfamille=$request->input('nvsfamille');
+            $produit_code=$request->input('nvcode');
+            $produit_description=$request->input('nvdescription');
+            $produit_model=$request->input('nvmodel');
+         
             //$depot->save();
 
-            DB::update("update  produits p set id_unite = '$produit_unite', code_produit= '$produit_code',  description='$produit_description', photo='$produit_photo' ,model='$produit_model',  id_sous_famille='$produit_sfamille' , id_fabricant='$produit_fabricant',data='$produit_detail' 
+            DB::update("update  produits p set id_unite = '$produit_unite', code_produit= '$produit_code',  description='$produit_description' ,model='$produit_model',  id_sous_famille='$produit_sfamille' 
             where p.id='$idProduitModiff' ");
             
             
-            return redirect('/produit')->with('success','Le Produit a été Modifié avec succée');
+            return redirect('/home/produits/produit')->with('success','Le Produit a été Modifié avec succée');
         }
     }
     
     public function SupprimerProduit(Request $request,$idProduitSupprimer)
     {
         
-        DB::delete("delete from produits  where id='$idProduitSupprimer'");
+        DB::update(" update produits p set visible= 0 where p.id='$idProduitSupprimer' ");
 
-        return redirect('/produit')->with('success','Le Produit a été supprimé avec succée');
+        return redirect('/home/produits/produit')->with('success','Le Produit a été supprimé avec succée');
 
     }
 

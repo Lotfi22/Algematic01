@@ -67,7 +67,6 @@ class UniteController extends Controller
      public function SupprimerUnite(Request $request,$idUniteSupprimer)
     {
         
-        DB::delete("delete from unites  where id='$idUniteSupprimer'");
         DB::update("update  unites p set visible='0' where p.id='$idUniteSupprimer' ");
 
 
