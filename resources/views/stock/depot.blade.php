@@ -33,12 +33,12 @@
       <br>
 
          <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                       Ajouter Un dépot
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -86,7 +86,7 @@
      <br>
 
     <div>
-        <table class="table table-striped table-dark" id="table_id">
+        <table  id="table_id">
           <thead>
             <tr>
               <th scope="col"><B>Numéro</B></th>
@@ -109,11 +109,11 @@
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModal{{$depot->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal{{$depot->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$depot->id}}" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Nouvelle Infos</h5>
+                            <h5 class="modal-title" id="exampleModalLabel{{$depot->id}}">Nouvelle Infos</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -125,19 +125,19 @@
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip01"><B>Nouveau Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="CAMERA ET CABLES" required>
+                                  <input type="text"  name="nvnom" class="form-control" value="{{$depot->nom}}"  required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>Nouvelle Adresse</B></label>
-                                  <input type="text" name="adresse"class="form-control"  placeholder="EL HAMIZ" required>
+                                  <input type="text" name="nvadresse"class="form-control"  value="{{$depot->adresse}}" required>
                                 </div>
                               </div>
 
                               <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip03"><B>Nouvelle Supérficie</B></label>
-                                  <input type="text" name="superficie"class="form-control" placeholder="30 m2" required>
+                                  <input type="text" name="nvsuperficie"class="form-control" value="{{$depot->superficie}}" required>
                                 </div>
                               </div>
                             

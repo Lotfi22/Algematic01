@@ -396,7 +396,7 @@
 
                     <!-- Boutom d'Ajouter une Maman -->
                     <div class="modal fade" id="exampleModalMODIFproduit{{$produit->IdProduit}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
+                      <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Nouvelles Infos</h5>
@@ -404,19 +404,19 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/ModifProduit/{{$produit->IdProduit}}" method="POST" enctype="multipart/form-data">
+                     <form class="needs-validation" novalidate action="/home/produits/ModifProduit/{{$produit->IdProduit}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field()}}
                            <div class="modal-body">
                               <div class="form-row">
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip01"><B>Code Produit</B></label>
-                                  <input type="text"  name="code" class="form-control" placeholder="A001" required>
+                                  <input type="text"  name="nvcode" class="form-control" value="{{$produit->code_produit}}" required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>Description</B></label>
-                                  <input type="text" name="description"class="form-control"  placeholder="EL HAMIZ" required>
+                                  <input type="text" name="nvdescription"class="form-control" value="{{$produit->description}}" required>
                                 </div>
                               </div>
 
@@ -426,13 +426,14 @@
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>Model</B></label>
-                                  <input type="text" name="model"class="form-control"  placeholder="EL HAMIZ" required>
+                                  <input type="text" name="nvmodel"class="form-control" value="{{$produit->model}}"  required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                           <label for="exampleFormControlSelect1"><B>Unité</B></label>
-                                          <select name="unite" class="form-control" id="exampleFormControlSelect1">
+                                          <select name="nvunite" class="form-control" id="exampleFormControlSelect1">
+                                            <option value="{{$produit->id_unite}}"> Ancienne Unité </option>
                                            @foreach($unites as $unite)
                                            <option value="{{$unite->id}}"> {{  $unite->description  }} </option>
                                             @endforeach
@@ -449,7 +450,8 @@
                                   <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                           <label for="exampleFormControlSelect1"><B>Sous Famille</B></label>
-                                          <select name="sfamille" class="form-control" id="exampleFormControlSelect1">
+                                          <select name="nvsfamille" class="form-control" id="exampleFormControlSelect1">
+                                            <option value="{{$produit->id_sous_famille}}"> Ancienne S_Famille </option>
                                            @foreach($sfamilles as $sfamille)
                                            <option value="{{$sfamille->id}}"> {{  $sfamille->nom  }} </option>
                                             @endforeach
@@ -458,38 +460,13 @@
                                         </div>
                                   </div>
 
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                          <label for="exampleFormControlSelect1"><B>Fabricant</B></label>
-                                          <select name="fabricant" class="form-control" id="exampleFormControlSelect1">
-                                           @foreach($fabricants as $fabricant)
-                                           <option value="{{$fabricant->id}}"> {{  $fabricant->nom  }} </option>
-                                            @endforeach
-                                           
-                                          </select>
-                                        </div>
-                                  </div>
+                                   
 
                                 </div>
-                            <div class="form-row">
-
-                                <div class="form-group">
-                                  <label for="exampleFormControlFile1"><B>Photo</B></label>
-                                  <input type="file" name="photo"  class="form-control-file" id="exampleFormControlFile1">
-                                </div>
-
-                              </div>
-
+                           
                              
 
-                               <div class="form-row">
-
-                                <div class="form-group">
-                                  <label for="exampleFormControlFile1"><B>Photo_Détails</B></label>
-                                  <input type="file" name="detail"  class="form-control-file" id="exampleFormControlFile1">
-                                </div>
-
-                              </div>
+                              
 
                               </div>
                           <div class="modal-footer">
@@ -515,7 +492,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/SupprimerProduit/{{$produit->IdProduit}}" method="POST">
+                     <form class="needs-validation" novalidate action="/home/produits/SupprimerProduit/{{$produit->IdProduit}}" method="POST">
                         {{ csrf_field()}}
                           
                           <div class="modal-footer">

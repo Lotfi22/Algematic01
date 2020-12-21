@@ -62,24 +62,7 @@ class SousFamilleController extends Controller
      public function ModifSousFamille(Request $request,$idSousFamilleModiff)
     {
     	
-    	$this->validate($request,[
-            'nom' => 'required|max:300',
-            'description' => 'required|max:800'
-            ]);
-
-    	$testnom=$request->input('nom');
-        $info=DB::select("select description  from sous_familles where nom='$testnom'");
-       
-
-         if (count($info) >1) 
-               {
-                   
-                session()->flash('notif' , ' Erreur Oupss Ce Nom de Sous_Famille existe déja  !!! ');
-
-                return redirect()->back(); 
-               }
-		else
-		{
+    	
 				$famille_famille=$request->input('famille');
 		        $famille_nom=$request->input('nom');
 		        $famille_description=$request->input('description');
@@ -89,7 +72,7 @@ class SousFamilleController extends Controller
 		        
 		        
 		        return redirect('/home/produits/sousFamille')->with('success','La Sous_Famille a été modofiée avec succée');	
-		}
+	
         
 
     }
@@ -97,7 +80,7 @@ class SousFamilleController extends Controller
     public function SupprimerSousFamille(Request $request,$idSousFamilleSupprimer)
     {
         
-        DB::delete("delete from sous_familles  where id='$idSousFamilleSupprimer'");
+        DB::update("update sous_familles s set visible=0  where id='$idSousFamilleSupprimer'");
 
         return redirect('/home/produits/sousFamille')->with('success','La Sous_Famille a été supprimée avec succée');
 

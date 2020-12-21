@@ -17,7 +17,7 @@ class UniteController extends Controller
     public function index()
      {
 
-    	$unites=DB::select("select * from unites");
+    	$unites=DB::select("select * from unites where visible=1");
     	
     	return view('Produit\unite',compact('unites'));
      }
@@ -67,11 +67,10 @@ class UniteController extends Controller
      public function SupprimerUnite(Request $request,$idUniteSupprimer)
     {
         
-        DB::delete("delete from unites  where id='$idUniteSupprimer'");
         DB::update("update  unites p set visible='0' where p.id='$idUniteSupprimer' ");
 
 
-        return redirect('/home/produits/unite')->with('success','Unitésupprimée avec succée');
+        return redirect('/home/produits/unite')->with('success','Unité supprimée avec succée');
 
     }
 

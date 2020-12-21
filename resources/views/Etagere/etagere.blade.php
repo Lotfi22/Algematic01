@@ -139,11 +139,11 @@
                                 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>Nouvelle Description</B></label>
-                                  <input type="text" name="description"class="form-control"  placeholder="EL HAMIZ" required>
+                                  <input type="text" name="description" class="form-control" value="{{$etagere->description}}"  required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>NV_Num_Etage</B></label>
-                                  <input type="number" min="0" name="num_etage"class="form-control"  placeholder="12" required>
+                                  <input type="number" min="0"  name="num_etage"class="form-control"  value="{{$etagere->num_etage}}"  required>
                                 </div>
                               </div>
 

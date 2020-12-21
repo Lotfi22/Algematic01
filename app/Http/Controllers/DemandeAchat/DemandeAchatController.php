@@ -352,9 +352,13 @@ class DemandeAchatController extends Controller
        $MaPiece=DB::select(" select p.piece from proprietes p
         where p.id_produit='$IdProduit' and p.id_type=(select id from type_pieces t where t.type='fiche technique')  ");
 
-      
+     
+
+
 
        $piece=$MaPiece[0]->piece;
+
+
 
        $file=public_path()."/images/produit/$piece";
 

@@ -83,7 +83,7 @@
      <br>
 
     <div>
-        <table class="table table-striped table-dark"  id="table_id">
+        <table   id="table_id">
           <thead>
             <tr>
               <th scope="col"><B>Numéro</B></th>
@@ -109,11 +109,11 @@
                     </button>
 
                     <!-- Boutom d'Ajouter une Maman -->
-                    <div class="modal fade" id="exampleModalMODIFcategorie{{$categorie->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalMODIFcategorie{{$categorie->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$categorie->id}}" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Nouvelles Infos</h5>
+                            <h5 class="modal-title" id="exampleModalLabel{{$categorie->id}}">Nouvelles Infos</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -126,12 +126,12 @@
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip01"><B>Nouveau Nom</B></label>
-                                  <input type="text"  name="nom" class="form-control" placeholder="{{$categorie->nom}}" required>
+                                  <input type="text"  name="nom" class="form-control" value="{{$categorie->nom}}" required>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                   <label for="validationTooltip02"><B>Nouvelle Description</B></label>
-                                  <input type="text" name="description"class="form-control"  placeholder="{{$categorie->description}}" required>
+                                  <input type="text" name="description"class="form-control"  value="{{$categorie->description}}" required>
                                 </div>
 
                               </div>

@@ -63,10 +63,12 @@ class DepotController extends Controller
     /*Modification d'un dépot*/
     public function ModifDepot(Request $request,$idDepotModif)
     {
+
+       
     	$this->validate($request,[
-            'nom' => 'required|max:500',
-            'adresse' => 'required|max:500',
-            'superficie' => 'required|numeric|between:0,99.1000'
+            'nvnom' => 'required|max:500',
+            'nvadresse' => 'required|max:500',
+            'nvsuperficie' => 'required|numeric|between:0,99.1000'
             ]);
 
     	/*
@@ -84,9 +86,9 @@ class DepotController extends Controller
                }
 		*/
         
-        $depot_nom=$request->input('nom');
-        $depot_adresse=$request->input('adresse');
-        $depot_superficie=$request->input('superficie');
+        $depot_nom=$request->input('nvnom');
+        $depot_adresse=$request->input('nvadresse');
+        $depot_superficie=$request->input('nvsuperficie');
         //$depot->save();
 
         

@@ -135,9 +135,9 @@ Route::get('/home/produits/produit', 'Produit\ProduitController@index');
 /*L'ajout d'un nouveau Produit*/
 Route::post('/home/produits/AddProduit', 'Produit\ProduitController@AddProduit');
 /*Modification d'un  Produit*/
-Route::post('/ModifProduit/{idProduitModiff}', 'Produit\ProduitController@ModifProduit');
+Route::post('/home/produits/ModifProduit/{idProduitModiff}', 'Produit\ProduitController@ModifProduit');
 /*Suppression d'un  Produit*/
-Route::post('/SupprimerProduit/{idProduitSupprimer}', 'Produit\ProduitController@SupprimerProduit');
+Route::post('/home/produits/SupprimerProduit/{idProduitSupprimer}', 'Produit\ProduitController@SupprimerProduit');
 
 Route::get('/TelechargerProduitFicheProduit/{IdPropriete}', 'Produit\ProduitController@TelechargerProduitFicheProduit');
 
