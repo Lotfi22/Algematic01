@@ -225,10 +225,11 @@
                             <p><B>Téléphone: </B>{{$fournisseur->tele}}</p>
                             <p><B>Fax:</B> {{$fournisseur->fax}}</p>
                             <p><B>Email:</B> {{$fournisseur->email}}</p>
-                            <p><B>NIS:</B> {{$fournisseur->nis}}</p>
-                            <p><B>NIF:</B> {{$fournisseur->nif}}</p>
                             <p><B>RC:</B> {{$fournisseur->rc}}</p>
-                            <p><B>Num_Art_Imp:</B> {{$fournisseur->num_art_imp}}</p>
+                            <p><B>NIF:</B> {{$fournisseur->nif}}</p>
+                            <p><B>NAI:</B> {{$fournisseur->num_art_imp}}</p>
+                            <p><B>NIS:</B> {{$fournisseur->nis}}</p>
+                            
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-succes" data-dismiss="modal">Fermer</button>
