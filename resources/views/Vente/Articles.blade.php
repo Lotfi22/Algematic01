@@ -191,7 +191,7 @@
 {{--                 <th scope="col">
                     <B>Infos</B>
                 </th>
- --}}                <th scope="col">
+ --}}           <th scope="col">
                     <B>Date</B>
                 </th>
 
@@ -221,10 +221,34 @@
                 <td>{{$article->description}}</td>
                                    
                 <td>{!! substr($article->created_at,0,10) !!} - {!! substr($article->created_at,10,6) !!}</td>
-                
+
+                <td style="text-align: center;">
+
+                @if($article->benifice == "")
                     
-                <td style="text-align: center;">{!! number_format((float)$article->total-$article->benifice) !!}</td> 
-                <td style="text-align: center;">{!! number_format((float)$article->total) !!}</td> 
+                    <?php $article->benifice = 0 ?>
+                    
+                    {!! number_format((float)$article->total-$article->benifice) !!}</td>
+
+                 @else
+
+                    {!! number_format((float)$article->total-$article->benifice) !!}</td>                     
+                @endif
+
+
+                <td style="text-align: center;">
+
+                @if($article->benifice == "")
+
+                    <?php $article->benifice = 0 ?>
+
+                    {!! number_format((float)$article->total) !!}
+                 @else
+
+                    {!! number_format((float)$article->total) !!}
+                @endif
+
+                </td> 
                 
                 @if($article->benifice>0)
     

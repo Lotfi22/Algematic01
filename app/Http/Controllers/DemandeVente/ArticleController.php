@@ -23,16 +23,17 @@ class ArticleController extends Controller
     public function index()
     {
 
+
      	$id = Auth::id();
 
         $actuel = User::FindOrFail($id);
 
         $produits=DB::select("select p.id, p.code_produit, p.description from produits p where visible =1");
 
-/*    	$produits=DB::select("select p.id, p.code_produit, p.description, s.quantite, s.prix,s.prix_vente
+    	/*$produits=DB::select("select p.id, p.code_produit, p.description, s.quantite, s.prix,s.prix_vente
         from produits p, stocks s
-        where p.id=s.id_produit");
-*/        
+        where p.id=s.id_produit");*/
+        
     	$clients=DB::select("select * from client_prospects");
 
     	$employes=DB::select("select * from employes");
@@ -53,6 +54,8 @@ class ArticleController extends Controller
             'description_article' => 'required'
             ]);
         
+
+
         $nom=$request->input('Réferance');
         $description=$request->input('description_article');
         $Prix_propose=$request->input('Prix_propose');
@@ -90,12 +93,7 @@ class ArticleController extends Controller
 
         DB::update("update articles a set visible = 0 where a.id=\"$id\" ");
 
-        session()->flash('notification.message' , "Article \"$id\" supprimé avec succés");
-
-        session()->flash('notification.type' , 'warning');         
-
-        return back();
-
+        return back()->with('warning','Article '.$id.' supprimé avec succés');
 
         # code...
     }
