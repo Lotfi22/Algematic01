@@ -281,5 +281,7 @@ Route::post('/home/parametres/SupprimerTypeDocument/{IdTypeSupprimer}', 'Paramet
 Route::get('/home/parametres/tva', 'Parametre\ParametreController@indextva');
 /*L'ajout d'un nouveau TVA*/
 Route::post('/home/parametres/AddTVA', 'Parametre\ParametreController@AddTVA');
+/*Modifier d'un  TVA*/
+Route::post('/home/parametres/ModifierTVA/{IdTVAModifier}', 'Parametre\ParametreController@ModifierTVA');
 /*Suppression d'un  TVA*/
 Route::post('/home/parametres/SupprimerTVA/{IdTVASupprimer}', 'Parametre\ParametreController@SupprimerTVA');

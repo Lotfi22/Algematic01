@@ -147,6 +147,24 @@ class ParametreController extends Controller
         }
     }
 
+    public function ModifierTVA(Request $request,$IdTVAModifier)
+    {   
+
+        $this->validate($request,[
+            'tva' => 'required|max:800'
+            ]);
+
+            $tva=$request->input('tva');
+          
+                //$depot->save();
+
+                DB::update("update  tvas t set tva = '$tva' where t.id='$IdTVAModifier' ");
+                
+                
+                return redirect('/home/parametres/tva')->with('success',' TVA Modifier Avec Succée'); 
+       
+    }
+
 
 
      public function SupprimerTVA(Request $request,$IdTVASupprimer)
