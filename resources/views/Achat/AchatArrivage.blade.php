@@ -378,7 +378,17 @@
                         <input type="file"  class="form-control-file" name="photo" id="photo" >
                     </div>
 
-                  
+                   <div class="col-md-6 mb-3">
+                          <label class="small mb-1" for="inputFirstName">Archivage </label>
+                          <select class='form-control ' class="js-example-basic-single" name='tiroir' id="tiroir" >
+                          
+                              @foreach($tiroirs as $tiroir)
+                              <option id="{{$tiroir->idtiroir}}"  value="{{$tiroir->idtiroir}}">
+                                  <B> Casier: {{$tiroir->description}} --- Tiroir N° :  {{$tiroir->numero}}</B>
+                              </option>
+                              @endforeach 
+                          </select>   
+                      </div>
                 </div>
 
               </div>

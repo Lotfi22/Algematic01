@@ -1307,6 +1307,7 @@ class DemandeAchatController extends Controller
 
                 $date=$array['date'];
 
+                $tiroir=$array['tiroir'];
 
                 $file_extension= $array['photo']->getClientOriginalExtension();
                 $file_name=time().'.'.$file_extension;
@@ -1316,8 +1317,8 @@ class DemandeAchatController extends Controller
 
 
                 
-                 DB::insert("insert into achat_document(id_pre_achat ,id_type,piece,date_Piece,numero_piece, date_Ajout)
-                  values('$idPreAchat','$IdTypePiece','$photofacture','$date','$facture','$now')");
+                 DB::insert("insert into achat_document(id_pre_achat ,id_type,piece,date_Piece,numero_piece, date_Ajout,id_tiroir)
+                  values('$idPreAchat','$IdTypePiece','$photofacture','$date','$facture','$now','$tiroir')");
             
 
             }
@@ -1659,8 +1660,12 @@ class DemandeAchatController extends Controller
 
       $privilege=$actuel->privilege;
 
+       $tiroirs=DB::select("select c.id,c.description,t.id as idtiroir,t.id_casier,t.numero 
+        from casiers c ,tiroirs t
+        where c.id=t.id_casier  ");
+
       
-      return view('Achat\AchatArrivage',compact('presachats','nature_doc_payments','privilege','produits','employes','etageres','nvproduits','produits2','pieces','types'));
+      return view('Achat\AchatArrivage',compact('presachats','nature_doc_payments','privilege','produits','employes','etageres','nvproduits','produits2','pieces','types','tiroirs'));
 
 
    
