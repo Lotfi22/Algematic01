@@ -405,7 +405,10 @@ function generate_table()
 
                   var cel = document.createElement("td");
 
-                  var celText = document.createTextNode(i+1);
+
+                  var x = document.getElementById("produit"+i).value;
+
+                  var celText = document.createTextNode(x);
 
                   cel.appendChild(celText);
 
