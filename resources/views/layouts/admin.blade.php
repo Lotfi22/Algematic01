@@ -248,6 +248,9 @@
                         <li> <a class="waves-effect waves-dark" href="/home" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">Profile</span></a></li>
 
                         <B><hr></B>
+
+                        <li> <a id="documents" class="waves-effect waves-dark" href="/home/documents/document" aria-expanded="false"><i class="mdi mdi-file-pdf"></i><span class="hide-menu">Documents</span></a></li>
+
                         <li> <a id="stocks" class="waves-effect waves-dark" href="/home4" onclick="fshow(event)" aria-expanded="false"><i class="mdi mdi-shopping"></i><span class="hide-menu">Stock</span></a></li>
 
 
