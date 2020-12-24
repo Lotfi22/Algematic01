@@ -289,10 +289,10 @@ Route::post('/home/parametres/SupprimerTVA/{IdTVASupprimer}', 'Parametre\Paramet
 
 /********************************************** Document *****************************/
 
-Route::get('/home/documents/document', 'Parametre\DocumentController@index');
-/*L'ajout d'un nouveau TVA*/
-Route::post('/home/parametres/AddTVA', 'Parametre\ParametreController@AddTVA');
-/*Modifier d'un  TVA*/
-Route::post('/home/parametres/ModifierTVA/{IdTVAModifier}', 'Parametre\ParametreController@ModifierTVA');
-/*Suppression d'un  TVA*/
-Route::post('/home/parametres/SupprimerTVA/{IdTVASupprimer}', 'Parametre\ParametreController@SupprimerTVA');
+Route::get('/home/documents/casier', 'Document\DocumentController@index');
+
+Route::get('/home/documents/tiroir', 'Document\DocumentController@indextiroir');
+
+Route::post('/home/documents/AddCasier', 'Document\DocumentController@AddCasier');
+
+Route::post('/home/documents/Addtiroir', 'Document\DocumentController@Addtiroir');

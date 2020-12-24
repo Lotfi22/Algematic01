@@ -109,9 +109,9 @@
 
         <!-- ============================================================== -->
 
-        <header class="topbar" style="background-color: black;">
+        <header class="topbar" >
 
-            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light"  >
 
                 <!-- ============================================================== -->
 
@@ -119,13 +119,13 @@
 
                 <!-- ============================================================== -->
 
-                <div class="navbar-header">
+                <div class="navbar-header" >
 
                     <a class="navbar-brand" href="">
 
                         <!-- Logo icon --><b>
 
-                            <img width="50%" height="50%" src="{{ asset('../nabila/assets/images/algematic.png') }}" alt="homepage" class="dark-logo" />
+                            <img width="50%"  src="{{ asset('../nabila/assets/images/algematic.png') }}" alt="homepage" class="dark-logo" />
 
                         </b>
 
@@ -249,7 +249,14 @@
 
                         <B><hr></B>
 
-                        <li> <a id="documents" class="waves-effect waves-dark" href="/home/documents/document" aria-expanded="false"><i class="mdi mdi-file-pdf"></i><span class="hide-menu">Archivage</span></a></li>
+                       
+
+                          <li> <a id="documents" class="waves-effect waves-dark" href="/home4" onclick="documentdropdown(event)" aria-expanded="false"><i class="mdi mdi-archive"></i><span class="hide-menu">Archivage</span></a></li>
+
+
+                        <li class="documentdropdown"> <a class="waves-effect waves-dark" href="/home/documents/casier" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Casiers</span></a></li>
+
+                        <li class="documentdropdown"> <a class="waves-effect waves-dark" href="/home/documents/tiroir" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Tiroirs</span></a></li>
 
                         <li> <a id="stocks" class="waves-effect waves-dark" href="/home4" onclick="fshow(event)" aria-expanded="false"><i class="mdi mdi-shopping"></i><span class="hide-menu">Stock</span></a></li>
 
@@ -859,6 +866,38 @@
                 event.preventDefault();
 
                 $(".DemandeVente").hide(1000);
+
+                $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
+                /**/                
+            }
+
+            i=i+1;
+
+            // body... 
+        }
+
+
+         $(".documentdropdown").hide(0);
+
+        var i=0;
+
+        function documentdropdown (event) 
+        {
+            
+            if (i%2==0)
+            {
+                event.preventDefault();
+
+                $(".documentdropdown").show(1000);
+
+                $(".mdi-arrow-down-drop-circle-outline").attr('class','mdi mdi-arrow-up-drop-circle-outline');
+            }
+            else
+            {
+                
+                event.preventDefault();
+
+                $(".documentdropdown").hide(1000);
 
                 $(".mdi-arrow-up-drop-circle-outline").attr('class','mdi mdi-arrow-down-drop-circle-outline');                
                 /**/                
