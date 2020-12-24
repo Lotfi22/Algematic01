@@ -254,9 +254,12 @@
                           <li> <a id="documents" class="waves-effect waves-dark" href="/home4" onclick="documentdropdown(event)" aria-expanded="false"><i class="mdi mdi-archive"></i><span class="hide-menu">Archivage</span></a></li>
 
 
-                        <li class="documentdropdown"> <a class="waves-effect waves-dark" href="/home/documents/casier" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Casiers</span></a></li>
+                        <li class="documentdropdown"> <a class="waves-effect waves-dark" href="/home/documents/casier" aria-expanded="false"><i class="mdi mdi-folder-multiple-outline"></i><span class="hide-menu">Casiers</span></a></li>
 
-                        <li class="documentdropdown"> <a class="waves-effect waves-dark" href="/home/documents/tiroir" aria-expanded="false"><i class="mdi mdi-dots-vertical "></i><span class="hide-menu">Tiroirs</span></a></li>
+                        <li class="documentdropdown"> <a class="waves-effect waves-dark" href="/home/documents/tiroir" aria-expanded="false"><i class="mdi mdi-folder-outline"></i><span class="hide-menu">Tiroirs</span></a></li>
+
+                         <li class="documentdropdown"> <a class="waves-effect waves-dark" href="/home/documents/document" aria-expanded="false"><i class="mdi mdi-file-document"></i><span class="hide-menu">Documents</span></a></li>
+
 
                         <li> <a id="stocks" class="waves-effect waves-dark" href="/home4" onclick="fshow(event)" aria-expanded="false"><i class="mdi mdi-shopping"></i><span class="hide-menu">Stock</span></a></li>
 
