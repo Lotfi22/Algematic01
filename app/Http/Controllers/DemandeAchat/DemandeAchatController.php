@@ -1432,6 +1432,11 @@ class DemandeAchatController extends Controller
       $id = Auth::id();
       $actuel = User::FindOrFail($id);
 
+
+      $tiroirs=DB::select("select c.id,c.description,t.id as idtiroir,t.id_casier,t.numero 
+        from casiers c ,tiroirs t
+        where c.id=t.id_casier  ");
+
       
 
       $produits=DB::select("select * from produits");
@@ -1444,7 +1449,7 @@ class DemandeAchatController extends Controller
         
 
       
-      return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types','tvas'));
+      return view('Achat\DemandeAchatPrestation',compact('produits','fournisseurs','types','tvas','tiroirs'));
      }
 
 
@@ -1588,6 +1593,8 @@ class DemandeAchatController extends Controller
 
                 $date=$array['date'];
 
+                $tiroir=$array['tiroir'];
+
 
                 $file_extension= $array['photo']->getClientOriginalExtension();
                 $file_name=time().'.'.$file_extension;
@@ -1597,9 +1604,10 @@ class DemandeAchatController extends Controller
 
                 
 
+
                 
-                 DB::insert("insert into pieces (id_type, id_pre_achat, piece,date_Piece, numero_piece, date_Ajout) 
-                values('$IdTypePiece','$id_pre_achat','$photofacture','$date','$facture','$now') ;");
+                 DB::insert("insert into pieces (id_type, id_pre_achat, piece,date_Piece, numero_piece, date_Ajout,id_tiroir) 
+                values('$IdTypePiece','$id_pre_achat','$photofacture','$date','$facture','$now','$tiroir') ;");
             
 
             }
