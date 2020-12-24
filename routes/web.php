@@ -285,3 +285,14 @@ Route::post('/home/parametres/AddTVA', 'Parametre\ParametreController@AddTVA');
 Route::post('/home/parametres/ModifierTVA/{IdTVAModifier}', 'Parametre\ParametreController@ModifierTVA');
 /*Suppression d'un  TVA*/
 Route::post('/home/parametres/SupprimerTVA/{IdTVASupprimer}', 'Parametre\ParametreController@SupprimerTVA');
+
+
+/********************************************** Document *****************************/
+
+Route::get('/home/documents/document', 'Parametre\DocumentController@index');
+/*L'ajout d'un nouveau TVA*/
+Route::post('/home/parametres/AddTVA', 'Parametre\ParametreController@AddTVA');
+/*Modifier d'un  TVA*/
+Route::post('/home/parametres/ModifierTVA/{IdTVAModifier}', 'Parametre\ParametreController@ModifierTVA');
+/*Suppression d'un  TVA*/
+Route::post('/home/parametres/SupprimerTVA/{IdTVASupprimer}', 'Parametre\ParametreController@SupprimerTVA');

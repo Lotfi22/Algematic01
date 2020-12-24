@@ -109,7 +109,7 @@
 
         <!-- ============================================================== -->
 
-        <header class="topbar">
+        <header class="topbar" style="background-color: black;">
 
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
 
@@ -125,7 +125,7 @@
 
                         <!-- Logo icon --><b>
 
-                            <img width="50%" src="{{ asset('../nabila/assets/images/algematic.png') }}" alt="homepage" class="dark-logo" />
+                            <img width="50%" height="50%" src="{{ asset('../nabila/assets/images/algematic.png') }}" alt="homepage" class="dark-logo" />
 
                         </b>
 
@@ -249,7 +249,7 @@
 
                         <B><hr></B>
 
-                        <li> <a id="documents" class="waves-effect waves-dark" href="/home/documents/document" aria-expanded="false"><i class="mdi mdi-file-pdf"></i><span class="hide-menu">Documents</span></a></li>
+                        <li> <a id="documents" class="waves-effect waves-dark" href="/home/documents/document" aria-expanded="false"><i class="mdi mdi-file-pdf"></i><span class="hide-menu">Archivage</span></a></li>
 
                         <li> <a id="stocks" class="waves-effect waves-dark" href="/home4" onclick="fshow(event)" aria-expanded="false"><i class="mdi mdi-shopping"></i><span class="hide-menu">Stock</span></a></li>
 
