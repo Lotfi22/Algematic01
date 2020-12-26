@@ -137,10 +137,12 @@ class ParametreController extends Controller
         else
         {
                 $tva=$request->input('tva');
+
+                $now = Carbon::now()->format('d/m/Y');
           
                 //$depot->save();
 
-                DB::insert("insert into tvas (tva) values('$tva') ");
+                DB::insert("insert into tvas (tva,date_ajout) values('$tva','$now') ");
                 
                 
                 return redirect('/home/parametres/tva')->with('success','Le Nouveau Pourcentage de TVA est enregistré avec succée'); 

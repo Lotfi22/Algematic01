@@ -1327,8 +1327,8 @@ class DemandeAchatController extends Controller
 
       }
 
-        DB::insert("insert into achat(id_pre_achat ,id_nature_payement)
-                  values('$idPreAchat','$nature_doc_payment')");
+        DB::insert("insert into achat(id_pre_achat ,id_nature_payement,date_arrivage)
+                  values('$idPreAchat','$nature_doc_payment','$now')");
                  
                     
         DB::update("update pre_achat p set achat_done=1 where p.id='$idPreAchat' ");
@@ -1839,9 +1839,10 @@ class DemandeAchatController extends Controller
 
        $prix=$produit->prix;
 
+       $now = Carbon::now()->format('d/m/Y');
        
-       DB::insert("insert into arrivages (id_produit,id_etagere,id_employe,quantite,prix) 
-                       values('$idProduit','$idEtagere','$id','$quantite','$prix') ");
+       DB::insert("insert into arrivages (id_produit,id_etagere,id_employe,quantite,prix,date_arrivage) 
+                       values('$idProduit','$idEtagere','$id','$quantite','$prix','$prix') ");
 
        DB::update(" update ligne_produit l set ranger='1' where l.id_pre_achat='$idpreachat' and l.id_produit='$idProduit' ");
 
@@ -1851,8 +1852,8 @@ class DemandeAchatController extends Controller
 
           if(count($exist)==0)
           {
-            DB::insert("insert into stocks (id_produit,quantite,prix) 
-                       values('$idProduit','$quantite','$prix') ");
+            DB::insert("insert into stocks (id_produit,quantite,prix,date_arrivage) 
+                       values('$idProduit','$quantite','$prix','$now') ");
           }
 
           else
