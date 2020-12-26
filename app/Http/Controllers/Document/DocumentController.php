@@ -74,6 +74,26 @@ class DocumentController extends Controller
 		}
     }
 
+ public function Modifiercasier(Request $request,$idcasier)
+    {   
+
+        $this->validate($request,[
+            'description' => 'required|max:800'
+            ]);
+
+        
+                $description=$request->input('description');
+          
+                //$depot->save();
+
+                DB::update("update  casiers c set description='$description' where c.id='$idcasier' ");
+                
+                
+                return redirect('/home/documents/casier')->with('success','Casier Modifié avec succée');    
+        
+    }
+
+
 
 
     public function Addtiroir(Request $request)

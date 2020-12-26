@@ -296,3 +296,6 @@ Route::get('/home/documents/tiroir', 'Document\DocumentController@indextiroir');
 Route::post('/home/documents/AddCasier', 'Document\DocumentController@AddCasier');
 
 Route::post('/home/documents/Addtiroir', 'Document\DocumentController@Addtiroir');
+
+Route::post('/home/documents/Modifiercasier/{idcasier}', 'Document\DocumentController@Modifiercasier');
+

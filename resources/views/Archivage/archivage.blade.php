@@ -106,7 +106,7 @@
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                     <form class="needs-validation" novalidate action="/home/parametres/Modifiercasier/{{$casier->id}}" method="POST" id="editFormId">
+                     <form class="needs-validation" novalidate action="/home/documents/Modifiercasier/{{$casier->id}}" method="POST" id="editFormId">
                         {{ csrf_field()}}
              
 
@@ -117,7 +117,7 @@
 
                                   <div class="col-md-6 mb-3">
                                         <label for="validationTooltip02"><B>Nouvelle description</B></label>
-                                        <input type="text" name="tva"class="form-control" id="tva"  value="{{$casier->description}}" required>
+                                        <input type="text" name="description" class="form-control" id="tva"  value="{{$casier->description}}" required>
                                   </div>
                                 
 
